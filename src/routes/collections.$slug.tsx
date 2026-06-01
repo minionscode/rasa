@@ -125,7 +125,7 @@ function CollectionPage() {
           <div>
             <SectionLabel>Available Flavours</SectionLabel>
             <ul className="mt-8 space-y-px">
-              {c.flavours.map((f, i) => (
+              {c.flavours.map((f: string, i: number) => (
                 <li key={f} className="border-t border-border/40 last:border-b py-5 flex items-center gap-6 group hover:pl-3 transition-all duration-500">
                   <span className="text-[0.65rem] tracking-luxe text-gold/60 w-8">0{i + 1}</span>
                   <span className="font-serif text-xl group-hover:text-gold transition-colors">{f}</span>
@@ -136,7 +136,7 @@ function CollectionPage() {
           <div>
             <SectionLabel>Packaging</SectionLabel>
             <div className="mt-8 grid grid-cols-2 gap-4">
-              {c.formats.map((f) => (
+              {c.formats.map((f: string) => (
                 <div key={f} className="aspect-square border border-border/40 flex items-center justify-center hover:border-gold/40 transition-colors duration-500">
                   <span className="font-serif text-2xl">{f}</span>
                 </div>
