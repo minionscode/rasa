@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as HouseOfRasaRouteImport } from './routes/house-of-rasa'
-import { Route as HookahsRouteImport } from './routes/hookahs'
 import { Route as HookahRouteImport } from './routes/hookah'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
@@ -26,11 +25,6 @@ const PartnersRoute = PartnersRouteImport.update({
 const HouseOfRasaRoute = HouseOfRasaRouteImport.update({
   id: '/house-of-rasa',
   path: '/house-of-rasa',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HookahsRoute = HookahsRouteImport.update({
-  id: '/hookahs',
-  path: '/hookahs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HookahRoute = HookahRouteImport.update({
@@ -64,7 +58,6 @@ export interface FileRoutesByFullPath {
   '/accessories': typeof AccessoriesRoute
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
-  '/hookahs': typeof HookahsRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
   '/collections/': typeof CollectionsIndexRoute
@@ -74,7 +67,6 @@ export interface FileRoutesByTo {
   '/accessories': typeof AccessoriesRoute
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
-  '/hookahs': typeof HookahsRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
   '/collections': typeof CollectionsIndexRoute
@@ -85,7 +77,6 @@ export interface FileRoutesById {
   '/accessories': typeof AccessoriesRoute
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
-  '/hookahs': typeof HookahsRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
   '/collections/': typeof CollectionsIndexRoute
@@ -97,7 +88,6 @@ export interface FileRouteTypes {
     | '/accessories'
     | '/contact'
     | '/hookah'
-    | '/hookahs'
     | '/house-of-rasa'
     | '/partners'
     | '/collections/'
@@ -107,7 +97,6 @@ export interface FileRouteTypes {
     | '/accessories'
     | '/contact'
     | '/hookah'
-    | '/hookahs'
     | '/house-of-rasa'
     | '/partners'
     | '/collections'
@@ -117,7 +106,6 @@ export interface FileRouteTypes {
     | '/accessories'
     | '/contact'
     | '/hookah'
-    | '/hookahs'
     | '/house-of-rasa'
     | '/partners'
     | '/collections/'
@@ -128,7 +116,6 @@ export interface RootRouteChildren {
   AccessoriesRoute: typeof AccessoriesRoute
   ContactRoute: typeof ContactRoute
   HookahRoute: typeof HookahRoute
-  HookahsRoute: typeof HookahsRoute
   HouseOfRasaRoute: typeof HouseOfRasaRoute
   PartnersRoute: typeof PartnersRoute
   CollectionsIndexRoute: typeof CollectionsIndexRoute
@@ -148,13 +135,6 @@ declare module '@tanstack/react-router' {
       path: '/house-of-rasa'
       fullPath: '/house-of-rasa'
       preLoaderRoute: typeof HouseOfRasaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/hookahs': {
-      id: '/hookahs'
-      path: '/hookahs'
-      fullPath: '/hookahs'
-      preLoaderRoute: typeof HookahsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hookah': {
@@ -200,7 +180,6 @@ const rootRouteChildren: RootRouteChildren = {
   AccessoriesRoute: AccessoriesRoute,
   ContactRoute: ContactRoute,
   HookahRoute: HookahRoute,
-  HookahsRoute: HookahsRoute,
   HouseOfRasaRoute: HouseOfRasaRoute,
   PartnersRoute: PartnersRoute,
   CollectionsIndexRoute: CollectionsIndexRoute,
