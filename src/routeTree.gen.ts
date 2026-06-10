@@ -9,23 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PartnerRouteImport } from './routes/partner'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as HouseOfRasaRouteImport } from './routes/house-of-rasa'
 import { Route as HookahsRouteImport } from './routes/hookahs'
+import { Route as HookahRouteImport } from './routes/hookah'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
-import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 
-const PartnerRoute = PartnerRouteImport.update({
-  id: '/partner',
-  path: '/partner',
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HouseOfRasaRoute = HouseOfRasaRouteImport.update({
+  id: '/house-of-rasa',
+  path: '/house-of-rasa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HookahsRoute = HookahsRouteImport.update({
   id: '/hookahs',
   path: '/hookahs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HookahRoute = HookahRouteImport.update({
+  id: '/hookah',
+  path: '/hookah',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -53,20 +64,16 @@ const CollectionsIndexRoute = CollectionsIndexRouteImport.update({
   path: '/collections/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
-  id: '/collections/$slug',
-  path: '/collections/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
   '/contact': typeof ContactRoute
+  '/hookah': typeof HookahRoute
   '/hookahs': typeof HookahsRoute
-  '/partner': typeof PartnerRoute
-  '/collections/$slug': typeof CollectionsSlugRoute
+  '/house-of-rasa': typeof HouseOfRasaRoute
+  '/partners': typeof PartnersRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -74,9 +81,10 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
   '/contact': typeof ContactRoute
+  '/hookah': typeof HookahRoute
   '/hookahs': typeof HookahsRoute
-  '/partner': typeof PartnerRoute
-  '/collections/$slug': typeof CollectionsSlugRoute
+  '/house-of-rasa': typeof HouseOfRasaRoute
+  '/partners': typeof PartnersRoute
   '/collections': typeof CollectionsIndexRoute
 }
 export interface FileRoutesById {
@@ -85,9 +93,10 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
   '/contact': typeof ContactRoute
+  '/hookah': typeof HookahRoute
   '/hookahs': typeof HookahsRoute
-  '/partner': typeof PartnerRoute
-  '/collections/$slug': typeof CollectionsSlugRoute
+  '/house-of-rasa': typeof HouseOfRasaRoute
+  '/partners': typeof PartnersRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRouteTypes {
@@ -97,9 +106,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/accessories'
     | '/contact'
+    | '/hookah'
     | '/hookahs'
-    | '/partner'
-    | '/collections/$slug'
+    | '/house-of-rasa'
+    | '/partners'
     | '/collections/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -107,9 +117,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/accessories'
     | '/contact'
+    | '/hookah'
     | '/hookahs'
-    | '/partner'
-    | '/collections/$slug'
+    | '/house-of-rasa'
+    | '/partners'
     | '/collections'
   id:
     | '__root__'
@@ -117,9 +128,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/accessories'
     | '/contact'
+    | '/hookah'
     | '/hookahs'
-    | '/partner'
-    | '/collections/$slug'
+    | '/house-of-rasa'
+    | '/partners'
     | '/collections/'
   fileRoutesById: FileRoutesById
 }
@@ -128,19 +140,27 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AccessoriesRoute: typeof AccessoriesRoute
   ContactRoute: typeof ContactRoute
+  HookahRoute: typeof HookahRoute
   HookahsRoute: typeof HookahsRoute
-  PartnerRoute: typeof PartnerRoute
-  CollectionsSlugRoute: typeof CollectionsSlugRoute
+  HouseOfRasaRoute: typeof HouseOfRasaRoute
+  PartnersRoute: typeof PartnersRoute
   CollectionsIndexRoute: typeof CollectionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/partner': {
-      id: '/partner'
-      path: '/partner'
-      fullPath: '/partner'
-      preLoaderRoute: typeof PartnerRouteImport
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/house-of-rasa': {
+      id: '/house-of-rasa'
+      path: '/house-of-rasa'
+      fullPath: '/house-of-rasa'
+      preLoaderRoute: typeof HouseOfRasaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/hookahs': {
@@ -148,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/hookahs'
       fullPath: '/hookahs'
       preLoaderRoute: typeof HookahsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hookah': {
+      id: '/hookah'
+      path: '/hookah'
+      fullPath: '/hookah'
+      preLoaderRoute: typeof HookahRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -185,13 +212,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/collections/$slug': {
-      id: '/collections/$slug'
-      path: '/collections/$slug'
-      fullPath: '/collections/$slug'
-      preLoaderRoute: typeof CollectionsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -200,9 +220,10 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AccessoriesRoute: AccessoriesRoute,
   ContactRoute: ContactRoute,
+  HookahRoute: HookahRoute,
   HookahsRoute: HookahsRoute,
-  PartnerRoute: PartnerRoute,
-  CollectionsSlugRoute: CollectionsSlugRoute,
+  HouseOfRasaRoute: HouseOfRasaRoute,
+  PartnersRoute: PartnersRoute,
   CollectionsIndexRoute: CollectionsIndexRoute,
 }
 export const routeTree = rootRouteImport

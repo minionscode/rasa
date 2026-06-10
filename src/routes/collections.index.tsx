@@ -1,67 +1,286 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
-import { SectionLabel } from "../components/SectionLabel";
-import majlisImg from "../assets/collection-majlis.jpg";
-import makhmalImg from "../assets/collection-makhmal.jpg";
-import tarkibImg from "../assets/collection-tarkib.jpg";
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { useRouterState } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/collections/")({
   head: () => ({
     meta: [
-      { title: "Collections — RASA" },
-      { name: "description", content: "Three houses, one discipline. Discover Majlis, Makhmal and Tarkib — the luxury tobacco collections of RASA." },
+      { title: "Collections — Three Expressions, One House" },
+      {
+        name: "description",
+        content:
+          "Within the House of RASA exist three distinct expressions: Majlis, Makhmal, and Tarkib — each a unique interpretation of character, refinement, and experience.",
+      },
       { property: "og:title", content: "Collections — RASA" },
-      { property: "og:description", content: "Majlis, Makhmal, Tarkib — three luxury tobacco collections." },
+      {
+        property: "og:description",
+        content:
+          "Majlis, Makhmal, Tarkib — three distinct expressions of the House of RASA.",
+      },
     ],
   }),
   component: Collections,
 });
 
-const list = [
-  { slug: "majlis", name: "Majlis", arabic: "مَجْلِس", tag: "Rich. Bold. Authentic.", img: majlisImg, accent: "oklch(0.38 0.13 18)" },
-  { slug: "makhmal", name: "Makhmal", arabic: "مَخْمَل", tag: "Smooth. Velvety. Refined.", img: makhmalImg, accent: "oklch(0.34 0.10 320)" },
-  { slug: "tarkib", name: "Tarkib", arabic: "تَرْكِيب", tag: "Innovative. Experimental. Engineered.", img: tarkibImg, accent: "oklch(0.32 0.09 265)" },
-] as const;
+type Section = {
+  slug: "majlis" | "makhmal" | "tarkib";
+  name: string;
+  tag: string;
+  intro: string[];
+  philosophy: string[];
+  flavours: string[];
+  closing: string;
+  color: string;
+  numeral: string;
+};
+
+const sections: Section[] = [
+  {
+    slug: "majlis",
+    name: "Majlis",
+    tag: "The Expression of Heritage",
+    numeral: "I.",
+    color: "var(--majlis)",
+    intro: [
+      "Majlis celebrates the enduring side of character.",
+      "Inspired by tradition but not confined by it, it is crafted for those who appreciate depth, confidence, and authenticity.",
+      "Rich in presence and timeless in spirit, Majlis represents a refined expression of the RASA experience.",
+    ],
+    philosophy: [
+      "Some things never need reinvention.",
+      "Not because they resist change, but because they possess a character that remains relevant through time.",
+      "Majlis is a tribute to that character.",
+    ],
+    flavours: [
+      "Two Apples",
+      "Mint",
+      "Grape",
+      "Rose",
+      "Lemon Mint",
+      "Gum",
+      "Cardamom",
+      "Mixed Fruit",
+      "Watermelon Mint",
+      "Peach",
+    ],
+    closing: "Character Endures.",
+  },
+  {
+    slug: "makhmal",
+    name: "Makhmal",
+    tag: "The Expression of Refinement",
+    numeral: "II.",
+    color: "var(--makhmal)",
+    intro: [
+      "Makhmal celebrates the quieter side of luxury.",
+      "Elegant without excess and refined without effort, it is crafted for those who appreciate balance, comfort, and sophistication.",
+      "Smooth in character and composed in presence, Makhmal represents a softer expression of the RASA experience.",
+    ],
+    philosophy: [
+      "Luxury is often mistaken for attention.",
+      "True luxury requires none.",
+      "It is found in balance. In comfort. In the confidence that comes from simplicity executed well.",
+      "Makhmal is a tribute to that philosophy.",
+    ],
+    flavours: [
+      "Velvet Peach",
+      "Silk Mango",
+      "Soft Berry",
+      "Lychee Bloom",
+      "Pear Whisper",
+      "Vanilla Mist",
+      "Coconut Cream",
+      "Honey Melon",
+      "Passion Fruit",
+      "Strawberry Cloud",
+    ],
+    closing: "Refinement Endures.",
+  },
+  {
+    slug: "tarkib",
+    name: "Tarkib",
+    tag: "The Expression of Innovation",
+    numeral: "III.",
+    color: "var(--tarkib)",
+    intro: [
+      "Tarkib celebrates the spirit of exploration.",
+      "Driven by curiosity and shaped by experimentation, it is crafted for those who seek new possibilities and unexpected experiences.",
+      "Bold in character and progressive in outlook, Tarkib represents the most forward-thinking expression of the House of RASA.",
+    ],
+    philosophy: [
+      "Innovation begins with curiosity.",
+      "The willingness to question what exists. To challenge expectations. To explore new possibilities.",
+      "Tarkib is a tribute to that mindset.",
+    ],
+    flavours: [
+      "Smoked Old Fashioned",
+      "Negroni Noir",
+      "Espresso Martini",
+      "Yuzu Spritz",
+      "Mezcal Sour",
+      "Hibiscus Gin",
+      "Cardamom Highball",
+      "Saffron Tonic",
+      "Black Cherry Bourbon",
+      "Pineapple Mezcal",
+    ],
+    closing: "Discovery Never Ends.",
+  },
+];
+
+const formats = ["20g", "60g", "250g", "500g", "1kg"];
 
 function Collections() {
+  const hash = useRouterState({ select: (s) => s.location.hash });
+
+  useEffect(() => {
+    if (!hash) return;
+    const el = document.getElementById(hash);
+    if (el) {
+      // small delay to let layout settle
+      setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+    }
+  }, [hash]);
+
   return (
     <>
-      <section className="pt-40 pb-20 bg-ink text-center px-6">
-        <SectionLabel className="justify-center"><span>The Tobacco Houses</span></SectionLabel>
-        <h1 className="mt-6 font-serif text-6xl md:text-8xl">Collections</h1>
-        <p className="mt-6 text-muted-foreground max-w-xl mx-auto">
-          Three distinct philosophies of smoke. Each a complete house unto itself.
-        </p>
-      </section>
-
-      <section className="bg-ink pb-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 space-y-px">
-          {list.map((c, i) => (
-            <Link
-              key={c.slug}
-              to="/collections/$slug"
-              params={{ slug: c.slug }}
-              className={`group grid lg:grid-cols-2 gap-0 overflow-hidden ${i % 2 ? "lg:[direction:rtl]" : ""}`}
-            >
-              <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[520px] overflow-hidden [direction:ltr]">
-                <img src={c.img} alt={c.name} className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" loading="lazy" width={1024} height={1280} />
-              </div>
-              <div className="relative bg-surface p-10 lg:p-16 flex flex-col justify-center [direction:ltr]">
-                <span className="block h-1 w-12 mb-8" style={{ background: c.accent }} />
-                <p className="font-serif text-3xl text-gold-soft mb-3">{c.arabic}</p>
-                <h2 className="font-serif text-5xl md:text-6xl">{c.name}</h2>
-                <p className="mt-4 text-[0.7rem] tracking-luxe uppercase text-gold">{c.tag}</p>
-                <p className="mt-8 text-muted-foreground leading-relaxed max-w-md">
-                  Step into the {c.name} story — its philosophy, its flavours, its formats.
-                </p>
-                <span className="inline-flex items-center gap-2 mt-10 text-xs tracking-luxe uppercase text-foreground group-hover:text-gold transition-colors">
-                  Enter {c.name} <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </div>
-            </Link>
-          ))}
+      {/* PAGE HERO */}
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-ink">
+        <div className="absolute inset-0 smoke-bg opacity-50" />
+        <div className="absolute inset-0 grain" />
+        <div className="relative z-10 text-center px-6 max-w-3xl animate-fade-up">
+          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
+            The Collections
+          </p>
+          <h1 className="font-serif text-5xl md:text-8xl text-balance leading-[1.02]">
+            Three Expressions. One House.
+          </h1>
+          <div className="luxe-divider max-w-[6rem] mx-auto my-10" />
+          <p className="text-muted-foreground leading-loose max-w-2xl mx-auto">
+            Within the House of RASA exist three distinct expressions. Each crafted
+            to offer a unique interpretation of character, refinement, and experience.
+          </p>
         </div>
       </section>
+
+      {sections.map((s, idx) => (
+        <CollectionSection key={s.slug} section={s} alt={idx % 2 === 1} />
+      ))}
     </>
+  );
+}
+
+function CollectionSection({ section, alt }: { section: Section; alt: boolean }) {
+  return (
+    <section
+      id={section.slug}
+      className={`relative scroll-mt-24 ${alt ? "bg-background" : "bg-ink"}`}
+    >
+      {/* Hero band */}
+      <div
+        className="relative min-h-[70vh] flex items-center overflow-hidden"
+        style={{
+          background: `linear-gradient(180deg, ${section.color} 0%, transparent 100%)`,
+        }}
+      >
+        <div className="absolute inset-0 bg-ink/60" />
+        <div className="absolute inset-0 smoke-bg opacity-40" />
+        <div className="absolute inset-0 grain" />
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 py-32 w-full">
+          <p className="text-[0.65rem] tracking-luxe uppercase text-gold">
+            {section.numeral}
+          </p>
+          <h2 className="mt-6 font-serif text-7xl md:text-[10rem] leading-none">
+            {section.name}
+          </h2>
+          <p className="mt-6 font-serif italic text-xl md:text-2xl text-gold-soft">
+            {section.tag}
+          </p>
+        </div>
+      </div>
+
+      {/* Introduction */}
+      <div className="py-28 md:py-36">
+        <div className="mx-auto max-w-3xl px-6 lg:px-10">
+          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
+            Introduction
+          </p>
+          <div className="space-y-6 text-lg leading-loose text-muted-foreground font-light">
+            {section.intro.map((p, i) => (
+              <p key={i} className={i === 0 ? "text-foreground/90" : ""}>
+                {p}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Philosophy */}
+      <div className="py-28 border-t border-border/30">
+        <div className="mx-auto max-w-3xl px-6 lg:px-10">
+          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
+            Philosophy
+          </p>
+          <div className="space-y-6 text-lg leading-loose text-muted-foreground font-light">
+            {section.philosophy.map((p, i) => (
+              <p key={i} className={i === 0 ? "font-serif italic text-2xl text-foreground/90 leading-snug" : ""}>
+                {p}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* The Collection — flavour names only */}
+      <div className="py-28 border-t border-border/30">
+        <div className="mx-auto max-w-5xl px-6 lg:px-10">
+          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
+            The Collection
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border/30">
+            {section.flavours.map((f, i) => (
+              <div
+                key={f}
+                className={`${alt ? "bg-background" : "bg-ink"} px-8 py-7 flex items-baseline gap-6 hover:bg-surface/40 transition-colors duration-500`}
+              >
+                <span className="text-[0.6rem] tracking-luxe text-gold/60 w-10">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="font-serif text-2xl md:text-3xl">{f}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Formats */}
+      <div className="py-28 border-t border-border/30">
+        <div className="mx-auto max-w-5xl px-6 lg:px-10">
+          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
+            Available Formats
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {formats.map((f) => (
+              <span
+                key={f}
+                className="px-8 py-4 border border-border/60 text-sm tracking-wide hover:border-gold/50 hover:text-gold transition-colors duration-500"
+              >
+                {f}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Closing */}
+      <div className="py-32 md:py-40 border-t border-border/30 text-center">
+        <p className="font-serif text-4xl md:text-6xl text-balance">
+          {section.closing}
+        </p>
+        <p className="mt-6 font-serif italic text-2xl text-gold-soft">
+          {section.name}.
+        </p>
+      </div>
+    </section>
   );
 }
