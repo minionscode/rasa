@@ -9,23 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PartnerRouteImport } from './routes/partner'
-import { Route as HookahsRouteImport } from './routes/hookahs'
+import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as HouseOfRasaRouteImport } from './routes/house-of-rasa'
+import { Route as HookahRouteImport } from './routes/hookah'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
-import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 
-const PartnerRoute = PartnerRouteImport.update({
-  id: '/partner',
-  path: '/partner',
+const PartnersRoute = PartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HookahsRoute = HookahsRouteImport.update({
-  id: '/hookahs',
-  path: '/hookahs',
+const HouseOfRasaRoute = HouseOfRasaRouteImport.update({
+  id: '/house-of-rasa',
+  path: '/house-of-rasa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HookahRoute = HookahRouteImport.update({
+  id: '/hookah',
+  path: '/hookah',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -38,11 +42,6 @@ const AccessoriesRoute = AccessoriesRouteImport.update({
   path: '/accessories',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -53,101 +52,96 @@ const CollectionsIndexRoute = CollectionsIndexRouteImport.update({
   path: '/collections/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
-  id: '/collections/$slug',
-  path: '/collections/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
   '/contact': typeof ContactRoute
-  '/hookahs': typeof HookahsRoute
-  '/partner': typeof PartnerRoute
-  '/collections/$slug': typeof CollectionsSlugRoute
+  '/hookah': typeof HookahRoute
+  '/house-of-rasa': typeof HouseOfRasaRoute
+  '/partners': typeof PartnersRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
   '/contact': typeof ContactRoute
-  '/hookahs': typeof HookahsRoute
-  '/partner': typeof PartnerRoute
-  '/collections/$slug': typeof CollectionsSlugRoute
+  '/hookah': typeof HookahRoute
+  '/house-of-rasa': typeof HouseOfRasaRoute
+  '/partners': typeof PartnersRoute
   '/collections': typeof CollectionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
   '/contact': typeof ContactRoute
-  '/hookahs': typeof HookahsRoute
-  '/partner': typeof PartnerRoute
-  '/collections/$slug': typeof CollectionsSlugRoute
+  '/hookah': typeof HookahRoute
+  '/house-of-rasa': typeof HouseOfRasaRoute
+  '/partners': typeof PartnersRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
     | '/accessories'
     | '/contact'
-    | '/hookahs'
-    | '/partner'
-    | '/collections/$slug'
+    | '/hookah'
+    | '/house-of-rasa'
+    | '/partners'
     | '/collections/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
     | '/accessories'
     | '/contact'
-    | '/hookahs'
-    | '/partner'
-    | '/collections/$slug'
+    | '/hookah'
+    | '/house-of-rasa'
+    | '/partners'
     | '/collections'
   id:
     | '__root__'
     | '/'
-    | '/about'
     | '/accessories'
     | '/contact'
-    | '/hookahs'
-    | '/partner'
-    | '/collections/$slug'
+    | '/hookah'
+    | '/house-of-rasa'
+    | '/partners'
     | '/collections/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   AccessoriesRoute: typeof AccessoriesRoute
   ContactRoute: typeof ContactRoute
-  HookahsRoute: typeof HookahsRoute
-  PartnerRoute: typeof PartnerRoute
-  CollectionsSlugRoute: typeof CollectionsSlugRoute
+  HookahRoute: typeof HookahRoute
+  HouseOfRasaRoute: typeof HouseOfRasaRoute
+  PartnersRoute: typeof PartnersRoute
   CollectionsIndexRoute: typeof CollectionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/partner': {
-      id: '/partner'
-      path: '/partner'
-      fullPath: '/partner'
-      preLoaderRoute: typeof PartnerRouteImport
+    '/partners': {
+      id: '/partners'
+      path: '/partners'
+      fullPath: '/partners'
+      preLoaderRoute: typeof PartnersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/hookahs': {
-      id: '/hookahs'
-      path: '/hookahs'
-      fullPath: '/hookahs'
-      preLoaderRoute: typeof HookahsRouteImport
+    '/house-of-rasa': {
+      id: '/house-of-rasa'
+      path: '/house-of-rasa'
+      fullPath: '/house-of-rasa'
+      preLoaderRoute: typeof HouseOfRasaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hookah': {
+      id: '/hookah'
+      path: '/hookah'
+      fullPath: '/hookah'
+      preLoaderRoute: typeof HookahRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -164,13 +158,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AccessoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -185,24 +172,16 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/collections/$slug': {
-      id: '/collections/$slug'
-      path: '/collections/$slug'
-      fullPath: '/collections/$slug'
-      preLoaderRoute: typeof CollectionsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   AccessoriesRoute: AccessoriesRoute,
   ContactRoute: ContactRoute,
-  HookahsRoute: HookahsRoute,
-  PartnerRoute: PartnerRoute,
-  CollectionsSlugRoute: CollectionsSlugRoute,
+  HookahRoute: HookahRoute,
+  HouseOfRasaRoute: HouseOfRasaRoute,
+  PartnersRoute: PartnersRoute,
   CollectionsIndexRoute: CollectionsIndexRoute,
 }
 export const routeTree = rootRouteImport
