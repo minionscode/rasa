@@ -1,6 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useRouterState } from "@tanstack/react-router";
+import majlisLogo from "@/assets/majlis-logo.jpg.asset.json";
+import makhmalLogo from "@/assets/makhmal-logo.jpg.asset.json";
+import tarkibLogo from "@/assets/tarkib-logo.jpg.asset.json";
+
+const collectionLogos: Record<string, string> = {
+  majlis: majlisLogo.url,
+  makhmal: makhmalLogo.url,
+  tarkib: tarkibLogo.url,
+};
 
 export const Route = createFileRoute("/collections/")({
   head: () => ({
@@ -186,16 +195,24 @@ function CollectionSection({ section, alt }: { section: Section; alt: boolean })
         <div className="absolute inset-0 bg-ink/60" />
         <div className="absolute inset-0 smoke-bg opacity-40" />
         <div className="absolute inset-0 grain" />
-        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 py-32 w-full">
-          <p className="text-[0.65rem] tracking-luxe uppercase text-gold">
-            {section.numeral}
-          </p>
-          <h2 className="mt-6 font-serif text-7xl md:text-[10rem] leading-none">
-            {section.name}
-          </h2>
-          <p className="mt-6 font-serif italic text-xl md:text-2xl text-gold-soft">
-            {section.tag}
-          </p>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 py-32 w-full grid md:grid-cols-[1fr_auto] gap-12 items-center">
+          <div>
+            <p className="text-[0.65rem] tracking-luxe uppercase text-gold">
+              {section.numeral}
+            </p>
+            <h2 className="mt-6 font-serif text-7xl md:text-[10rem] leading-none">
+              {section.name}
+            </h2>
+            <p className="mt-6 font-serif italic text-xl md:text-2xl text-gold-soft">
+              {section.tag}
+            </p>
+          </div>
+          <img
+            src={collectionLogos[section.slug]}
+            alt={`${section.name} emblem`}
+            className="hidden md:block w-64 lg:w-80 h-auto rounded-full shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]"
+            loading="lazy"
+          />
         </div>
       </div>
 
