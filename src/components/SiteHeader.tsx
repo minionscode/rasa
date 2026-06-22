@@ -146,7 +146,8 @@ export function SiteHeader() {
           </div>
           <nav className="flex flex-col px-8 py-10 gap-6">
             {[
-              { to: "/house-of-rasa", label: "The House of RASA" },
+              { to: "/", label: "Home" },
+              { to: "/house-of-rasa", label: "House of RASA" },
               { to: "/collections", label: "Collections" },
               { to: "/hookah", label: "Hookah" },
               { to: "/accessories", label: "Accessories" },
