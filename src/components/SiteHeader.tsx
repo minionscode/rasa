@@ -11,14 +11,25 @@ const collectionsDrop: DropItem[] = [
   { label: "Tarkib", sub: "The Expression of Innovation", to: "/collections", hash: "tarkib" },
 ];
 
-const hookahDrop: DropItem[] = [
-  { label: "Explore All", to: "/hookah" },
-  { label: "Classic — Portable", to: "/hookah", hash: "classic-collection" },
-  { label: "Classic — Medium", to: "/hookah", hash: "classic-collection" },
-  { label: "Classic — Large", to: "/hookah", hash: "classic-collection" },
-  { label: "Luxury — Portable", to: "/hookah", hash: "luxury-collection" },
-  { label: "Luxury — Medium", to: "/hookah", hash: "luxury-collection" },
-  { label: "Luxury — Large", to: "/hookah", hash: "luxury-collection" },
+const hookahGroups: { heading: string; sub: string; items: DropItem[] }[] = [
+  {
+    heading: "Classic Series",
+    sub: "Heritage forms, refined",
+    items: [
+      { label: "Portable", to: "/hookah", hash: "classic-collection" },
+      { label: "Medium", to: "/hookah", hash: "classic-collection" },
+      { label: "Large", to: "/hookah", hash: "classic-collection" },
+    ],
+  },
+  {
+    heading: "Luxury Series",
+    sub: "The pinnacle of craft",
+    items: [
+      { label: "Portable", to: "/hookah", hash: "luxury-collection" },
+      { label: "Medium", to: "/hookah", hash: "luxury-collection" },
+      { label: "Large", to: "/hookah", hash: "luxury-collection" },
+    ],
+  },
 ];
 
 const partnersDrop: DropItem[] = [
@@ -64,9 +75,12 @@ export function SiteHeader() {
             RASA
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-7">
+            <Link to="/" className={navLink} activeOptions={{ exact: true }} activeProps={{ className: "text-gold" }}>
+              Home
+            </Link>
             <Link to="/house-of-rasa" className={navLink} activeProps={{ className: "text-gold" }}>
-              The House of RASA
+              House of RASA
             </Link>
 
             <DropdownNav
@@ -77,9 +91,9 @@ export function SiteHeader() {
               onClose={() => setOpenDrop(null)}
             />
 
-            <DropdownNav
+            <MegaDropdown
               label="Hookah"
-              items={hookahDrop}
+              groups={hookahGroups}
               isOpen={openDrop === "hookah"}
               onOpen={() => setOpenDrop("hookah")}
               onClose={() => setOpenDrop(null)}
@@ -132,7 +146,8 @@ export function SiteHeader() {
           </div>
           <nav className="flex flex-col px-8 py-10 gap-6">
             {[
-              { to: "/house-of-rasa", label: "The House of RASA" },
+              { to: "/", label: "Home" },
+              { to: "/house-of-rasa", label: "House of RASA" },
               { to: "/collections", label: "Collections" },
               { to: "/hookah", label: "Hookah" },
               { to: "/accessories", label: "Accessories" },
@@ -197,6 +212,58 @@ function DropdownNav({
                   </p>
                 )}
               </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MegaDropdown({
+  label,
+  groups,
+  isOpen,
+  onOpen,
+  onClose,
+}: {
+  label: string;
+  groups: { heading: string; sub: string; items: DropItem[] }[];
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}) {
+  return (
+    <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
+      <button className="text-[0.7rem] tracking-luxe uppercase text-foreground/70 hover:text-gold transition-colors duration-500 inline-flex items-center gap-1.5">
+        {label}
+        <ChevronDown className="h-3 w-3 opacity-60" />
+      </button>
+      {isOpen && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-5">
+          <div className="bg-ink/95 backdrop-blur-xl border border-border/60 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-8 animate-fade-in grid grid-cols-2 gap-10 min-w-[520px]">
+            {groups.map((g) => (
+              <div key={g.heading}>
+                <p className="font-serif text-lg text-gold">{g.heading}</p>
+                <p className="text-[0.6rem] tracking-luxe uppercase text-muted-foreground mt-1 mb-4">
+                  {g.sub}
+                </p>
+                <div className="luxe-divider mb-3" />
+                <ul className="space-y-1">
+                  {g.items.map((it) => (
+                    <li key={`${g.heading}-${it.label}`}>
+                      <Link
+                        to={it.to}
+                        hash={it.hash}
+                        onClick={onClose}
+                        className="block py-2 text-sm text-foreground/80 hover:text-gold transition-colors"
+                      >
+                        {it.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
         </div>

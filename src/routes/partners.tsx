@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 
@@ -104,6 +104,36 @@ function Partners() {
         </div>
       </section>
 
+      {/* Why Partner */}
+      <section className="py-24 bg-ink border-t border-border/40">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10">
+          <p className="text-[0.65rem] tracking-luxe uppercase text-gold text-center">
+            Why Partner With RASA
+          </p>
+          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-center text-balance">
+            A partnership built on craft, consistency and care.
+          </h2>
+          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border/30">
+            {[
+              ["Wholesale Pricing", "Tiered structures aligned with serious trade partners."],
+              ["Exclusive Collections", "Access to limited and territory-specific releases."],
+              ["Dedicated Support", "A named account lead for every relationship."],
+              ["Reliable Supply Chain", "Disciplined logistics across India and the Gulf."],
+              ["Marketing Support", "Brand assets, training and co-branded campaigns."],
+              ["Long-term Growth", "Structured to grow with you, season after season."],
+            ].map(([t, d]) => (
+              <div key={t} className="bg-ink p-10">
+                <p className="font-serif text-2xl text-gold">{t}</p>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Registration form */}
+      <PartnerForm />
+
       <section className="py-32 bg-ink text-center">
         <div className="mx-auto max-w-2xl px-6">
           <h2 className="font-serif text-4xl md:text-5xl text-balance">
@@ -119,5 +149,109 @@ function Partners() {
         </div>
       </section>
     </>
+  );
+}
+
+function PartnerForm() {
+  const [submitted, setSubmitted] = useState(false);
+  const [f, setF] = useState({
+    name: "", company: "", phone: "", email: "",
+    businessType: "Distributor", city: "", state: "", message: "",
+  });
+  const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setF((p) => ({ ...p, [k]: e.target.value }));
+
+  return (
+    <section id="register" className="py-28 bg-background border-t border-border/40">
+      <div className="mx-auto max-w-5xl px-6 lg:px-10">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-[0.65rem] tracking-luxe uppercase text-gold">Partner Registration</p>
+          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-balance">
+            Submit a partnership enquiry.
+          </h2>
+          <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
+            Share your details below. Our sales atelier responds within one business day.
+          </p>
+        </div>
+
+        {submitted ? (
+          <div className="mt-16 border border-gold/30 bg-surface p-12 text-center animate-fade-up max-w-xl mx-auto">
+            <h3 className="font-serif text-3xl">Thank you.</h3>
+            <p className="mt-4 text-muted-foreground">
+              Your enquiry has reached the House of RASA.
+            </p>
+          </div>
+        ) : (
+          <form
+            onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+            className="mt-14 grid sm:grid-cols-2 gap-x-10 gap-y-7"
+          >
+            <PField label="Name *" value={f.name} onChange={set("name")} required />
+            <PField label="Company *" value={f.company} onChange={set("company")} required />
+            <PField label="Phone *" type="tel" value={f.phone} onChange={set("phone")} required />
+            <PField label="Email *" type="email" value={f.email} onChange={set("email")} required />
+            <div>
+              <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">
+                Business Type *
+              </label>
+              <select
+                value={f.businessType}
+                onChange={set("businessType")}
+                className="w-full bg-transparent border-b border-border/60 py-3 text-foreground focus:border-gold outline-none transition-colors"
+              >
+                {["Distributor", "Lounge", "Retail", "Wholesale", "Other"].map((o) => (
+                  <option key={o} value={o} className="bg-ink">{o}</option>
+                ))}
+              </select>
+            </div>
+            <PField label="City *" value={f.city} onChange={set("city")} required />
+            <PField label="State *" value={f.state} onChange={set("state")} required />
+            <div className="sm:col-span-2">
+              <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">
+                Message
+              </label>
+              <textarea
+                rows={4}
+                value={f.message}
+                onChange={set("message")}
+                placeholder="Tell us about your business and intent…"
+                className="w-full bg-transparent border-b border-border/60 py-3 text-foreground focus:border-gold outline-none transition-colors resize-none"
+              />
+            </div>
+            <div className="sm:col-span-2 pt-4">
+              <button
+                type="submit"
+                className="inline-flex items-center gap-3 px-12 py-4 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
+              >
+                Submit Inquiry <ArrowRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function PField({
+  label, value, onChange, type = "text", required = false,
+}: {
+  label: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+  required?: boolean;
+}) {
+  return (
+    <div>
+      <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">{label}</label>
+      <input
+        type={type}
+        required={required}
+        value={value}
+        onChange={onChange}
+        className="w-full bg-transparent border-b border-border/60 py-3 text-foreground focus:border-gold outline-none transition-colors"
+      />
+    </div>
   );
 }

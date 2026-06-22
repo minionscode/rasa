@@ -59,6 +59,22 @@ function Contact() {
           </div>
 
           <div className="mt-12 luxe-divider" />
+          <div className="mt-8">
+            <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-3">
+              Registered Office
+            </p>
+            <p className="font-serif text-lg text-foreground/95 leading-snug">
+              RASA Tobacco Partners Private Limited
+            </p>
+            <address className="not-italic mt-3 text-sm text-muted-foreground leading-relaxed">
+              Suit No. 312A, Suncity Trade Tower<br />
+              Sector 21, Industrial Complex Dundahera<br />
+              Gurugram, Haryana<br />
+              India — 122016
+            </address>
+          </div>
+
+          <div className="mt-8 luxe-divider" />
           <p className="mt-6 text-xs text-muted-foreground">
             India · UAE · Saudi Arabia · Qatar · Kuwait · Oman · Bahrain
           </p>
