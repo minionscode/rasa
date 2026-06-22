@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter, useRouterState } from "@tanstack/react-router";
+import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 
 const STORAGE_KEY = "rasa_age_verified";
 
@@ -55,9 +56,9 @@ export function AgeGate() {
           <span className="absolute bottom-0 right-0 w-8 h-px bg-gold" />
           <span className="absolute bottom-0 right-0 w-px h-8 bg-gold" />
 
-          <div className="animate-fade-up">
-            <p className="font-serif text-4xl md:text-5xl tracking-[0.4em] text-gold">RASA</p>
-            <p className="mt-3 text-[0.6rem] tracking-luxe uppercase text-muted-foreground">
+          <div className="animate-fade-up flex flex-col items-center">
+            <img src={rasaLogo.url} alt="RASA" className="h-20 md:h-24 w-auto" />
+            <p className="mt-4 text-[0.6rem] tracking-luxe uppercase text-muted-foreground">
               Smoke, Perfected.
             </p>
           </div>

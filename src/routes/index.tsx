@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,8 +39,8 @@ function Home() {
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-4xl">
-        <h1 className="animate-fade-up font-serif text-7xl md:text-[11rem] leading-none tracking-tight text-foreground">
-          RASA
+        <h1 className="animate-fade-up flex justify-center">
+          <img src={rasaLogo.url} alt="RASA — Smoke, Perfected." className="h-40 md:h-64 w-auto" />
         </h1>
         <div className="animate-fade-up delay-200 mt-8 luxe-divider max-w-[8rem] mx-auto" />
         <p className="animate-fade-up delay-300 mt-8 font-serif italic text-2xl md:text-3xl text-gold-soft">

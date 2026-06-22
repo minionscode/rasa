@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 
 export const Route = createFileRoute("/age-restricted")({
   head: () => ({
@@ -25,7 +26,7 @@ function AgeRestricted() {
       <div className="absolute inset-0 grain" />
 
       <div className="relative z-10 max-w-xl w-full text-center animate-fade-up">
-        <p className="font-serif text-3xl tracking-[0.4em] text-gold">RASA</p>
+        <img src={rasaLogo.url} alt="RASA" className="h-16 mx-auto" />
         <div className="luxe-divider max-w-[6rem] mx-auto my-10" />
         <h1 className="font-serif text-5xl md:text-6xl text-foreground text-balance">
           Access Restricted
