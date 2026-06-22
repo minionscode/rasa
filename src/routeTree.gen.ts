@@ -13,6 +13,7 @@ import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as HouseOfRasaRouteImport } from './routes/house-of-rasa'
 import { Route as HookahRouteImport } from './routes/hookah'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AgeRestrictedRouteImport } from './routes/age-restricted'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
@@ -37,6 +38,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgeRestrictedRoute = AgeRestrictedRouteImport.update({
+  id: '/age-restricted',
+  path: '/age-restricted',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccessoriesRoute = AccessoriesRouteImport.update({
   id: '/accessories',
   path: '/accessories',
@@ -56,6 +62,7 @@ const CollectionsIndexRoute = CollectionsIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/age-restricted': typeof AgeRestrictedRoute
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/age-restricted': typeof AgeRestrictedRoute
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/age-restricted': typeof AgeRestrictedRoute
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accessories'
+    | '/age-restricted'
     | '/contact'
     | '/hookah'
     | '/house-of-rasa'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/accessories'
+    | '/age-restricted'
     | '/contact'
     | '/hookah'
     | '/house-of-rasa'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/accessories'
+    | '/age-restricted'
     | '/contact'
     | '/hookah'
     | '/house-of-rasa'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessoriesRoute: typeof AccessoriesRoute
+  AgeRestrictedRoute: typeof AgeRestrictedRoute
   ContactRoute: typeof ContactRoute
   HookahRoute: typeof HookahRoute
   HouseOfRasaRoute: typeof HouseOfRasaRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/age-restricted': {
+      id: '/age-restricted'
+      path: '/age-restricted'
+      fullPath: '/age-restricted'
+      preLoaderRoute: typeof AgeRestrictedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/accessories': {
       id: '/accessories'
       path: '/accessories'
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessoriesRoute: AccessoriesRoute,
+  AgeRestrictedRoute: AgeRestrictedRoute,
   ContactRoute: ContactRoute,
   HookahRoute: HookahRoute,
   HouseOfRasaRoute: HouseOfRasaRoute,

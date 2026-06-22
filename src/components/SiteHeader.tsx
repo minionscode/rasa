@@ -11,14 +11,25 @@ const collectionsDrop: DropItem[] = [
   { label: "Tarkib", sub: "The Expression of Innovation", to: "/collections", hash: "tarkib" },
 ];
 
-const hookahDrop: DropItem[] = [
-  { label: "Explore All", to: "/hookah" },
-  { label: "Classic — Portable", to: "/hookah", hash: "classic-collection" },
-  { label: "Classic — Medium", to: "/hookah", hash: "classic-collection" },
-  { label: "Classic — Large", to: "/hookah", hash: "classic-collection" },
-  { label: "Luxury — Portable", to: "/hookah", hash: "luxury-collection" },
-  { label: "Luxury — Medium", to: "/hookah", hash: "luxury-collection" },
-  { label: "Luxury — Large", to: "/hookah", hash: "luxury-collection" },
+const hookahGroups: { heading: string; sub: string; items: DropItem[] }[] = [
+  {
+    heading: "Classic Series",
+    sub: "Heritage forms, refined",
+    items: [
+      { label: "Portable", to: "/hookah", hash: "classic-collection" },
+      { label: "Medium", to: "/hookah", hash: "classic-collection" },
+      { label: "Large", to: "/hookah", hash: "classic-collection" },
+    ],
+  },
+  {
+    heading: "Luxury Series",
+    sub: "The pinnacle of craft",
+    items: [
+      { label: "Portable", to: "/hookah", hash: "luxury-collection" },
+      { label: "Medium", to: "/hookah", hash: "luxury-collection" },
+      { label: "Large", to: "/hookah", hash: "luxury-collection" },
+    ],
+  },
 ];
 
 const partnersDrop: DropItem[] = [
