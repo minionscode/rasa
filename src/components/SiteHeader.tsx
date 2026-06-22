@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
+import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 
 type DropItem = { label: string; sub?: string; to: string; hash?: string };
 
@@ -71,8 +72,8 @@ export function SiteHeader() {
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-10 h-20 flex items-center justify-between">
-          <Link to="/" className="font-serif text-xl tracking-[0.4em] text-gold">
-            RASA
+          <Link to="/" aria-label="RASA — Home" className="flex items-center">
+            <img src={rasaLogo.url} alt="RASA" className="h-10 md:h-12 w-auto" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-7">
@@ -139,7 +140,7 @@ export function SiteHeader() {
       {open && (
         <div className="fixed inset-0 z-50 bg-ink/98 backdrop-blur-xl animate-fade-in lg:hidden overflow-y-auto">
           <div className="flex items-center justify-between h-20 px-6 border-b border-border/40">
-            <span className="font-serif text-xl tracking-[0.4em] text-gold">RASA</span>
+            <img src={rasaLogo.url} alt="RASA" className="h-9 w-auto" />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2">
               <X className="h-5 w-5" />
             </button>

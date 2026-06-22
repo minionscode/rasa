@@ -1,16 +1,23 @@
+import rasaLogo from "@/assets/rasa-logo.png.asset.json";
+
 interface Props {
   className?: string;
   showTag?: boolean;
+  imgClassName?: string;
 }
 
-export function RasaLogo({ className = "", showTag = false }: Props) {
+export function RasaLogo({ className = "", showTag = false, imgClassName = "h-10 w-auto" }: Props) {
   return (
     <div className={`inline-flex flex-col items-center ${className}`}>
-      <span className="font-serif text-2xl md:text-3xl tracking-[0.4em] text-gold">
-        RASA
-      </span>
+      <img
+        src={rasaLogo.url}
+        alt="RASA"
+        className={imgClassName}
+        loading="eager"
+        decoding="async"
+      />
       {showTag && (
-        <span className="mt-1 text-[0.6rem] md:text-xs tracking-luxe text-muted-foreground uppercase">
+        <span className="mt-2 text-[0.6rem] md:text-xs tracking-luxe text-muted-foreground uppercase">
           Smoke, Perfected
         </span>
       )}

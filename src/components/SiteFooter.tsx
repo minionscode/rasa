@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Mail, Phone, MessageCircle } from "lucide-react";
+import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 
 export function SiteFooter() {
   return (
@@ -9,8 +10,8 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Column 1 — Brand */}
           <div className="md:col-span-1">
-            <div className="font-serif text-2xl tracking-[0.4em] text-gold">RASA</div>
-            <p className="mt-4 text-xs tracking-luxe text-muted-foreground uppercase">
+            <img src={rasaLogo.url} alt="RASA" className="h-14 w-auto" />
+            <p className="mt-5 text-xs tracking-luxe text-muted-foreground uppercase">
               Smoke, Perfected.
             </p>
             <p className="mt-8 text-sm text-muted-foreground leading-relaxed max-w-xs">
