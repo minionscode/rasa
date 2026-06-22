@@ -219,6 +219,58 @@ function DropdownNav({
   );
 }
 
+function MegaDropdown({
+  label,
+  groups,
+  isOpen,
+  onOpen,
+  onClose,
+}: {
+  label: string;
+  groups: { heading: string; sub: string; items: DropItem[] }[];
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}) {
+  return (
+    <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
+      <button className="text-[0.7rem] tracking-luxe uppercase text-foreground/70 hover:text-gold transition-colors duration-500 inline-flex items-center gap-1.5">
+        {label}
+        <ChevronDown className="h-3 w-3 opacity-60" />
+      </button>
+      {isOpen && (
+        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-5">
+          <div className="bg-ink/95 backdrop-blur-xl border border-border/60 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-8 animate-fade-in grid grid-cols-2 gap-10 min-w-[520px]">
+            {groups.map((g) => (
+              <div key={g.heading}>
+                <p className="font-serif text-lg text-gold">{g.heading}</p>
+                <p className="text-[0.6rem] tracking-luxe uppercase text-muted-foreground mt-1 mb-4">
+                  {g.sub}
+                </p>
+                <div className="luxe-divider mb-3" />
+                <ul className="space-y-1">
+                  {g.items.map((it) => (
+                    <li key={`${g.heading}-${it.label}`}>
+                      <Link
+                        to={it.to}
+                        hash={it.hash}
+                        onClick={onClose}
+                        className="block py-2 text-sm text-foreground/80 hover:text-gold transition-colors"
+                      >
+                        {it.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SearchOverlay({ onClose }: { onClose: () => void }) {
   const [q, setQ] = useState("");
   useEffect(() => {
