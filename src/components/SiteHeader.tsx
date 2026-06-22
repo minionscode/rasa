@@ -75,9 +75,12 @@ export function SiteHeader() {
             RASA
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-7">
+            <Link to="/" className={navLink} activeOptions={{ exact: true }} activeProps={{ className: "text-gold" }}>
+              Home
+            </Link>
             <Link to="/house-of-rasa" className={navLink} activeProps={{ className: "text-gold" }}>
-              The House of RASA
+              House of RASA
             </Link>
 
             <DropdownNav
@@ -88,9 +91,9 @@ export function SiteHeader() {
               onClose={() => setOpenDrop(null)}
             />
 
-            <DropdownNav
+            <MegaDropdown
               label="Hookah"
-              items={hookahDrop}
+              groups={hookahGroups}
               isOpen={openDrop === "hookah"}
               onOpen={() => setOpenDrop("hookah")}
               onClose={() => setOpenDrop(null)}
