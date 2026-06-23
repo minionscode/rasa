@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "50d24af2-5cf0-4a32-9232-706c4b364831",
-  "project_id": "4a6a45d3-9513-4290-afee-d7d5f4d2a176",
-  "url": "/__l5e/assets-v1/50d24af2-5cf0-4a32-9232-706c4b364831/makhmal-logo.jpg",
-  "r2_key": "a/v1/4a6a45d3-9513-4290-afee-d7d5f4d2a176/50d24af2-5cf0-4a32-9232-706c4b364831/makhmal-logo.jpg",
-  "original_filename": "makhmal-logo.jpg",
-  "size": 584974,
   "content_type": "image/jpeg",
-  "created_at": "2026-06-22T09:54:00Z"
+  "created_at": "2026-06-22T09:54:00Z",
+  "original_filename": "makhmal-logo.jpg",
+  "project_id": "2ff68d28-acda-48ac-99f4-6d9f3b221ead",
+  "r2_key": "a/v1/2ff68d28-acda-48ac-99f4-6d9f3b221ead/50d24af2-5cf0-4a32-9232-706c4b364831/makhmal-logo.jpg",
+  "size": 584974,
+  "url": "/__l5e/assets-v1/50d24af2-5cf0-4a32-9232-706c4b364831/makhmal-logo.jpg",
+  "version": 1
 }

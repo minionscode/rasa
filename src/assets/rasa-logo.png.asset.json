@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "65637164-087b-45e3-a3f3-df7a061b3eff",
-  "project_id": "4a6a45d3-9513-4290-afee-d7d5f4d2a176",
-  "url": "/__l5e/assets-v1/65637164-087b-45e3-a3f3-df7a061b3eff/rasa-logo.png",
-  "r2_key": "a/v1/4a6a45d3-9513-4290-afee-d7d5f4d2a176/65637164-087b-45e3-a3f3-df7a061b3eff/rasa-logo.png",
-  "original_filename": "rasa-logo.png",
-  "size": 129774,
   "content_type": "image/png",
-  "created_at": "2026-06-22T09:53:53Z"
+  "created_at": "2026-06-22T09:53:53Z",
+  "original_filename": "rasa-logo.png",
+  "project_id": "2ff68d28-acda-48ac-99f4-6d9f3b221ead",
+  "r2_key": "a/v1/2ff68d28-acda-48ac-99f4-6d9f3b221ead/65637164-087b-45e3-a3f3-df7a061b3eff/rasa-logo.png",
+  "size": 129774,
+  "url": "/__l5e/assets-v1/65637164-087b-45e3-a3f3-df7a061b3eff/rasa-logo.png",
+  "version": 1
 }
