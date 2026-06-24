@@ -122,9 +122,7 @@ function Contact() {
     setSubmitted(true);
   };
 
-  const whatsappLink = `${contactInfo.whatsappUrl}?text=${encodeURIComponent(
-    `Hello RASA — I'm ${form.name || "[name]"} from ${form.business || "[business]"}. Enquiry: ${form.type}.`,
-  )}`;
+  const whatsappLink = contactInfo.whatsappUrl;
 
   const quickActions = [
     {
