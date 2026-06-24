@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AgeGate } from "../components/AgeGate";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
+import { LeadCaptureModal } from "../components/LeadCaptureModal";
 
 function NotFoundComponent() {
   return (
@@ -119,6 +120,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <SiteFooter />
+      <LeadCaptureModal />
     </QueryClientProvider>
   );
 }

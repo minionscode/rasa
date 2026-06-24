@@ -102,34 +102,34 @@ function Home() {
       </section>
 
       {/* COLLECTIONS PREVIEW */}
-      <section className="relative bg-background py-20 md:py-24">
+      <section className="relative bg-background py-14 md:py-16">
         <div className="mx-auto max-w-6xl px-6 lg:px-10">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-[0.65rem] tracking-luxe uppercase text-gold">The Collections</p>
             <h2 className="mt-3 font-serif text-4xl md:text-5xl text-balance">
               Three expressions, one house.
             </h2>
-            <p className="mt-5 text-foreground/80 leading-relaxed">
+            <p className="mt-4 text-foreground/80 leading-relaxed">
               Majlis, Makhmal and Tarkib — each a distinct luxury world, curated for hospitality and trade.
             </p>
           </div>
 
-          <div className="mt-12 grid md:grid-cols-3 gap-5">
+          <div className="mt-10 grid md:grid-cols-3 gap-5">
             {collections.map((c) => (
               <Link
                 key={c.hash}
                 to="/collections"
                 hash={c.hash}
-                className="card-luxe p-8 text-center group"
+                className="card-luxe p-7 text-center group"
               >
-                <div className="aspect-square mb-5 flex items-center justify-center">
-                  <img src={c.logo} alt={c.name} className="max-h-32 w-auto opacity-95 group-hover:opacity-100 transition-opacity" />
+                <div className="aspect-square mb-4 flex items-center justify-center">
+                  <img src={c.logo} alt={c.name} className="max-h-28 w-auto opacity-95 group-hover:opacity-100 transition-opacity" />
                 </div>
                 <h3 className="font-serif text-2xl md:text-3xl">{c.name}</h3>
                 <p className="mt-2 text-[0.65rem] tracking-luxe uppercase text-gold/85">
                   {c.tag}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-[0.7rem] tracking-luxe uppercase text-foreground/80 group-hover:text-gold transition-colors">
+                <span className="mt-4 inline-flex items-center gap-2 text-[0.7rem] tracking-luxe uppercase text-foreground/80 group-hover:text-gold transition-colors">
                   Explore <ArrowRight className="h-3 w-3" />
                 </span>
               </Link>
@@ -139,25 +139,25 @@ function Home() {
       </section>
 
       {/* BUSINESS CREDIBILITY */}
-      <section className="relative bg-ink py-20 md:py-24 border-t border-border/40">
+      <section className="relative bg-ink py-14 md:py-16 border-t border-border/40">
         <div className="mx-auto max-w-6xl px-6 lg:px-10">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-[0.65rem] tracking-luxe uppercase text-gold">House & Distribution</p>
             <h2 className="mt-3 font-serif text-4xl md:text-5xl text-balance">
               More than a lifestyle brand.
             </h2>
-            <p className="mt-5 text-foreground/80 leading-relaxed">
+            <p className="mt-4 text-foreground/80 leading-relaxed">
               RASA is a luxury lifestyle house and a premium distribution partner — sourcing,
               curating and supplying for hospitality, retail and wholesale across markets.
             </p>
           </div>
 
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {pillars.map(({ icon: Icon, title, body }) => (
-              <div key={title} className="card-luxe p-6 flex flex-col">
-                <Icon className="h-6 w-6 text-gold mb-5" strokeWidth={1.25} />
+              <div key={title} className="card-luxe p-5 flex flex-col">
+                <Icon className="h-6 w-6 text-gold mb-4" strokeWidth={1.25} />
                 <p className="font-serif text-lg leading-tight">{title}</p>
-                <p className="mt-3 text-sm text-foreground/75 leading-relaxed">{body}</p>
+                <p className="mt-2 text-sm text-foreground/75 leading-relaxed">{body}</p>
               </div>
             ))}
           </div>
@@ -165,7 +165,7 @@ function Home() {
       </section>
 
       {/* BECOME A PARTNER */}
-      <section className="relative bg-background py-24 border-t border-border/40 overflow-hidden">
+      <section className="relative bg-background py-16 md:py-20 border-t border-border/40 overflow-hidden">
         <div
           className="absolute inset-0 opacity-50"
           style={{

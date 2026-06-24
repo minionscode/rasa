@@ -1,154 +1,323 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionLabel } from "../components/SectionLabel";
-import { ArrowRight, Mail, Phone, MessageCircle } from "lucide-react";
+import {
+  ArrowRight,
+  Mail,
+  Phone,
+  MessageCircle,
+  Handshake,
+  FileText,
+  Truck,
+  Building2,
+  Store,
+  Sparkles,
+} from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Sales — RASA" },
-      { name: "description", content: "Speak with the RASA sales team. Distribution, lounge partnerships, wholesale and general enquiries across India and the Gulf." },
-      { property: "og:title", content: "Contact Sales — RASA" },
-      { property: "og:description", content: "Let's start a conversation." },
+      { title: "Contact — Sales, Distribution & Partnerships | RASA" },
+      {
+        name: "description",
+        content:
+          "Speak with the RASA sales atelier — distribution, hospitality, retail and wholesale enquiries across India and the Gulf.",
+      },
+      { property: "og:title", content: "Contact RASA Sales" },
+      {
+        property: "og:description",
+        content:
+          "Distribution, hospitality, retail and wholesale opportunities with the House of RASA.",
+      },
     ],
   }),
   component: Contact,
 });
 
+type FormState = {
+  name: string;
+  business: string;
+  email: string;
+  phone: string;
+  type: string;
+  message: string;
+};
+
+const businessTypes = [
+  "Distributor",
+  "Hospitality / Lounge",
+  "Retail Boutique",
+  "Wholesale",
+  "Media / Press",
+  "Other",
+];
+
+const focusAreas = [
+  { icon: Truck, title: "Sales Inquiries", body: "Pricing, allocations and order desks for serious buyers." },
+  { icon: Building2, title: "Distribution Partnerships", body: "Territory representation across India, Gulf and beyond." },
+  { icon: Sparkles, title: "Hospitality Collaborations", body: "Composed RASA programmes for lounges, hotels and clubs." },
+  { icon: Store, title: "Retail Opportunities", body: "Curated placements for boutique tobacconists and concept stores." },
+];
+
 function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({
-    name: "", company: "", country: "", email: "", phone: "", type: "Distributor", message: "",
+  const [form, setForm] = useState<FormState>({
+    name: "",
+    business: "",
+    email: "",
+    phone: "",
+    type: "Distributor",
+    message: "",
   });
+  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
 
-  const onChange = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm((f) => ({ ...f, [k]: e.target.value }));
+  const onChange =
+    (k: keyof FormState) =>
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >,
+    ) => {
+      setForm((f) => ({ ...f, [k]: e.target.value }));
+      if (errors[k]) setErrors((p) => ({ ...p, [k]: undefined }));
+    };
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const validate = (): boolean => {
+    const e: Partial<Record<keyof FormState, string>> = {};
+    if (!form.name.trim()) e.name = "Kindly share your full name.";
+    if (!form.business.trim()) e.business = "Your business name is required.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
+      e.email = "A valid email address is required.";
+    if (!form.phone.trim()) e.phone = "A contact number lets us respond swiftly.";
+    if (!form.message.trim() || form.message.trim().length < 10)
+      e.message = "Please share a few words about your enquiry.";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const onSubmit = (ev: React.FormEvent) => {
+    ev.preventDefault();
+    if (!validate()) return;
     setSubmitted(true);
   };
 
   const whatsappLink = `https://wa.me/910000000000?text=${encodeURIComponent(
-    `Hello RASA — I'm ${form.name || "[name]"} from ${form.company || "[company]"} (${form.country || "[country]"}). I'm enquiring about: ${form.type}.`
+    `Hello RASA — I'm ${form.name || "[name]"} from ${form.business || "[business]"}. Enquiry: ${form.type}.`,
   )}`;
 
+  const quickActions = [
+    {
+      icon: Phone,
+      label: "Call Sales",
+      sub: "+91 00000 00000",
+      href: "tel:+910000000000",
+    },
+    {
+      icon: MessageCircle,
+      label: "WhatsApp Sales",
+      sub: "Reply within the hour",
+      href: whatsappLink,
+      external: true,
+    },
+    {
+      icon: Handshake,
+      label: "Become a Partner",
+      sub: "Distribution & retail",
+      href: "/partners",
+    },
+    {
+      icon: FileText,
+      label: "Request Catalogue",
+      sub: "Full house portfolio",
+      href: "mailto:sales@rasahouse.com?subject=Catalogue%20Request",
+    },
+  ];
+
   return (
-    <section className="pt-32 pb-20 bg-ink min-h-screen">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-20">
-        <div className="lg:sticky lg:top-32 self-start">
-          <SectionLabel><span>Contact Sales</span></SectionLabel>
-          <h1 className="mt-6 font-serif text-6xl md:text-7xl text-balance">
-            Let's start a <em className="text-gold not-italic">conversation</em>.
+    <section className="pt-28 pb-16 bg-ink min-h-screen">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        {/* HEADER */}
+        <div className="max-w-3xl">
+          <SectionLabel><span>Contact the House</span></SectionLabel>
+          <h1 className="mt-5 font-serif text-5xl md:text-6xl text-balance leading-[1.05]">
+            Speak with the <em className="text-gold not-italic">RASA</em> sales atelier.
           </h1>
-          <p className="mt-6 text-muted-foreground max-w-md leading-relaxed">
-            Whether you seek distribution, a lounge partnership, or simply wish to experience
-            RASA — our sales team responds within one business day.
-          </p>
-
-          <div className="mt-12 space-y-5 text-sm">
-            <a href="mailto:sales@rasahouse.com" className="flex items-center gap-4 text-muted-foreground hover:text-gold transition-colors">
-              <Mail className="h-4 w-4 text-gold" /> sales@rasahouse.com
-            </a>
-            <a href="tel:+910000000000" className="flex items-center gap-4 text-muted-foreground hover:text-gold transition-colors">
-              <Phone className="h-4 w-4 text-gold" /> +91 00000 00000
-            </a>
-            <a href={whatsappLink} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-muted-foreground hover:text-gold transition-colors">
-              <MessageCircle className="h-4 w-4 text-gold" /> WhatsApp Sales
-            </a>
-          </div>
-
-          <div className="mt-12 luxe-divider" />
-          <div className="mt-8">
-            <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-3">
-              Registered Office
-            </p>
-            <p className="font-serif text-lg text-foreground/95 leading-snug">
-              RASA Tobacco Partners Private Limited
-            </p>
-            <address className="not-italic mt-3 text-sm text-muted-foreground leading-relaxed">
-              Suit No. 312A, Suncity Trade Tower<br />
-              Sector 21, Industrial Complex Dundahera<br />
-              Gurugram, Haryana<br />
-              India — 122016
-            </address>
-          </div>
-
-          <div className="mt-8 luxe-divider" />
-          <p className="mt-6 text-xs text-muted-foreground">
-            India · UAE · Saudi Arabia · Qatar · Kuwait · Oman · Bahrain
+          <p className="mt-5 text-foreground/80 max-w-2xl leading-relaxed">
+            Sales inquiries, distribution partnerships, hospitality collaborations and
+            retail opportunities — a representative responds within one business day.
           </p>
         </div>
 
-        <div>
-          {submitted ? (
-            <div className="border border-gold/30 bg-surface p-12 text-center animate-fade-up">
-              <h2 className="font-serif text-3xl">Thank you.</h2>
-              <p className="mt-4 text-muted-foreground">
-                Your enquiry has reached our sales atelier. A representative will respond shortly.
-              </p>
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 mt-8 px-8 py-3 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors"
-              >
-                Continue on WhatsApp <MessageCircle className="h-3.5 w-3.5" />
-              </a>
-            </div>
-          ) : (
-            <form onSubmit={onSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-6">
-                <Field label="Name" value={form.name} onChange={onChange("name")} required />
-                <Field label="Company" value={form.company} onChange={onChange("company")} />
-                <Field label="Country" value={form.country} onChange={onChange("country")} required />
-                <Field label="Email" type="email" value={form.email} onChange={onChange("email")} required />
-                <Field label="Phone" type="tel" value={form.phone} onChange={onChange("phone")} />
-                <div>
-                  <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">Business Type</label>
-                  <select
-                    value={form.type}
-                    onChange={onChange("type")}
-                    className="w-full bg-transparent border-b border-border/60 py-3 text-foreground focus:border-gold outline-none transition-colors"
-                  >
-                    {["Distributor", "Lounge Owner", "Wholesale", "Retail", "Media", "Other"].map((o) => (
-                      <option key={o} value={o} className="bg-ink">{o}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+        {/* QUICK ACTIONS */}
+        <div className="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {quickActions.map(({ icon: Icon, label, sub, href, external }) => (
+            <a
+              key={label}
+              href={href}
+              {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+              className="card-luxe p-5 group flex flex-col gap-3"
+            >
+              <Icon className="h-5 w-5 text-gold" strokeWidth={1.25} />
               <div>
-                <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">Message</label>
-                <textarea
-                  rows={5}
-                  value={form.message}
-                  onChange={onChange("message")}
-                  className="w-full bg-transparent border-b border-border/60 py-3 text-foreground focus:border-gold outline-none transition-colors resize-none"
-                  placeholder="Tell us about your enquiry…"
-                />
+                <p className="font-serif text-lg leading-tight">{label}</p>
+                <p className="mt-1 text-xs text-foreground/70">{sub}</p>
               </div>
+              <span className="mt-auto pt-2 inline-flex items-center gap-2 text-[0.65rem] tracking-luxe uppercase text-gold/85 group-hover:text-gold transition-colors">
+                Open <ArrowRight className="h-3 w-3" />
+              </span>
+            </a>
+          ))}
+        </div>
 
-              <div className="pt-6 flex flex-col sm:flex-row gap-3">
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
-                >
-                  Submit Enquiry <ArrowRight className="h-3.5 w-3.5" />
-                </button>
+        {/* FORM + FOCUS */}
+        <div className="mt-12 grid lg:grid-cols-[1.15fr_1fr] gap-12">
+          <div>
+            {submitted ? (
+              <div className="card-luxe p-10 text-center animate-fade-up">
+                <h2 className="font-serif text-3xl">Thank you.</h2>
+                <p className="mt-4 text-foreground/80">
+                  Your enquiry has reached our sales atelier. A representative
+                  will respond within one business day.
+                </p>
                 <a
                   href={whatsappLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-3 px-10 py-4 border border-border text-foreground text-xs tracking-luxe uppercase hover:border-gold/50 hover:text-gold transition-all"
+                  className="inline-flex items-center gap-2 mt-7 px-8 py-3 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors"
                 >
-                  WhatsApp Instead <MessageCircle className="h-3.5 w-3.5" />
+                  Continue on WhatsApp <MessageCircle className="h-3.5 w-3.5" />
                 </a>
               </div>
-              <p className="text-xs text-muted-foreground">
-                By submitting you confirm you are 18+ and acting in a professional capacity.
+            ) : (
+              <form onSubmit={onSubmit} noValidate className="card-luxe p-6 md:p-8 space-y-5">
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <Field
+                    label="Full Name"
+                    required
+                    value={form.name}
+                    onChange={onChange("name")}
+                    error={errors.name}
+                  />
+                  <Field
+                    label="Business Name"
+                    required
+                    value={form.business}
+                    onChange={onChange("business")}
+                    error={errors.business}
+                  />
+                  <Field
+                    label="Email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={onChange("email")}
+                    error={errors.email}
+                  />
+                  <Field
+                    label="Phone"
+                    type="tel"
+                    required
+                    value={form.phone}
+                    onChange={onChange("phone")}
+                    error={errors.phone}
+                  />
+                  <div className="sm:col-span-2">
+                    <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">
+                      Business Type
+                    </label>
+                    <select
+                      value={form.type}
+                      onChange={onChange("type")}
+                      className="w-full bg-transparent border-b border-border/60 py-3 text-foreground focus:border-gold outline-none transition-colors"
+                    >
+                      {businessTypes.map((o) => (
+                        <option key={o} value={o} className="bg-ink">
+                          {o}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    rows={5}
+                    value={form.message}
+                    onChange={onChange("message")}
+                    placeholder="Tell us about your territory, venue or enquiry…"
+                    className={`w-full bg-transparent border-b ${
+                      errors.message ? "border-destructive" : "border-border/60"
+                    } py-3 text-foreground focus:border-gold outline-none transition-colors resize-none placeholder:text-muted-foreground/50`}
+                  />
+                  {errors.message && (
+                    <p className="mt-2 text-xs font-serif italic text-destructive">
+                      {errors.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className="pt-3 flex flex-col sm:flex-row gap-3">
+                  <button
+                    type="submit"
+                    className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
+                  >
+                    Submit Enquiry
+                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center gap-3 px-10 py-4 border border-border text-foreground text-xs tracking-luxe uppercase hover:border-gold/50 hover:text-gold transition-all"
+                  >
+                    WhatsApp Instead <MessageCircle className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+                <p className="text-xs text-foreground/60">
+                  By submitting you confirm you are 18+ and acting in a professional capacity.
+                </p>
+              </form>
+            )}
+          </div>
+
+          {/* FOCUS AREAS */}
+          <aside className="space-y-4">
+            <p className="text-[0.65rem] tracking-luxe uppercase text-gold">What We Compose</p>
+            <h2 className="font-serif text-3xl text-balance leading-tight">
+              Built for serious trade partners.
+            </h2>
+            <div className="mt-4 grid sm:grid-cols-2 gap-4">
+              {focusAreas.map(({ icon: Icon, title, body }) => (
+                <div key={title} className="card-luxe p-5">
+                  <Icon className="h-5 w-5 text-gold mb-3" strokeWidth={1.25} />
+                  <p className="font-serif text-lg leading-tight">{title}</p>
+                  <p className="mt-2 text-sm text-foreground/75 leading-relaxed">{body}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="card-luxe p-6 mt-4">
+              <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-3">
+                Direct Channels
               </p>
-            </form>
-          )}
+              <div className="space-y-3 text-sm">
+                <a href="mailto:sales@rasahouse.com" className="flex items-center gap-3 text-foreground/85 hover:text-gold transition-colors">
+                  <Mail className="h-4 w-4 text-gold" /> sales@rasahouse.com
+                </a>
+                <a href="tel:+910000000000" className="flex items-center gap-3 text-foreground/85 hover:text-gold transition-colors">
+                  <Phone className="h-4 w-4 text-gold" /> +91 00000 00000
+                </a>
+                <a href={whatsappLink} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-foreground/85 hover:text-gold transition-colors">
+                  <MessageCircle className="h-4 w-4 text-gold" /> WhatsApp Sales
+                </a>
+              </div>
+              <p className="mt-5 text-xs text-foreground/60">
+                Serving India · UAE · Saudi Arabia · Qatar · Kuwait · Oman · Bahrain
+              </p>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -156,24 +325,39 @@ function Contact() {
 }
 
 function Field({
-  label, value, onChange, type = "text", required = false,
+  label,
+  value,
+  onChange,
+  type = "text",
+  required = false,
+  error,
 }: {
   label: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
   required?: boolean;
+  error?: string;
 }) {
   return (
     <div>
-      <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">{label}{required && " *"}</label>
+      <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">
+        {label}
+        {required && <span className="text-gold/60"> *</span>}
+      </label>
       <input
         type={type}
-        required={required}
         value={value}
         onChange={onChange}
-        className="w-full bg-transparent border-b border-border/60 py-3 text-foreground focus:border-gold outline-none transition-colors"
+        className={`w-full bg-transparent border-b ${
+          error ? "border-destructive" : "border-border/60"
+        } py-3 text-foreground focus:border-gold outline-none transition-colors`}
       />
+      {error && (
+        <p className="mt-2 text-xs font-serif italic text-destructive">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
