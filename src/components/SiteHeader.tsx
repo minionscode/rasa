@@ -137,8 +137,8 @@ export function SiteHeader() {
               { to: "/", label: "Home" },
               { to: "/house-of-rasa", label: "House of RASA" },
               { to: "/collections", label: "Collections" },
-              { to: "/hookah", label: "Hookah" },
-              { to: "/accessories", label: "Accessories" },
+              { to: "/coming-soon", label: "Hookah", search: { category: "hookah" } },
+              { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
               { to: "/partners", label: "Partners" },
               { to: "/contact", label: "Contact" },
             ].map((item) => (
