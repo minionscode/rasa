@@ -54,7 +54,7 @@ const sections: Section[] = [
     slug: "majlis",
     name: "Majlis",
     label: "Collection I",
-    expression: "The Expression of Gathering",
+    expression: "The Expression of Heritage",
     tagline: "Tradition Lives On.",
     intro:
       "Majlis is a tribute to gathering. Rooted in heritage, warmed by hospitality, it carries the timeless character of an evening spent in good company.",
