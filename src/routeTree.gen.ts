@@ -21,7 +21,6 @@ import { Route as CollectionsIndexRouteImport } from './routes/collections.index
 import { Route as CollectionsTarkibRouteImport } from './routes/collections.tarkib'
 import { Route as CollectionsMakhmalRouteImport } from './routes/collections.makhmal'
 import { Route as CollectionsMajlisRouteImport } from './routes/collections.majlis'
-import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
@@ -83,11 +82,6 @@ const CollectionsMajlisRoute = CollectionsMajlisRouteImport.update({
   path: '/collections/majlis',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
-  id: '/collections/$slug',
-  path: '/collections/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -98,7 +92,6 @@ export interface FileRoutesByFullPath {
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
-  '/collections/$slug': typeof CollectionsSlugRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -113,7 +106,6 @@ export interface FileRoutesByTo {
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
-  '/collections/$slug': typeof CollectionsSlugRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -129,7 +121,6 @@ export interface FileRoutesById {
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
-  '/collections/$slug': typeof CollectionsSlugRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -146,7 +137,6 @@ export interface FileRouteTypes {
     | '/hookah'
     | '/house-of-rasa'
     | '/partners'
-    | '/collections/$slug'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -161,7 +151,6 @@ export interface FileRouteTypes {
     | '/hookah'
     | '/house-of-rasa'
     | '/partners'
-    | '/collections/$slug'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -176,7 +165,6 @@ export interface FileRouteTypes {
     | '/hookah'
     | '/house-of-rasa'
     | '/partners'
-    | '/collections/$slug'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -192,7 +180,6 @@ export interface RootRouteChildren {
   HookahRoute: typeof HookahRoute
   HouseOfRasaRoute: typeof HouseOfRasaRoute
   PartnersRoute: typeof PartnersRoute
-  CollectionsSlugRoute: typeof CollectionsSlugRoute
   CollectionsMajlisRoute: typeof CollectionsMajlisRoute
   CollectionsMakhmalRoute: typeof CollectionsMakhmalRoute
   CollectionsTarkibRoute: typeof CollectionsTarkibRoute
@@ -285,13 +272,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsMajlisRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/collections/$slug': {
-      id: '/collections/$slug'
-      path: '/collections/$slug'
-      fullPath: '/collections/$slug'
-      preLoaderRoute: typeof CollectionsSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -304,7 +284,6 @@ const rootRouteChildren: RootRouteChildren = {
   HookahRoute: HookahRoute,
   HouseOfRasaRoute: HouseOfRasaRoute,
   PartnersRoute: PartnersRoute,
-  CollectionsSlugRoute: CollectionsSlugRoute,
   CollectionsMajlisRoute: CollectionsMajlisRoute,
   CollectionsMakhmalRoute: CollectionsMakhmalRoute,
   CollectionsTarkibRoute: CollectionsTarkibRoute,
