@@ -207,12 +207,19 @@ function CollectionSection({ section }: { section: Section }) {
       {/* HERO — restructured hierarchy: LABEL · NAME · EXPRESSION · TAGLINE */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 pt-20 md:pt-24 pb-10 grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
         <div>
-          <p
-            className="text-[0.65rem] tracking-[0.45em] uppercase mb-5"
-            style={{ color: section.accentVar }}
-          >
-            {section.label}
-          </p>
+          <div className="flex items-center gap-4 mb-6">
+            <img
+              src={collectionLogos[section.slug]}
+              alt=""
+              className="h-10 md:h-12 w-auto opacity-90 crisp-img"
+            />
+            <span
+              className="text-[0.65rem] tracking-[0.45em] uppercase"
+              style={{ color: section.accentVar }}
+            >
+              {section.name} Collection
+            </span>
+          </div>
           <h2 className="font-serif text-7xl md:text-[8.5rem] leading-[0.95] tracking-tight">
             {section.name}
           </h2>
