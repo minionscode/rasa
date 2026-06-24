@@ -5,7 +5,15 @@ import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 const STORAGE_KEY = "rasa_age_verified";
 
 export function AgeGate() {
-  const [verified, setVerified] = useState(true);
+  // Read sessionStorage synchronously on the very first render so the gate
+  // paints BEFORE the homepage instead of flashing in afterwards.
+  // On the server we default to "not verified" — gate is rendered in SSR HTML
+  // and overlays the page on first paint.
+  // Default to NOT verified so the gate is part of the very first paint
+  // (both during SSR and client hydration). The effect below then hides it
+  // for users who already verified in this session, avoiding the homepage
+  // flash that happens when the initial state hides the gate.
+  const [verified, setVerified] = useState<boolean>(false);
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
