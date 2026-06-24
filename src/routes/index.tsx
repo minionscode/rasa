@@ -111,25 +111,29 @@ function Home() {
           </div>
 
           <div className="mt-10 grid md:grid-cols-3 gap-5">
-            {collections.map((c) => (
-              <Link
-                key={c.slug}
-                to="/collections/$slug"
-                params={{ slug: c.slug }}
-                className="card-luxe collection-card p-7 text-center group"
-              >
-                <div className="aspect-square mb-4 flex items-center justify-center">
-                  <img src={c.logo} alt={c.name} className="max-h-36 w-auto opacity-95 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-500 crisp-img" />
-                </div>
-                <h3 className="font-serif text-2xl md:text-3xl group-hover:text-gold transition-colors">{c.name}</h3>
-                <p className="mt-2 text-[0.65rem] tracking-luxe uppercase text-gold/85">
-                  {c.tag}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-2 text-[0.7rem] tracking-luxe uppercase text-foreground/80 group-hover:text-gold transition-colors">
-                  Explore <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-            ))}
+            {collections.map((c) => {
+              const cardBg = `radial-gradient(ellipse at 50% 0%, var(--${c.slug}-secondary) 0%, transparent 55%), linear-gradient(180deg, color-mix(in oklab, var(--${c.slug}) 75%, var(--ink)) 0%, var(--ink) 100%)`;
+              return (
+                <Link
+                  key={c.slug}
+                  to="/collections/$slug"
+                  params={{ slug: c.slug }}
+                  className="collection-card relative overflow-hidden border border-foreground/10 hover:border-gold/40 p-7 text-center group transition-all duration-500 hover:-translate-y-1.5"
+                  style={{ background: cardBg }}
+                >
+                  <div className="aspect-square mb-4 flex items-center justify-center">
+                    <img src={c.logo} alt={c.name} className="max-h-40 w-auto opacity-95 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-500 crisp-img" />
+                  </div>
+                  <h3 className="font-serif text-2xl md:text-3xl group-hover:text-gold-soft transition-colors">{c.name}</h3>
+                  <p className="mt-2 text-[0.65rem] tracking-luxe uppercase" style={{ color: `var(--${c.slug}-accent)` }}>
+                    {c.tag}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-2 text-[0.7rem] tracking-luxe uppercase text-foreground/80 group-hover:text-gold transition-colors">
+                    Explore <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
