@@ -18,10 +18,10 @@ const heroImages: Record<Collection["slug"], string> = {
   tarkib: chapterTarkib.url,
 };
 
-const heroTones: Record<Collection["slug"], "copper" | "silver" | "ember"> = {
-  majlis: "ember",
-  makhmal: "copper",
-  tarkib: "silver",
+const heroTones: Record<Collection["slug"], "burgundy" | "aubergine" | "midnight"> = {
+  majlis: "burgundy",
+  makhmal: "aubergine",
+  tarkib: "midnight",
 };
 
 export function CollectionExperience({ collection }: { collection: Collection }) {
