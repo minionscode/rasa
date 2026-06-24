@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import majlisLogo from "@/assets/majlis-logo.png.asset.json";
 import makhmalLogo from "@/assets/makhmal-logo.png.asset.json";
 import tarkibLogo from "@/assets/tarkib-logo.png.asset.json";
