@@ -281,12 +281,7 @@ function CollectionSection({ section }: { section: Section }) {
               <div
                 key={f}
                 className="px-7 py-5 flex items-baseline gap-5 transition-colors duration-300"
-                style={
-                  {
-                    background: tile,
-                    ["--hover-bg" as never]: tileHover,
-                  } as React.CSSProperties
-                }
+                style={{ background: tile }}
                 onMouseEnter={(e) => (e.currentTarget.style.background = tileHover)}
                 onMouseLeave={(e) => (e.currentTarget.style.background = tile)}
               >
