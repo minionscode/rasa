@@ -9,10 +9,11 @@ export function AgeGate() {
   // paints BEFORE the homepage instead of flashing in afterwards.
   // On the server we default to "not verified" — gate is rendered in SSR HTML
   // and overlays the page on first paint.
-  const [verified, setVerified] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    return window.sessionStorage.getItem(STORAGE_KEY) === "1";
-  });
+  // Default to NOT verified so the gate is part of the very first paint
+  // (both during SSR and client hydration). The effect below then hides it
+  // for users who already verified in this session, avoiding the homepage
+  // flash that happens when the initial state hides the gate.
+  const [verified, setVerified] = useState<boolean>(false);
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
