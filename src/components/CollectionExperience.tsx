@@ -49,20 +49,8 @@ export function CollectionExperience({ collection }: { collection: Collection })
             {collection.expression}
           </p>
 
-          {/* PACKAGING FORMAT BAR — before tagline */}
-          <div className="mt-7 max-w-xl">
-            <p
-              className="text-[0.6rem] tracking-[0.4em] uppercase mb-2"
-              style={{ color: collection.accentVar }}
-            >
-              Available Packaging Formats
-            </p>
-            <div className="grid grid-cols-5 gap-2">
-              {formats.map((f) => (
-                <FormatEnquireChip key={f} format={f} c={collection} />
-              ))}
-            </div>
-          </div>
+
+
 
           <p className="mt-6 font-serif italic text-lg md:text-xl text-foreground/80">
             {collection.tagline}
