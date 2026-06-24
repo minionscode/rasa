@@ -3,13 +3,14 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import heroHookah from "@/assets/hero-hookah.jpg.asset.json";
-import bandEarth from "@/assets/band-earth.jpg.asset.json";
+import bandCopper from "@/assets/band-copper.jpg.asset.json";
 import chapterMajlis from "@/assets/chapter-majlis.jpg.asset.json";
 import chapterMakhmal from "@/assets/chapter-makhmal.jpg.asset.json";
 import chapterTarkib from "@/assets/chapter-tarkib.jpg.asset.json";
 import { CinematicSmoke } from "@/components/CinematicSmoke";
 import { Reveal, RevealChild, RevealGroup } from "@/components/motion/Reveal";
 import { Parallax } from "@/components/motion/Parallax";
+import { AnimatedWordmark } from "@/components/AnimatedWordmark";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,7 +43,7 @@ type Chapter = {
   image: string;
   path: "/collections/majlis" | "/collections/makhmal" | "/collections/tarkib";
   align: "left" | "right";
-  tone: "copper" | "silver" | "ember";
+  tone: "burgundy" | "aubergine" | "midnight";
 };
 
 const chapters: Chapter[] = [
@@ -55,7 +56,7 @@ const chapters: Chapter[] = [
     image: chapterMajlis.url,
     path: "/collections/majlis",
     align: "right",
-    tone: "ember",
+    tone: "burgundy",
   },
   {
     numeral: "II",
@@ -66,7 +67,7 @@ const chapters: Chapter[] = [
     image: chapterMakhmal.url,
     path: "/collections/makhmal",
     align: "left",
-    tone: "copper",
+    tone: "aubergine",
   },
   {
     numeral: "III",
@@ -77,7 +78,7 @@ const chapters: Chapter[] = [
     image: chapterTarkib.url,
     path: "/collections/tarkib",
     align: "right",
-    tone: "silver",
+    tone: "midnight",
   },
 ];
 
@@ -134,11 +135,11 @@ function Hero() {
         />
       </motion.div>
 
-      {/* Smoke canvas */}
-      <CinematicSmoke intensity={0.85} tone="copper" />
+      {/* Golden smoke */}
+      <CinematicSmoke intensity={0.9} tone="gold" />
       <div className="pointer-events-none absolute inset-0 grain opacity-60" />
 
-      {/* MASSIVE WORDMARK */}
+      {/* MASSIVE RASA WORDMARK (logo PNG with shimmer + halo + float) */}
       <div className="absolute inset-0 flex items-center justify-center px-4">
         <motion.div
           style={{
@@ -149,42 +150,19 @@ function Hero() {
           }}
           className="text-center will-change-transform"
         >
-          <motion.h1
-            aria-label="RASA"
-            className="font-serif font-light leading-[0.85] tracking-[-0.04em] text-foreground"
-            style={{ fontSize: "clamp(6rem, 24vw, 20rem)" }}
-            initial="hidden"
-            animate="show"
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: 0.14, delayChildren: 0.2 } },
-            }}
-          >
-            {letters.map((l, i) => (
-              <motion.span
-                key={i}
-                className="inline-block"
-                variants={{
-                  hidden: { opacity: 0, y: 80, filter: "blur(20px)", rotateX: -40 },
-                  show: {
-                    opacity: 1,
-                    y: 0,
-                    filter: "blur(0px)",
-                    rotateX: 0,
-                    transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1] },
-                  },
-                }}
-              >
-                {l}
-              </motion.span>
-            ))}
-          </motion.h1>
+          <AnimatedWordmark
+            size="h-[28vw] max-h-[26rem] min-h-[10rem]"
+            halo
+            float
+            shimmer
+            reveal={false}
+          />
 
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 1.4, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto mt-6 h-px w-32 origin-center"
+            transition={{ duration: 1.4, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto mt-8 h-px w-40 origin-center"
             style={{
               background:
                 "linear-gradient(90deg, transparent, var(--gold) 50%, transparent)",
@@ -194,8 +172,8 @@ function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1.4, delay: 1.6, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 font-serif italic text-2xl md:text-4xl text-gold-soft tracking-wide"
+            transition={{ duration: 1.4, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 font-serif italic text-2xl md:text-4xl gradient-gold-text tracking-wide"
           >
             Smoke, Perfected.
           </motion.p>
