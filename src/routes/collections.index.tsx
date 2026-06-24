@@ -154,18 +154,23 @@ function Collections() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-ink">
-        <div className="absolute inset-0 smoke-bg opacity-50" />
-        <div className="absolute inset-0 grain" />
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-ink">
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 40%, color-mix(in oklab, var(--gold) 14%, transparent), transparent 70%)",
+          }}
+        />
         <div className="relative z-10 text-center px-6 max-w-3xl animate-fade-up">
-          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
+          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold mb-7">
             The Collections
           </p>
-          <h1 className="font-serif text-5xl md:text-8xl text-balance leading-[1.02]">
+          <h1 className="font-serif text-5xl md:text-7xl text-balance leading-[1.05]">
             Three Expressions. One House.
           </h1>
-          <div className="luxe-divider max-w-[6rem] mx-auto my-10" />
-          <p className="text-muted-foreground leading-loose max-w-2xl mx-auto">
+          <div className="luxe-divider max-w-[6rem] mx-auto my-8" />
+          <p className="text-foreground/70 leading-relaxed max-w-2xl mx-auto">
             Within the House of RASA exist three distinct expressions. Each crafted
             to offer a unique interpretation of character, refinement, and experience.
           </p>
