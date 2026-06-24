@@ -6,7 +6,7 @@ export function SiteFooter() {
   return (
     <footer className="relative bg-ink border-t border-border/60">
       <div className="absolute inset-x-0 top-0 luxe-divider" />
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Column 1 — Brand */}
           <div className="md:col-span-1">

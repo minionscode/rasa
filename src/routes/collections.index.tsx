@@ -314,14 +314,14 @@ function CollectionSection({ section }: { section: Section }) {
       {/* Formats + Closing combined in one band */}
       <div className="relative z-10 border-t border-foreground/5">
         <div className="mx-auto max-w-5xl px-6 lg:px-10 py-16 md:py-20">
-          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-6">
+          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-8">
             Available Formats
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             {formats.map((f) => (
               <span
                 key={f}
-                className="px-7 py-3.5 border border-foreground/15 text-sm tracking-wide hover:border-gold/60 hover:text-gold transition-colors duration-300"
+                className="px-4 py-3.5 border border-foreground/15 text-sm tracking-wide hover:border-gold/60 hover:text-gold transition-colors duration-300 text-center"
               >
                 {f}
               </span>
