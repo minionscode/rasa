@@ -105,7 +105,7 @@ function Hero() {
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 180]);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.2]);
 
-  const letters = "RASA".split("");
+  
 
   return (
     <section
