@@ -95,10 +95,6 @@ function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-fade-in delay-700">
-          <span className="text-[0.6rem] tracking-luxe text-muted-foreground uppercase">Scroll</span>
-          <span className="block w-px h-12 bg-gradient-to-b from-gold/60 to-transparent animate-pulse" />
-        </div>
       </section>
 
       {/* COLLECTIONS PREVIEW */}
