@@ -51,7 +51,7 @@ export function AnimatedWordmark({
         />
       )}
 
-      <motion.div
+      {/* <motion.div
         animate={float ? { y: [0, -6, 0] } : undefined}
         transition={float ? { duration: 7, repeat: Infinity, ease: "easeInOut" } : undefined}
         className="relative"
@@ -85,7 +85,7 @@ export function AnimatedWordmark({
             transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }}
           />
         )}
-      </motion.div>
+      </motion.div> */}
     </motion.div>
   );
 }
