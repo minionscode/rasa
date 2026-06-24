@@ -197,21 +197,20 @@ export function Hero3D() {
       aria-hidden="true"
     >
       <Canvas
-        dpr={[1, 1.75]}
+        dpr={[1, 1.25]}
         camera={{ position: [0, 0, 5], fov: 38 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         style={{ background: "transparent" }}
       >
-        <ambientLight intensity={0.35} />
-        <directionalLight position={[3, 4, 5]} intensity={1.1} color="#ffd9b5" />
-        <directionalLight position={[-4, -2, 2]} intensity={0.4} color="#7a3a1a" />
-        <pointLight position={[0, 0, 3]} intensity={0.6} color="#ffb37a" />
+        <ambientLight intensity={0.55} />
+        <directionalLight position={[3, 4, 5]} intensity={1.4} color="#ffd9b5" />
+        <directionalLight position={[-4, -2, 2]} intensity={0.5} color="#7a3a1a" />
+        <pointLight position={[0, 0, 3]} intensity={0.7} color="#ffb37a" />
 
         <Suspense fallback={null}>
-          <Environment preset="warehouse" />
           <CopperEmblem />
         </Suspense>
-        <Smoke />
+        <Smoke count={12} />
         <MouseParallax />
       </Canvas>
     </div>
