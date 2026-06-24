@@ -67,7 +67,7 @@ function Home() {
 
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <h1 className="animate-fade-up flex justify-center">
-            <img src={rasaLogo.url} alt="RASA — Smoke, Perfected." className="h-44 md:h-72 w-auto" />
+            <img src={rasaLogo.url} alt="RASA — Smoke, Perfected." className="h-36 md:h-60 w-auto crisp-img" />
           </h1>
           <div className="animate-fade-up delay-200 mt-8 luxe-divider max-w-[8rem] mx-auto" />
           <p className="animate-fade-up delay-300 mt-8 font-serif italic text-2xl md:text-3xl text-gold-soft">
