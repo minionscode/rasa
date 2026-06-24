@@ -219,7 +219,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* Introduction */}
-      <div className="py-28 md:py-36">
+      <div className="py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
             Introduction
@@ -235,7 +235,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* Philosophy */}
-      <div className="py-28 border-t border-border/30">
+      <div className="py-20 border-t border-border/30">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
             Philosophy
@@ -251,7 +251,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* The Collection — flavour names only */}
-      <div className="py-28 border-t border-border/30">
+      <div className="py-20 border-t border-border/30">
         <div className="mx-auto max-w-5xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
             The Collection
@@ -273,7 +273,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* Formats */}
-      <div className="py-28 border-t border-border/30">
+      <div className="py-20 border-t border-border/30">
         <div className="mx-auto max-w-5xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
             Available Formats
@@ -292,7 +292,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* Closing */}
-      <div className="py-32 md:py-40 border-t border-border/30 text-center">
+      <div className="py-24 md:py-28 border-t border-border/30 text-center">
         <p className="font-serif text-4xl md:text-6xl text-balance">
           {section.closing}
         </p>
