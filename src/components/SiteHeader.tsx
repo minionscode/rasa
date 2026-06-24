@@ -50,7 +50,8 @@ export function SiteHeader() {
   }, [pathname]);
 
   const navLink =
-    "text-[0.7rem] tracking-luxe uppercase text-foreground/70 hover:text-gold transition-colors duration-500";
+    "text-[0.7rem] tracking-luxe uppercase whitespace-nowrap text-foreground/70 hover:text-gold transition-colors duration-200";
+
 
   return (
     <>
