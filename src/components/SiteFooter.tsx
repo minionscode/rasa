@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucide-react";
-import rasaLogo from "@/assets/rasa-logo.png.asset.json";
+
 import { contactInfo } from "@/data/contact";
 import { AnimatedWordmark } from "@/components/AnimatedWordmark";
 
