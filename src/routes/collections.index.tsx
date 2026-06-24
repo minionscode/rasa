@@ -219,22 +219,33 @@ function CollectionSection({ section }: { section: Section }) {
               {section.tag}
             </p>
           </div>
-          <div
-            className="hidden md:flex relative items-center justify-center w-56 lg:w-72 aspect-square"
-            style={{
-              WebkitMaskImage:
-                "radial-gradient(circle at center, black 50%, rgba(0,0,0,0.6) 65%, transparent 82%)",
-              maskImage:
-                "radial-gradient(circle at center, black 50%, rgba(0,0,0,0.6) 65%, transparent 82%)",
-            }}
-          >
-            <img
-              src={collectionLogos[section.slug]}
-              alt={`${section.name} emblem`}
-              className="w-full h-full object-cover"
-              loading="eager"
-              decoding="async"
+          <div className="hidden md:block relative w-64 lg:w-[22rem] aspect-square">
+            {/* Color halo — ramps the section bg up to the medallion's interior */}
+            <div
+              className="absolute inset-[-25%] pointer-events-none"
+              style={{
+                background: `radial-gradient(circle at center, ${section.color} 0%, color-mix(in oklab, ${section.color} 70%, transparent) 35%, transparent 70%)`,
+                filter: "blur(6px)",
+              }}
             />
+            {/* Medallion with soft radial mask so its plate fades into the halo */}
+            <div
+              className="relative w-full h-full"
+              style={{
+                WebkitMaskImage:
+                  "radial-gradient(circle at center, black 38%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.35) 65%, transparent 82%)",
+                maskImage:
+                  "radial-gradient(circle at center, black 38%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.35) 65%, transparent 82%)",
+              }}
+            >
+              <img
+                src={collectionLogos[section.slug]}
+                alt={`${section.name} emblem`}
+                className="w-full h-full object-cover"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
       </div>
