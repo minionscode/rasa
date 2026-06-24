@@ -328,7 +328,7 @@ function CollectionSection({ section }: { section: Section }) {
             ))}
           </div>
 
-          <div className="mt-20 md:mt-24 text-center">
+          <div className="mt-16 text-center">
             <p className="font-serif text-4xl md:text-5xl text-balance">
               {section.closing}
             </p>
