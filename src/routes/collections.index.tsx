@@ -416,17 +416,22 @@ function CollectionSection({ section }: { section: Section }) {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            {formats.map((f) => (
-              <button
-                key={f}
-                type="button"
-                onClick={() => setSelectedFormat(f)}
-                data-selected={selectedFormat === f}
-                className="chip-luxe px-5 py-4 text-sm tracking-luxe uppercase text-center"
-              >
-                {f}
-              </button>
-            ))}
+            {formats.map((f) => {
+              const active = selectedFormat === f;
+              return (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => setSelectedFormat(f)}
+                  data-selected={active}
+                  aria-pressed={active}
+                  className="chip-luxe px-5 py-4 text-sm tracking-luxe uppercase text-center inline-flex items-center justify-center gap-2"
+                >
+                  {active && <Check className="h-3.5 w-3.5" strokeWidth={2.5} />}
+                  {f}
+                </button>
+              );
+            })}
           </div>
           <p className="mt-4 text-xs text-foreground/60">
             Selected: <span style={{ color: section.accentVar }}>{selectedFormat}</span> — included automatically in your enquiry.
