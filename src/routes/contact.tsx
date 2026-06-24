@@ -1,6 +1,7 @@
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionLabel } from "../components/SectionLabel";
+import { contactInfo } from "@/data/contact";
 import {
   ArrowRight,
   Mail,
@@ -12,6 +13,7 @@ import {
   Building2,
   Store,
   Sparkles,
+  Instagram,
 } from "lucide-react";
 
 type ContactSearch = {
