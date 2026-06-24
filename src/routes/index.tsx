@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Globe, Truck, Building2, Briefcase, TrendingUp, Sparkles } from "lucide-react";
-import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 import majlisLogo from "@/assets/majlis-logo.png.asset.json";
 import makhmalLogo from "@/assets/makhmal-logo.png.asset.json";
 import tarkibLogo from "@/assets/tarkib-logo.png.asset.json";
+import { Hero3D } from "@/components/Hero3D";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,31 +54,34 @@ function Home() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-ink">
         <div className="absolute inset-0">
           <div className="absolute inset-0 smoke-bg opacity-40" />
-          <div
-            className="absolute -inset-[20%] opacity-50 animate-smoke"
-            style={{
-              background:
-                "radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.05), transparent 55%), radial-gradient(ellipse at 70% 60%, rgba(255,255,255,0.04), transparent 60%)",
-            }}
-          />
           <div className="absolute inset-0 grain" />
-          <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink" />
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl">
-          <h1 className="animate-fade-up flex justify-center">
-            <img src={rasaLogo.url} alt="RASA — Smoke, Perfected." className="h-36 md:h-60 w-auto crisp-img" />
-          </h1>
-          <div className="animate-fade-up delay-200 mt-8 luxe-divider max-w-[8rem] mx-auto" />
+        {/* Floating copper RASA emblem + smoke (Three.js) */}
+        <Hero3D />
+
+        {/* Vignette + bottom fade above the 3D canvas */}
+        <div className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-b from-ink/30 via-transparent to-ink" />
+        <div
+          className="pointer-events-none absolute inset-0 z-[2]"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 55%, transparent 35%, rgba(10,8,7,0.55) 80%)",
+          }}
+        />
+
+        <div className="relative z-10 text-center px-6 max-w-4xl pt-[42vh] md:pt-[48vh]">
+          <h1 className="sr-only">RASA — Smoke, Perfected.</h1>
+          <div className="animate-fade-up delay-200 luxe-divider max-w-[8rem] mx-auto" />
           <p className="animate-fade-up delay-300 mt-8 font-serif italic text-2xl md:text-3xl text-gold-soft">
             Smoke, Perfected.
           </p>
-          <p className="animate-fade-up delay-400 mt-7 text-sm md:text-base text-foreground/85 max-w-xl mx-auto leading-relaxed">
+          <p className="animate-fade-up delay-400 mt-6 text-sm md:text-base text-foreground/85 max-w-xl mx-auto leading-relaxed">
             A luxury hookah lifestyle house and premium distribution partner — built on craftsmanship,
             character, and refinement.
           </p>
 
-          <div className="animate-fade-up delay-500 mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="animate-fade-up delay-500 mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/collections"
               className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-all duration-500"
@@ -94,7 +97,6 @@ function Home() {
             </Link>
           </div>
         </div>
-
       </section>
 
       {/* COLLECTIONS PREVIEW */}
