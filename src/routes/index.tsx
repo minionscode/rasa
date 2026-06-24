@@ -34,7 +34,7 @@ const pillars = [
 ];
 
 const collections = [
-  { name: "Majlis", tag: "The Expression of Gathering", hash: "majlis", logo: majlisLogo.url },
+  { name: "Majlis", tag: "The Expression of Heritage", hash: "majlis", logo: majlisLogo.url },
   { name: "Makhmal", tag: "The Expression of Refinement", hash: "makhmal", logo: makhmalLogo.url },
   { name: "Tarkib", tag: "The Expression of Innovation", hash: "tarkib", logo: tarkibLogo.url },
 ];
