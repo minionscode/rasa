@@ -114,18 +114,18 @@ function Newsletter() {
   return (
     <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 items-center">
       <div>
-        <p className="text-[0.65rem] tracking-luxe uppercase text-gold">Private Access</p>
+        <p className="text-[0.65rem] tracking-luxe uppercase text-gold">Stay Updated</p>
         <h3 className="mt-3 font-serif text-3xl md:text-4xl text-balance">
-          Enter the House of RASA.
+          Stay Updated with RASA
         </h3>
         <p className="mt-3 text-sm text-foreground/75 max-w-md leading-relaxed">
-          Receive collection launches, flavour releases, wholesale opportunities,
-          and exclusive previews.
+          Subscribe to receive product launches, collection releases, flavour
+          updates, partnership opportunities, and industry news.
         </p>
       </div>
       {done ? (
         <p className="font-serif italic text-lg text-gold-soft">
-          Welcome — your access is composed.
+          Thank you — you are now subscribed.
         </p>
       ) : (
         <form
@@ -146,14 +146,14 @@ function Newsletter() {
               type="email"
               value={email}
               onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
-              placeholder="Your email address"
+              placeholder="Enter your email address"
               className="flex-1 bg-transparent py-3 text-foreground outline-none placeholder:text-muted-foreground/60"
             />
             <button
               type="submit"
               className="inline-flex items-center gap-2 py-3 text-[0.7rem] tracking-luxe uppercase text-gold hover:text-gold-soft transition-colors"
             >
-              Request Access <ArrowRight className="h-3.5 w-3.5" />
+              Subscribe <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
           {error && (
