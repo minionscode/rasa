@@ -67,7 +67,7 @@ export function SiteHeader() {
             <img src={rasaLogo.url} alt="RASA" className="h-10 md:h-12 w-auto" />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-7">
             <Link to="/" className={navLink} activeOptions={{ exact: true }} activeProps={{ className: "text-gold" }}>
               Home
             </Link>
