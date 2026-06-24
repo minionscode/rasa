@@ -1,12 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
+import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
@@ -17,16 +10,13 @@ import { SiteFooter } from "../components/SiteFooter";
 import { LeadCaptureModal } from "../components/LeadCaptureModal";
 import { PageTransition } from "../components/PageTransition";
 
-
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-ink px-4">
       <div className="max-w-md text-center">
         <h1 className="font-serif text-7xl text-gold">404</h1>
         <h2 className="mt-4 font-serif text-2xl text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          This path drifts beyond our atelier.
-        </p>
+        <p className="mt-2 text-sm text-muted-foreground">This path drifts beyond our atelier.</p>
         <div className="mt-8">
           <Link
             to="/"
@@ -51,17 +41,21 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
     <div className="flex min-h-screen items-center justify-center bg-ink px-4">
       <div className="max-w-md text-center">
         <h1 className="font-serif text-3xl text-foreground">Something went amiss</h1>
-        <p className="mt-3 text-sm text-muted-foreground">
-          Please try again or return home.
-        </p>
+        <p className="mt-3 text-sm text-muted-foreground">Please try again or return home.</p>
         <div className="mt-8 flex justify-center gap-3">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="px-6 py-3 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors"
           >
             Try Again
           </button>
-          <a href="/" className="px-6 py-3 border border-border text-xs tracking-luxe uppercase hover:border-gold/50 transition-all">
+          <a
+            href="/"
+            className="px-6 py-3 border border-border text-xs tracking-luxe uppercase hover:border-gold/50 transition-all"
+          >
             Home
           </a>
         </div>
@@ -76,10 +70,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "RASA — Smoke, Perfected." },
-      { name: "description", content: "A luxury hookah lifestyle house uniting premium tobacco collections, hookah systems, and curated accessories." },
+      {
+        name: "description",
+        content:
+          "A luxury hookah lifestyle house uniting premium tobacco collections, hookah systems, and curated accessories.",
+      },
       { name: "author", content: "RASA" },
       { property: "og:title", content: "RASA — Smoke, Perfected." },
-      { property: "og:description", content: "A luxury hookah lifestyle house uniting premium tobacco collections, hookah systems, and curated accessories." },
+      {
+        property: "og:description",
+        content:
+          "A luxury hookah lifestyle house uniting premium tobacco collections, hookah systems, and curated accessories.",
+      },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "RASA" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -88,7 +90,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -116,7 +121,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PageTransition />
+      {/* <PageTransition /> */}
       <AgeGate />
       <SiteHeader />
       <main className="min-h-screen">
