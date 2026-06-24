@@ -15,6 +15,7 @@ import { AgeGate } from "../components/AgeGate";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { LeadCaptureModal } from "../components/LeadCaptureModal";
+import { PageTransition } from "../components/PageTransition";
 
 
 function NotFoundComponent() {
@@ -115,6 +116,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <PageTransition />
       <AgeGate />
       <SiteHeader />
       <main className="min-h-screen">
