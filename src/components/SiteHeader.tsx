@@ -113,6 +113,9 @@ export function SiteHeader() {
               { to: "/", label: "Home" },
               { to: "/house-of-rasa", label: "House of RASA" },
               { to: "/collections", label: "Collections" },
+              { to: "/collections/$slug", label: "— Majlis", params: { slug: "majlis" } },
+              { to: "/collections/$slug", label: "— Makhmal", params: { slug: "makhmal" } },
+              { to: "/collections/$slug", label: "— Tarkib", params: { slug: "tarkib" } },
               { to: "/coming-soon", label: "Hookahs", search: { category: "hookahs" } },
               { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
               { to: "/partners", label: "Partners" },
@@ -121,11 +124,12 @@ export function SiteHeader() {
               <Link
                 key={item.to + item.label}
                 to={item.to}
+                params={item.params as any}
                 search={item.search as any}
-                className="font-serif text-2xl tracking-wide text-foreground hover:text-gold transition-colors"
+                className={`font-serif tracking-wide text-foreground hover:text-gold transition-colors ${item.label.startsWith("—") ? "text-lg pl-4 text-foreground/75" : "text-2xl"}`}
                 activeProps={{ className: "text-gold" }}
               >
-                {item.label}
+                {item.label.replace(/^— /, "")}
               </Link>
             ))}
 
