@@ -218,7 +218,7 @@ function OriginBand() {
     <section ref={ref} className="relative h-[90vh] md:h-screen overflow-hidden">
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img
-          src={bandEarth.url}
+          src={bandCopper.url}
           alt="Tobacco fields at golden hour"
           width={1536}
           height={1024}
