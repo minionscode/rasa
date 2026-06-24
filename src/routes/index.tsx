@@ -34,9 +34,9 @@ const pillars = [
 ];
 
 const collections = [
-  { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis" as const, logo: majlisLogo.url },
-  { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal" as const, logo: makhmalLogo.url },
-  { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib" as const, logo: tarkibLogo.url },
+  { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis" as const, path: "/collections/majlis" as const, logo: majlisLogo.url },
+  { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal" as const, path: "/collections/makhmal" as const, logo: makhmalLogo.url },
+  { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib" as const, path: "/collections/tarkib" as const, logo: tarkibLogo.url },
 ];
 
 const partnerBenefits = [
@@ -116,8 +116,7 @@ function Home() {
               return (
                 <Link
                   key={c.slug}
-                  to="/collections/$slug"
-                  params={{ slug: c.slug }}
+                  to={c.path}
                   className="collection-card relative overflow-hidden border border-foreground/10 hover:border-gold/40 p-7 text-center group transition-all duration-500 hover:-translate-y-1.5"
                   style={{ background: cardBg }}
                 >

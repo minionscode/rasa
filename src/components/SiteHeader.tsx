@@ -113,9 +113,9 @@ export function SiteHeader() {
               { to: "/", label: "Home" },
               { to: "/house-of-rasa", label: "House of RASA" },
               { to: "/collections", label: "Collections" },
-              { to: "/collections/$slug", label: "— Majlis", params: { slug: "majlis" } },
-              { to: "/collections/$slug", label: "— Makhmal", params: { slug: "makhmal" } },
-              { to: "/collections/$slug", label: "— Tarkib", params: { slug: "tarkib" } },
+              { to: "/collections/majlis", label: "— Majlis" },
+              { to: "/collections/makhmal", label: "— Makhmal" },
+              { to: "/collections/tarkib", label: "— Tarkib" },
               { to: "/coming-soon", label: "Hookahs", search: { category: "hookahs" } },
               { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
               { to: "/partners", label: "Partners" },
@@ -176,9 +176,9 @@ function CollectionsMega({
   onClose: () => void;
 }) {
   const items = [
-    { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis", logo: majlisLogo.url },
-    { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal", logo: makhmalLogo.url },
-    { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib", logo: tarkibLogo.url },
+    { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis", path: "/collections/majlis" as const, logo: majlisLogo.url },
+    { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal", path: "/collections/makhmal" as const, logo: makhmalLogo.url },
+    { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib", path: "/collections/tarkib" as const, logo: tarkibLogo.url },
   ];
   return (
     <DropButton label="Collections" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
@@ -195,8 +195,7 @@ function CollectionsMega({
           {items.map((c) => (
             <Link
               key={c.slug}
-              to="/collections/$slug"
-              params={{ slug: c.slug }}
+              to={c.path}
               onClick={onClose}
               className="group block p-3 border border-transparent hover:border-gold/30 hover:bg-surface/40 transition-all duration-300"
             >
