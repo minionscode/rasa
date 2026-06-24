@@ -59,15 +59,17 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact + Office */}
           <div>
             <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Contact</h4>
             <ul className="space-y-3 text-sm text-foreground/75">
               <li className="flex items-start gap-3">
                 <MapPin className="h-3.5 w-3.5 text-gold/80 shrink-0 mt-1" />
-                <span className="leading-relaxed">
-                  Registered Office<br />
-                  House of RASA, India
+                <span className="leading-relaxed not-italic">
+                  RASA Tobacco Partners Pvt. Ltd.<br />
+                  Suit 312A, Suncity Trade Tower<br />
+                  Sector 21, Dundahera<br />
+                  Gurugram, Haryana — 122016
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -77,12 +79,12 @@ export function SiteFooter() {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <MessageCircle className="h-3.5 w-3.5 text-gold/80 shrink-0" />
-                <span>WhatsApp Available</span>
+                <Phone className="h-3.5 w-3.5 text-gold/80 shrink-0" />
+                <a href="tel:+910000000000" className="hover:text-gold transition-colors">+91 00000 00000</a>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-3.5 w-3.5 text-gold/80 shrink-0" />
-                <span>+91 00000 00000</span>
+                <MessageCircle className="h-3.5 w-3.5 text-gold/80 shrink-0" />
+                <span>WhatsApp Available</span>
               </li>
               <li className="flex items-center gap-3">
                 <Instagram className="h-3.5 w-3.5 text-gold/80 shrink-0" />
@@ -108,40 +110,55 @@ export function SiteFooter() {
 function Newsletter() {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
+  const [error, setError] = useState("");
   return (
     <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 items-center">
       <div>
-        <p className="text-[0.65rem] tracking-luxe uppercase text-gold">The Atelier Letter</p>
+        <p className="text-[0.65rem] tracking-luxe uppercase text-gold">Private Access</p>
         <h3 className="mt-3 font-serif text-3xl md:text-4xl text-balance">
-          Composed dispatches from the House of RASA.
+          Enter the House of RASA.
         </h3>
+        <p className="mt-3 text-sm text-foreground/75 max-w-md leading-relaxed">
+          Receive collection launches, flavour releases, wholesale opportunities,
+          and exclusive previews.
+        </p>
       </div>
       {done ? (
         <p className="font-serif italic text-lg text-gold-soft">
-          Thank you — your subscription is composed.
+          Welcome — your access is composed.
         </p>
       ) : (
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            if (email) setDone(true);
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+              setError("A valid email address is required.");
+              return;
+            }
+            setError("");
+            setDone(true);
           }}
-          className="flex items-center gap-3 border-b border-border/70 focus-within:border-gold transition-colors"
+          noValidate
+          className="space-y-2"
         >
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Your email"
-            className="flex-1 bg-transparent py-3 text-foreground outline-none placeholder:text-muted-foreground/60"
-          />
-          <button
-            type="submit"
-            className="inline-flex items-center gap-2 py-3 text-[0.7rem] tracking-luxe uppercase text-gold hover:text-gold-soft transition-colors"
-          >
-            Subscribe <ArrowRight className="h-3.5 w-3.5" />
-          </button>
+          <div className={`flex items-center gap-3 border-b ${error ? "border-destructive" : "border-border/70 focus-within:border-gold"} transition-colors`}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
+              placeholder="Your email address"
+              className="flex-1 bg-transparent py-3 text-foreground outline-none placeholder:text-muted-foreground/60"
+            />
+            <button
+              type="submit"
+              className="inline-flex items-center gap-2 py-3 text-[0.7rem] tracking-luxe uppercase text-gold hover:text-gold-soft transition-colors"
+            >
+              Request Access <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
+          {error && (
+            <p className="text-xs font-serif italic text-destructive">{error}</p>
+          )}
         </form>
       )}
     </div>
