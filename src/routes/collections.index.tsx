@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import majlisLogo from "@/assets/majlis-logo.jpg.asset.json";
-import makhmalLogo from "@/assets/makhmal-logo.jpg.asset.json";
-import tarkibLogo from "@/assets/tarkib-logo.jpg.asset.json";
+import majlisLogo from "@/assets/majlis-logo.png.asset.json";
+import makhmalLogo from "@/assets/makhmal-logo.png.asset.json";
+import tarkibLogo from "@/assets/tarkib-logo.png.asset.json";
 
 const collectionLogos: Record<string, string> = {
   majlis: majlisLogo.url,
