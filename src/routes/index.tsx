@@ -234,19 +234,19 @@ function OriginBand() {
             <p className="text-[0.6rem] tracking-wider-luxe uppercase text-gold-soft/90">Origin</p>
           </RevealChild>
           <RevealChild>
-            <h2 className="mt-6 font-serif italic font-light text-[clamp(2.5rem,7vw,6rem)] leading-[1.05] text-balance text-foreground">
-              Born from the earth.
+            <h2 className="mt-6 font-serif italic font-light text-[clamp(2.5rem,7vw,6rem)] leading-[1.05] text-balance gradient-gold-text">
+              Forged in copper.
             </h2>
           </RevealChild>
           <RevealChild>
-            <h2 className="font-serif font-light text-[clamp(2.5rem,7vw,6rem)] leading-[1.05] text-balance text-foreground/70">
-              Composed in the house.
+            <h2 className="font-serif font-light text-[clamp(2.5rem,7vw,6rem)] leading-[1.05] text-balance text-foreground/75">
+              Tempered in smoke.
             </h2>
           </RevealChild>
           <RevealChild>
             <p className="mt-10 max-w-md mx-auto text-sm md:text-base text-foreground/75 leading-relaxed">
-              Every RASA leaf begins in a field, ends in a moment. We tend the
-              distance between them with discipline.
+              From ember to expression, every RASA blend is composed with the
+              patience of an atelier and the precision of a jeweller.
             </p>
           </RevealChild>
         </RevealGroup>
