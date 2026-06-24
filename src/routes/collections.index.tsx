@@ -154,7 +154,7 @@ function Collections() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-ink">
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-ink pt-28 pb-16">
         <div
           className="absolute inset-0"
           style={{
