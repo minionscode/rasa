@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucide-react";
 
 import { contactInfo } from "@/data/contact";
-import { AnimatedWordmark } from "@/components/AnimatedWordmark";
+// import { AnimatedWordmark } from "@/components/AnimatedWordmark";
 
 export function SiteFooter() {
   return (
@@ -17,12 +17,10 @@ export function SiteFooter() {
           {/* Brand */}
           <div className="lg:col-span-1 sm:col-span-2">
             <AnimatedWordmark size="h-14" halo={false} float={false} />
-            <p className="mt-4 font-serif italic text-base gradient-gold-text">
-              Smoke, Perfected.
-            </p>
+            <p className="mt-4 font-serif italic text-base gradient-gold-text">Smoke, Perfected.</p>
             <p className="mt-5 text-sm text-foreground/75 leading-relaxed max-w-xs">
-              A luxury hookah lifestyle house and premium distribution partner — built on
-              craftsmanship, character and refinement.
+              A luxury hookah lifestyle house and premium distribution partner — built on craftsmanship, character and
+              refinement.
             </p>
           </div>
 
@@ -30,11 +28,35 @@ export function SiteFooter() {
           <div>
             <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Navigation</h4>
             <ul className="space-y-3 text-sm text-foreground/75">
-              <li><Link to="/" className="hover:text-gold transition-colors">Home</Link></li>
-              <li><Link to="/house-of-rasa" className="hover:text-gold transition-colors">House of RASA</Link></li>
-              <li><Link to="/coming-soon" search={{ category: "hookahs" }} className="hover:text-gold transition-colors">Hookahs</Link></li>
-              <li><Link to="/coming-soon" search={{ category: "accessories" }} className="hover:text-gold transition-colors">Accessories</Link></li>
-              <li><Link to="/contact" className="hover:text-gold transition-colors">Contact</Link></li>
+              <li>
+                <Link to="/" className="hover:text-gold transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/house-of-rasa" className="hover:text-gold transition-colors">
+                  House of RASA
+                </Link>
+              </li>
+              <li>
+                <Link to="/coming-soon" search={{ category: "hookahs" }} className="hover:text-gold transition-colors">
+                  Hookahs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/coming-soon"
+                  search={{ category: "accessories" }}
+                  className="hover:text-gold transition-colors"
+                >
+                  Accessories
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-gold transition-colors">
+                  Contact
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -42,10 +64,26 @@ export function SiteFooter() {
           <div>
             <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Collections</h4>
             <ul className="space-y-3 text-sm text-foreground/75">
-              <li><Link to="/collections" className="hover:text-gold transition-colors">View All</Link></li>
-              <li><Link to="/collections/majlis" className="hover:text-gold transition-colors">Majlis</Link></li>
-              <li><Link to="/collections/makhmal" className="hover:text-gold transition-colors">Makhmal</Link></li>
-              <li><Link to="/collections/tarkib" className="hover:text-gold transition-colors">Tarkib</Link></li>
+              <li>
+                <Link to="/collections" className="hover:text-gold transition-colors">
+                  View All
+                </Link>
+              </li>
+              <li>
+                <Link to="/collections/majlis" className="hover:text-gold transition-colors">
+                  Majlis
+                </Link>
+              </li>
+              <li>
+                <Link to="/collections/makhmal" className="hover:text-gold transition-colors">
+                  Makhmal
+                </Link>
+              </li>
+              <li>
+                <Link to="/collections/tarkib" className="hover:text-gold transition-colors">
+                  Tarkib
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -53,11 +91,31 @@ export function SiteFooter() {
           <div>
             <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Partnerships</h4>
             <ul className="space-y-3 text-sm text-foreground/75">
-              <li><Link to="/partners" className="hover:text-gold transition-colors">Become a Partner</Link></li>
-              <li><Link to="/partners" hash="distributor" className="hover:text-gold transition-colors">Distributors</Link></li>
-              <li><Link to="/partners" hash="lounge" className="hover:text-gold transition-colors">Hospitality</Link></li>
-              <li><Link to="/partners" hash="retail" className="hover:text-gold transition-colors">Retail</Link></li>
-              <li><Link to="/contact" className="hover:text-gold transition-colors">Wholesale Inquiry</Link></li>
+              <li>
+                <Link to="/partners" className="hover:text-gold transition-colors">
+                  Become a Partner
+                </Link>
+              </li>
+              <li>
+                <Link to="/partners" hash="distributor" className="hover:text-gold transition-colors">
+                  Distributors
+                </Link>
+              </li>
+              <li>
+                <Link to="/partners" hash="lounge" className="hover:text-gold transition-colors">
+                  Hospitality
+                </Link>
+              </li>
+              <li>
+                <Link to="/partners" hash="retail" className="hover:text-gold transition-colors">
+                  Retail
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-gold transition-colors">
+                  Wholesale Inquiry
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -68,9 +126,12 @@ export function SiteFooter() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-3.5 w-3.5 text-gold/80 shrink-0 mt-1" />
                 <span className="leading-relaxed not-italic">
-                  {contactInfo.address.company}<br />
-                  {contactInfo.address.line1}<br />
-                  {contactInfo.address.line2}<br />
+                  {contactInfo.address.company}
+                  <br />
+                  {contactInfo.address.line1}
+                  <br />
+                  {contactInfo.address.line2}
+                  <br />
                   {contactInfo.address.line3}
                 </span>
               </li>
@@ -82,17 +143,29 @@ export function SiteFooter() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-3.5 w-3.5 text-gold/80 shrink-0" />
-                <a href={`tel:${contactInfo.phoneRaw}`} className="hover:text-gold transition-colors">{contactInfo.phone}</a>
+                <a href={`tel:${contactInfo.phoneRaw}`} className="hover:text-gold transition-colors">
+                  {contactInfo.phone}
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <MessageCircle className="h-3.5 w-3.5 text-gold/80 shrink-0" />
-                <a href={contactInfo.whatsappUrl} target="_blank" rel="noreferrer" className="hover:text-gold transition-colors">
+                <a
+                  href={contactInfo.whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-gold transition-colors"
+                >
                   WhatsApp
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Instagram className="h-3.5 w-3.5 text-gold/80 shrink-0" />
-                <a href={contactInfo.instagramUrl} target="_blank" rel="noreferrer" className="hover:text-gold transition-colors">
+                <a
+                  href={contactInfo.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-gold transition-colors"
+                >
                   @{contactInfo.instagramHandle}
                 </a>
               </li>
@@ -103,9 +176,15 @@ export function SiteFooter() {
         <div className="mt-14 pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-foreground/65">
           <p>© {new Date().getFullYear()} RASA. All Rights Reserved.</p>
           <div className="flex gap-6 flex-wrap justify-center">
-            <a href="#" className="hover:text-gold transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-gold transition-colors">Terms &amp; Conditions</a>
-            <a href="#" className="hover:text-gold transition-colors">Age Restriction Policy</a>
+            <a href="#" className="hover:text-gold transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-gold transition-colors">
+              Terms &amp; Conditions
+            </a>
+            <a href="#" className="hover:text-gold transition-colors">
+              Age Restriction Policy
+            </a>
           </div>
         </div>
       </div>
@@ -121,18 +200,14 @@ function Newsletter() {
     <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 items-center">
       <div>
         <p className="text-[0.65rem] tracking-luxe uppercase text-gold">Stay Updated</p>
-        <h3 className="mt-3 font-serif text-3xl md:text-4xl text-balance">
-          Stay Updated with RASA
-        </h3>
+        <h3 className="mt-3 font-serif text-3xl md:text-4xl text-balance">Stay Updated with RASA</h3>
         <p className="mt-3 text-sm text-foreground/75 max-w-md leading-relaxed">
-          Subscribe to receive product launches, collection releases, flavour
-          updates, partnership opportunities, and industry news.
+          Subscribe to receive product launches, collection releases, flavour updates, partnership opportunities, and
+          industry news.
         </p>
       </div>
       {done ? (
-        <p className="font-serif italic text-lg text-gold-soft">
-          Thank you — you are now subscribed.
-        </p>
+        <p className="font-serif italic text-lg text-gold-soft">Thank you — you are now subscribed.</p>
       ) : (
         <form
           onSubmit={(e) => {
@@ -147,11 +222,16 @@ function Newsletter() {
           noValidate
           className="space-y-2"
         >
-          <div className={`flex items-center gap-3 border-b ${error ? "border-destructive" : "border-border/70 focus-within:border-gold"} transition-colors`}>
+          <div
+            className={`flex items-center gap-3 border-b ${error ? "border-destructive" : "border-border/70 focus-within:border-gold"} transition-colors`}
+          >
             <input
               type="email"
               value={email}
-              onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError("");
+              }}
               placeholder="Enter your email address"
               className="flex-1 bg-transparent py-3 text-foreground outline-none placeholder:text-muted-foreground/60"
             />
@@ -162,9 +242,7 @@ function Newsletter() {
               Subscribe <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
-          {error && (
-            <p className="text-xs font-serif italic text-destructive">{error}</p>
-          )}
+          {error && <p className="text-xs font-serif italic text-destructive">{error}</p>}
         </form>
       )}
     </div>
