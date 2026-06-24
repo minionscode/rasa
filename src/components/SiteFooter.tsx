@@ -1,74 +1,100 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Mail, Phone, MessageCircle } from "lucide-react";
+import { useState } from "react";
+import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucide-react";
 import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 
 export function SiteFooter() {
   return (
     <footer className="relative bg-ink border-t border-border/60">
       <div className="absolute inset-x-0 top-0 luxe-divider" />
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {/* Column 1 — Brand */}
-          <div className="md:col-span-1">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 pt-16 pb-10">
+        {/* NEWSLETTER */}
+        <Newsletter />
+
+        <div className="mt-14 pt-12 border-t border-border/40 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+          {/* Brand */}
+          <div className="lg:col-span-1 sm:col-span-2">
             <img src={rasaLogo.url} alt="RASA" className="h-14 w-auto" />
-            <p className="mt-5 text-xs tracking-luxe text-muted-foreground uppercase">
+            <p className="mt-4 font-serif italic text-base text-gold-soft">
               Smoke, Perfected.
             </p>
-            <p className="mt-8 text-sm text-muted-foreground leading-relaxed max-w-xs">
-              A luxury hookah lifestyle house built on craftsmanship, character, and refinement.
+            <p className="mt-5 text-sm text-foreground/75 leading-relaxed max-w-xs">
+              A luxury hookah lifestyle house and premium distribution partner — built on
+              craftsmanship, character and refinement.
             </p>
           </div>
 
-          {/* Column 2 — Navigation */}
+          {/* Navigation */}
           <div>
             <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Navigation</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><Link to="/house-of-rasa" className="hover:text-gold transition-colors">The House of RASA</Link></li>
-              <li><Link to="/collections" className="hover:text-gold transition-colors">Collections</Link></li>
-              <li><Link to="/coming-soon" search={{ category: "hookah" }} className="hover:text-gold transition-colors">Hookah</Link></li>
-              <li><Link to="/coming-soon" search={{ category: "accessories" }} className="hover:text-gold transition-colors">Accessories</Link></li>
-              <li><Link to="/partners" className="hover:text-gold transition-colors">Partners</Link></li>
+            <ul className="space-y-3 text-sm text-foreground/75">
+              <li><Link to="/" className="hover:text-gold transition-colors">Home</Link></li>
+              <li><Link to="/house-of-rasa" className="hover:text-gold transition-colors">House of RASA</Link></li>
+              <li><Link to="/hookah" className="hover:text-gold transition-colors">Hookah</Link></li>
+              <li><Link to="/accessories" className="hover:text-gold transition-colors">Accessories</Link></li>
               <li><Link to="/contact" className="hover:text-gold transition-colors">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Column 3 — Collections */}
+          {/* Collections */}
           <div>
             <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Collections</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
+            <ul className="space-y-3 text-sm text-foreground/75">
+              <li><Link to="/collections" className="hover:text-gold transition-colors">View All</Link></li>
               <li><Link to="/collections" hash="majlis" className="hover:text-gold transition-colors">Majlis</Link></li>
               <li><Link to="/collections" hash="makhmal" className="hover:text-gold transition-colors">Makhmal</Link></li>
               <li><Link to="/collections" hash="tarkib" className="hover:text-gold transition-colors">Tarkib</Link></li>
             </ul>
           </div>
 
-          {/* Column 4 — Connect */}
+          {/* Partnerships */}
           <div>
-            <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Connect</h4>
-            <ul className="space-y-3 text-sm text-muted-foreground">
-              <li className="flex items-center gap-3">
-                <Mail className="h-3.5 w-3.5 text-gold/70 shrink-0" />
-                <span>sales@rasahouse.com</span>
+            <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Partnerships</h4>
+            <ul className="space-y-3 text-sm text-foreground/75">
+              <li><Link to="/partners" className="hover:text-gold transition-colors">Become a Partner</Link></li>
+              <li><Link to="/partners" hash="distributor" className="hover:text-gold transition-colors">Distributors</Link></li>
+              <li><Link to="/partners" hash="lounge" className="hover:text-gold transition-colors">Hospitality</Link></li>
+              <li><Link to="/partners" hash="retail" className="hover:text-gold transition-colors">Retail</Link></li>
+              <li><Link to="/contact" className="hover:text-gold transition-colors">Wholesale Inquiry</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Contact</h4>
+            <ul className="space-y-3 text-sm text-foreground/75">
+              <li className="flex items-start gap-3">
+                <MapPin className="h-3.5 w-3.5 text-gold/80 shrink-0 mt-1" />
+                <span className="leading-relaxed">
+                  Registered Office<br />
+                  House of RASA, India
+                </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-3.5 w-3.5 text-gold/70 shrink-0" />
+                <Mail className="h-3.5 w-3.5 text-gold/80 shrink-0" />
+                <a href="mailto:sales@rasahouse.com" className="hover:text-gold transition-colors">
+                  sales@rasahouse.com
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <MessageCircle className="h-3.5 w-3.5 text-gold/80 shrink-0" />
+                <span>WhatsApp Available</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="h-3.5 w-3.5 text-gold/80 shrink-0" />
                 <span>+91 00000 00000</span>
               </li>
               <li className="flex items-center gap-3">
-                <MessageCircle className="h-3.5 w-3.5 text-gold/70 shrink-0" />
-                <span>WhatsApp</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Instagram className="h-3.5 w-3.5 text-gold/70 shrink-0" />
+                <Instagram className="h-3.5 w-3.5 text-gold/80 shrink-0" />
                 <span>@rasa.house</span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
-          <p>© RASA. All Rights Reserved.</p>
-          <div className="flex gap-6">
+        <div className="mt-14 pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-foreground/65">
+          <p>© {new Date().getFullYear()} RASA. All Rights Reserved.</p>
+          <div className="flex gap-6 flex-wrap justify-center">
             <a href="#" className="hover:text-gold transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-gold transition-colors">Terms &amp; Conditions</a>
             <a href="#" className="hover:text-gold transition-colors">Age Restriction Policy</a>
@@ -76,5 +102,48 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function Newsletter() {
+  const [email, setEmail] = useState("");
+  const [done, setDone] = useState(false);
+  return (
+    <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 items-center">
+      <div>
+        <p className="text-[0.65rem] tracking-luxe uppercase text-gold">The Atelier Letter</p>
+        <h3 className="mt-3 font-serif text-3xl md:text-4xl text-balance">
+          Composed dispatches from the House of RASA.
+        </h3>
+      </div>
+      {done ? (
+        <p className="font-serif italic text-lg text-gold-soft">
+          Thank you — your subscription is composed.
+        </p>
+      ) : (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (email) setDone(true);
+          }}
+          className="flex items-center gap-3 border-b border-border/70 focus-within:border-gold transition-colors"
+        >
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Your email"
+            className="flex-1 bg-transparent py-3 text-foreground outline-none placeholder:text-muted-foreground/60"
+          />
+          <button
+            type="submit"
+            className="inline-flex items-center gap-2 py-3 text-[0.7rem] tracking-luxe uppercase text-gold hover:text-gold-soft transition-colors"
+          >
+            Subscribe <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        </form>
+      )}
+    </div>
   );
 }
