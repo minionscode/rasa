@@ -303,6 +303,38 @@
     border-color: oklch(0.86 0.07 52);
     color: oklch(0.16 0.005 60);
     background: var(--gradient-gold);
+    box-shadow: 0 0 28px -6px oklch(0.78 0.09 48 / 0.55);
   }
+
+  /* Crisp image rendering — kills blur/bloom on PNG logos */
+  .crisp-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    filter: none;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* Collection card hover — copper glow + lift + smoke intensify */
+  .collection-card {
+    position: relative;
+    overflow: hidden;
+  }
+  .collection-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 0%, oklch(0.78 0.09 48 / 0.10), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .collection-card:hover {
+    transform: translateY(-6px);
+    border-color: oklch(0.78 0.09 48 / 0.55);
+    box-shadow: var(--shadow-card-luxe), 0 0 50px -10px oklch(0.78 0.09 48 / 0.40);
+  }
+  .collection-card:hover::before { opacity: 1; }
 }
 

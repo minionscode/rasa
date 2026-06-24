@@ -34,7 +34,7 @@ const pillars = [
 ];
 
 const collections = [
-  { name: "Majlis", tag: "The Expression of Gathering", hash: "majlis", logo: majlisLogo.url },
+  { name: "Majlis", tag: "The Expression of Heritage", hash: "majlis", logo: majlisLogo.url },
   { name: "Makhmal", tag: "The Expression of Refinement", hash: "makhmal", logo: makhmalLogo.url },
   { name: "Tarkib", tag: "The Expression of Innovation", hash: "tarkib", logo: tarkibLogo.url },
 ];
@@ -67,7 +67,7 @@ function Home() {
 
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <h1 className="animate-fade-up flex justify-center">
-            <img src={rasaLogo.url} alt="RASA — Smoke, Perfected." className="h-44 md:h-72 w-auto" />
+            <img src={rasaLogo.url} alt="RASA — Smoke, Perfected." className="h-36 md:h-60 w-auto crisp-img" />
           </h1>
           <div className="animate-fade-up delay-200 mt-8 luxe-divider max-w-[8rem] mx-auto" />
           <p className="animate-fade-up delay-300 mt-8 font-serif italic text-2xl md:text-3xl text-gold-soft">
@@ -95,10 +95,6 @@ function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-fade-in delay-700">
-          <span className="text-[0.6rem] tracking-luxe text-muted-foreground uppercase">Scroll</span>
-          <span className="block w-px h-12 bg-gradient-to-b from-gold/60 to-transparent animate-pulse" />
-        </div>
       </section>
 
       {/* COLLECTIONS PREVIEW */}
@@ -120,17 +116,17 @@ function Home() {
                 key={c.hash}
                 to="/collections"
                 hash={c.hash}
-                className="card-luxe p-7 text-center group"
+                className="card-luxe collection-card p-7 text-center group"
               >
                 <div className="aspect-square mb-4 flex items-center justify-center">
-                  <img src={c.logo} alt={c.name} className="max-h-28 w-auto opacity-95 group-hover:opacity-100 transition-opacity" />
+                  <img src={c.logo} alt={c.name} className="max-h-36 w-auto opacity-95 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-500 crisp-img" />
                 </div>
-                <h3 className="font-serif text-2xl md:text-3xl">{c.name}</h3>
+                <h3 className="font-serif text-2xl md:text-3xl group-hover:text-gold transition-colors">{c.name}</h3>
                 <p className="mt-2 text-[0.65rem] tracking-luxe uppercase text-gold/85">
                   {c.tag}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-2 text-[0.7rem] tracking-luxe uppercase text-foreground/80 group-hover:text-gold transition-colors">
-                  Explore <ArrowRight className="h-3 w-3" />
+                  Explore <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             ))}

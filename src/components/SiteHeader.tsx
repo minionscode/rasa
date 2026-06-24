@@ -46,9 +46,9 @@ export function SiteHeader() {
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 h-24 flex items-center justify-between gap-6">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 h-20 flex items-center justify-between gap-6">
           <Link to="/" aria-label="RASA — Home" className="flex items-center shrink-0">
-            <img src={rasaLogo.url} alt="RASA" className="h-12 md:h-14 w-auto" />
+            <img src={rasaLogo.url} alt="RASA" className="h-10 md:h-11 w-auto crisp-img" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
@@ -102,8 +102,8 @@ export function SiteHeader() {
       {/* Mobile drawer */}
       {open && (
         <div className="fixed inset-0 z-50 bg-ink/98 backdrop-blur-xl animate-fade-in lg:hidden overflow-y-auto">
-          <div className="flex items-center justify-between h-24 px-6 border-b border-border/40">
-            <img src={rasaLogo.url} alt="RASA" className="h-11 w-auto" />
+          <div className="flex items-center justify-between h-20 px-6 border-b border-border/40">
+            <img src={rasaLogo.url} alt="RASA" className="h-9 w-auto crisp-img" />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2">
               <X className="h-5 w-5" />
             </button>

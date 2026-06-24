@@ -333,7 +333,7 @@ function Contact() {
                 </a>
               </div>
               <p className="mt-5 text-xs text-foreground/60">
-                Serving India · UAE · Saudi Arabia · Qatar · Kuwait · Oman · Bahrain
+                Serving India · UAE · Saudi Arabia · Qatar · Kuwait · Oman · Bahrain · Global Distribution
               </p>
             </div>
           </aside>
