@@ -25,7 +25,8 @@ export const Route = createFileRoute("/collections/$slug")({
 });
 
 function CollectionPage() {
-  const { collection } = Route.useLoaderData();
+  const data = Route.useLoaderData() as { collection: Collection };
+  const collection = data.collection;
   const [selectedFormat, setSelectedFormat] = useState<string>("250g");
   const secondaryVar = `var(--${collection.slug}-secondary)`;
   const sectionBg = `radial-gradient(ellipse at 20% 10%, ${secondaryVar} 0%, transparent 45%), radial-gradient(ellipse at 85% 80%, color-mix(in oklab, ${collection.accentVar} 10%, transparent) 0%, transparent 55%), linear-gradient(180deg, color-mix(in oklab, ${collection.bgVar} 85%, var(--ink)) 0%, color-mix(in oklab, ${collection.bgVar} 60%, var(--ink)) 50%, var(--ink) 100%)`;
