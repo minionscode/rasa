@@ -41,9 +41,9 @@ export function SiteFooter() {
             <h4 className="text-[0.7rem] tracking-luxe uppercase text-gold mb-6">Collections</h4>
             <ul className="space-y-3 text-sm text-foreground/75">
               <li><Link to="/collections" className="hover:text-gold transition-colors">View All</Link></li>
-              <li><Link to="/collections" hash="majlis" className="hover:text-gold transition-colors">Majlis</Link></li>
-              <li><Link to="/collections" hash="makhmal" className="hover:text-gold transition-colors">Makhmal</Link></li>
-              <li><Link to="/collections" hash="tarkib" className="hover:text-gold transition-colors">Tarkib</Link></li>
+              <li><Link to="/collections/$slug" params={{ slug: "majlis" }} className="hover:text-gold transition-colors">Majlis</Link></li>
+              <li><Link to="/collections/$slug" params={{ slug: "makhmal" }} className="hover:text-gold transition-colors">Makhmal</Link></li>
+              <li><Link to="/collections/$slug" params={{ slug: "tarkib" }} className="hover:text-gold transition-colors">Tarkib</Link></li>
             </ul>
           </div>
 
