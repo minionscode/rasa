@@ -37,7 +37,7 @@ export function AnimatedWordmark({
       transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
       className={`relative inline-block ${className}`}
     >
-      {halo && (
+      /* {halo && (
         <motion.div
           aria-hidden
           className="pointer-events-none absolute inset-0 -m-12 rounded-full"
@@ -49,7 +49,7 @@ export function AnimatedWordmark({
           animate={{ opacity: [0.55, 0.9, 0.55], scale: [1, 1.06, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
-      )}
+      )} */
 
       {/* <motion.div
         animate={float ? { y: [0, -6, 0] } : undefined}
@@ -86,6 +86,6 @@ export function AnimatedWordmark({
           />
         )}
       </motion.div> */}
-    </motion.div>
+    {/* </motion.div> */}
   );
 }
