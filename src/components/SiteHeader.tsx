@@ -260,6 +260,24 @@ function ProductsMega({
 }
 
 
+type SearchResult = {
+  name: string;
+  notes: string;
+  collectionName: string;
+  collectionPath: "/collections/majlis" | "/collections/makhmal" | "/collections/tarkib";
+  accentVar: string;
+};
+
+const allFlavours: SearchResult[] = collections.flatMap((c) =>
+  c.flavours.map((f) => ({
+    name: f.name,
+    notes: f.notes,
+    collectionName: c.name,
+    collectionPath: c.path,
+    accentVar: c.accentVar,
+  })),
+);
+
 function SearchOverlay({ onClose }: { onClose: () => void }) {
   const [q, setQ] = useState("");
   useEffect(() => {
@@ -268,6 +286,19 @@ function SearchOverlay({ onClose }: { onClose: () => void }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
+  const results = useMemo(() => {
+    const term = q.trim().toLowerCase();
+    if (!term) return [] as SearchResult[];
+    return allFlavours
+      .filter(
+        (f) =>
+          f.name.toLowerCase().includes(term) ||
+          f.notes.toLowerCase().includes(term) ||
+          f.collectionName.toLowerCase().includes(term),
+      )
+      .slice(0, 12);
+  }, [q]);
+
   return (
     <div className="fixed inset-0 z-50 bg-ink/98 backdrop-blur-2xl animate-fade-in flex flex-col">
       <div className="flex justify-end p-6">
@@ -275,16 +306,67 @@ function SearchOverlay({ onClose }: { onClose: () => void }) {
           <X className="h-5 w-5" />
         </button>
       </div>
-      <div className="flex-1 flex items-center justify-center px-6">
-        <div className="w-full max-w-2xl">
+      <div className="flex-1 overflow-y-auto px-6 pb-10">
+        <div className="w-full max-w-3xl mx-auto">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-6 text-center">Search</p>
           <input
             autoFocus
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search the House of RASA…"
-            className="w-full bg-transparent border-b border-border/60 focus:border-gold transition-colors py-6 text-2xl md:text-4xl font-serif text-center outline-none placeholder:text-muted-foreground/40"
+            placeholder="Search flavours, collections, notes…"
+            className="w-full bg-transparent border-b border-border/60 focus:border-gold transition-colors py-5 text-xl md:text-3xl font-serif text-center outline-none placeholder:text-muted-foreground/40"
           />
+
+          <div className="mt-8">
+            {q.trim() === "" ? (
+              <p className="text-center text-xs tracking-luxe uppercase text-muted-foreground">
+                Type to filter flavours across all collections
+              </p>
+            ) : results.length === 0 ? (
+              <p className="text-center text-sm text-foreground/70 font-serif italic">
+                No flavours match “{q}”.
+              </p>
+            ) : (
+              <ul className="grid gap-2">
+                {results.map((r) => (
+                  <li key={`${r.collectionName}-${r.name}`}>
+                    <Link
+                      to="/contact"
+                      search={{ product: r.name, collection: r.collectionName }}
+                      onClick={onClose}
+                      className="group flex items-center justify-between gap-4 p-4 border border-border/40 hover:border-gold/50 transition-all bg-surface/30 hover:bg-surface/60"
+                    >
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-3 mb-1">
+                          <span
+                            className="text-[0.55rem] tracking-luxe uppercase"
+                            style={{ color: r.accentVar }}
+                          >
+                            {r.collectionName}
+                          </span>
+                        </div>
+                        <p className="font-serif text-lg truncate group-hover:text-gold transition-colors">
+                          {r.name}
+                        </p>
+                        <p className="text-xs text-foreground/65 truncate">{r.notes}</p>
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-foreground/60 group-hover:text-gold group-hover:translate-x-1 transition-all shrink-0" />
+                    </Link>
+                  </li>
+                ))}
+                <li className="pt-2 text-center">
+                  <Link
+                    to="/collections"
+                    onClick={onClose}
+                    className="text-[0.65rem] tracking-luxe uppercase text-gold/80 hover:text-gold"
+                  >
+                    Browse all collections →
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </div>
+
           <p className="mt-8 text-center text-xs tracking-luxe uppercase text-muted-foreground">
             Press Esc to close
           </p>
