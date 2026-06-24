@@ -172,52 +172,54 @@ function Collections() {
         </div>
       </section>
 
-      {sections.map((s, idx) => (
-        <CollectionSection key={s.slug} section={s} alt={idx % 2 === 1} />
+      {sections.map((s) => (
+        <CollectionSection key={s.slug} section={s} />
       ))}
     </>
   );
 }
 
-function CollectionSection({ section, alt }: { section: Section; alt: boolean }) {
+function CollectionSection({ section }: { section: Section }) {
   return (
     <section
       id={section.slug}
-      className={`relative scroll-mt-24 ${alt ? "bg-background" : "bg-ink"}`}
+      className="relative scroll-mt-24 bg-ink border-t border-border/20"
     >
       {/* Hero band */}
       <div
-        className="relative min-h-[70vh] flex items-center overflow-hidden"
+        className="relative min-h-[60vh] flex items-center overflow-hidden"
         style={{
           background: `linear-gradient(180deg, ${section.color} 0%, transparent 100%)`,
         }}
       >
-        <div className="absolute inset-0 bg-ink/60" />
+        <div className="absolute inset-0 bg-ink/70" />
         <div className="absolute inset-0 smoke-bg opacity-40" />
         <div className="absolute inset-0 grain" />
-        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 py-32 w-full grid md:grid-cols-[1fr_auto] gap-12 items-center">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 py-24 md:py-28 w-full grid md:grid-cols-[1fr_auto] gap-12 items-center">
           <div>
             <p className="text-[0.65rem] tracking-luxe uppercase text-gold">
               {section.numeral}
             </p>
-            <h2 className="mt-6 font-serif text-7xl md:text-[10rem] leading-none">
+            <h2 className="mt-6 font-serif text-7xl md:text-[9rem] leading-none">
               {section.name}
             </h2>
             <p className="mt-6 font-serif italic text-xl md:text-2xl text-gold-soft">
               {section.tag}
             </p>
           </div>
-          <img
-            src={collectionLogos[section.slug]}
-            alt={`${section.name} emblem`}
-            className="hidden md:block w-64 lg:w-80 h-auto rounded-full shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]"
-            loading="lazy"
-          />
+          <div className="hidden md:flex items-center justify-center w-64 lg:w-80 aspect-square rounded-full bg-ink ring-1 ring-gold/30 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] overflow-hidden">
+            <img
+              src={collectionLogos[section.slug]}
+              alt={`${section.name} emblem`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
 
       {/* Introduction */}
-      <div className="py-28 md:py-36">
+      <div className="py-20 md:py-24">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
             Introduction
@@ -233,7 +235,7 @@ function CollectionSection({ section, alt }: { section: Section; alt: boolean })
       </div>
 
       {/* Philosophy */}
-      <div className="py-28 border-t border-border/30">
+      <div className="py-20 border-t border-border/30">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
             Philosophy
@@ -249,7 +251,7 @@ function CollectionSection({ section, alt }: { section: Section; alt: boolean })
       </div>
 
       {/* The Collection — flavour names only */}
-      <div className="py-28 border-t border-border/30">
+      <div className="py-20 border-t border-border/30">
         <div className="mx-auto max-w-5xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
             The Collection
@@ -258,7 +260,7 @@ function CollectionSection({ section, alt }: { section: Section; alt: boolean })
             {section.flavours.map((f, i) => (
               <div
                 key={f}
-                className={`${alt ? "bg-background" : "bg-ink"} px-8 py-7 flex items-baseline gap-6 hover:bg-surface/40 transition-colors duration-500`}
+                className="bg-ink px-8 py-7 flex items-baseline gap-6 hover:bg-surface/40 transition-colors duration-500"
               >
                 <span className="text-[0.6rem] tracking-luxe text-gold/60 w-10">
                   {String(i + 1).padStart(2, "0")}
@@ -271,7 +273,7 @@ function CollectionSection({ section, alt }: { section: Section; alt: boolean })
       </div>
 
       {/* Formats */}
-      <div className="py-28 border-t border-border/30">
+      <div className="py-20 border-t border-border/30">
         <div className="mx-auto max-w-5xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
             Available Formats
@@ -290,7 +292,7 @@ function CollectionSection({ section, alt }: { section: Section; alt: boolean })
       </div>
 
       {/* Closing */}
-      <div className="py-32 md:py-40 border-t border-border/30 text-center">
+      <div className="py-24 md:py-28 border-t border-border/30 text-center">
         <p className="font-serif text-4xl md:text-6xl text-balance">
           {section.closing}
         </p>

@@ -12,8 +12,8 @@ export function AgeGate() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const stored = window.sessionStorage.getItem(STORAGE_KEY);
-    if (stored !== "1") setVerified(false);
-  }, []);
+    setVerified(stored === "1");
+  }, [pathname]);
 
   // Never show gate on the restricted page itself
   if (verified || pathname === "/age-restricted") return null;
@@ -24,7 +24,7 @@ export function AgeGate() {
   };
 
   const decline = () => {
-    setVerified(true); // hide gate, but route to restricted page
+    // Do NOT set verified=true — gate must reappear if user returns home.
     router.navigate({ to: "/age-restricted" });
   };
 
