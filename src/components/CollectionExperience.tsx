@@ -158,17 +158,34 @@ export function CollectionExperience({ collection }: { collection: Collection })
 
       {/* CLOSING CTA */}
       <div className="relative z-10 border-t border-foreground/10">
-        <div className="mx-auto max-w-6xl px-6 lg:px-10 py-14 md:py-16 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <p className="font-serif text-3xl md:text-4xl">{collection.closing}</p>
-            <p
-              className="mt-2 font-serif italic text-lg"
-              style={{ color: collection.accentVar }}
-            >
-              {collection.name}.
-            </p>
+        <div className="mx-auto max-w-6xl px-6 lg:px-10 py-14 md:py-16 flex flex-col gap-10">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <p className="font-serif text-3xl md:text-4xl">{collection.closing}</p>
+              <p
+                className="mt-2 font-serif italic text-lg"
+                style={{ color: collection.accentVar }}
+              >
+                {collection.name}.
+              </p>
+            </div>
+
+            <div className="w-full md:w-auto md:max-w-md">
+              <p
+                className="text-[0.6rem] tracking-[0.4em] uppercase mb-2"
+                style={{ color: collection.accentVar }}
+              >
+                Available Packaging Formats
+              </p>
+              <div className="grid grid-cols-5 gap-2">
+                {formats.map((f) => (
+                  <FormatEnquireChip key={f} format={f} c={collection} />
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3">
+
+          <div className="flex flex-col sm:flex-row gap-3 md:justify-end">
             <Link
               to="/contact"
               search={{ collection: collection.name }}
@@ -185,6 +202,7 @@ export function CollectionExperience({ collection }: { collection: Collection })
           </div>
         </div>
       </div>
+
 
       {/* SISTER COLLECTIONS */}
       <div className="relative z-10 border-t border-foreground/10 bg-ink/40">
