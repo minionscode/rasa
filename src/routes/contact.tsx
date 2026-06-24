@@ -1,6 +1,7 @@
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionLabel } from "../components/SectionLabel";
+import { contactInfo } from "@/data/contact";
 import {
   ArrowRight,
   Mail,
@@ -12,6 +13,7 @@ import {
   Building2,
   Store,
   Sparkles,
+  Instagram,
 } from "lucide-react";
 
 type ContactSearch = {
@@ -120,7 +122,7 @@ function Contact() {
     setSubmitted(true);
   };
 
-  const whatsappLink = `https://wa.me/910000000000?text=${encodeURIComponent(
+  const whatsappLink = `${contactInfo.whatsappUrl}?text=${encodeURIComponent(
     `Hello RASA — I'm ${form.name || "[name]"} from ${form.business || "[business]"}. Enquiry: ${form.type}.`,
   )}`;
 
@@ -128,8 +130,8 @@ function Contact() {
     {
       icon: Phone,
       label: "Call Sales",
-      sub: "+91 00000 00000",
-      href: "tel:+910000000000",
+      sub: contactInfo.phone,
+      href: `tel:${contactInfo.phoneRaw}`,
     },
     {
       icon: MessageCircle,
@@ -148,7 +150,7 @@ function Contact() {
       icon: FileText,
       label: "Request Catalogue",
       sub: "Full house portfolio",
-      href: "mailto:sales@rasahouse.com?subject=Catalogue%20Request",
+      href: `mailto:${contactInfo.email}?subject=Catalogue%20Request`,
     },
   ];
 
@@ -322,14 +324,17 @@ function Contact() {
                 Direct Channels
               </p>
               <div className="space-y-3 text-sm">
-                <a href="mailto:sales@rasahouse.com" className="flex items-center gap-3 text-foreground/85 hover:text-gold transition-colors">
-                  <Mail className="h-4 w-4 text-gold" /> sales@rasahouse.com
+                <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-3 text-foreground/85 hover:text-gold transition-colors">
+                  <Mail className="h-4 w-4 text-gold" /> {contactInfo.email}
                 </a>
-                <a href="tel:+910000000000" className="flex items-center gap-3 text-foreground/85 hover:text-gold transition-colors">
-                  <Phone className="h-4 w-4 text-gold" /> +91 00000 00000
+                <a href={`tel:${contactInfo.phoneRaw}`} className="flex items-center gap-3 text-foreground/85 hover:text-gold transition-colors">
+                  <Phone className="h-4 w-4 text-gold" /> {contactInfo.phone}
                 </a>
                 <a href={whatsappLink} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-foreground/85 hover:text-gold transition-colors">
-                  <MessageCircle className="h-4 w-4 text-gold" /> WhatsApp Sales
+                  <MessageCircle className="h-4 w-4 text-gold" /> WhatsApp
+                </a>
+                <a href={contactInfo.instagramUrl} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-foreground/85 hover:text-gold transition-colors">
+                  <Instagram className="h-4 w-4 text-gold" /> @{contactInfo.instagramHandle}
                 </a>
               </div>
               <p className="mt-5 text-xs text-foreground/60">
