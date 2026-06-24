@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { collections, formats, type Collection, type Flavour } from "@/data/collections";
 
 export const Route = createFileRoute("/collections/")({
@@ -82,7 +81,6 @@ function Collections() {
 }
 
 function CollectionPreview({ c }: { c: Collection }) {
-  const [selectedFormat, setSelectedFormat] = useState<string>("250g");
   const secondaryVar = `var(--${c.slug}-secondary)`;
   const sectionBg = `radial-gradient(ellipse at 15% 0%, ${secondaryVar} 0%, transparent 50%), radial-gradient(ellipse at 90% 100%, color-mix(in oklab, ${c.accentVar} 12%, transparent) 0%, transparent 55%), linear-gradient(180deg, color-mix(in oklab, ${c.bgVar} 80%, var(--ink)) 0%, color-mix(in oklab, ${c.bgVar} 55%, var(--ink)) 60%, var(--ink) 100%)`;
 
@@ -138,37 +136,24 @@ function CollectionPreview({ c }: { c: Collection }) {
         {/* FEATURED FLAVOURS — 4 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {c.featured.slice(0, 4).map((f) => (
-            <PreviewFlavourCard key={f.name} flavour={f} c={c} selectedFormat={selectedFormat} />
+            <PreviewFlavourCard key={f.name} flavour={f} c={c} />
           ))}
         </div>
 
-        {/* QUANTITY / FORMAT BAR */}
+        {/* PACKAGING FORMAT BAR — hover to enquire */}
         <div className="mt-8 border-t border-foreground/10 pt-6">
           <div className="flex flex-wrap items-center gap-4 justify-between">
             <p className="text-[0.6rem] tracking-[0.4em] uppercase" style={{ color: c.accentVar }}>
               Available Packaging Formats
             </p>
             <p className="text-xs text-foreground/55">
-              Selected: <span style={{ color: c.accentVar }}>{selectedFormat}</span> — applied to enquiry
+              Hover to enquire — click to begin a request
             </p>
           </div>
           <div className="mt-3 grid grid-cols-5 gap-2">
-            {formats.map((f) => {
-              const active = selectedFormat === f;
-              return (
-                <button
-                  key={f}
-                  type="button"
-                  onClick={() => setSelectedFormat(f)}
-                  data-selected={active}
-                  aria-pressed={active}
-                  className="chip-luxe px-3 py-2.5 text-xs tracking-luxe uppercase inline-flex items-center justify-center gap-1.5"
-                >
-                  {active && <Check className="h-3 w-3" strokeWidth={2.5} />}
-                  {f}
-                </button>
-              );
-            })}
+            {formats.map((f) => (
+              <FormatEnquireChip key={f} format={f} c={c} />
+            ))}
           </div>
         </div>
 
@@ -194,11 +179,11 @@ function CollectionPreview({ c }: { c: Collection }) {
   );
 }
 
-function PreviewFlavourCard({ flavour, c, selectedFormat }: { flavour: Flavour; c: Collection; selectedFormat: string }) {
+function PreviewFlavourCard({ flavour, c }: { flavour: Flavour; c: Collection }) {
   return (
     <Link
       to="/contact"
-      search={{ product: flavour.name, collection: c.name, format: selectedFormat }}
+      search={{ product: flavour.name, collection: c.name }}
       className="group relative block p-5 border border-foreground/10 hover:border-foreground/30 bg-ink/35 backdrop-blur-sm hover:-translate-y-1 transition-all duration-500"
     >
       <div
@@ -214,16 +199,6 @@ function PreviewFlavourCard({ flavour, c, selectedFormat }: { flavour: Flavour; 
         <p className="mt-2 text-xs text-foreground/65 leading-relaxed min-h-[2.5rem]">
           {flavour.notes}
         </p>
-        <div className="mt-4 flex flex-wrap gap-1">
-          {formats.slice(0, 3).map((f) => (
-            <span
-              key={f}
-              className="text-[0.55rem] tracking-luxe uppercase px-1.5 py-0.5 border border-foreground/15 text-foreground/55"
-            >
-              {f}
-            </span>
-          ))}
-        </div>
         <span
           className="mt-4 inline-flex items-center gap-2 text-[0.6rem] tracking-luxe uppercase"
           style={{ color: c.accentVar }}
@@ -231,6 +206,39 @@ function PreviewFlavourCard({ flavour, c, selectedFormat }: { flavour: Flavour; 
           Enquire <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
         </span>
       </div>
+    </Link>
+  );
+}
+
+export function FormatEnquireChip({
+  format,
+  c,
+  product,
+}: {
+  format: string;
+  c: Collection;
+  product?: string;
+}) {
+  return (
+    <Link
+      to="/contact"
+      search={{
+        format,
+        collection: c.name,
+        ...(product ? { product } : {}),
+      }}
+      className="group relative overflow-hidden chip-luxe px-3 py-2.5 text-xs tracking-luxe uppercase inline-flex items-center justify-center"
+      aria-label={`Enquire ${format}`}
+    >
+      <span className="transition-all duration-300 group-hover:opacity-0 group-hover:-translate-y-1">
+        {format}
+      </span>
+      <span
+        className="absolute inset-0 flex items-center justify-center gap-1.5 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 text-[0.65rem]"
+        style={{ color: c.accentVar }}
+      >
+        Enquire Now <ArrowRight className="h-3 w-3" />
+      </span>
     </Link>
   );
 }
