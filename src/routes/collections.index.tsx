@@ -178,8 +178,7 @@ function CollectionPreview({ c }: { c: Collection }) {
             A curated preview from the {c.name} cellar. The complete collection is revealed inside.
           </p>
           <Link
-            to="/collections/$slug"
-            params={{ slug: c.slug }}
+            to={c.path}
             className="group inline-flex items-center gap-3 px-8 py-3.5 border text-[0.7rem] tracking-luxe uppercase transition-all duration-500"
             style={{
               borderColor: `color-mix(in oklab, ${c.accentVar} 55%, transparent)`,

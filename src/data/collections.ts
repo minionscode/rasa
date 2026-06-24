@@ -6,6 +6,7 @@ export type Flavour = { name: string; notes: string };
 
 export type Collection = {
   slug: "majlis" | "makhmal" | "tarkib";
+  path: "/collections/majlis" | "/collections/makhmal" | "/collections/tarkib";
   name: string;
   label: string;
   expression: string;
@@ -27,6 +28,7 @@ export const formats = ["20g", "60g", "250g", "500g", "1kg"];
 export const collections: Collection[] = [
   {
     slug: "majlis",
+    path: "/collections/majlis",
     name: "Majlis",
     label: "Collection I",
     expression: "The Expression of Heritage",
@@ -56,6 +58,7 @@ export const collections: Collection[] = [
   },
   {
     slug: "makhmal",
+    path: "/collections/makhmal",
     name: "Makhmal",
     label: "Collection II",
     expression: "The Expression of Refinement",
@@ -90,6 +93,7 @@ export const collections: Collection[] = [
   },
   {
     slug: "tarkib",
+    path: "/collections/tarkib",
     name: "Tarkib",
     label: "Collection III",
     expression: "The Expression of Innovation",

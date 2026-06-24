@@ -1,32 +1,10 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, ArrowDown, Check } from "lucide-react";
-import { collections, formats, getCollection, type Collection, type Flavour } from "@/data/collections";
+import { ArrowDown, ArrowRight, Check } from "lucide-react";
 
-export const Route = createFileRoute("/collections/$slug")({
-  beforeLoad: ({ params }) => {
-    if (!getCollection(params.slug)) throw notFound();
-  },
-  loader: ({ params }) => ({ collection: getCollection(params.slug)! }),
-  head: ({ params }) => {
-    const c = getCollection(params.slug);
-    const title = c ? `${c.name} — ${c.expression} | RASA` : "Collection — RASA";
-    const description = c?.intro ?? "A collection within the House of RASA.";
-    return {
-      meta: [
-        { title },
-        { name: "description", content: description },
-        { property: "og:title", content: title },
-        { property: "og:description", content: description },
-      ],
-    };
-  },
-  component: CollectionPage,
-});
+import { collections, formats, type Collection, type Flavour } from "@/data/collections";
 
-function CollectionPage() {
-  const data = Route.useLoaderData() as { collection: Collection };
-  const collection = data.collection;
+export function CollectionExperience({ collection }: { collection: Collection }) {
   const [selectedFormat, setSelectedFormat] = useState<string>("250g");
   const secondaryVar = `var(--${collection.slug}-secondary)`;
   const sectionBg = `radial-gradient(ellipse at 20% 10%, ${secondaryVar} 0%, transparent 45%), radial-gradient(ellipse at 85% 80%, color-mix(in oklab, ${collection.accentVar} 10%, transparent) 0%, transparent 55%), linear-gradient(180deg, color-mix(in oklab, ${collection.bgVar} 85%, var(--ink)) 0%, color-mix(in oklab, ${collection.bgVar} 60%, var(--ink)) 50%, var(--ink) 100%)`;
@@ -309,8 +287,7 @@ function CollectionPage() {
               .map((c) => (
                 <Link
                   key={c.slug}
-                  to="/collections/$slug"
-                  params={{ slug: c.slug }}
+                  to={c.path}
                   className="card-luxe collection-card p-6 flex items-center justify-between group"
                 >
                   <div className="flex items-center gap-4">
