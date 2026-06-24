@@ -260,7 +260,7 @@ function CollectionSection({ section }: { section: Section }) {
             {section.flavours.map((f, i) => (
               <div
                 key={f}
-                className={`${alt ? "bg-background" : "bg-ink"} px-8 py-7 flex items-baseline gap-6 hover:bg-surface/40 transition-colors duration-500`}
+                className="bg-ink px-8 py-7 flex items-baseline gap-6 hover:bg-surface/40 transition-colors duration-500"
               >
                 <span className="text-[0.6rem] tracking-luxe text-gold/60 w-10">
                   {String(i + 1).padStart(2, "0")}
