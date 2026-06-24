@@ -180,134 +180,154 @@ function Collections() {
 }
 
 function CollectionSection({ section }: { section: Section }) {
+  // Tint surface used for flavour tiles & dividers — slightly darker than section bg
+  const tile = `color-mix(in oklab, ${section.color} 35%, var(--ink))`;
+  const tileHover = `color-mix(in oklab, ${section.color} 55%, var(--ink))`;
+  const sectionBg = `linear-gradient(180deg, ${section.color} 0%, color-mix(in oklab, ${section.color} 40%, var(--ink)) 55%, var(--ink) 100%)`;
+
   return (
     <section
       id={section.slug}
-      className="relative scroll-mt-24 bg-ink border-t border-border/20"
+      className="relative scroll-mt-24 border-t border-border/10"
+      style={{ background: sectionBg }}
     >
-      {/* Hero band */}
+      {/* Soft vignette for depth (cheap, no animation) */}
       <div
-        className="relative min-h-[50vh] flex items-center overflow-hidden"
+        className="pointer-events-none absolute inset-0"
         style={{
-          background: `linear-gradient(180deg, ${section.color} 0%, transparent 100%)`,
+          background:
+            "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06), transparent 60%)",
         }}
-      >
-        <div className="absolute inset-0 bg-ink/70" />
-        <div className="absolute inset-0 smoke-bg opacity-40" />
-        <div className="absolute inset-0 grain" />
-        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 py-24 md:py-28 w-full grid md:grid-cols-[1fr_auto] gap-12 items-center">
+      />
+
+      {/* Hero band */}
+      <div className="relative">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 pt-20 pb-14 md:pt-24 md:pb-16 w-full grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
           <div>
-            <p className="text-[0.65rem] tracking-luxe uppercase text-gold">
+            <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/90">
               {section.numeral}
             </p>
-            <h2 className="mt-6 font-serif text-7xl md:text-[9rem] leading-none">
+            <h2 className="mt-5 font-serif text-7xl md:text-[8.5rem] leading-[0.95] tracking-tight">
               {section.name}
             </h2>
-            <p className="mt-6 font-serif italic text-xl md:text-2xl text-gold-soft">
+            <p className="mt-5 font-serif italic text-xl md:text-2xl text-gold-soft">
               {section.tag}
             </p>
           </div>
           <div
-            className="hidden md:flex relative items-center justify-center w-64 lg:w-80 aspect-square"
+            className="hidden md:flex relative items-center justify-center w-56 lg:w-72 aspect-square"
             style={{
               WebkitMaskImage:
-                "radial-gradient(circle at center, black 48%, rgba(0,0,0,0.55) 62%, transparent 78%)",
+                "radial-gradient(circle at center, black 50%, rgba(0,0,0,0.6) 65%, transparent 82%)",
               maskImage:
-                "radial-gradient(circle at center, black 48%, rgba(0,0,0,0.55) 62%, transparent 78%)",
+                "radial-gradient(circle at center, black 50%, rgba(0,0,0,0.6) 65%, transparent 82%)",
             }}
           >
             <img
               src={collectionLogos[section.slug]}
               alt={`${section.name} emblem`}
               className="w-full h-full object-cover"
-              loading="lazy"
+              loading="eager"
+              decoding="async"
             />
           </div>
         </div>
       </div>
 
-      {/* Introduction */}
-      <div className="py-14 md:py-16">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10">
-          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
-            Introduction
-          </p>
-          <div className="space-y-6 text-lg leading-loose text-muted-foreground font-light">
-            {section.intro.map((p, i) => (
-              <p key={i} className={i === 0 ? "text-foreground/90" : ""}>
-                {p}
-              </p>
-            ))}
+      {/* Introduction + Philosophy — two columns to compress vertical space */}
+      <div className="relative z-10 border-t border-foreground/5">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10 py-16 md:py-20 grid md:grid-cols-2 gap-x-16 gap-y-12">
+          <div>
+            <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-6">
+              Introduction
+            </p>
+            <div className="space-y-5 text-[15px] md:text-base leading-[1.85] text-foreground/75 font-light">
+              {section.intro.map((p, i) => (
+                <p key={i} className={i === 0 ? "text-foreground/95" : ""}>
+                  {p}
+                </p>
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
-
-      {/* Philosophy */}
-      <div className="py-14 border-t border-border/30">
-        <div className="mx-auto max-w-3xl px-6 lg:px-10">
-          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
-            Philosophy
-          </p>
-          <div className="space-y-6 text-lg leading-loose text-muted-foreground font-light">
-            {section.philosophy.map((p, i) => (
-              <p key={i} className={i === 0 ? "font-serif italic text-2xl text-foreground/90 leading-snug" : ""}>
-                {p}
-              </p>
-            ))}
+          <div>
+            <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-6">
+              Philosophy
+            </p>
+            <div className="space-y-5 text-[15px] md:text-base leading-[1.85] text-foreground/75 font-light">
+              {section.philosophy.map((p, i) => (
+                <p
+                  key={i}
+                  className={i === 0 ? "font-serif italic text-xl md:text-2xl text-foreground/95 leading-snug" : ""}
+                >
+                  {p}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
       {/* The Collection — flavour names only */}
-      <div className="py-14 border-t border-border/30">
-        <div className="mx-auto max-w-5xl px-6 lg:px-10">
-          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
+      <div className="relative z-10 border-t border-foreground/5">
+        <div className="mx-auto max-w-5xl px-6 lg:px-10 py-16 md:py-20">
+          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-8">
             The Collection
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border/30">
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-px"
+            style={{ background: "color-mix(in oklab, var(--gold) 12%, transparent)" }}
+          >
             {section.flavours.map((f, i) => (
               <div
                 key={f}
-                className="bg-ink px-8 py-7 flex items-baseline gap-6 hover:bg-surface/40 transition-colors duration-500"
+                className="px-7 py-5 flex items-baseline gap-5 transition-colors duration-300"
+                style={
+                  {
+                    background: tile,
+                    ["--hover-bg" as never]: tileHover,
+                  } as React.CSSProperties
+                }
+                onMouseEnter={(e) => (e.currentTarget.style.background = tileHover)}
+                onMouseLeave={(e) => (e.currentTarget.style.background = tile)}
               >
-                <span className="text-[0.6rem] tracking-luxe text-gold/60 w-10">
+                <span className="text-[0.6rem] tracking-[0.4em] text-gold/70 w-8">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="font-serif text-2xl md:text-3xl">{f}</span>
+                <span className="font-serif text-xl md:text-2xl">{f}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Formats */}
-      <div className="py-14 border-t border-border/30">
-        <div className="mx-auto max-w-5xl px-6 lg:px-10">
-          <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
+      {/* Formats + Closing combined in one band */}
+      <div className="relative z-10 border-t border-foreground/5">
+        <div className="mx-auto max-w-5xl px-6 lg:px-10 py-16 md:py-20">
+          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-6">
             Available Formats
           </p>
           <div className="flex flex-wrap gap-3">
             {formats.map((f) => (
               <span
                 key={f}
-                className="px-8 py-4 border border-border/60 text-sm tracking-wide hover:border-gold/50 hover:text-gold transition-colors duration-500"
+                className="px-7 py-3.5 border border-foreground/15 text-sm tracking-wide hover:border-gold/60 hover:text-gold transition-colors duration-300"
               >
                 {f}
               </span>
             ))}
           </div>
-        </div>
-      </div>
 
-      {/* Closing */}
-      <div className="py-16 md:py-20 border-t border-border/30 text-center">
-        <p className="font-serif text-4xl md:text-6xl text-balance">
-          {section.closing}
-        </p>
-        <p className="mt-6 font-serif italic text-2xl text-gold-soft">
-          {section.name}.
-        </p>
+          <div className="mt-20 md:mt-24 text-center">
+            <p className="font-serif text-4xl md:text-5xl text-balance">
+              {section.closing}
+            </p>
+            <p className="mt-4 font-serif italic text-xl text-gold-soft">
+              {section.name}.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
