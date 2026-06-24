@@ -287,7 +287,8 @@ export function CollectionExperience({ collection }: { collection: Collection })
               .map((c) => (
                 <Link
                   key={c.slug}
-                  to={c.path}
+                  to="/collections/$slug"
+                  params={{ slug: c.slug }}
                   className="card-luxe collection-card p-6 flex items-center justify-between group"
                 >
                   <div className="flex items-center gap-4">
