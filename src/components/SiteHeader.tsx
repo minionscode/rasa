@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
 import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 
-type DropItem = { label: string; sub?: string; to: string; hash?: string };
+type DropItem = {
+  label: string;
+  sub?: string;
+  to: string;
+  hash?: string;
+  search?: Record<string, string>;
+};
 
 const collectionsDrop: DropItem[] = [
   { label: "Explore All", sub: "Discover the complete House of RASA", to: "/collections" },
@@ -12,25 +18,9 @@ const collectionsDrop: DropItem[] = [
   { label: "Tarkib", sub: "The Expression of Innovation", to: "/collections", hash: "tarkib" },
 ];
 
-const hookahGroups: { heading: string; sub: string; items: DropItem[] }[] = [
-  {
-    heading: "Classic Series",
-    sub: "Heritage forms, refined",
-    items: [
-      { label: "Portable", to: "/hookah", hash: "classic-collection" },
-      { label: "Medium", to: "/hookah", hash: "classic-collection" },
-      { label: "Large", to: "/hookah", hash: "classic-collection" },
-    ],
-  },
-  {
-    heading: "Luxury Series",
-    sub: "The pinnacle of craft",
-    items: [
-      { label: "Portable", to: "/hookah", hash: "luxury-collection" },
-      { label: "Medium", to: "/hookah", hash: "luxury-collection" },
-      { label: "Large", to: "/hookah", hash: "luxury-collection" },
-    ],
-  },
+const shopDrop: DropItem[] = [
+  { label: "Hookah", sub: "Sculptural pieces, in preparation", to: "/coming-soon", search: { category: "hookah" } },
+  { label: "Accessories", sub: "Refined companions, in preparation", to: "/coming-soon", search: { category: "accessories" } },
 ];
 
 const partnersDrop: DropItem[] = [
