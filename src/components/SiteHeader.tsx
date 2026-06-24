@@ -143,8 +143,9 @@ export function SiteHeader() {
               { to: "/contact", label: "Contact" },
             ].map((item) => (
               <Link
-                key={item.to}
+                key={`${item.to}-${item.label}`}
                 to={item.to}
+                search={item.search as never}
                 className="font-serif text-2xl tracking-wide text-foreground hover:text-gold transition-colors"
                 activeProps={{ className: "text-gold" }}
               >
