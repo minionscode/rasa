@@ -82,6 +82,7 @@ function Collections() {
 }
 
 function CollectionPreview({ c }: { c: Collection }) {
+  const [selectedFormat, setSelectedFormat] = useState<string>("250g");
   const secondaryVar = `var(--${c.slug}-secondary)`;
   const sectionBg = `radial-gradient(ellipse at 15% 0%, ${secondaryVar} 0%, transparent 50%), radial-gradient(ellipse at 90% 100%, color-mix(in oklab, ${c.accentVar} 12%, transparent) 0%, transparent 55%), linear-gradient(180deg, color-mix(in oklab, ${c.bgVar} 80%, var(--ink)) 0%, color-mix(in oklab, ${c.bgVar} 55%, var(--ink)) 60%, var(--ink) 100%)`;
 
@@ -137,12 +138,42 @@ function CollectionPreview({ c }: { c: Collection }) {
         {/* FEATURED FLAVOURS — 4 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {c.featured.slice(0, 4).map((f) => (
-            <PreviewFlavourCard key={f.name} flavour={f} c={c} />
+            <PreviewFlavourCard key={f.name} flavour={f} c={c} selectedFormat={selectedFormat} />
           ))}
         </div>
 
+        {/* QUANTITY / FORMAT BAR */}
+        <div className="mt-8 border-t border-foreground/10 pt-6">
+          <div className="flex flex-wrap items-center gap-4 justify-between">
+            <p className="text-[0.6rem] tracking-[0.4em] uppercase" style={{ color: c.accentVar }}>
+              Available Packaging Formats
+            </p>
+            <p className="text-xs text-foreground/55">
+              Selected: <span style={{ color: c.accentVar }}>{selectedFormat}</span> — applied to enquiry
+            </p>
+          </div>
+          <div className="mt-3 grid grid-cols-5 gap-2">
+            {formats.map((f) => {
+              const active = selectedFormat === f;
+              return (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => setSelectedFormat(f)}
+                  data-selected={active}
+                  aria-pressed={active}
+                  className="chip-luxe px-3 py-2.5 text-xs tracking-luxe uppercase inline-flex items-center justify-center gap-1.5"
+                >
+                  {active && <Check className="h-3 w-3" strokeWidth={2.5} />}
+                  {f}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* EXPLORE BUTTON */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-foreground/65 max-w-md">
             A curated preview from the {c.name} cellar. The complete collection is revealed inside.
           </p>
@@ -164,11 +195,11 @@ function CollectionPreview({ c }: { c: Collection }) {
   );
 }
 
-function PreviewFlavourCard({ flavour, c }: { flavour: Flavour; c: Collection }) {
+function PreviewFlavourCard({ flavour, c, selectedFormat }: { flavour: Flavour; c: Collection; selectedFormat: string }) {
   return (
     <Link
       to="/contact"
-      search={{ product: flavour.name, collection: c.name, format: "250g" }}
+      search={{ product: flavour.name, collection: c.name, format: selectedFormat }}
       className="group relative block p-5 border border-foreground/10 hover:border-foreground/30 bg-ink/35 backdrop-blur-sm hover:-translate-y-1 transition-all duration-500"
     >
       <div
