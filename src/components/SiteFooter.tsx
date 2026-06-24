@@ -67,29 +67,33 @@ export function SiteFooter() {
               <li className="flex items-start gap-3">
                 <MapPin className="h-3.5 w-3.5 text-gold/80 shrink-0 mt-1" />
                 <span className="leading-relaxed not-italic">
-                  RASA Tobacco Partners Pvt. Ltd.<br />
-                  Suit 312A, Suncity Trade Tower<br />
-                  Sector 21, Dundahera<br />
-                  Gurugram, Haryana — 122016
+                  {contactInfo.address.company}<br />
+                  {contactInfo.address.line1}<br />
+                  {contactInfo.address.line2}<br />
+                  {contactInfo.address.line3}
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-3.5 w-3.5 text-gold/80 shrink-0" />
-                <a href="mailto:sales@rasahouse.com" className="hover:text-gold transition-colors">
-                  sales@rasahouse.com
+                <a href={`mailto:${contactInfo.email}`} className="hover:text-gold transition-colors">
+                  {contactInfo.email}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-3.5 w-3.5 text-gold/80 shrink-0" />
-                <a href="tel:+910000000000" className="hover:text-gold transition-colors">+91 00000 00000</a>
+                <a href={`tel:${contactInfo.phoneRaw}`} className="hover:text-gold transition-colors">{contactInfo.phone}</a>
               </li>
               <li className="flex items-center gap-3">
                 <MessageCircle className="h-3.5 w-3.5 text-gold/80 shrink-0" />
-                <span>WhatsApp Available</span>
+                <a href={contactInfo.whatsappUrl} target="_blank" rel="noreferrer" className="hover:text-gold transition-colors">
+                  WhatsApp
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Instagram className="h-3.5 w-3.5 text-gold/80 shrink-0" />
-                <span>@rasa.house</span>
+                <a href={contactInfo.instagramUrl} target="_blank" rel="noreferrer" className="hover:text-gold transition-colors">
+                  @{contactInfo.instagramHandle}
+                </a>
               </li>
             </ul>
           </div>
