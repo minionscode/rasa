@@ -5,12 +5,14 @@ import { useEffect, useRef } from "react";
  * Soft radial puffs drift upward, gently follow cursor parallax,
  * additive blending for luxury depth. Caps frame work for 60fps.
  */
+type Tone = "copper" | "silver" | "ember" | "gold" | "burgundy" | "aubergine" | "midnight";
+
 type Props = {
   className?: string;
   /** 0 – 1 intensity */
   intensity?: number;
-  /** copper / silver tint */
-  tone?: "copper" | "silver" | "ember";
+  /** colored smoke tint that matches collection / context */
+  tone?: Tone;
 };
 
 type Puff = {
@@ -53,11 +55,15 @@ export function CinematicSmoke({ className = "", intensity = 0.6, tone = "copper
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    const tones = {
-      copper: { h1: 28, h2: 18 },
-      silver: { h1: 35, h2: 220 },
-      ember: { h1: 18, h2: 8 },
-    } as const;
+    const tones: Record<Tone, { h1: number; h2: number; s1: number; s2: number; l1: number; l2: number }> = {
+      copper:    { h1: 28,  h2: 18,  s1: 55, s2: 45, l1: 60, l2: 35 },
+      silver:    { h1: 35,  h2: 30,  s1: 28, s2: 18, l1: 70, l2: 40 },
+      ember:     { h1: 18,  h2: 8,   s1: 70, s2: 55, l1: 55, l2: 30 },
+      gold:      { h1: 42,  h2: 32,  s1: 65, s2: 50, l1: 65, l2: 40 },
+      burgundy:  { h1: 355, h2: 8,   s1: 60, s2: 55, l1: 45, l2: 28 },
+      aubergine: { h1: 295, h2: 320, s1: 45, s2: 35, l1: 40, l2: 22 },
+      midnight:  { h1: 220, h2: 32,  s1: 55, s2: 45, l1: 45, l2: 55 },
+    };
     const T = tones[tone];
 
     const count = Math.round((reduced ? 8 : 22) * intensity);
@@ -119,10 +125,13 @@ export function CinematicSmoke({ className = "", intensity = 0.6, tone = "copper
         const fade = t < 0.2 ? t / 0.2 : t > 0.7 ? 1 - (t - 0.7) / 0.3 : 1;
         const a = p.alpha * fade;
 
+        const useFirst = p.hue === T.h1;
+        const s = useFirst ? T.s1 : T.s2;
+        const l = useFirst ? T.l1 : T.l2;
         const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-        g.addColorStop(0, `hsla(${p.hue}, 50%, 65%, ${a})`);
-        g.addColorStop(0.5, `hsla(${p.hue}, 40%, 35%, ${a * 0.45})`);
-        g.addColorStop(1, `hsla(${p.hue}, 30%, 10%, 0)`);
+        g.addColorStop(0, `hsla(${p.hue}, ${s}%, ${l}%, ${a})`);
+        g.addColorStop(0.5, `hsla(${p.hue}, ${Math.max(20, s - 15)}%, ${Math.max(20, l - 20)}%, ${a * 0.45})`);
+        g.addColorStop(1, `hsla(${p.hue}, 25%, 8%, 0)`);
         ctx.fillStyle = g;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
