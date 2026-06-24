@@ -18,14 +18,12 @@ export const Route = createFileRoute("/")({
       { title: "RASA — Smoke, Perfected." },
       {
         name: "description",
-        content:
-          "RASA — a luxury hookah lifestyle house. Three collections. One discipline. Smoke, perfected.",
+        content: "RASA — a luxury hookah lifestyle house. Three collections. One discipline. Smoke, perfected.",
       },
       { property: "og:title", content: "RASA — Smoke, Perfected." },
       {
         property: "og:description",
-        content:
-          "A luxury hookah lifestyle house — Majlis, Makhmal, Tarkib. Smoke, perfected.",
+        content: "A luxury hookah lifestyle house — Majlis, Makhmal, Tarkib. Smoke, perfected.",
       },
       { property: "og:image", content: heroHookah.url },
       { name: "twitter:image", content: heroHookah.url },
@@ -99,24 +97,15 @@ function Hero() {
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const titleY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const titleScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const titleBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(14px)"]);
+  const titleScale = useTransform(scrollYProgress, [0, 1], [1, 1.02]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.4, 0]);
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 180]);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.2]);
 
-  
-
   return (
-    <section
-      ref={ref}
-      className="relative min-h-[100svh] overflow-hidden bg-ink"
-    >
+    <section ref={ref} className="relative min-h-[100svh] overflow-hidden bg-ink">
       {/* Cinematic background image */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ y: bgY, scale: bgScale }}
-      >
+      <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale }}>
         <img
           src={heroHookah.url}
           alt=""
@@ -129,8 +118,7 @@ function Hero() {
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "radial-gradient(ellipse at 50% 55%, transparent 25%, oklch(0.06 0.004 60 / 0.85) 80%)",
+            background: "radial-gradient(ellipse at 50% 55%, transparent 25%, oklch(0.06 0.004 60 / 0.85) 80%)",
           }}
         />
       </motion.div>
@@ -145,19 +133,11 @@ function Hero() {
           style={{
             y: titleY,
             scale: titleScale,
-            filter: titleBlur,
             opacity: titleOpacity,
           }}
           className="text-center will-change-transform"
         >
-          <AnimatedWordmark
-            size="h-[18vw] max-h-[18rem] min-h-[7rem]"
-            halo
-            float
-            shimmer={false}
-            reveal={false}
-          />
-
+          <AnimatedWordmark size="h-[18vw] max-h-[18rem] min-h-[7rem]" halo float shimmer={false} reveal={false} />
 
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
@@ -165,8 +145,7 @@ function Hero() {
             transition={{ duration: 1.4, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
             className="mx-auto mt-8 h-px w-40 origin-center"
             style={{
-              background:
-                "linear-gradient(90deg, transparent, var(--gold) 50%, transparent)",
+              background: "linear-gradient(90deg, transparent, var(--gold) 50%, transparent)",
             }}
           />
 
@@ -246,8 +225,8 @@ function OriginBand() {
           </RevealChild>
           <RevealChild>
             <p className="mt-10 max-w-md mx-auto text-sm md:text-base text-foreground/75 leading-relaxed">
-              From ember to expression, every RASA blend is composed with the
-              patience of an atelier and the precision of a jeweller.
+              From ember to expression, every RASA blend is composed with the patience of an atelier and the precision
+              of a jeweller.
             </p>
           </RevealChild>
         </RevealGroup>
@@ -265,9 +244,7 @@ function ChaptersSection() {
 
       <div className="relative text-center max-w-2xl mx-auto px-6">
         <Reveal>
-          <p className="text-[0.6rem] tracking-wider-luxe uppercase text-gold">
-            The Collections
-          </p>
+          <p className="text-[0.6rem] tracking-wider-luxe uppercase text-gold">The Collections</p>
         </Reveal>
         <Reveal delay={0.1}>
           <h2 className="mt-6 font-serif font-light text-4xl md:text-6xl text-balance leading-tight">
@@ -313,11 +290,7 @@ function ChapterBlock({ chapter, index }: { chapter: Chapter; index: number }) {
                 />
               </Parallax>
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-              <CinematicSmoke
-                intensity={0.3}
-                tone={chapter.tone}
-                className="opacity-60 mix-blend-screen"
-              />
+              <CinematicSmoke intensity={0.3} tone={chapter.tone} className="opacity-60 mix-blend-screen" />
               <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-foreground">
                 <span className="text-[0.55rem] tracking-wider-luxe uppercase text-gold-soft">
                   Collection {chapter.numeral}
@@ -333,9 +306,7 @@ function ChapterBlock({ chapter, index }: { chapter: Chapter; index: number }) {
         {/* Text */}
         <RevealGroup className="md:col-span-5" stagger={0.1}>
           <RevealChild>
-            <p className="text-[0.6rem] tracking-wider-luxe uppercase text-gold/80">
-              {chapter.expression}
-            </p>
+            <p className="text-[0.6rem] tracking-wider-luxe uppercase text-gold/80">{chapter.expression}</p>
           </RevealChild>
           <RevealChild>
             <h3 className="mt-4 font-serif font-light text-[clamp(2.75rem,8vw,6rem)] leading-[0.9] tracking-[-0.02em]">
@@ -343,14 +314,10 @@ function ChapterBlock({ chapter, index }: { chapter: Chapter; index: number }) {
             </h3>
           </RevealChild>
           <RevealChild>
-            <p className="mt-6 font-serif italic text-xl md:text-2xl text-gold-soft leading-snug">
-              {chapter.oneLiner}
-            </p>
+            <p className="mt-6 font-serif italic text-xl md:text-2xl text-gold-soft leading-snug">{chapter.oneLiner}</p>
           </RevealChild>
           <RevealChild>
-            <p className="mt-6 text-foreground/75 leading-relaxed max-w-md font-light">
-              {chapter.body}
-            </p>
+            <p className="mt-6 text-foreground/75 leading-relaxed max-w-md font-light">{chapter.body}</p>
           </RevealChild>
           <RevealChild>
             <Link
@@ -388,9 +355,7 @@ function Invitation() {
       <div className="relative mx-auto max-w-3xl px-6 text-center">
         <RevealGroup stagger={0.12}>
           <RevealChild>
-            <p className="text-[0.6rem] tracking-wider-luxe uppercase text-gold">
-              Partner Programme
-            </p>
+            <p className="text-[0.6rem] tracking-wider-luxe uppercase text-gold">Partner Programme</p>
           </RevealChild>
           <RevealChild>
             <h2 className="mt-6 font-serif font-light text-4xl md:text-6xl leading-[1.05] text-balance">
@@ -400,9 +365,8 @@ function Invitation() {
           </RevealChild>
           <RevealChild>
             <p className="mt-8 text-foreground/80 leading-relaxed max-w-xl mx-auto">
-              A curated network of distributors, lounges and boutiques. We grow
-              with you — with structured support, exclusive access, and the
-              discipline of a luxury house.
+              A curated network of distributors, lounges and boutiques. We grow with you — with structured support,
+              exclusive access, and the discipline of a luxury house.
             </p>
           </RevealChild>
           <RevealChild>
