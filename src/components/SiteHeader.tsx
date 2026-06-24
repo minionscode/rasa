@@ -113,6 +113,9 @@ export function SiteHeader() {
               { to: "/", label: "Home" },
               { to: "/house-of-rasa", label: "House of RASA" },
               { to: "/collections", label: "Collections" },
+              { to: "/collections/$slug", label: "— Majlis", params: { slug: "majlis" } },
+              { to: "/collections/$slug", label: "— Makhmal", params: { slug: "makhmal" } },
+              { to: "/collections/$slug", label: "— Tarkib", params: { slug: "tarkib" } },
               { to: "/coming-soon", label: "Hookahs", search: { category: "hookahs" } },
               { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
               { to: "/partners", label: "Partners" },
@@ -121,11 +124,12 @@ export function SiteHeader() {
               <Link
                 key={item.to + item.label}
                 to={item.to}
+                params={item.params as any}
                 search={item.search as any}
-                className="font-serif text-2xl tracking-wide text-foreground hover:text-gold transition-colors"
+                className={`font-serif tracking-wide text-foreground hover:text-gold transition-colors ${item.label.startsWith("—") ? "text-lg pl-4 text-foreground/75" : "text-2xl"}`}
                 activeProps={{ className: "text-gold" }}
               >
-                {item.label}
+                {item.label.replace(/^— /, "")}
               </Link>
             ))}
 
@@ -172,9 +176,9 @@ function CollectionsMega({
   onClose: () => void;
 }) {
   const items = [
-    { name: "Majlis", tag: "The Expression of Gathering", hash: "majlis", logo: majlisLogo.url },
-    { name: "Makhmal", tag: "The Expression of Refinement", hash: "makhmal", logo: makhmalLogo.url },
-    { name: "Tarkib", tag: "The Expression of Innovation", hash: "tarkib", logo: tarkibLogo.url },
+    { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis", logo: majlisLogo.url },
+    { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal", logo: makhmalLogo.url },
+    { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib", logo: tarkibLogo.url },
   ];
   return (
     <DropButton label="Collections" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
@@ -190,14 +194,14 @@ function CollectionsMega({
         <div className="grid grid-cols-3 gap-3">
           {items.map((c) => (
             <Link
-              key={c.hash}
-              to="/collections"
-              hash={c.hash}
+              key={c.slug}
+              to="/collections/$slug"
+              params={{ slug: c.slug }}
               onClick={onClose}
               className="group block p-3 border border-transparent hover:border-gold/30 hover:bg-surface/40 transition-all duration-300"
             >
               <div className="aspect-square mb-3 flex items-center justify-center">
-                <img src={c.logo} alt="" className="max-h-20 w-auto opacity-90 group-hover:opacity-100 transition-opacity" />
+                <img src={c.logo} alt="" className="max-h-20 w-auto opacity-90 group-hover:opacity-100 crisp-img transition-opacity" />
               </div>
               <p className="font-serif text-base text-foreground group-hover:text-gold transition-colors text-center">
                 {c.name}

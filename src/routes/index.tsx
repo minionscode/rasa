@@ -34,9 +34,9 @@ const pillars = [
 ];
 
 const collections = [
-  { name: "Majlis", tag: "The Expression of Heritage", hash: "majlis", logo: majlisLogo.url },
-  { name: "Makhmal", tag: "The Expression of Refinement", hash: "makhmal", logo: makhmalLogo.url },
-  { name: "Tarkib", tag: "The Expression of Innovation", hash: "tarkib", logo: tarkibLogo.url },
+  { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis" as const, logo: majlisLogo.url },
+  { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal" as const, logo: makhmalLogo.url },
+  { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib" as const, logo: tarkibLogo.url },
 ];
 
 const partnerBenefits = [
@@ -113,9 +113,9 @@ function Home() {
           <div className="mt-10 grid md:grid-cols-3 gap-5">
             {collections.map((c) => (
               <Link
-                key={c.hash}
-                to="/collections"
-                hash={c.hash}
+                key={c.slug}
+                to="/collections/$slug"
+                params={{ slug: c.slug }}
                 className="card-luxe collection-card p-7 text-center group"
               >
                 <div className="aspect-square mb-4 flex items-center justify-center">
