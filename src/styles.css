@@ -306,13 +306,14 @@
     box-shadow: 0 0 28px -6px oklch(0.78 0.09 48 / 0.55);
   }
 
-  /* Crisp image rendering — kills blur/bloom on PNG logos */
+  /* Smooth high-fidelity downscaling for PNG logos (avoids crisp-edges pixelation) */
   .crisp-img {
+    image-rendering: auto;
     image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
     filter: none;
     backface-visibility: hidden;
     transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
   }
 
   /* Collection card hover — copper glow + lift + smoke intensify */
