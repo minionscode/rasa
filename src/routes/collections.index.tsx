@@ -187,7 +187,7 @@ function CollectionSection({ section }: { section: Section }) {
     >
       {/* Hero band */}
       <div
-        className="relative min-h-[60vh] flex items-center overflow-hidden"
+        className="relative min-h-[50vh] flex items-center overflow-hidden"
         style={{
           background: `linear-gradient(180deg, ${section.color} 0%, transparent 100%)`,
         }}
@@ -227,7 +227,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* Introduction */}
-      <div className="py-20 md:py-24">
+      <div className="py-14 md:py-16">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
             Introduction
@@ -243,7 +243,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* Philosophy */}
-      <div className="py-20 border-t border-border/30">
+      <div className="py-14 border-t border-border/30">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
             Philosophy
@@ -259,7 +259,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* The Collection — flavour names only */}
-      <div className="py-20 border-t border-border/30">
+      <div className="py-14 border-t border-border/30">
         <div className="mx-auto max-w-5xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
             The Collection
@@ -281,7 +281,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* Formats */}
-      <div className="py-20 border-t border-border/30">
+      <div className="py-14 border-t border-border/30">
         <div className="mx-auto max-w-5xl px-6 lg:px-10">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-10">
             Available Formats
@@ -300,7 +300,7 @@ function CollectionSection({ section }: { section: Section }) {
       </div>
 
       {/* Closing */}
-      <div className="py-24 md:py-28 border-t border-border/30 text-center">
+      <div className="py-16 md:py-20 border-t border-border/30 text-center">
         <p className="font-serif text-4xl md:text-6xl text-balance">
           {section.closing}
         </p>
