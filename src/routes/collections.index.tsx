@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Check } from "lucide-react";
 import { collections, formats, type Collection, type Flavour } from "@/data/collections";
 
 export const Route = createFileRoute("/collections/")({
