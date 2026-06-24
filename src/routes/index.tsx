@@ -113,9 +113,9 @@ function Home() {
           <div className="mt-10 grid md:grid-cols-3 gap-5">
             {collections.map((c) => (
               <Link
-                key={c.hash}
-                to="/collections"
-                hash={c.hash}
+                key={c.slug}
+                to="/collections/$slug"
+                params={{ slug: c.slug }}
                 className="card-luxe collection-card p-7 text-center group"
               >
                 <div className="aspect-square mb-4 flex items-center justify-center">
