@@ -4,48 +4,48 @@ import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 
 const STORAGE_KEY = "rasa_age_verified";
 
+const readVerified = () => {
+  if (typeof window === "undefined") return false;
+  try {
+    return (
+      window.localStorage.getItem(STORAGE_KEY) === "1" ||
+      window.sessionStorage.getItem(STORAGE_KEY) === "1"
+    );
+  } catch {
+    return false;
+  }
+};
+
 export function AgeGate() {
-  // Read sessionStorage synchronously on the very first render so the gate
-  // paints BEFORE the homepage instead of flashing in afterwards.
-  // On the server we default to "not verified" — gate is rendered in SSR HTML
-  // and overlays the page on first paint.
-  // Default to NOT verified so the gate is part of the very first paint
-  // (both during SSR and client hydration). The effect below then hides it
-  // for users who already verified in this session, avoiding the homepage
-  // flash that happens when the initial state hides the gate.
-  const [verified, setVerified] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    return window.sessionStorage.getItem(STORAGE_KEY) === "1";
-  });
-  const [hydrated, setHydrated] = useState(false);
+  // Client-only: avoid SSR/client hydration mismatch by waiting one tick.
+  const [mounted, setMounted] = useState(false);
+  const [verified, setVerified] = useState<boolean>(false);
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    setHydrated(true);
-    const stored = window.sessionStorage.getItem(STORAGE_KEY);
-    setVerified(stored === "1");
+    setMounted(true);
+    setVerified(readVerified());
   }, [pathname]);
 
-  // Avoid SSR flash: don't render the overlay until client confirms unverified
-  if (!hydrated && typeof window === "undefined") return null;
-
-  // Never show gate on the restricted page itself
+  if (!mounted) return null;
   if (verified || pathname === "/age-restricted") return null;
 
   const enter = () => {
-    window.sessionStorage.setItem(STORAGE_KEY, "1");
+    try {
+      window.localStorage.setItem(STORAGE_KEY, "1");
+    } catch {
+      /* ignore */
+    }
     setVerified(true);
   };
 
   const decline = () => {
-    // Do NOT set verified=true — gate must reappear if user returns home.
     router.navigate({ to: "/age-restricted" });
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 animate-fade-in px-6">
+    <div className="fixed inset-0 z-[120] flex items-center justify-center bg-ink/95 animate-fade-in px-6">
       <div className="absolute inset-0 smoke-bg opacity-70" />
       <div
         className="absolute -inset-[20%] opacity-50 animate-smoke"
