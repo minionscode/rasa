@@ -25,8 +25,8 @@ export function SiteFooter() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li><Link to="/house-of-rasa" className="hover:text-gold transition-colors">The House of RASA</Link></li>
               <li><Link to="/collections" className="hover:text-gold transition-colors">Collections</Link></li>
-              <li><Link to="/hookah" className="hover:text-gold transition-colors">Hookah</Link></li>
-              <li><Link to="/accessories" className="hover:text-gold transition-colors">Accessories</Link></li>
+              <li><Link to="/coming-soon" search={{ category: "hookah" }} className="hover:text-gold transition-colors">Hookah</Link></li>
+              <li><Link to="/coming-soon" search={{ category: "accessories" }} className="hover:text-gold transition-colors">Accessories</Link></li>
               <li><Link to="/partners" className="hover:text-gold transition-colors">Partners</Link></li>
               <li><Link to="/contact" className="hover:text-gold transition-colors">Contact</Link></li>
             </ul>
