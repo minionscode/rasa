@@ -102,8 +102,8 @@ export function SiteHeader() {
       {/* Mobile drawer */}
       {open && (
         <div className="fixed inset-0 z-50 bg-ink/98 backdrop-blur-xl animate-fade-in lg:hidden overflow-y-auto">
-          <div className="flex items-center justify-between h-24 px-6 border-b border-border/40">
-            <img src={rasaLogo.url} alt="RASA" className="h-11 w-auto" />
+          <div className="flex items-center justify-between h-20 px-6 border-b border-border/40">
+            <img src={rasaLogo.url} alt="RASA" className="h-9 w-auto crisp-img" />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2">
               <X className="h-5 w-5" />
             </button>
