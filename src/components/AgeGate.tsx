@@ -5,7 +5,14 @@ import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 const STORAGE_KEY = "rasa_age_verified";
 
 export function AgeGate() {
-  const [verified, setVerified] = useState(true);
+  // Read sessionStorage synchronously on the very first render so the gate
+  // paints BEFORE the homepage instead of flashing in afterwards.
+  // On the server we default to "not verified" — gate is rendered in SSR HTML
+  // and overlays the page on first paint.
+  const [verified, setVerified] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.sessionStorage.getItem(STORAGE_KEY) === "1";
+  });
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
