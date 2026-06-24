@@ -2,6 +2,9 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
 import rasaLogo from "@/assets/rasa-logo.png.asset.json";
+import majlisLogo from "@/assets/majlis-logo.png.asset.json";
+import makhmalLogo from "@/assets/makhmal-logo.png.asset.json";
+import tarkibLogo from "@/assets/tarkib-logo.png.asset.json";
 
 type DropItem = {
   label: string;
@@ -10,24 +13,6 @@ type DropItem = {
   hash?: string;
   search?: Record<string, string>;
 };
-
-const collectionsDrop: DropItem[] = [
-  { label: "Explore All", sub: "Discover the complete House of RASA", to: "/collections" },
-  { label: "Majlis", sub: "The Expression of Heritage", to: "/collections", hash: "majlis" },
-  { label: "Makhmal", sub: "The Expression of Refinement", to: "/collections", hash: "makhmal" },
-  { label: "Tarkib", sub: "The Expression of Innovation", to: "/collections", hash: "tarkib" },
-];
-
-const shopDrop: DropItem[] = [
-  { label: "Hookah", sub: "Sculptural pieces, in preparation", to: "/coming-soon", search: { category: "hookah" } },
-  { label: "Accessories", sub: "Refined companions, in preparation", to: "/coming-soon", search: { category: "accessories" } },
-];
-
-const partnersDrop: DropItem[] = [
-  { label: "Distributor Partnerships", to: "/partners", hash: "distributor" },
-  { label: "Lounge Partnerships", to: "/partners", hash: "lounge" },
-  { label: "Retail Partnerships", to: "/partners", hash: "retail" },
-];
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -50,24 +35,23 @@ export function SiteHeader() {
   }, [pathname]);
 
   const navLink =
-    "text-[0.7rem] tracking-luxe uppercase whitespace-nowrap text-foreground/70 hover:text-gold transition-colors duration-200";
-
+    "text-[0.7rem] tracking-luxe uppercase whitespace-nowrap text-foreground/85 hover:text-gold transition-colors duration-200";
 
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-40 transition-all duration-700 ${
+        className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ${
           scrolled
-            ? "bg-ink/75 backdrop-blur-xl border-b border-border/60"
+            ? "bg-ink/80 backdrop-blur-xl border-b border-border/60"
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 h-20 flex items-center justify-between">
-          <Link to="/" aria-label="RASA — Home" className="flex items-center">
-            <img src={rasaLogo.url} alt="RASA" className="h-10 md:h-12 w-auto" />
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 h-24 flex items-center justify-between gap-6">
+          <Link to="/" aria-label="RASA — Home" className="flex items-center shrink-0">
+            <img src={rasaLogo.url} alt="RASA" className="h-12 md:h-14 w-auto" />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
+          <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
             <Link to="/" className={navLink} activeOptions={{ exact: true }} activeProps={{ className: "text-gold" }}>
               Home
             </Link>
@@ -75,31 +59,24 @@ export function SiteHeader() {
               House of RASA
             </Link>
 
-            <DropdownNav
-              label="Collections"
-              items={collectionsDrop}
+            <CollectionsMega
               isOpen={openDrop === "collections"}
               onOpen={() => setOpenDrop("collections")}
               onClose={() => setOpenDrop(null)}
             />
 
-            <DropdownNav
-              label="Shop"
-              items={shopDrop}
-              isOpen={openDrop === "shop"}
-              onOpen={() => setOpenDrop("shop")}
+            <HookahMega
+              isOpen={openDrop === "hookah"}
+              onOpen={() => setOpenDrop("hookah")}
               onClose={() => setOpenDrop(null)}
             />
 
-
-            <DropdownNav
-              label="Partners"
-              items={partnersDrop}
-              isOpen={openDrop === "partners"}
-              onOpen={() => setOpenDrop("partners")}
-              onClose={() => setOpenDrop(null)}
-            />
-
+            <Link to="/accessories" className={navLink} activeProps={{ className: "text-gold" }}>
+              Accessories
+            </Link>
+            <Link to="/partners" className={navLink} activeProps={{ className: "text-gold" }}>
+              Partners
+            </Link>
             <Link to="/contact" className={navLink} activeProps={{ className: "text-gold" }}>
               Contact
             </Link>
@@ -107,14 +84,14 @@ export function SiteHeader() {
             <button
               aria-label="Search"
               onClick={() => setSearch(true)}
-              className="text-foreground/70 hover:text-gold transition-colors"
+              className="text-foreground/85 hover:text-gold transition-colors"
             >
               <Search className="h-4 w-4" />
             </button>
           </nav>
 
           <div className="lg:hidden flex items-center gap-4">
-            <button aria-label="Search" onClick={() => setSearch(true)} className="text-foreground/80">
+            <button aria-label="Search" onClick={() => setSearch(true)} className="text-foreground/85">
               <Search className="h-4 w-4" />
             </button>
             <button onClick={() => setOpen(true)} className="p-1 text-foreground" aria-label="Open menu">
@@ -127,26 +104,25 @@ export function SiteHeader() {
       {/* Mobile drawer */}
       {open && (
         <div className="fixed inset-0 z-50 bg-ink/98 backdrop-blur-xl animate-fade-in lg:hidden overflow-y-auto">
-          <div className="flex items-center justify-between h-20 px-6 border-b border-border/40">
-            <img src={rasaLogo.url} alt="RASA" className="h-9 w-auto" />
+          <div className="flex items-center justify-between h-24 px-6 border-b border-border/40">
+            <img src={rasaLogo.url} alt="RASA" className="h-11 w-auto" />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2">
               <X className="h-5 w-5" />
             </button>
           </div>
-          <nav className="flex flex-col px-8 py-10 gap-6">
+          <nav className="flex flex-col px-8 py-10 gap-5">
             {[
               { to: "/", label: "Home" },
               { to: "/house-of-rasa", label: "House of RASA" },
               { to: "/collections", label: "Collections" },
-              { to: "/coming-soon", label: "Hookah", search: { category: "hookah" } },
-              { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
+              { to: "/hookah", label: "Hookah" },
+              { to: "/accessories", label: "Accessories" },
               { to: "/partners", label: "Partners" },
               { to: "/contact", label: "Contact" },
             ].map((item) => (
               <Link
-                key={`${item.to}-${item.label}`}
+                key={item.to + item.label}
                 to={item.to}
-                search={item.search as never}
                 className="font-serif text-2xl tracking-wide text-foreground hover:text-gold transition-colors"
                 activeProps={{ className: "text-gold" }}
               >
@@ -157,61 +133,143 @@ export function SiteHeader() {
         </div>
       )}
 
-      {/* Search overlay */}
       {search && <SearchOverlay onClose={() => setSearch(false)} />}
     </>
   );
 }
 
-function DropdownNav({
+function DropButton({
   label,
-  items,
   isOpen,
   onOpen,
   onClose,
+  children,
 }: {
   label: string;
-  items: DropItem[];
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
+  children: React.ReactNode;
 }) {
   return (
     <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
-      <button className="text-[0.7rem] tracking-luxe uppercase whitespace-nowrap text-foreground/70 hover:text-gold transition-colors duration-200 inline-flex items-center gap-1.5">
+      <button className="text-[0.7rem] tracking-luxe uppercase whitespace-nowrap text-foreground/85 hover:text-gold transition-colors duration-200 inline-flex items-center gap-1.5">
         {label}
-        <ChevronDown className="h-3 w-3 opacity-60" />
+        <ChevronDown className={`h-3 w-3 opacity-60 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
       </button>
-      {isOpen && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 min-w-[280px]">
-          <div className="bg-ink/95 backdrop-blur-xl border border-border/60 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] py-3">
-
-            {items.map((it) => (
-              <Link
-                key={`${it.label}-${it.hash ?? ""}`}
-                to={it.to}
-                hash={it.hash}
-                search={it.search as never}
-                onClick={onClose}
-                className="block px-6 py-3 hover:bg-surface/60 transition-colors group"
-              >
-                <p className="font-serif text-base text-foreground group-hover:text-gold transition-colors">
-                  {it.label}
-                </p>
-                {it.sub && (
-                  <p className="text-[0.65rem] tracking-luxe uppercase text-muted-foreground mt-1">
-                    {it.sub}
-                  </p>
-                )}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
+      {isOpen && <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4">{children}</div>}
     </div>
   );
 }
 
+function CollectionsMega({
+  isOpen,
+  onOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}) {
+  const items = [
+    { name: "Majlis", tag: "The Expression of Gathering", hash: "majlis", logo: majlisLogo.url },
+    { name: "Makhmal", tag: "The Expression of Refinement", hash: "makhmal", logo: makhmalLogo.url },
+    { name: "Tarkib", tag: "The Expression of Innovation", hash: "tarkib", logo: tarkibLogo.url },
+  ];
+  return (
+    <DropButton label="Collections" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+      <div className="bg-ink/95 backdrop-blur-xl border border-gold/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-6 w-[560px]">
+        <Link
+          to="/collections"
+          onClick={onClose}
+          className="block mb-4 pb-4 border-b border-border/40 hover:text-gold transition-colors"
+        >
+          <p className="text-[0.6rem] tracking-luxe uppercase text-gold/80">Explore</p>
+          <p className="font-serif text-lg mt-1">View All Collections</p>
+        </Link>
+        <div className="grid grid-cols-3 gap-3">
+          {items.map((c) => (
+            <Link
+              key={c.hash}
+              to="/collections"
+              hash={c.hash}
+              onClick={onClose}
+              className="group block p-3 border border-transparent hover:border-gold/30 hover:bg-surface/40 transition-all duration-300"
+            >
+              <div className="aspect-square mb-3 flex items-center justify-center">
+                <img src={c.logo} alt="" className="max-h-20 w-auto opacity-90 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <p className="font-serif text-base text-foreground group-hover:text-gold transition-colors text-center">
+                {c.name}
+              </p>
+              <p className="text-[0.6rem] tracking-luxe uppercase text-muted-foreground mt-1 text-center leading-snug">
+                {c.tag}
+              </p>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </DropButton>
+  );
+}
+
+function HookahMega({
+  isOpen,
+  onOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}) {
+  const series = [
+    {
+      title: "Classic Series",
+      sub: "The Essential Expression",
+      hash: "classic-collection",
+      items: ["Portable", "Medium", "Large"],
+    },
+    {
+      title: "Luxury Series",
+      sub: "The Flagship Expression",
+      hash: "luxury-collection",
+      items: ["Portable", "Medium", "Large"],
+    },
+  ];
+  return (
+    <DropButton label="Hookah" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+      <div className="bg-ink/95 backdrop-blur-xl border border-gold/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-6 w-[480px] grid grid-cols-2 gap-6">
+        {series.map((s) => (
+          <div key={s.hash}>
+            <Link
+              to="/hookah"
+              hash={s.hash}
+              onClick={onClose}
+              className="block pb-3 mb-3 border-b border-border/40"
+            >
+              <p className="text-[0.6rem] tracking-luxe uppercase text-gold/80">{s.sub}</p>
+              <p className="font-serif text-lg mt-1 hover:text-gold transition-colors">{s.title}</p>
+            </Link>
+            <ul className="space-y-2">
+              {s.items.map((item) => (
+                <li key={item}>
+                  <Link
+                    to="/hookah"
+                    hash={s.hash}
+                    onClick={onClose}
+                    className="block text-sm text-foreground/75 hover:text-gold transition-colors"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </DropButton>
+  );
+}
 
 function SearchOverlay({ onClose }: { onClose: () => void }) {
   const [q, setQ] = useState("");
@@ -246,3 +304,6 @@ function SearchOverlay({ onClose }: { onClose: () => void }) {
     </div>
   );
 }
+
+// keep DropItem export for type re-use elsewhere
+export type { DropItem };

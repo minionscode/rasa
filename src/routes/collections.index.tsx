@@ -1,6 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useRouterState } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import majlisLogo from "@/assets/majlis-logo.png.asset.json";
 import makhmalLogo from "@/assets/makhmal-logo.png.asset.json";
 import tarkibLogo from "@/assets/tarkib-logo.png.asset.json";
@@ -34,106 +35,104 @@ export const Route = createFileRoute("/collections/")({
 type Section = {
   slug: "majlis" | "makhmal" | "tarkib";
   name: string;
-  tag: string;
-  intro: string[];
-  philosophy: string[];
+  label: string;
+  expression: string;
+  tagline: string;
+  intro: string;
+  signature: string[];
+  philosophy: string;
+  featured: { name: string; notes: string }[];
   flavours: string[];
   closing: string;
-  color: string;
-  numeral: string;
+  bgVar: string;
+  accentVar: string;
+  pattern: string;
 };
 
 const sections: Section[] = [
   {
     slug: "majlis",
     name: "Majlis",
-    tag: "The Expression of Heritage",
-    numeral: "I.",
-    color: "var(--majlis)",
-    intro: [
-      "Majlis celebrates the enduring side of character.",
-      "Inspired by tradition but not confined by it, it is crafted for those who appreciate depth, confidence, and authenticity.",
-      "Rich in presence and timeless in spirit, Majlis represents a refined expression of the RASA experience.",
-    ],
-    philosophy: [
-      "Some things never need reinvention.",
-      "Not because they resist change, but because they possess a character that remains relevant through time.",
-      "Majlis is a tribute to that character.",
+    label: "Collection I",
+    expression: "The Expression of Gathering",
+    tagline: "Tradition Lives On.",
+    intro:
+      "Majlis is a tribute to gathering. Rooted in heritage, warmed by hospitality, it carries the timeless character of an evening spent in good company.",
+    signature: ["Heritage Profile", "Warm & Aromatic", "Crafted for Conviviality"],
+    philosophy:
+      "Some rituals never need reinvention. Majlis preserves them with the discipline of a house that respects its origins.",
+    featured: [
+      { name: "Two Apples", notes: "Anise · Spiced Apple · Char" },
+      { name: "Rose", notes: "Damask Rose · Honey · Soft Smoke" },
+      { name: "Cardamom", notes: "Green Cardamom · Cream · Wood" },
+      { name: "Lemon Mint", notes: "Citrus Zest · Spearmint · Cool" },
+      { name: "Grape", notes: "Black Grape · Ice · Lush" },
+      { name: "Mixed Fruit", notes: "Stone Fruit · Berry · Bright" },
     ],
     flavours: [
-      "Two Apples",
-      "Mint",
-      "Grape",
-      "Rose",
-      "Lemon Mint",
-      "Gum",
-      "Cardamom",
-      "Mixed Fruit",
-      "Watermelon Mint",
-      "Peach",
+      "Two Apples", "Mint", "Grape", "Rose", "Lemon Mint",
+      "Gum", "Cardamom", "Mixed Fruit", "Watermelon Mint", "Peach",
     ],
-    closing: "Character Endures.",
+    closing: "Tradition Lives On.",
+    bgVar: "var(--majlis)",
+    accentVar: "var(--majlis-accent)",
+    pattern: "pattern-arabesque",
   },
   {
     slug: "makhmal",
     name: "Makhmal",
-    tag: "The Expression of Refinement",
-    numeral: "II.",
-    color: "var(--makhmal)",
-    intro: [
-      "Makhmal celebrates the quieter side of luxury.",
-      "Elegant without excess and refined without effort, it is crafted for those who appreciate balance, comfort, and sophistication.",
-      "Smooth in character and composed in presence, Makhmal represents a softer expression of the RASA experience.",
-    ],
-    philosophy: [
-      "Luxury is often mistaken for attention.",
-      "True luxury requires none.",
-      "It is found in balance. In comfort. In the confidence that comes from simplicity executed well.",
-      "Makhmal is a tribute to that philosophy.",
+    label: "Collection II",
+    expression: "The Expression of Refinement",
+    tagline: "Refinement Endures.",
+    intro:
+      "Makhmal is velvet made vapour. Quiet, composed, and effortlessly elegant — it is luxury without volume, refinement without effort.",
+    signature: ["Velvet Profile", "Soft & Composed", "Crafted for Stillness"],
+    philosophy:
+      "True luxury requires no attention. It is found in balance, in comfort, in the confidence of simplicity executed well.",
+    featured: [
+      { name: "Velvet Peach", notes: "Ripe Peach · Cream · Silk" },
+      { name: "Silk Mango", notes: "Alphonso · Saffron · Smooth" },
+      { name: "Lychee Bloom", notes: "Lychee · Rose · Linen" },
+      { name: "Vanilla Mist", notes: "Bourbon Vanilla · Cloud · Warm" },
+      { name: "Coconut Cream", notes: "Toasted Coconut · Cream · Calm" },
+      { name: "Honey Melon", notes: "Honeydew · Honey · Soft" },
     ],
     flavours: [
-      "Velvet Peach",
-      "Silk Mango",
-      "Soft Berry",
-      "Lychee Bloom",
-      "Pear Whisper",
-      "Vanilla Mist",
-      "Coconut Cream",
-      "Honey Melon",
-      "Passion Fruit",
-      "Strawberry Cloud",
+      "Velvet Peach", "Silk Mango", "Soft Berry", "Lychee Bloom", "Pear Whisper",
+      "Vanilla Mist", "Coconut Cream", "Honey Melon", "Passion Fruit", "Strawberry Cloud",
     ],
     closing: "Refinement Endures.",
+    bgVar: "var(--makhmal)",
+    accentVar: "var(--makhmal-accent)",
+    pattern: "pattern-velvet",
   },
   {
     slug: "tarkib",
     name: "Tarkib",
-    tag: "The Expression of Innovation",
-    numeral: "III.",
-    color: "var(--tarkib)",
-    intro: [
-      "Tarkib celebrates the spirit of exploration.",
-      "Driven by curiosity and shaped by experimentation, it is crafted for those who seek new possibilities and unexpected experiences.",
-      "Bold in character and progressive in outlook, Tarkib represents the most forward-thinking expression of the House of RASA.",
-    ],
-    philosophy: [
-      "Innovation begins with curiosity.",
-      "The willingness to question what exists. To challenge expectations. To explore new possibilities.",
-      "Tarkib is a tribute to that mindset.",
+    label: "Collection III",
+    expression: "The Expression of Innovation",
+    tagline: "Discovery Never Ends.",
+    intro:
+      "Tarkib is curiosity bottled. Bold, modern, and progressive — it is the House of RASA looking forward, composing flavours the way a bartender composes a cocktail.",
+    signature: ["Modern Profile", "Bold & Layered", "Crafted for Discovery"],
+    philosophy:
+      "Innovation begins with the willingness to question what exists. Tarkib is the proof that tradition and progress are not opposites.",
+    featured: [
+      { name: "Smoked Old Fashioned", notes: "Bourbon · Orange · Oak" },
+      { name: "Espresso Martini", notes: "Espresso · Cocoa · Cream" },
+      { name: "Yuzu Spritz", notes: "Yuzu · Soda · Bright" },
+      { name: "Negroni Noir", notes: "Bitter Orange · Vermouth · Spice" },
+      { name: "Saffron Tonic", notes: "Saffron · Tonic · Floral" },
+      { name: "Pineapple Mezcal", notes: "Pineapple · Smoke · Lime" },
     ],
     flavours: [
-      "Smoked Old Fashioned",
-      "Negroni Noir",
-      "Espresso Martini",
-      "Yuzu Spritz",
-      "Mezcal Sour",
-      "Hibiscus Gin",
-      "Cardamom Highball",
-      "Saffron Tonic",
-      "Black Cherry Bourbon",
-      "Pineapple Mezcal",
+      "Smoked Old Fashioned", "Negroni Noir", "Espresso Martini", "Yuzu Spritz", "Mezcal Sour",
+      "Hibiscus Gin", "Cardamom Highball", "Saffron Tonic", "Black Cherry Bourbon", "Pineapple Mezcal",
     ],
     closing: "Discovery Never Ends.",
+    bgVar: "var(--tarkib)",
+    accentVar: "var(--tarkib-accent)",
+    pattern: "pattern-geometric",
   },
 ];
 
@@ -145,16 +144,13 @@ function Collections() {
   useEffect(() => {
     if (!hash) return;
     const el = document.getElementById(hash);
-    if (el) {
-      // small delay to let layout settle
-      setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
-    }
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
   }, [hash]);
 
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-ink pt-28 pb-16">
+      <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-ink pt-32 pb-14">
         <div
           className="absolute inset-0"
           style={{
@@ -163,16 +159,16 @@ function Collections() {
           }}
         />
         <div className="relative z-10 text-center px-6 max-w-3xl animate-fade-up">
-          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold mb-7">
+          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold mb-6">
             The Collections
           </p>
           <h1 className="font-serif text-5xl md:text-7xl text-balance leading-[1.05]">
             Three Expressions. One House.
           </h1>
-          <div className="luxe-divider max-w-[6rem] mx-auto my-8" />
-          <p className="text-foreground/70 leading-relaxed max-w-2xl mx-auto">
-            Within the House of RASA exist three distinct expressions. Each crafted
-            to offer a unique interpretation of character, refinement, and experience.
+          <div className="luxe-divider max-w-[6rem] mx-auto my-7" />
+          <p className="text-foreground/85 leading-relaxed max-w-2xl mx-auto">
+            Within the House of RASA exist three distinct expressions — each a luxury world of its own,
+            crafted for domestic and international partners who recognise the difference.
           </p>
         </div>
       </section>
@@ -185,10 +181,7 @@ function Collections() {
 }
 
 function CollectionSection({ section }: { section: Section }) {
-  // Tint surface used for flavour tiles & dividers — slightly darker than section bg
-  const tile = `color-mix(in oklab, ${section.color} 35%, var(--ink))`;
-  const tileHover = `color-mix(in oklab, ${section.color} 55%, var(--ink))`;
-  const sectionBg = `linear-gradient(180deg, ${section.color} 0%, color-mix(in oklab, ${section.color} 40%, var(--ink)) 55%, var(--ink) 100%)`;
+  const sectionBg = `linear-gradient(180deg, ${section.bgVar} 0%, color-mix(in oklab, ${section.bgVar} 55%, var(--ink)) 60%, var(--ink) 100%)`;
 
   return (
     <section
@@ -196,149 +189,257 @@ function CollectionSection({ section }: { section: Section }) {
       className="relative scroll-mt-24 border-t border-border/10"
       style={{ background: sectionBg }}
     >
-      {/* Soft vignette for depth (cheap, no animation) */}
+      {/* Identity pattern overlay */}
+      <div className={`pointer-events-none absolute inset-0 opacity-40 ${section.pattern}`} />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06), transparent 60%)",
+            "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.07), transparent 60%)",
         }}
       />
 
-      {/* Hero band */}
-      <div className="relative">
-        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 pt-20 pb-14 md:pt-24 md:pb-16 w-full grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
-          <div>
-            <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/90">
-              {section.numeral}
-            </p>
-            <h2 className="mt-5 font-serif text-7xl md:text-[8.5rem] leading-[0.95] tracking-tight">
-              {section.name}
-            </h2>
-            <p className="mt-5 font-serif italic text-xl md:text-2xl text-gold-soft">
-              {section.tag}
-            </p>
-          </div>
-          <div className="hidden md:block relative w-64 lg:w-[22rem] aspect-square">
-            {/* Color halo — ramps the section bg up to the medallion's interior */}
-            <div
-              className="absolute inset-[-25%] pointer-events-none"
-              style={{
-                background: `radial-gradient(circle at center, ${section.color} 0%, color-mix(in oklab, ${section.color} 70%, transparent) 35%, transparent 70%)`,
-                filter: "blur(6px)",
-              }}
-            />
-            {/* Medallion with soft radial mask so its plate fades into the halo */}
-            <div
-              className="relative w-full h-full"
-              style={{
-                WebkitMaskImage:
-                  "radial-gradient(circle at center, black 38%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.35) 65%, transparent 82%)",
-                maskImage:
-                  "radial-gradient(circle at center, black 38%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.35) 65%, transparent 82%)",
-              }}
-            >
-              <img
-                src={collectionLogos[section.slug]}
-                alt={`${section.name} emblem`}
-                className="w-full h-full object-cover"
-                loading="eager"
-                decoding="async"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Introduction + Philosophy — two columns to compress vertical space */}
-      <div className="relative z-10 border-t border-foreground/5">
-        <div className="mx-auto max-w-6xl px-6 lg:px-10 py-16 md:py-20 grid md:grid-cols-2 gap-x-16 gap-y-12">
-          <div>
-            <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-6">
-              Introduction
-            </p>
-            <div className="space-y-5 text-[15px] md:text-base leading-[1.85] text-foreground/75 font-light">
-              {section.intro.map((p, i) => (
-                <p key={i} className={i === 0 ? "text-foreground/95" : ""}>
-                  {p}
-                </p>
-              ))}
-            </div>
-          </div>
-          <div>
-            <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-6">
-              Philosophy
-            </p>
-            <div className="space-y-5 text-[15px] md:text-base leading-[1.85] text-foreground/75 font-light">
-              {section.philosophy.map((p, i) => (
-                <p
-                  key={i}
-                  className={i === 0 ? "font-serif italic text-xl md:text-2xl text-foreground/95 leading-snug" : ""}
-                >
-                  {p}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* The Collection — flavour names only */}
-      <div className="relative z-10 border-t border-foreground/5">
-        <div className="mx-auto max-w-5xl px-6 lg:px-10 py-16 md:py-20">
-          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-8">
-            The Collection
-          </p>
-          <div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-px"
-            style={{ background: "color-mix(in oklab, var(--gold) 12%, transparent)" }}
+      {/* HERO — restructured hierarchy: LABEL · NAME · EXPRESSION · TAGLINE */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 pt-20 md:pt-24 pb-10 grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
+        <div>
+          <p
+            className="text-[0.65rem] tracking-[0.45em] uppercase mb-5"
+            style={{ color: section.accentVar }}
           >
-            {section.flavours.map((f, i) => (
+            {section.label}
+          </p>
+          <h2 className="font-serif text-7xl md:text-[8.5rem] leading-[0.95] tracking-tight">
+            {section.name}
+          </h2>
+          <p
+            className="mt-5 font-serif text-2xl md:text-3xl"
+            style={{ color: section.accentVar }}
+          >
+            {section.expression}
+          </p>
+          <p className="mt-3 font-serif italic text-lg md:text-xl text-foreground/80">
+            {section.tagline}
+          </p>
+        </div>
+
+        <div className="hidden md:block relative w-56 lg:w-80 aspect-square">
+          <div
+            className="absolute inset-[-25%] pointer-events-none"
+            style={{
+              background: `radial-gradient(circle at center, ${section.bgVar} 0%, color-mix(in oklab, ${section.bgVar} 70%, transparent) 35%, transparent 70%)`,
+              filter: "blur(6px)",
+            }}
+          />
+          <div
+            className="relative w-full h-full"
+            style={{
+              WebkitMaskImage:
+                "radial-gradient(circle at center, black 38%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.35) 65%, transparent 82%)",
+              maskImage:
+                "radial-gradient(circle at center, black 38%, rgba(0,0,0,0.85) 50%, rgba(0,0,0,0.35) 65%, transparent 82%)",
+            }}
+          >
+            <img
+              src={collectionLogos[section.slug]}
+              alt={`${section.name} emblem`}
+              className="w-full h-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* INTRO + SIGNATURE — immediately under hero, no empty band */}
+      <div className="relative z-10">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10 pb-12 grid md:grid-cols-[1.4fr_1fr] gap-x-14 gap-y-10 items-start">
+          <p className="font-serif text-2xl md:text-[1.65rem] leading-snug text-foreground/95 text-balance">
+            {section.intro}
+          </p>
+          <div className="flex flex-col gap-3">
+            <p
+              className="text-[0.6rem] tracking-[0.4em] uppercase mb-1"
+              style={{ color: section.accentVar }}
+            >
+              Signature
+            </p>
+            {section.signature.map((s) => (
               <div
-                key={f}
-                className="px-7 py-5 flex items-baseline gap-5 transition-colors duration-300"
-                style={{ background: tile }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = tileHover)}
-                onMouseLeave={(e) => (e.currentTarget.style.background = tile)}
+                key={s}
+                className="flex items-center gap-3 text-sm text-foreground/85"
               >
-                <span className="text-[0.6rem] tracking-[0.4em] text-gold/70 w-8">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="font-serif text-xl md:text-2xl">{f}</span>
+                <span
+                  className="h-px w-6"
+                  style={{ background: section.accentVar, opacity: 0.6 }}
+                />
+                {s}
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Formats + Closing combined in one band */}
-      <div className="relative z-10 border-t border-foreground/5">
-        <div className="mx-auto max-w-5xl px-6 lg:px-10 py-16 md:py-20">
-          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold/80 mb-8">
-            Available Formats
-          </p>
+      {/* FEATURED FLAVOURS — luxury product cards */}
+      <div className="relative z-10 border-t border-foreground/10">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10 py-14 md:py-16">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
+            <div>
+              <p
+                className="text-[0.65rem] tracking-[0.4em] uppercase"
+                style={{ color: section.accentVar }}
+              >
+                Featured Flavours
+              </p>
+              <h3 className="mt-2 font-serif text-3xl md:text-4xl">
+                Selected from the {section.name} cellar
+              </h3>
+            </div>
+            <Link
+              to="/contact"
+              className="luxe-underline text-[0.7rem] tracking-luxe uppercase"
+              style={{ color: section.accentVar }}
+            >
+              Request the full catalogue
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {section.featured.map((p, i) => (
+              <article key={p.name} className="card-luxe p-6 flex flex-col">
+                <p
+                  className="text-[0.6rem] tracking-[0.4em] uppercase"
+                  style={{ color: section.accentVar }}
+                >
+                  No. {String(i + 1).padStart(2, "0")}
+                </p>
+                <h4 className="mt-3 font-serif text-2xl md:text-[1.65rem] leading-tight">
+                  {p.name}
+                </h4>
+                <p className="mt-2 text-sm text-foreground/70 leading-relaxed">
+                  {p.notes}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-1.5">
+                  {formats.slice(0, 3).map((f) => (
+                    <span
+                      key={f}
+                      className="text-[0.6rem] tracking-luxe uppercase px-2 py-1 border border-foreground/15 text-foreground/65"
+                    >
+                      {f}
+                    </span>
+                  ))}
+                  <span className="text-[0.6rem] tracking-luxe uppercase px-2 py-1 text-foreground/45">
+                    +2
+                  </span>
+                </div>
+                <Link
+                  to="/contact"
+                  className="mt-6 inline-flex items-center justify-between text-[0.7rem] tracking-luxe uppercase hover:text-gold transition-colors group"
+                  style={{ color: section.accentVar }}
+                >
+                  Request Information
+                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* PHILOSOPHY + FULL CATALOGUE — two columns, tight */}
+      <div className="relative z-10 border-t border-foreground/10">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10 py-14 md:py-16 grid md:grid-cols-2 gap-x-14 gap-y-10">
+          <div>
+            <p
+              className="text-[0.65rem] tracking-[0.4em] uppercase mb-5"
+              style={{ color: section.accentVar }}
+            >
+              Philosophy
+            </p>
+            <p className="font-serif italic text-xl md:text-2xl leading-snug text-foreground/95 text-balance">
+              {section.philosophy}
+            </p>
+          </div>
+          <div>
+            <p
+              className="text-[0.65rem] tracking-[0.4em] uppercase mb-5"
+              style={{ color: section.accentVar }}
+            >
+              The Complete Cellar
+            </p>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2 text-foreground/85">
+              {section.flavours.map((f, i) => (
+                <li key={f} className="flex items-baseline gap-3 text-sm">
+                  <span
+                    className="text-[0.55rem] tracking-[0.3em]"
+                    style={{ color: section.accentVar, opacity: 0.75 }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-serif text-base">{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* FORMATS + CTA */}
+      <div className="relative z-10 border-t border-foreground/10">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10 py-14 md:py-16">
+          <div className="grid md:grid-cols-[1fr_auto] items-end gap-8 mb-8">
+            <div>
+              <p
+                className="text-[0.65rem] tracking-[0.4em] uppercase"
+                style={{ color: section.accentVar }}
+              >
+                Available Formats
+              </p>
+              <h3 className="mt-2 font-serif text-3xl md:text-4xl">
+                Configure your order
+              </h3>
+            </div>
+            <p className="text-sm text-foreground/70 max-w-xs">
+              Retail through wholesale quantities, supplied to domestic and international partners.
+            </p>
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             {formats.map((f) => (
-              <span
+              <button
                 key={f}
-                className="px-4 py-3.5 border border-foreground/15 text-sm tracking-wide hover:border-gold/60 hover:text-gold transition-colors duration-300 text-center"
+                className="chip-luxe px-5 py-4 text-sm tracking-luxe uppercase text-center"
               >
                 {f}
-              </span>
+              </button>
             ))}
           </div>
 
-          <div className="mt-16 text-center">
-            <p className="font-serif text-4xl md:text-5xl text-balance">
-              {section.closing}
-            </p>
-            <p className="mt-4 font-serif italic text-xl text-gold-soft">
-              {section.name}.
-            </p>
+          <div className="mt-14 flex flex-col md:flex-row items-center justify-between gap-6 pt-10 border-t border-foreground/10">
+            <div>
+              <p className="font-serif text-3xl md:text-4xl">{section.closing}</p>
+              <p
+                className="mt-2 font-serif italic text-lg"
+                style={{ color: section.accentVar }}
+              >
+                {section.name}.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
+              >
+                Request Information <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <Link
+                to="/partners"
+                className="inline-flex items-center justify-center px-8 py-3.5 border border-foreground/30 text-[0.7rem] tracking-luxe uppercase hover:border-gold hover:text-gold transition-all duration-500"
+              >
+                Wholesale Inquiry
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
