@@ -82,17 +82,14 @@ export function SiteHeader() {
               onClose={() => setOpenDrop(null)}
             />
 
-            <MegaDropdown
-              label="Hookah"
-              groups={hookahGroups}
-              isOpen={openDrop === "hookah"}
-              onOpen={() => setOpenDrop("hookah")}
+            <DropdownNav
+              label="Shop"
+              items={shopDrop}
+              isOpen={openDrop === "shop"}
+              onOpen={() => setOpenDrop("shop")}
               onClose={() => setOpenDrop(null)}
             />
 
-            <Link to="/accessories" className={navLink} activeProps={{ className: "text-gold" }}>
-              Accessories
-            </Link>
 
             <DropdownNav
               label="Partners"
