@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "@tanstack/react-router";
-import { X, ArrowRight, Sparkles } from "lucide-react";
+import { X, ArrowRight, Mail } from "lucide-react";
 
 const SESSION_KEY = "rasa_lead_modal_shown";
 const VISIT_KEY = "rasa_visit_count";
@@ -112,22 +112,22 @@ export function LeadCaptureModal() {
         </button>
 
         <p className="text-[0.65rem] tracking-luxe uppercase text-gold inline-flex items-center gap-2">
-          <Sparkles className="h-3 w-3" /> Private Invitation
+          <Mail className="h-3 w-3" /> Stay Updated
         </p>
         <h2
           id="lead-title"
           className="mt-3 font-serif text-3xl md:text-4xl text-balance"
         >
-          Enter the House of RASA.
+          Stay Updated with RASA
         </h2>
         <p className="mt-4 text-sm text-foreground/80 leading-relaxed">
-          Receive exclusive access to collection launches, flavour releases,
-          partner opportunities, and private announcements.
+          Subscribe to receive product launches, collection releases, flavour
+          updates, partnership opportunities, and industry news.
         </p>
 
         {done ? (
           <p className="mt-8 font-serif italic text-lg text-gold-soft">
-            Welcome — your access is composed.
+            Thank you — you are now subscribed.
           </p>
         ) : (
           <form onSubmit={onSubmit} noValidate className="mt-8 space-y-5">
@@ -142,7 +142,7 @@ export function LeadCaptureModal() {
                   setEmail(e.target.value);
                   if (error) setError("");
                 }}
-                placeholder="you@house.com"
+                placeholder="Enter your email address"
                 className={`w-full bg-transparent border-b ${
                   error ? "border-destructive" : "border-border/70"
                 } py-3 text-foreground focus:border-gold outline-none transition-colors placeholder:text-muted-foreground/50`}
@@ -159,7 +159,7 @@ export function LeadCaptureModal() {
                 type="submit"
                 className="group inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-all duration-500 flex-1"
               >
-                Request Access
+                Subscribe
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
               </button>
               <button
