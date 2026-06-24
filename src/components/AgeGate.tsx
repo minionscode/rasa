@@ -13,15 +13,23 @@ export function AgeGate() {
   // (both during SSR and client hydration). The effect below then hides it
   // for users who already verified in this session, avoiding the homepage
   // flash that happens when the initial state hides the gate.
-  const [verified, setVerified] = useState<boolean>(false);
+  const [verified, setVerified] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.sessionStorage.getItem(STORAGE_KEY) === "1";
+  });
+  const [hydrated, setHydrated] = useState(false);
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    setHydrated(true);
     const stored = window.sessionStorage.getItem(STORAGE_KEY);
     setVerified(stored === "1");
   }, [pathname]);
+
+  // Avoid SSR flash: don't render the overlay until client confirms unverified
+  if (!hydrated && typeof window === "undefined") return null;
 
   // Never show gate on the restricted page itself
   if (verified || pathname === "/age-restricted") return null;

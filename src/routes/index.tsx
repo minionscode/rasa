@@ -151,12 +151,13 @@ function Hero() {
           className="text-center will-change-transform"
         >
           <AnimatedWordmark
-            size="h-[28vw] max-h-[26rem] min-h-[10rem]"
+            size="h-[18vw] max-h-[18rem] min-h-[7rem]"
             halo
             float
-            shimmer
+            shimmer={false}
             reveal={false}
           />
+
 
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
