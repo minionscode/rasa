@@ -181,8 +181,10 @@ function Collections() {
 }
 
 function CollectionSection({ section }: { section: Section }) {
+  const [selectedFormat, setSelectedFormat] = useState<string>("250g");
   const secondaryVar = `var(--${section.slug}-secondary)`;
-  const sectionBg = `radial-gradient(ellipse at 20% 0%, ${secondaryVar} 0%, transparent 55%), radial-gradient(ellipse at 80% 30%, color-mix(in oklab, ${section.accentVar} 35%, transparent) 0%, transparent 50%), linear-gradient(180deg, ${section.bgVar} 0%, color-mix(in oklab, ${section.bgVar} 70%, var(--ink)) 55%, var(--ink) 100%)`;
+  // Darker, richer atmosphere — collection color dominates, subtle copper ambient
+  const sectionBg = `radial-gradient(ellipse at 20% 10%, ${secondaryVar} 0%, transparent 45%), radial-gradient(ellipse at 85% 80%, color-mix(in oklab, ${section.accentVar} 10%, transparent) 0%, transparent 55%), linear-gradient(180deg, color-mix(in oklab, ${section.bgVar} 85%, var(--ink)) 0%, color-mix(in oklab, ${section.bgVar} 60%, var(--ink)) 50%, var(--ink) 100%)`;
 
   return (
     <section
@@ -190,15 +192,17 @@ function CollectionSection({ section }: { section: Section }) {
       className="relative scroll-mt-24 border-t border-border/10"
       style={{ background: sectionBg }}
     >
-      {/* Identity pattern overlay */}
-      <div className={`pointer-events-none absolute inset-0 opacity-40 ${section.pattern}`} />
+      {/* Identity pattern overlay — subtle */}
+      <div className={`pointer-events-none absolute inset-0 opacity-25 ${section.pattern}`} />
+      {/* Deep vignette for premium contrast */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.07), transparent 60%)",
+            "radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.55), transparent 65%), radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.35), transparent 60%)",
         }}
       />
+
 
       {/* HERO — restructured hierarchy: LABEL · NAME · EXPRESSION · TAGLINE */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 pt-20 md:pt-24 pb-10 grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">

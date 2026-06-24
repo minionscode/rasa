@@ -79,17 +79,17 @@
   --accent-foreground: oklch(0.12 0.004 60);
 
   /* Collection accents — three distinct luxury universes */
-  /* Majlis — Burgundy / Gathering & Hospitality */
-  --majlis: #5A1E2B;
-  --majlis-secondary: #7A2B3A;
+  /* Majlis — Rich Burgundy / Gathering & Hospitality */
+  --majlis: #5B1823;
+  --majlis-secondary: #742131;
   --majlis-accent: #D3A188;
   /* Makhmal — Deep Aubergine / Velvet Refinement */
-  --makhmal: #3B163D;
-  --makhmal-secondary: #532057;
+  --makhmal: #3A123F;
+  --makhmal-secondary: #4D1754;
   --makhmal-accent: #D3A188;
-  /* Tarkib — Midnight Blue / Innovation & Craft */
-  --tarkib: #0D1B3D;
-  --tarkib-secondary: #132A57;
+  /* Tarkib — Midnight Blue / Innovation & Precision */
+  --tarkib: #081A3B;
+  --tarkib-secondary: #0D2552;
   --tarkib-accent: #D3A188;
 
   --destructive: oklch(0.55 0.20 25);
