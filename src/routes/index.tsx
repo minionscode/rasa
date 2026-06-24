@@ -116,17 +116,17 @@ function Home() {
                 key={c.hash}
                 to="/collections"
                 hash={c.hash}
-                className="card-luxe p-7 text-center group"
+                className="card-luxe collection-card p-7 text-center group"
               >
                 <div className="aspect-square mb-4 flex items-center justify-center">
-                  <img src={c.logo} alt={c.name} className="max-h-28 w-auto opacity-95 group-hover:opacity-100 transition-opacity" />
+                  <img src={c.logo} alt={c.name} className="max-h-36 w-auto opacity-95 group-hover:opacity-100 group-hover:brightness-110 transition-all duration-500 crisp-img" />
                 </div>
-                <h3 className="font-serif text-2xl md:text-3xl">{c.name}</h3>
+                <h3 className="font-serif text-2xl md:text-3xl group-hover:text-gold transition-colors">{c.name}</h3>
                 <p className="mt-2 text-[0.65rem] tracking-luxe uppercase text-gold/85">
                   {c.tag}
                 </p>
                 <span className="mt-4 inline-flex items-center gap-2 text-[0.7rem] tracking-luxe uppercase text-foreground/80 group-hover:text-gold transition-colors">
-                  Explore <ArrowRight className="h-3 w-3" />
+                  Explore <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             ))}
