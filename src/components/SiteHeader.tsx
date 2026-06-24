@@ -189,6 +189,7 @@ function DropdownNav({
                 key={`${it.label}-${it.hash ?? ""}`}
                 to={it.to}
                 hash={it.hash}
+                search={it.search as never}
                 onClick={onClose}
                 className="block px-6 py-3 hover:bg-surface/60 transition-colors group"
               >
