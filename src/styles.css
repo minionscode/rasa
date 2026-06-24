@@ -78,10 +78,10 @@
   --accent: oklch(0.74 0.08 45);
   --accent-foreground: oklch(0.12 0.004 60);
 
-  /* Collection accents */
-  --majlis: oklch(0.38 0.13 18);     /* deep burgundy */
-  --makhmal: oklch(0.34 0.10 320);   /* rich aubergine */
-  --tarkib: oklch(0.32 0.09 265);    /* midnight blue */
+  /* Collection accents — tuned to match the interior of each medallion */
+  --majlis: oklch(0.34 0.13 20);     /* wine burgundy */
+  --makhmal: oklch(0.30 0.11 330);   /* aubergine plum */
+  --tarkib: oklch(0.26 0.11 268);    /* deep midnight */
 
   --destructive: oklch(0.55 0.20 25);
   --destructive-foreground: oklch(0.98 0 0);
