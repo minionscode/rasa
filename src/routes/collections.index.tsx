@@ -181,7 +181,8 @@ function Collections() {
 }
 
 function CollectionSection({ section }: { section: Section }) {
-  const sectionBg = `linear-gradient(180deg, ${section.bgVar} 0%, color-mix(in oklab, ${section.bgVar} 55%, var(--ink)) 60%, var(--ink) 100%)`;
+  const secondaryVar = `var(--${section.slug}-secondary)`;
+  const sectionBg = `radial-gradient(ellipse at 20% 0%, ${secondaryVar} 0%, transparent 55%), radial-gradient(ellipse at 80% 30%, color-mix(in oklab, ${section.accentVar} 35%, transparent) 0%, transparent 50%), linear-gradient(180deg, ${section.bgVar} 0%, color-mix(in oklab, ${section.bgVar} 70%, var(--ink)) 55%, var(--ink) 100%)`;
 
   return (
     <section

@@ -78,13 +78,19 @@
   --accent: oklch(0.78 0.09 48);
   --accent-foreground: oklch(0.12 0.004 60);
 
-  /* Collection accents — distinct luxury worlds */
-  --majlis: oklch(0.32 0.08 165);         /* deep emerald */
-  --majlis-accent: oklch(0.74 0.11 55);   /* warm copper */
-  --makhmal: oklch(0.30 0.12 18);         /* deep burgundy */
-  --makhmal-accent: oklch(0.82 0.08 35);  /* rose gold */
-  --tarkib: oklch(0.22 0.08 265);         /* midnight navy */
-  --tarkib-accent: oklch(0.76 0.10 50);   /* copper */
+  /* Collection accents — three distinct luxury universes */
+  /* Majlis — Burgundy / Gathering & Hospitality */
+  --majlis: #5A1E2B;
+  --majlis-secondary: #7A2B3A;
+  --majlis-accent: #D3A188;
+  /* Makhmal — Deep Aubergine / Velvet Refinement */
+  --makhmal: #3B163D;
+  --makhmal-secondary: #532057;
+  --makhmal-accent: #D3A188;
+  /* Tarkib — Midnight Blue / Innovation & Craft */
+  --tarkib: #0D1B3D;
+  --tarkib-secondary: #132A57;
+  --tarkib-accent: #D3A188;
 
   --destructive: oklch(0.55 0.20 25);
   --destructive-foreground: oklch(0.98 0 0);
