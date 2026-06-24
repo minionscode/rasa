@@ -1,15 +1,7 @@
-import { useEffect, useRef, useState, Suspense } from "react";
+import { useEffect, useRef, useState, Suspense, useMemo } from "react";
 import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
 import * as THREE from "three";
 import rasaLogo from "@/assets/rasa-logo.png.asset.json";
-
-/* ============================================================
- * Floating copper RASA emblem with ambient smoke.
- * Client-only (mounted check). Gracefully no-ops on SSR.
- * Reacts to mouse for subtle camera parallax + dissolves on
- * scroll into the next section.
- * ============================================================ */
 
 function CopperEmblem() {
   const groupRef = useRef<THREE.Group>(null);
@@ -20,82 +12,54 @@ function CopperEmblem() {
   const logoTex = useLoader(THREE.TextureLoader, rasaLogo.url);
   useEffect(() => {
     logoTex.colorSpace = THREE.SRGBColorSpace;
-    logoTex.anisotropy = 8;
+    logoTex.anisotropy = 4;
+    logoTex.generateMipmaps = true;
+    logoTex.minFilter = THREE.LinearMipmapLinearFilter;
   }, [logoTex]);
 
   useFrame((state, delta) => {
+    const d = Math.min(delta, 0.05);
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.18;
-      // gentle float
+      groupRef.current.rotation.y += d * 0.18;
       groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.6) * 0.06;
     }
     if (ringRef.current) {
-      ringRef.current.rotation.z += delta * 0.05;
+      ringRef.current.rotation.z += d * 0.05;
     }
   });
 
-  // Copper PBR
-  const copper = {
-    color: new THREE.Color("#c97a4a"),
-    metalness: 1,
-    roughness: 0.28,
-    clearcoat: 0.6,
-    clearcoatRoughness: 0.25,
-  };
-
   return (
     <group ref={groupRef}>
-      {/* Outer thin ring */}
+      {/* Outer ring */}
       <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.55, 0.018, 32, 220]} />
-        <meshPhysicalMaterial {...copper} />
+        <torusGeometry args={[1.55, 0.018, 18, 128]} />
+        <meshStandardMaterial color="#c97a4a" metalness={1} roughness={0.32} />
       </mesh>
 
       {/* Inner decorative ring */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.42, 0.008, 24, 200]} />
-        <meshPhysicalMaterial {...copper} roughness={0.4} />
+        <torusGeometry args={[1.42, 0.008, 14, 96]} />
+        <meshStandardMaterial color="#c97a4a" metalness={1} roughness={0.45} />
       </mesh>
 
       {/* Copper medallion disc */}
       <mesh ref={discRef}>
-        <cylinderGeometry args={[1.35, 1.35, 0.06, 96]} />
-        <meshPhysicalMaterial
-          color="#a45a30"
-          metalness={1}
-          roughness={0.38}
-          clearcoat={0.5}
-          clearcoatRoughness={0.35}
-        />
+        <cylinderGeometry args={[1.35, 1.35, 0.05, 64]} />
+        <meshStandardMaterial color="#a45a30" metalness={1} roughness={0.42} />
       </mesh>
 
-      {/* Logo etched as emissive bronze overlay on the disc front */}
-      <mesh position={[0, 0.032, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      {/* Logo on front and back of the disc */}
+      <mesh position={[0, 0.028, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[2.2, 2.2]} />
         <meshStandardMaterial
           map={logoTex}
           transparent
           alphaTest={0.05}
           metalness={0.9}
-          roughness={0.3}
+          roughness={0.32}
           emissive={new THREE.Color("#3a1a0a")}
           emissiveMap={logoTex}
-          emissiveIntensity={0.35}
-          color="#d89568"
-          side={THREE.DoubleSide}
-        />
-      </mesh>
-      <mesh position={[0, -0.032, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[2.2, 2.2]} />
-        <meshStandardMaterial
-          map={logoTex}
-          transparent
-          alphaTest={0.05}
-          metalness={0.9}
-          roughness={0.3}
-          emissive={new THREE.Color("#3a1a0a")}
-          emissiveMap={logoTex}
-          emissiveIntensity={0.35}
+          emissiveIntensity={0.4}
           color="#d89568"
           side={THREE.DoubleSide}
         />
@@ -233,21 +197,20 @@ export function Hero3D() {
       aria-hidden="true"
     >
       <Canvas
-        dpr={[1, 1.75]}
+        dpr={[1, 1.25]}
         camera={{ position: [0, 0, 5], fov: 38 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         style={{ background: "transparent" }}
       >
-        <ambientLight intensity={0.35} />
-        <directionalLight position={[3, 4, 5]} intensity={1.1} color="#ffd9b5" />
-        <directionalLight position={[-4, -2, 2]} intensity={0.4} color="#7a3a1a" />
-        <pointLight position={[0, 0, 3]} intensity={0.6} color="#ffb37a" />
+        <ambientLight intensity={0.55} />
+        <directionalLight position={[3, 4, 5]} intensity={1.4} color="#ffd9b5" />
+        <directionalLight position={[-4, -2, 2]} intensity={0.5} color="#7a3a1a" />
+        <pointLight position={[0, 0, 3]} intensity={0.7} color="#ffb37a" />
 
         <Suspense fallback={null}>
-          <Environment preset="warehouse" />
           <CopperEmblem />
         </Suspense>
-        <Smoke />
+        <Smoke count={12} />
         <MouseParallax />
       </Canvas>
     </div>
