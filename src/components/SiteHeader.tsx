@@ -73,7 +73,7 @@ export function SiteHeader() {
             />
 
             <Link to="/partners" className={navLink} activeProps={{ className: "text-gold" }}>
-              Partners
+              Partner
             </Link>
             <Link to="/contact" className={navLink} activeProps={{ className: "text-gold" }}>
               Contact
@@ -119,7 +119,7 @@ export function SiteHeader() {
               { to: "/collections/tarkib", label: "— Tarkib" },
               { to: "/coming-soon", label: "Hookahs", search: { category: "hookahs" } },
               { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
-              { to: "/partners", label: "Partners" },
+              { to: "/partners", label: "Partner" },
               { to: "/contact", label: "Contact" },
             ].map((item) => (
               <Link
