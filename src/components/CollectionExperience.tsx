@@ -1,11 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowDown, ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { collections, formats, type Collection, type Flavour } from "@/data/collections";
+import { FormatEnquireChip } from "@/routes/collections.index";
 
 export function CollectionExperience({ collection }: { collection: Collection }) {
-  const [selectedFormat, setSelectedFormat] = useState<string>("250g");
   const secondaryVar = `var(--${collection.slug}-secondary)`;
   const sectionBg = `radial-gradient(ellipse at 20% 10%, ${secondaryVar} 0%, transparent 45%), radial-gradient(ellipse at 85% 80%, color-mix(in oklab, ${collection.accentVar} 10%, transparent) 0%, transparent 55%), linear-gradient(180deg, color-mix(in oklab, ${collection.bgVar} 85%, var(--ink)) 0%, color-mix(in oklab, ${collection.bgVar} 60%, var(--ink)) 50%, var(--ink) 100%)`;
 
@@ -49,7 +48,23 @@ export function CollectionExperience({ collection }: { collection: Collection })
           >
             {collection.expression}
           </p>
-          <p className="mt-3 font-serif italic text-lg md:text-xl text-foreground/80">
+
+          {/* PACKAGING FORMAT BAR — before tagline */}
+          <div className="mt-7 max-w-xl">
+            <p
+              className="text-[0.6rem] tracking-[0.4em] uppercase mb-2"
+              style={{ color: collection.accentVar }}
+            >
+              Available Packaging Formats
+            </p>
+            <div className="grid grid-cols-5 gap-2">
+              {formats.map((f) => (
+                <FormatEnquireChip key={f} format={f} c={collection} />
+              ))}
+            </div>
+          </div>
+
+          <p className="mt-6 font-serif italic text-lg md:text-xl text-foreground/80">
             {collection.tagline}
           </p>
         </div>
@@ -108,105 +123,6 @@ export function CollectionExperience({ collection }: { collection: Collection })
         </div>
       </div>
 
-      {/* FEATURED FLAVOURS */}
-      <div className="relative z-10 border-t border-foreground/10">
-        <div className="mx-auto max-w-6xl px-6 lg:px-10 py-14 md:py-16">
-          <div className="flex items-end justify-between flex-wrap gap-4 mb-8">
-            <div>
-              <p
-                className="text-[0.65rem] tracking-[0.4em] uppercase"
-                style={{ color: collection.accentVar }}
-              >
-                Featured Flavours
-              </p>
-              <h2 className="mt-2 font-serif text-3xl md:text-4xl">
-                Selected from the {collection.name} cellar
-              </h2>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {collection.featured.map((p) => (
-              <FlavourCard
-                key={p.name}
-                flavour={p}
-                collection={collection}
-                selectedFormat={selectedFormat}
-              />
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <a
-              href="#all-flavours"
-              className="group inline-flex items-center gap-3 px-8 py-3.5 border border-foreground/30 text-[0.7rem] tracking-luxe uppercase hover:border-gold hover:text-gold transition-all duration-500"
-              style={{ color: collection.accentVar }}
-            >
-              Explore All {collection.name} Flavours
-              <ArrowDown className="h-3.5 w-3.5 group-hover:translate-y-1 transition-transform" />
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* PHILOSOPHY */}
-      <div className="relative z-10 border-t border-foreground/10">
-        <div className="mx-auto max-w-4xl px-6 lg:px-10 py-14 md:py-16 text-center">
-          <p
-            className="text-[0.65rem] tracking-[0.4em] uppercase mb-5"
-            style={{ color: collection.accentVar }}
-          >
-            Philosophy
-          </p>
-          <p className="font-serif italic text-2xl md:text-3xl leading-snug text-foreground/95 text-balance">
-            {collection.philosophy}
-          </p>
-        </div>
-      </div>
-
-      {/* FORMAT SELECTOR */}
-      <div id="formats" className="relative z-10 border-t border-foreground/10 scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-6 lg:px-10 py-14 md:py-16">
-          <div className="grid md:grid-cols-[1fr_auto] items-end gap-8 mb-6">
-            <div>
-              <p
-                className="text-[0.65rem] tracking-[0.4em] uppercase"
-                style={{ color: collection.accentVar }}
-              >
-                Available Packaging Formats
-              </p>
-              <h3 className="mt-2 font-serif text-3xl md:text-4xl">
-                Select Preferred Format
-              </h3>
-            </div>
-            <p className="text-sm text-foreground/70 max-w-xs">
-              Retail through wholesale quantities, supplied to domestic and international partners.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            {formats.map((f) => {
-              const active = selectedFormat === f;
-              return (
-                <button
-                  key={f}
-                  type="button"
-                  onClick={() => setSelectedFormat(f)}
-                  data-selected={active}
-                  aria-pressed={active}
-                  className="chip-luxe px-5 py-4 text-sm tracking-luxe uppercase text-center inline-flex items-center justify-center gap-2"
-                >
-                  {active && <Check className="h-3.5 w-3.5" strokeWidth={2.5} />}
-                  {f}
-                </button>
-              );
-            })}
-          </div>
-          <p className="mt-4 text-xs text-foreground/60">
-            Selected: <span style={{ color: collection.accentVar }}>{selectedFormat}</span> — included automatically in your enquiry.
-          </p>
-        </div>
-      </div>
-
       {/* ALL FLAVOURS */}
       <div id="all-flavours" className="relative z-10 border-t border-foreground/10 scroll-mt-24">
         <div className="mx-auto max-w-6xl px-6 lg:px-10 py-14 md:py-16">
@@ -224,7 +140,7 @@ export function CollectionExperience({ collection }: { collection: Collection })
             </div>
             <Link
               to="/contact"
-              search={{ collection: collection.name, format: selectedFormat }}
+              search={{ collection: collection.name }}
               className="luxe-underline text-[0.7rem] tracking-luxe uppercase"
               style={{ color: collection.accentVar }}
             >
@@ -234,12 +150,7 @@ export function CollectionExperience({ collection }: { collection: Collection })
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {collection.flavours.map((p) => (
-              <FlavourCard
-                key={p.name}
-                flavour={p}
-                collection={collection}
-                selectedFormat={selectedFormat}
-              />
+              <FlavourCard key={p.name} flavour={p} collection={collection} />
             ))}
           </div>
         </div>
@@ -260,7 +171,7 @@ export function CollectionExperience({ collection }: { collection: Collection })
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
               to="/contact"
-              search={{ collection: collection.name, format: selectedFormat }}
+              search={{ collection: collection.name }}
               className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
             >
               Request Information <ArrowRight className="h-3.5 w-3.5" />
@@ -310,11 +221,9 @@ export function CollectionExperience({ collection }: { collection: Collection })
 function FlavourCard({
   flavour,
   collection,
-  selectedFormat,
 }: {
   flavour: Flavour;
   collection: Collection;
-  selectedFormat: string;
 }) {
   return (
     <article className="card-luxe p-6 flex flex-col">
@@ -328,20 +237,15 @@ function FlavourCard({
         <p className="text-[0.55rem] tracking-[0.35em] uppercase mb-2 text-foreground/55">
           Available Formats
         </p>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="grid grid-cols-5 gap-1.5">
           {formats.map((f) => (
-            <span
-              key={f}
-              className="text-[0.6rem] tracking-luxe uppercase px-2 py-1 border border-foreground/15 text-foreground/65"
-            >
-              {f}
-            </span>
+            <FormatEnquireChip key={f} format={f} c={collection} product={flavour.name} />
           ))}
         </div>
       </div>
       <Link
         to="/contact"
-        search={{ product: flavour.name, collection: collection.name, format: selectedFormat }}
+        search={{ product: flavour.name, collection: collection.name }}
         className="mt-6 inline-flex items-center justify-between text-[0.7rem] tracking-luxe uppercase hover:text-gold transition-colors group"
         style={{ color: collection.accentVar }}
       >
