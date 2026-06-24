@@ -4,6 +4,19 @@ import { X, ArrowRight, Mail } from "lucide-react";
 
 const SESSION_KEY = "rasa_lead_modal_shown";
 const VISIT_KEY = "rasa_visit_count";
+const AGE_KEY = "rasa_age_verified";
+
+const isAgeVerified = () => {
+  if (typeof window === "undefined") return false;
+  try {
+    return (
+      window.localStorage.getItem(AGE_KEY) === "1" ||
+      window.sessionStorage.getItem(AGE_KEY) === "1"
+    );
+  } catch {
+    return false;
+  }
+};
 
 export function LeadCaptureModal() {
   const [open, setOpen] = useState(false);
@@ -27,6 +40,7 @@ export function LeadCaptureModal() {
     const trigger = () => {
       if (firedRef.current) return;
       if (sessionStorage.getItem(SESSION_KEY)) return;
+      if (!isAgeVerified()) return; // never overlay the age gate
       firedRef.current = true;
       sessionStorage.setItem(SESSION_KEY, "1");
       setOpen(true);
