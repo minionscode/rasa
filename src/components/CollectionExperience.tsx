@@ -147,17 +147,13 @@ export function CollectionExperience({ collection }: { collection: Collection })
       {/* PACKAGING FORMATS — full width */}
       <div className="relative z-10 border-t border-foreground/10">
         <div className="mx-auto max-w-6xl px-6 lg:px-10 py-10">
-          <div className="flex items-end justify-between flex-wrap gap-3 mb-4">
-            <p
-              className="text-[0.65rem] tracking-[0.4em] uppercase"
-              style={{ color: collection.accentVar }}
-            >
-              Available Packaging Formats
-            </p>
-            <p className="text-[0.7rem] tracking-wide text-foreground/55 italic">
-              Hover to enquire — click to begin a request
-            </p>
-          </div>
+          <p
+            className="text-[0.65rem] tracking-[0.4em] uppercase mb-4"
+            style={{ color: collection.accentVar }}
+          >
+            Available Packaging Formats
+          </p>
+
           <div className="grid grid-cols-5 gap-3">
             {formats.map((f) => (
               <FormatEnquireChip key={f} format={f} c={collection} />
