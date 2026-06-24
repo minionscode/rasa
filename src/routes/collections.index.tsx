@@ -154,7 +154,7 @@ function Collections() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-ink">
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-ink pt-28 pb-16">
         <div
           className="absolute inset-0"
           style={{
@@ -328,7 +328,7 @@ function CollectionSection({ section }: { section: Section }) {
             ))}
           </div>
 
-          <div className="mt-20 md:mt-24 text-center">
+          <div className="mt-16 text-center">
             <p className="font-serif text-4xl md:text-5xl text-balance">
               {section.closing}
             </p>

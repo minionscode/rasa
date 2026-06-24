@@ -50,7 +50,8 @@ export function SiteHeader() {
   }, [pathname]);
 
   const navLink =
-    "text-[0.7rem] tracking-luxe uppercase text-foreground/70 hover:text-gold transition-colors duration-500";
+    "text-[0.7rem] tracking-luxe uppercase whitespace-nowrap text-foreground/70 hover:text-gold transition-colors duration-200";
+
 
   return (
     <>
@@ -66,7 +67,7 @@ export function SiteHeader() {
             <img src={rasaLogo.url} alt="RASA" className="h-10 md:h-12 w-auto" />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-7">
             <Link to="/" className={navLink} activeOptions={{ exact: true }} activeProps={{ className: "text-gold" }}>
               Home
             </Link>
@@ -177,13 +178,14 @@ function DropdownNav({
 }) {
   return (
     <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
-      <button className="text-[0.7rem] tracking-luxe uppercase text-foreground/70 hover:text-gold transition-colors duration-500 inline-flex items-center gap-1.5">
+      <button className="text-[0.7rem] tracking-luxe uppercase whitespace-nowrap text-foreground/70 hover:text-gold transition-colors duration-200 inline-flex items-center gap-1.5">
         {label}
         <ChevronDown className="h-3 w-3 opacity-60" />
       </button>
       {isOpen && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-5 min-w-[280px]">
-          <div className="bg-ink/95 backdrop-blur-xl border border-border/60 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] py-3 animate-fade-in">
+        <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 min-w-[280px]">
+          <div className="bg-ink/95 backdrop-blur-xl border border-border/60 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] py-3">
+
             {items.map((it) => (
               <Link
                 key={`${it.label}-${it.hash ?? ""}`}

@@ -4,7 +4,7 @@ import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 
 export function SiteFooter() {
   return (
-    <footer className="relative bg-ink border-t border-border/60 mt-32">
+    <footer className="relative bg-ink border-t border-border/60">
       <div className="absolute inset-x-0 top-0 luxe-divider" />
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
