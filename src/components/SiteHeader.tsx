@@ -65,21 +65,19 @@ export function SiteHeader() {
               onClose={() => setOpenDrop(null)}
             />
 
-            <HookahMega
-              isOpen={openDrop === "hookah"}
-              onOpen={() => setOpenDrop("hookah")}
+            <ProductsMega
+              isOpen={openDrop === "products"}
+              onOpen={() => setOpenDrop("products")}
               onClose={() => setOpenDrop(null)}
             />
 
-            <Link to="/accessories" className={navLink} activeProps={{ className: "text-gold" }}>
-              Accessories
-            </Link>
             <Link to="/partners" className={navLink} activeProps={{ className: "text-gold" }}>
               Partners
             </Link>
             <Link to="/contact" className={navLink} activeProps={{ className: "text-gold" }}>
               Contact
             </Link>
+
 
             <button
               aria-label="Search"
@@ -115,20 +113,22 @@ export function SiteHeader() {
               { to: "/", label: "Home" },
               { to: "/house-of-rasa", label: "House of RASA" },
               { to: "/collections", label: "Collections" },
-              { to: "/hookah", label: "Hookah" },
-              { to: "/accessories", label: "Accessories" },
+              { to: "/coming-soon", label: "Hookahs", search: { category: "hookahs" } },
+              { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
               { to: "/partners", label: "Partners" },
               { to: "/contact", label: "Contact" },
             ].map((item) => (
               <Link
                 key={item.to + item.label}
                 to={item.to}
+                search={item.search as any}
                 className="font-serif text-2xl tracking-wide text-foreground hover:text-gold transition-colors"
                 activeProps={{ className: "text-gold" }}
               >
                 {item.label}
               </Link>
             ))}
+
           </nav>
         </div>
       )}
@@ -213,7 +213,7 @@ function CollectionsMega({
   );
 }
 
-function HookahMega({
+function ProductsMega({
   isOpen,
   onOpen,
   onClose,
@@ -222,54 +222,40 @@ function HookahMega({
   onOpen: () => void;
   onClose: () => void;
 }) {
-  const series = [
+  const items = [
     {
-      title: "Classic Series",
-      sub: "The Essential Expression",
-      hash: "classic-collection",
-      items: ["Portable", "Medium", "Large"],
+      title: "Hookahs",
+      sub: "Classic & Luxury Series",
+      category: "hookahs",
     },
     {
-      title: "Luxury Series",
-      sub: "The Flagship Expression",
-      hash: "luxury-collection",
-      items: ["Portable", "Medium", "Large"],
+      title: "Accessories",
+      sub: "Bowls · Hoses · Mouthpieces",
+      category: "accessories",
     },
   ];
   return (
-    <DropButton label="Hookah" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-      <div className="bg-ink/95 backdrop-blur-xl border border-gold/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-6 w-[480px] grid grid-cols-2 gap-6">
-        {series.map((s) => (
-          <div key={s.hash}>
-            <Link
-              to="/hookah"
-              hash={s.hash}
-              onClick={onClose}
-              className="block pb-3 mb-3 border-b border-border/40"
-            >
-              <p className="text-[0.6rem] tracking-luxe uppercase text-gold/80">{s.sub}</p>
-              <p className="font-serif text-lg mt-1 hover:text-gold transition-colors">{s.title}</p>
-            </Link>
-            <ul className="space-y-2">
-              {s.items.map((item) => (
-                <li key={item}>
-                  <Link
-                    to="/hookah"
-                    hash={s.hash}
-                    onClick={onClose}
-                    className="block text-sm text-foreground/75 hover:text-gold transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <DropButton label="Products" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
+      <div className="bg-ink/95 backdrop-blur-xl border border-gold/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-6 w-[420px] grid grid-cols-2 gap-4">
+        {items.map((it) => (
+          <Link
+            key={it.category}
+            to="/coming-soon"
+            search={{ category: it.category }}
+            onClick={onClose}
+            className="group block p-4 border border-transparent hover:border-gold/30 hover:bg-surface/40 transition-all duration-300"
+          >
+            <p className="text-[0.6rem] tracking-luxe uppercase text-gold/80">{it.sub}</p>
+            <p className="font-serif text-lg mt-2 group-hover:text-gold transition-colors">
+              {it.title}
+            </p>
+          </Link>
         ))}
       </div>
     </DropButton>
   );
 }
+
 
 function SearchOverlay({ onClose }: { onClose: () => void }) {
   const [q, setQ] = useState("");

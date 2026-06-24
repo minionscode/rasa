@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionLabel } from "../components/SectionLabel";
 import {
@@ -14,7 +14,18 @@ import {
   Sparkles,
 } from "lucide-react";
 
+type ContactSearch = {
+  product?: string;
+  collection?: string;
+  format?: string;
+};
+
 export const Route = createFileRoute("/contact")({
+  validateSearch: (s: Record<string, unknown>): ContactSearch => ({
+    product: typeof s.product === "string" ? s.product : undefined,
+    collection: typeof s.collection === "string" ? s.collection : undefined,
+    format: typeof s.format === "string" ? s.format : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Contact — Sales, Distribution & Partnerships | RASA" },
@@ -60,6 +71,14 @@ const focusAreas = [
 ];
 
 function Contact() {
+  const search = useSearch({ from: "/contact" }) as ContactSearch;
+  const prefilledMessage = (() => {
+    const parts: string[] = [];
+    if (search.product) parts.push(`Selected Product: ${search.product}`);
+    if (search.collection) parts.push(`Selected Collection: ${search.collection}`);
+    if (search.format) parts.push(`Selected Format: ${search.format}`);
+    return parts.length ? parts.join("\n") + "\n\nPlease share availability and wholesale pricing." : "";
+  })();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState<FormState>({
     name: "",
@@ -67,7 +86,7 @@ function Contact() {
     email: "",
     phone: "",
     type: "Distributor",
-    message: "",
+    message: prefilledMessage,
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
 
