@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import majlisLogo from "@/assets/majlis-logo.png.asset.json";
@@ -301,6 +301,7 @@ function CollectionSection({ section }: { section: Section }) {
             </div>
             <Link
               to="/contact"
+              search={{ collection: section.name }}
               className="luxe-underline text-[0.7rem] tracking-luxe uppercase"
               style={{ color: section.accentVar }}
             >
@@ -338,6 +339,7 @@ function CollectionSection({ section }: { section: Section }) {
                 </div>
                 <Link
                   to="/contact"
+                  search={{ product: p.name, collection: section.name, format: selectedFormat }}
                   className="mt-6 inline-flex items-center justify-between text-[0.7rem] tracking-luxe uppercase hover:text-gold transition-colors group"
                   style={{ color: section.accentVar }}
                 >
@@ -347,6 +349,7 @@ function CollectionSection({ section }: { section: Section }) {
               </article>
             ))}
           </div>
+
         </div>
       </div>
 
@@ -397,10 +400,10 @@ function CollectionSection({ section }: { section: Section }) {
                 className="text-[0.65rem] tracking-[0.4em] uppercase"
                 style={{ color: section.accentVar }}
               >
-                Available Formats
+                Available Packaging Formats
               </p>
               <h3 className="mt-2 font-serif text-3xl md:text-4xl">
-                Configure your order
+                Select Preferred Format
               </h3>
             </div>
             <p className="text-sm text-foreground/70 max-w-xs">
@@ -411,14 +414,20 @@ function CollectionSection({ section }: { section: Section }) {
             {formats.map((f) => (
               <button
                 key={f}
+                type="button"
+                onClick={() => setSelectedFormat(f)}
+                data-selected={selectedFormat === f}
                 className="chip-luxe px-5 py-4 text-sm tracking-luxe uppercase text-center"
               >
                 {f}
               </button>
             ))}
           </div>
+          <p className="mt-4 text-xs text-foreground/60">
+            Selected: <span style={{ color: section.accentVar }}>{selectedFormat}</span> — included automatically in your enquiry.
+          </p>
 
-          <div className="mt-14 flex flex-col md:flex-row items-center justify-between gap-6 pt-10 border-t border-foreground/10">
+          <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 pt-10 border-t border-foreground/10">
             <div>
               <p className="font-serif text-3xl md:text-4xl">{section.closing}</p>
               <p
@@ -431,6 +440,7 @@ function CollectionSection({ section }: { section: Section }) {
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
                 to="/contact"
+                search={{ collection: section.name, format: selectedFormat }}
                 className="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
               >
                 Request Information <ArrowRight className="h-3.5 w-3.5" />
@@ -440,6 +450,7 @@ function CollectionSection({ section }: { section: Section }) {
                 className="inline-flex items-center justify-center px-8 py-3.5 border border-foreground/30 text-[0.7rem] tracking-luxe uppercase hover:border-gold hover:text-gold transition-all duration-500"
               >
                 Wholesale Inquiry
+
               </Link>
             </div>
           </div>
