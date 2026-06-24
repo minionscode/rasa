@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucide-react";
 import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 import { contactInfo } from "@/data/contact";
+import { AnimatedWordmark } from "@/components/AnimatedWordmark";
 
 export function SiteFooter() {
   return (
@@ -15,8 +16,8 @@ export function SiteFooter() {
         <div className="mt-14 pt-12 border-t border-border/40 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1 sm:col-span-2">
-            <img src={rasaLogo.url} alt="RASA" className="h-14 w-auto" />
-            <p className="mt-4 font-serif italic text-base text-gold-soft">
+            <AnimatedWordmark size="h-14" halo={false} float={false} />
+            <p className="mt-4 font-serif italic text-base gradient-gold-text">
               Smoke, Perfected.
             </p>
             <p className="mt-5 text-sm text-foreground/75 leading-relaxed max-w-xs">
