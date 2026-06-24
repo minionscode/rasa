@@ -207,7 +207,15 @@ function CollectionSection({ section }: { section: Section }) {
               {section.tag}
             </p>
           </div>
-          <div className="hidden md:flex items-center justify-center w-64 lg:w-80 aspect-square rounded-full bg-ink ring-1 ring-gold/30 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] overflow-hidden">
+          <div
+            className="hidden md:flex relative items-center justify-center w-64 lg:w-80 aspect-square"
+            style={{
+              WebkitMaskImage:
+                "radial-gradient(circle at center, black 48%, rgba(0,0,0,0.55) 62%, transparent 78%)",
+              maskImage:
+                "radial-gradient(circle at center, black 48%, rgba(0,0,0,0.55) 62%, transparent 78%)",
+            }}
+          >
             <img
               src={collectionLogos[section.slug]}
               alt={`${section.name} emblem`}
