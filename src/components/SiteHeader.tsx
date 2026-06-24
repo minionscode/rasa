@@ -124,7 +124,6 @@ export function SiteHeader() {
               <Link
                 key={item.to + item.label}
                 to={item.to}
-                params={item.params as any}
                 search={item.search as any}
                 className={`font-serif tracking-wide text-foreground hover:text-gold transition-colors ${item.label.startsWith("—") ? "text-lg pl-4 text-foreground/75" : "text-2xl"}`}
                 activeProps={{ className: "text-gold" }}
