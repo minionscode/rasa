@@ -317,32 +317,30 @@ function CollectionSection({ section }: { section: Section }) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {section.featured.map((p, i) => (
+            {section.featured.map((p) => (
               <article key={p.name} className="card-luxe p-6 flex flex-col">
-                <p
-                  className="text-[0.6rem] tracking-[0.4em] uppercase"
-                  style={{ color: section.accentVar }}
-                >
-                  No. {String(i + 1).padStart(2, "0")}
-                </p>
-                <h4 className="mt-3 font-serif text-2xl md:text-[1.65rem] leading-tight">
+                <h4 className="font-serif text-2xl md:text-[1.65rem] leading-tight">
                   {p.name}
                 </h4>
                 <p className="mt-2 text-sm text-foreground/70 leading-relaxed">
                   {p.notes}
                 </p>
-                <div className="mt-5 flex flex-wrap gap-1.5">
-                  {formats.slice(0, 3).map((f) => (
-                    <span
-                      key={f}
-                      className="text-[0.6rem] tracking-luxe uppercase px-2 py-1 border border-foreground/15 text-foreground/65"
-                    >
-                      {f}
-                    </span>
-                  ))}
-                  <span className="text-[0.6rem] tracking-luxe uppercase px-2 py-1 text-foreground/45">
-                    +2
-                  </span>
+                <div className="mt-5">
+                  <p
+                    className="text-[0.55rem] tracking-[0.35em] uppercase mb-2 text-foreground/55"
+                  >
+                    Available Formats
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {formats.map((f) => (
+                      <span
+                        key={f}
+                        className="text-[0.6rem] tracking-luxe uppercase px-2 py-1 border border-foreground/15 text-foreground/65"
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 <Link
                   to="/contact"
