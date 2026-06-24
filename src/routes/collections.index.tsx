@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { collections, formats, type Collection, type Flavour } from "@/data/collections";
+import { CinematicSmoke } from "@/components/CinematicSmoke";
+import { Reveal, RevealChild, RevealGroup } from "@/components/motion/Reveal";
+import { motion } from "framer-motion";
 
 export const Route = createFileRoute("/collections/")({
   head: () => ({
@@ -26,7 +29,8 @@ function Collections() {
   return (
     <>
       {/* PAGE HERO */}
-      <section className="relative min-h-[42vh] flex items-center justify-center overflow-hidden bg-ink pt-32 pb-10">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-ink pt-32 pb-16">
+        <CinematicSmoke intensity={0.7} tone="copper" />
         <div
           className="absolute inset-0"
           style={{
@@ -34,23 +38,48 @@ function Collections() {
               "radial-gradient(ellipse at 50% 40%, color-mix(in oklab, var(--gold) 14%, transparent), transparent 70%)",
           }}
         />
-        <div className="relative z-10 text-center px-6 max-w-3xl animate-fade-up">
-          <p className="text-[0.65rem] tracking-[0.4em] uppercase text-gold mb-5">
+        <div className="pointer-events-none absolute inset-0 grain opacity-60" />
+        <div className="relative z-10 text-center px-6 max-w-3xl">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.1 }}
+            className="text-[0.65rem] tracking-wider-luxe uppercase text-gold mb-6"
+          >
             The Collections
-          </p>
-          <h1 className="font-serif text-5xl md:text-7xl text-balance leading-[1.05]">
-            Three Expressions. One House.
-          </h1>
-          <div className="luxe-divider max-w-[6rem] mx-auto my-6" />
-          <p className="text-foreground/85 leading-relaxed max-w-2xl mx-auto">
+          </motion.p>
+          <motion.h1
+            className="font-serif font-light leading-[0.95] tracking-[-0.02em]"
+            style={{ fontSize: "clamp(3rem, 9vw, 7rem)" }}
+            initial={{ opacity: 0, y: 40, filter: "blur(14px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1.4, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Three Expressions.
+            <span className="block italic text-gold-soft">One House.</span>
+          </motion.h1>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1.2, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="luxe-divider max-w-[6rem] mx-auto my-8 origin-center"
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.1 }}
+            className="text-foreground/85 leading-relaxed max-w-2xl mx-auto"
+          >
             Within the House of RASA exist three distinct expressions — each a luxury world of its own,
             crafted for domestic and international partners who recognise the difference.
-          </p>
+          </motion.p>
         </div>
       </section>
 
       {collections.map((c) => (
-        <CollectionPreview key={c.slug} c={c} />
+        <Reveal key={c.slug} amount={0.15}>
+          <CollectionPreview c={c} />
+        </Reveal>
       ))}
 
       {/* CLOSING */}
