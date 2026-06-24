@@ -46,9 +46,9 @@ export function SiteHeader() {
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 h-24 flex items-center justify-between gap-6">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 h-20 flex items-center justify-between gap-6">
           <Link to="/" aria-label="RASA — Home" className="flex items-center shrink-0">
-            <img src={rasaLogo.url} alt="RASA" className="h-12 md:h-14 w-auto" />
+            <img src={rasaLogo.url} alt="RASA" className="h-10 md:h-11 w-auto crisp-img" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
