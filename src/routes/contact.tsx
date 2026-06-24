@@ -122,7 +122,7 @@ function Contact() {
     setSubmitted(true);
   };
 
-  const whatsappLink = `https://wa.me/910000000000?text=${encodeURIComponent(
+  const whatsappLink = `${contactInfo.whatsappUrl}?text=${encodeURIComponent(
     `Hello RASA — I'm ${form.name || "[name]"} from ${form.business || "[business]"}. Enquiry: ${form.type}.`,
   )}`;
 
@@ -130,8 +130,8 @@ function Contact() {
     {
       icon: Phone,
       label: "Call Sales",
-      sub: "+91 00000 00000",
-      href: "tel:+910000000000",
+      sub: contactInfo.phone,
+      href: `tel:${contactInfo.phoneRaw}`,
     },
     {
       icon: MessageCircle,
@@ -150,7 +150,7 @@ function Contact() {
       icon: FileText,
       label: "Request Catalogue",
       sub: "Full house portfolio",
-      href: "mailto:sales@rasahouse.com?subject=Catalogue%20Request",
+      href: `mailto:${contactInfo.email}?subject=Catalogue%20Request`,
     },
   ];
 
