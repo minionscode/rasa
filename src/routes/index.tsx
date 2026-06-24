@@ -34,9 +34,9 @@ const pillars = [
 ];
 
 const collections = [
-  { name: "Majlis", tag: "The Expression of Heritage", hash: "majlis", logo: majlisLogo.url },
-  { name: "Makhmal", tag: "The Expression of Refinement", hash: "makhmal", logo: makhmalLogo.url },
-  { name: "Tarkib", tag: "The Expression of Innovation", hash: "tarkib", logo: tarkibLogo.url },
+  { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis" as const, logo: majlisLogo.url },
+  { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal" as const, logo: makhmalLogo.url },
+  { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib" as const, logo: tarkibLogo.url },
 ];
 
 const partnerBenefits = [
