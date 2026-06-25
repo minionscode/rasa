@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
@@ -169,15 +169,19 @@ function CinematicHero({ collection }: { collection: Collection }) {
 function BodySections({ collection }: { collection: Collection }) {
   const secondaryVar = `var(--${collection.slug}-secondary)`;
   const sectionBg = `radial-gradient(ellipse at 20% 10%, ${secondaryVar} 0%, transparent 50%), radial-gradient(ellipse at 85% 90%, color-mix(in oklab, ${collection.accentVar} 8%, transparent) 0%, transparent 60%), linear-gradient(180deg, color-mix(in oklab, ${collection.bgVar} 60%, var(--ink)) 0%, var(--ink) 100%)`;
+  const smokeRef = useRef<HTMLDivElement | null>(null);
+  const smokeInView = useInView(smokeRef, { margin: "200px 0px", once: false });
 
   return (
-    <div className="relative overflow-hidden" style={{ background: sectionBg }}>
+    <div ref={smokeRef} className="relative overflow-hidden" style={{ background: sectionBg }}>
       <div className={`pointer-events-none absolute inset-0 opacity-20 ${collection.pattern}`} />
-      <CinematicSmoke
-        intensity={0.3}
-        tone={heroTones[collection.slug]}
-        className="opacity-40"
-      />
+      {smokeInView && (
+        <CinematicSmoke
+          intensity={0.3}
+          tone={heroTones[collection.slug]}
+          className="opacity-40"
+        />
+      )}
 
       {/* INTRO + SIGNATURE */}
       <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-10 pt-20 md:pt-28 pb-16 grid md:grid-cols-[1.4fr_1fr] gap-x-14 gap-y-10 items-start">
