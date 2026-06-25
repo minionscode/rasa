@@ -1,10 +1,10 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Menu, X, Search, ChevronDown, ArrowRight } from "lucide-react";
-import rasaLogo from "@/assets/rasa-logo.png.asset.json";
-import majlisLogo from "@/assets/majlis-logo.png.asset.json";
-import makhmalLogo from "@/assets/makhmal-logo.png.asset.json";
-import tarkibLogo from "@/assets/tarkib-logo.png.asset.json";
+import rasaLogo from "@/assets/rasa-logo.png";
+import majlisLogo from "@/assets/majlis-logo.png";
+import makhmalLogo from "@/assets/makhmal-logo.png";
+import tarkibLogo from "@/assets/tarkib-logo.png";
 import { collections } from "@/data/collections";
 
 type DropItem = {
@@ -49,7 +49,7 @@ export function SiteHeader() {
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-10 h-20 flex items-center justify-between gap-6">
           <Link to="/" aria-label="RASA — Home" className="flex items-center shrink-0">
-            <img src={rasaLogo.url} alt="RASA" className="h-10 md:h-11 w-auto crisp-img" />
+            <img src={rasaLogo} alt="RASA" className="h-10 md:h-11 w-auto crisp-img" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
@@ -104,7 +104,7 @@ export function SiteHeader() {
       {open && (
         <div className="fixed inset-0 z-50 bg-ink/98 backdrop-blur-xl animate-fade-in lg:hidden overflow-y-auto">
           <div className="flex items-center justify-between h-20 px-6 border-b border-border/40">
-            <img src={rasaLogo.url} alt="RASA" className="h-9 w-auto crisp-img" />
+            <img src={rasaLogo} alt="RASA" className="h-9 w-auto crisp-img" />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2">
               <X className="h-5 w-5" />
             </button>
@@ -176,9 +176,9 @@ function CollectionsMega({
   onClose: () => void;
 }) {
   const items = [
-    { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis", path: "/collections/majlis" as const, logo: majlisLogo.url },
-    { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal", path: "/collections/makhmal" as const, logo: makhmalLogo.url },
-    { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib", path: "/collections/tarkib" as const, logo: tarkibLogo.url },
+    { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis", path: "/collections/majlis" as const, logo: majlisLogo },
+    { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal", path: "/collections/makhmal" as const, logo: makhmalLogo },
+    { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib", path: "/collections/tarkib" as const, logo: tarkibLogo },
   ];
   return (
     <DropButton label="Collections" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>

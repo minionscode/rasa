@@ -1,6 +1,6 @@
-import majlisLogo from "@/assets/majlis-logo.png.asset.json";
-import makhmalLogo from "@/assets/makhmal-logo.png.asset.json";
-import tarkibLogo from "@/assets/tarkib-logo.png.asset.json";
+import majlisLogo from "@/assets/majlis-logo.png";
+import makhmalLogo from "@/assets/makhmal-logo.png";
+import tarkibLogo from "@/assets/tarkib-logo.png";
 
 export type Flavour = { name: string; notes: string };
 
@@ -54,7 +54,7 @@ export const collections: Collection[] = [
     bgVar: "var(--majlis)",
     accentVar: "var(--majlis-accent)",
     pattern: "pattern-arabesque",
-    logo: majlisLogo.url,
+    logo: majlisLogo,
   },
   {
     slug: "makhmal",
@@ -89,7 +89,7 @@ export const collections: Collection[] = [
     bgVar: "var(--makhmal)",
     accentVar: "var(--makhmal-accent)",
     pattern: "pattern-velvet",
-    logo: makhmalLogo.url,
+    logo: makhmalLogo,
   },
   {
     slug: "tarkib",
@@ -120,7 +120,7 @@ export const collections: Collection[] = [
     bgVar: "var(--tarkib)",
     accentVar: "var(--tarkib-accent)",
     pattern: "pattern-geometric",
-    logo: tarkibLogo.url,
+    logo: tarkibLogo,
   },
 ];
 

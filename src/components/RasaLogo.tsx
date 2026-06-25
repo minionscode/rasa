@@ -1,4 +1,4 @@
-import rasaLogo from "@/assets/rasa-logo.png.asset.json";
+import rasaLogo from "@/assets/rasa-logo.png";
 
 interface Props {
   className?: string;
@@ -10,7 +10,7 @@ export function RasaLogo({ className = "", showTag = false, imgClassName = "h-10
   return (
     <div className={`inline-flex flex-col items-center ${className}`}>
       <img
-        src={rasaLogo.url}
+        src={rasaLogo}
         alt="RASA"
         className={imgClassName}
         loading="eager"

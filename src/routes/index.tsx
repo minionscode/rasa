@@ -2,11 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import heroHookah from "@/assets/hero-hookah.jpg.asset.json";
-import bandCopper from "@/assets/band-copper.jpg.asset.json";
-import chapterMajlis from "@/assets/chapter-majlis.jpg.asset.json";
-import chapterMakhmal from "@/assets/chapter-makhmal.jpg.asset.json";
-import chapterTarkib from "@/assets/chapter-tarkib.jpg.asset.json";
+import heroHookah from "@/assets/hero-hookah.jpg";
+import bandCopper from "@/assets/band-copper.jpg";
+import chapterMajlis from "@/assets/chapter-majlis.jpg";
+import chapterMakhmal from "@/assets/chapter-makhmal.jpg";
+import chapterTarkib from "@/assets/chapter-tarkib.jpg";
 import { CinematicSmoke } from "@/components/CinematicSmoke";
 import { Reveal, RevealChild, RevealGroup } from "@/components/motion/Reveal";
 import { Parallax } from "@/components/motion/Parallax";
@@ -25,8 +25,8 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "A luxury hookah lifestyle house — Majlis, Makhmal, Tarkib. Smoke, perfected.",
       },
-      { property: "og:image", content: heroHookah.url },
-      { name: "twitter:image", content: heroHookah.url },
+      { property: "og:image", content: heroHookah },
+      { name: "twitter:image", content: heroHookah },
     ],
   }),
   component: Home,
@@ -51,7 +51,7 @@ const chapters: Chapter[] = [
     expression: "Heritage",
     oneLiner: "Where evenings remember themselves.",
     body: "A tribute to gathering. Rooted in heritage, warmed by hospitality — the timeless character of an evening spent in good company.",
-    image: chapterMajlis.url,
+    image: chapterMajlis,
     path: "/collections/majlis",
     align: "right",
     tone: "burgundy",
@@ -62,7 +62,7 @@ const chapters: Chapter[] = [
     expression: "Refinement",
     oneLiner: "Velvet, made vapour.",
     body: "Quiet, composed, effortlessly elegant. Luxury without volume, refinement without effort — the confidence of simplicity executed well.",
-    image: chapterMakhmal.url,
+    image: chapterMakhmal,
     path: "/collections/makhmal",
     align: "left",
     tone: "aubergine",
@@ -73,7 +73,7 @@ const chapters: Chapter[] = [
     expression: "Innovation",
     oneLiner: "Curiosity, bottled.",
     body: "Bold, modern, progressive. The House of RASA looking forward — composing flavours the way a perfumer composes an accord.",
-    image: chapterTarkib.url,
+    image: chapterTarkib,
     path: "/collections/tarkib",
     align: "right",
     tone: "midnight",
@@ -107,7 +107,7 @@ function Hero() {
       {/* Cinematic background image */}
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale }}>
         <img
-          src={heroHookah.url}
+          src={heroHookah}
           alt=""
           width={1536}
           height={1024}
@@ -198,7 +198,7 @@ function OriginBand() {
     <section ref={ref} className="relative h-[90vh] md:h-screen overflow-hidden">
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <img
-          src={bandCopper.url}
+          src={bandCopper}
           alt="Tobacco fields at golden hour"
           width={1536}
           height={1024}
