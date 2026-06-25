@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import rasaLogo from "@/assets/rasa-logo.png.asset.json";
+import rasaLogo from "@/assets/rasa-logo.png";
 
 type Props = {
   className?: string;
@@ -22,7 +22,7 @@ export function AnimatedWordmark({ className = "", size = "h-24 md:h-40", halo: 
       className={`relative inline-block ${className}`}
     >
       <img
-        src={rasaLogo.url}
+        src={rasaLogo}
         alt="RASA"
         className={`w-auto ${size}`}
         loading="eager"

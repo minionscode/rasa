@@ -8,14 +8,14 @@ import { FormatEnquireChip } from "@/routes/collections.index";
 import { CinematicSmoke } from "@/components/CinematicSmoke";
 import { Reveal, RevealChild, RevealGroup } from "@/components/motion/Reveal";
 
-import chapterMajlis from "@/assets/chapter-majlis.jpg.asset.json";
-import chapterMakhmal from "@/assets/chapter-makhmal.jpg.asset.json";
-import chapterTarkib from "@/assets/chapter-tarkib.jpg.asset.json";
+import chapterMajlis from "@/assets/chapter-majlis.jpg";
+import chapterMakhmal from "@/assets/chapter-makhmal.jpg";
+import chapterTarkib from "@/assets/chapter-tarkib.jpg";
 
 const heroImages: Record<Collection["slug"], string> = {
-  majlis: chapterMajlis.url,
-  makhmal: chapterMakhmal.url,
-  tarkib: chapterTarkib.url,
+  majlis: chapterMajlis,
+  makhmal: chapterMakhmal,
+  tarkib: chapterTarkib,
 };
 
 const heroTones: Record<Collection["slug"], "burgundy" | "aubergine" | "midnight"> = {

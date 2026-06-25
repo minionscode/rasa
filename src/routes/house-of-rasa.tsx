@@ -3,12 +3,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 
-import houseAtelier from "@/assets/house-atelier.jpg.asset.json";
-import houseCraft from "@/assets/house-craft.jpg.asset.json";
-import bandCopper from "@/assets/band-copper.jpg.asset.json";
-import chapterMajlis from "@/assets/chapter-majlis.jpg.asset.json";
-import chapterMakhmal from "@/assets/chapter-makhmal.jpg.asset.json";
-import chapterTarkib from "@/assets/chapter-tarkib.jpg.asset.json";
+import houseAtelier from "@/assets/house-atelier.jpg";
+import houseCraft from "@/assets/house-craft.jpg";
+import bandCopper from "@/assets/band-copper.jpg";
+import chapterMajlis from "@/assets/chapter-majlis.jpg";
+import chapterMakhmal from "@/assets/chapter-makhmal.jpg";
+import chapterTarkib from "@/assets/chapter-tarkib.jpg";
 
 import { CinematicSmoke } from "@/components/CinematicSmoke";
 import { Reveal, RevealChild, RevealGroup } from "@/components/motion/Reveal";
@@ -30,8 +30,8 @@ export const Route = createFileRoute("/house-of-rasa")({
         content:
           "Three expressions, one house. The philosophy behind Smoke, Perfected.",
       },
-      { property: "og:image", content: houseAtelier.url },
-      { name: "twitter:image", content: houseAtelier.url },
+      { property: "og:image", content: houseAtelier },
+      { name: "twitter:image", content: houseAtelier },
     ],
   }),
   component: HouseOfRasa,
@@ -88,7 +88,7 @@ const expressions = [
     name: "Majlis",
     tag: "The Expression of Heritage",
     body: "Inspired by timeless traditions, rich character, and enduring authenticity.",
-    image: chapterMajlis.url,
+    image: chapterMajlis,
     accent: "var(--majlis-accent)",
     tone: "burgundy" as const,
     path: "/collections/majlis" as const,
@@ -97,7 +97,7 @@ const expressions = [
     name: "Makhmal",
     tag: "The Expression of Refinement",
     body: "Smooth, elegant, and composed. A celebration of sophistication and balance.",
-    image: chapterMakhmal.url,
+    image: chapterMakhmal,
     accent: "var(--makhmal-accent)",
     tone: "aubergine" as const,
     path: "/collections/makhmal" as const,
@@ -106,7 +106,7 @@ const expressions = [
     name: "Tarkib",
     tag: "The Expression of Innovation",
     body: "Curious, experimental, and forward-thinking. Crafted for those who seek something new.",
-    image: chapterTarkib.url,
+    image: chapterTarkib,
     accent: "var(--tarkib-accent)",
     tone: "midnight" as const,
     path: "/collections/tarkib" as const,
@@ -143,7 +143,7 @@ function HeroBlock() {
     >
       <motion.div className="absolute inset-0" style={{ y: bgY, scale: bgScale }}>
         <img
-          src={houseAtelier.url}
+          src={houseAtelier}
           alt=""
           width={1280}
           height={1600}
@@ -245,7 +245,7 @@ function CraftedSection() {
           <div className="relative aspect-[4/5] overflow-hidden">
             <Parallax range={50} scale className="h-full w-full">
               <img
-                src={houseCraft.url}
+                src={houseCraft}
                 alt="Artisan hands preparing premium tobacco"
                 width={1024}
                 height={1280}
@@ -333,7 +333,7 @@ function ProcessSection() {
     <section className="relative py-24 md:py-32 overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src={bandCopper.url}
+          src={bandCopper}
           alt=""
           width={1920}
           height={1080}

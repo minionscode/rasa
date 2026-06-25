@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, Phone, Handshake, Home } from "lucide-react";
-import rasaLogo from "@/assets/rasa-logo.png.asset.json";
+import rasaLogo from "@/assets/rasa-logo.png";
 
 export const Route = createFileRoute("/coming-soon")({
   validateSearch: (s: Record<string, unknown>) => ({
@@ -37,7 +37,7 @@ function ComingSoon() {
       <div className="absolute inset-0 grain" />
 
       <div className="relative z-10 max-w-2xl w-full text-center animate-fade-up">
-        <img src={rasaLogo.url} alt="RASA" className="h-16 mx-auto" />
+        <img src={rasaLogo} alt="RASA" className="h-16 mx-auto" />
         <div className="luxe-divider max-w-[6rem] mx-auto my-10" />
         <p className="text-[0.65rem] tracking-luxe uppercase text-gold">{label}</p>
         <h1 className="mt-6 font-serif text-5xl md:text-6xl text-foreground text-balance">
