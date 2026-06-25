@@ -138,8 +138,10 @@ function CollectionPreview({ c }: { c: Collection }) {
             <img
               src={c.logo}
               alt={`${c.name} emblem`}
+              width={612}
+              height={408}
               className="relative w-full h-full object-contain crisp-img"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
           </div>

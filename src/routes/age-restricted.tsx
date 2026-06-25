@@ -26,7 +26,7 @@ function AgeRestricted() {
       <div className="absolute inset-0 grain" />
 
       <div className="relative z-10 max-w-xl w-full text-center animate-fade-up">
-        <img src={rasaLogo} alt="RASA" className="h-16 mx-auto" />
+        <img src={rasaLogo} alt="RASA" width={728} height={292} loading="lazy" className="h-16 mx-auto" />
         <div className="luxe-divider max-w-[6rem] mx-auto my-10" />
         <h1 className="font-serif text-5xl md:text-6xl text-foreground text-balance">
           Access Restricted

@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import { useRef, type ReactNode } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useRef, useState, type ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -18,8 +18,17 @@ export function Parallax({ children, className, range = 80, scale = false }: Pro
   });
   const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [range, -range]);
   const s = useTransform(scrollYProgress, [0, 0.5, 1], scale ? [1.08, 1.0, 1.08] : [1, 1, 1]);
+  const [active, setActive] = useState(false);
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const inRange = v > 0 && v < 1;
+    setActive((prev) => (prev === inRange ? prev : inRange));
+  });
   return (
-    <motion.div ref={ref} className={className} style={{ y, scale: s, willChange: "transform" }}>
+    <motion.div
+      ref={ref}
+      className={className}
+      style={{ y, scale: s, willChange: active ? "transform" : "auto" }}
+    >
       {children}
     </motion.div>
   );

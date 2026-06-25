@@ -23,6 +23,7 @@ export function PageTransition() {
         animate={{ opacity: 0 }}
         exit={{ opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        style={{ willChange: "opacity, transform" }}
       >
         <motion.div
           className="absolute inset-0"

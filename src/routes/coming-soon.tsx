@@ -37,7 +37,7 @@ function ComingSoon() {
       <div className="absolute inset-0 grain" />
 
       <div className="relative z-10 max-w-2xl w-full text-center animate-fade-up">
-        <img src={rasaLogo} alt="RASA" className="h-16 mx-auto" />
+        <img src={rasaLogo} alt="RASA" width={728} height={292} loading="lazy" className="h-16 mx-auto" />
         <div className="luxe-divider max-w-[6rem] mx-auto my-10" />
         <p className="text-[0.65rem] tracking-luxe uppercase text-gold">{label}</p>
         <h1 className="mt-6 font-serif text-5xl md:text-6xl text-foreground text-balance">

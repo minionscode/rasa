@@ -13,13 +13,13 @@ type Props = {
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-/** Editorial reveal — fade up + faint blur clear. Used everywhere. */
+/** Editorial reveal — fade up. Blur removed for GPU cost. */
 export function Reveal({
   children,
   className,
   delay = 0,
   y = 36,
-  blur = true,
+  blur: _blur = true,
   once = true,
   amount = 0.25,
 }: Props) {
@@ -28,12 +28,10 @@ export function Reveal({
     hidden: {
       opacity: 0,
       y: reduce ? 0 : y,
-      filter: blur && !reduce ? "blur(8px)" : "blur(0px)",
     },
     show: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: { duration: reduce ? 0.2 : 1.2, ease, delay },
     },
   };
@@ -94,11 +92,10 @@ export function RevealChild({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: reduce ? 0 : y, filter: reduce ? "blur(0)" : "blur(6px)" },
+        hidden: { opacity: 0, y: reduce ? 0 : y },
         show: {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
           transition: { duration: reduce ? 0.2 : 1.1, ease },
         },
       }}
