@@ -30,12 +30,13 @@ export function AgeGate() {
 
   const enter = () => {
     try {
-      window.localStorage.setItem(STORAGE_KEY, "1");
+      window.sessionStorage.setItem(STORAGE_KEY, "1");
     } catch {
       /* ignore */
     }
     try {
-      window.sessionStorage.setItem(STORAGE_KEY, "1");
+      // Clear any stale persistent flag from earlier builds
+      window.localStorage.removeItem(STORAGE_KEY);
     } catch {
       /* ignore */
     }
