@@ -7,10 +7,7 @@ const STORAGE_KEY = "rasa_age_verified";
 const readVerified = () => {
   if (typeof window === "undefined") return false;
   try {
-    return (
-      window.localStorage.getItem(STORAGE_KEY) === "1" ||
-      window.sessionStorage.getItem(STORAGE_KEY) === "1"
-    );
+    return window.sessionStorage.getItem(STORAGE_KEY) === "1";
   } catch {
     return false;
   }
@@ -33,12 +30,13 @@ export function AgeGate() {
 
   const enter = () => {
     try {
-      window.localStorage.setItem(STORAGE_KEY, "1");
+      window.sessionStorage.setItem(STORAGE_KEY, "1");
     } catch {
       /* ignore */
     }
     try {
-      window.sessionStorage.setItem(STORAGE_KEY, "1");
+      // Clear any stale persistent flag from earlier builds
+      window.localStorage.removeItem(STORAGE_KEY);
     } catch {
       /* ignore */
     }
