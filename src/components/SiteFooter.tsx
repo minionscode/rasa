@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucide-react";
 
 import { contactInfo } from "@/data/contact";
-// import { AnimatedWordmark } from "@/components/AnimatedWordmark";
+import { AnimatedWordmark } from "@/components/AnimatedWordmark";
 
 export function SiteFooter() {
   return (

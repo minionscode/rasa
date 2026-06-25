@@ -4,9 +4,13 @@ import rasaLogo from "@/assets/rasa-logo.png.asset.json";
 type Props = {
   className?: string;
   size?: string;
+  halo?: boolean;
+  float?: boolean;
+  shimmer?: boolean;
+  reveal?: boolean;
 };
 
-export function AnimatedWordmark({ className = "", size = "h-24 md:h-40" }: Props) {
+export function AnimatedWordmark({ className = "", size = "h-24 md:h-40", halo: _halo, float: _float, shimmer: _shimmer, reveal: _reveal }: Props) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
