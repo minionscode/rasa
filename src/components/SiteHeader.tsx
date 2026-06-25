@@ -49,7 +49,7 @@ export function SiteHeader() {
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-10 h-20 flex items-center justify-between gap-6">
           <Link to="/" aria-label="RASA — Home" className="flex items-center shrink-0">
-            <img src={rasaLogo} alt="RASA" className="h-10 md:h-11 w-auto crisp-img" />
+            <img src={rasaLogo} alt="RASA" width={728} height={292} loading="lazy" className="h-10 md:h-11 w-auto crisp-img" />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
@@ -104,7 +104,7 @@ export function SiteHeader() {
       {open && (
         <div className="fixed inset-0 z-50 bg-ink/98 backdrop-blur-xl animate-fade-in lg:hidden overflow-y-auto">
           <div className="flex items-center justify-between h-20 px-6 border-b border-border/40">
-            <img src={rasaLogo} alt="RASA" className="h-9 w-auto crisp-img" />
+            <img src={rasaLogo} alt="RASA" width={728} height={292} loading="lazy" className="h-9 w-auto crisp-img" />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2">
               <X className="h-5 w-5" />
             </button>
@@ -200,7 +200,7 @@ function CollectionsMega({
               className="group block p-3 border border-transparent hover:border-gold/30 hover:bg-surface/40 transition-all duration-300"
             >
               <div className="aspect-square mb-3 flex items-center justify-center">
-                <img src={c.logo} alt="" className="max-h-20 w-auto opacity-90 group-hover:opacity-100 crisp-img transition-opacity" />
+                <img src={c.logo} alt="" width={612} height={408} loading="lazy" className="max-h-20 w-auto opacity-90 group-hover:opacity-100 crisp-img transition-opacity" />
               </div>
               <p className="font-serif text-base text-foreground group-hover:text-gold transition-colors text-center">
                 {c.name}

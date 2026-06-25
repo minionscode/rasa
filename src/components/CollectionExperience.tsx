@@ -325,6 +325,9 @@ function BodySections({ collection }: { collection: Collection }) {
                       <img
                         src={c.logo}
                         alt=""
+                        width={612}
+                        height={408}
+                        loading="lazy"
                         className="h-12 w-auto opacity-90 group-hover:brightness-110 transition crisp-img"
                       />
                       <div>
