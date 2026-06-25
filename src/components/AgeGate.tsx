@@ -25,7 +25,7 @@ export function AgeGate() {
 
   useEffect(() => {
     setMounted(true);
-    setVerified(readVerified());
+    if (readVerified()) setVerified(true);
   }, [pathname]);
 
   if (!mounted) return null;
@@ -34,6 +34,11 @@ export function AgeGate() {
   const enter = () => {
     try {
       window.localStorage.setItem(STORAGE_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+    try {
+      window.sessionStorage.setItem(STORAGE_KEY, "1");
     } catch {
       /* ignore */
     }
