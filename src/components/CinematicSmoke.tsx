@@ -38,10 +38,14 @@ export function CinematicSmoke({ className = "", intensity = 0.6, tone = "copper
     if (!ctx) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMobile = window.innerWidth < 768;
+    const lowPower =
+      isMobile ||
+      (typeof navigator !== "undefined" && (navigator.hardwareConcurrency ?? 8) <= 4);
 
     let w = 0,
       h = 0,
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.5);
 
     const resize = () => {
       w = canvas.clientWidth;
@@ -66,7 +70,8 @@ export function CinematicSmoke({ className = "", intensity = 0.6, tone = "copper
     };
     const T = tones[tone];
 
-    const count = Math.round((reduced ? 8 : 22) * intensity);
+    const baseCount = reduced ? 8 : 22;
+    const count = Math.round(baseCount * intensity * (lowPower ? 0.5 : 1));
     const puffs: Puff[] = [];
 
     const spawn = (initial = false): Puff => {
