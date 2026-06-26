@@ -156,6 +156,9 @@ function Partners() {
 
 function PartnerForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const sendPartner = useServerFn(sendPartnerEmail);
   const [f, setF] = useState({
     name: "", company: "", phone: "", email: "",
     businessType: "Distributor", city: "", state: "", message: "",
@@ -163,9 +166,24 @@ function PartnerForm() {
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setF((p) => ({ ...p, [k]: e.target.value }));
 
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSendError(null);
+    setSending(true);
+    try {
+      await sendPartner({ data: f });
+      setSubmitted(true);
+    } catch {
+      setSendError("Something went wrong. Please try WhatsApp or email us directly.");
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <section id="register" className="py-28 bg-background border-t border-border/40">
       <div className="mx-auto max-w-5xl px-6 lg:px-10">
+
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold">Partner Registration</p>
           <h2 className="mt-4 font-serif text-4xl md:text-5xl text-balance">
