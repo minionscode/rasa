@@ -203,7 +203,7 @@ function PartnerForm() {
           </div>
         ) : (
           <form
-            onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
+            onSubmit={onSubmit}
             className="mt-14 grid sm:grid-cols-2 gap-x-10 gap-y-7"
           >
             <PField label="Name *" value={f.name} onChange={set("name")} required />
@@ -238,15 +238,25 @@ function PartnerForm() {
                 className="w-full bg-transparent border-b border-border/60 py-3 text-foreground focus:border-gold outline-none transition-colors resize-none"
               />
             </div>
-            <div className="sm:col-span-2 pt-4">
+            <div className="sm:col-span-2 pt-4 space-y-4">
               <button
                 type="submit"
-                className="inline-flex items-center gap-3 px-12 py-4 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
+                disabled={sending}
+                className="inline-flex items-center gap-3 px-12 py-4 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Submit Inquiry <ArrowRight className="h-3.5 w-3.5" />
+                {sending ? "Sending…" : "Submit Inquiry"}
+                {sending ? (
+                  <span className="h-3.5 w-3.5 rounded-full border-2 border-primary-foreground/40 border-t-primary-foreground animate-spin" />
+                ) : (
+                  <ArrowRight className="h-3.5 w-3.5" />
+                )}
               </button>
+              {sendError && (
+                <p className="text-xs font-serif italic text-destructive">{sendError}</p>
+              )}
             </div>
           </form>
+
         )}
       </div>
     </section>
