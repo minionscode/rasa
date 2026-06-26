@@ -296,10 +296,15 @@ function Contact() {
                 <div className="pt-3 flex flex-col sm:flex-row gap-3">
                   <button
                     type="submit"
-                    className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
+                    disabled={sending}
+                    className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Submit Enquiry
-                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                    {sending ? "Sending…" : "Submit Enquiry"}
+                    {sending ? (
+                      <span className="h-3.5 w-3.5 rounded-full border-2 border-primary-foreground/40 border-t-primary-foreground animate-spin" />
+                    ) : (
+                      <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                    )}
                   </button>
                   <a
                     href={whatsappLink}
@@ -310,9 +315,15 @@ function Contact() {
                     WhatsApp Instead <MessageCircle className="h-3.5 w-3.5" />
                   </a>
                 </div>
+                {sendError && (
+                  <p className="text-xs font-serif italic text-destructive">
+                    {sendError}
+                  </p>
+                )}
                 <p className="text-xs text-foreground/60">
                   By submitting you confirm you are 18+ and acting in a professional capacity.
                 </p>
+
               </form>
             )}
           </div>
