@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight } from "lucide-react";
+import { sendPartnerEmail } from "@/lib/api/sendPartnerEmail.functions";
 
 export const Route = createFileRoute("/partners")({
   head: () => ({
