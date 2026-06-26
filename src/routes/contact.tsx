@@ -93,6 +93,9 @@ function Contact() {
     message: prefilledMessage,
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+  const sendContact = useServerFn(sendContactEmail);
 
   const onChange =
     (k: keyof FormState) =>
@@ -118,10 +121,21 @@ function Contact() {
     return Object.keys(e).length === 0;
   };
 
-  const onSubmit = (ev: React.FormEvent) => {
+  const onSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     if (!validate()) return;
-    setSubmitted(true);
+    setSendError(null);
+    setSending(true);
+    try {
+      await sendContact({ data: form });
+      setSubmitted(true);
+    } catch {
+      setSendError(
+        "Something went wrong. Please try WhatsApp or email us directly.",
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   const whatsappLink = contactInfo.whatsappUrl;
