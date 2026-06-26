@@ -1,7 +1,9 @@
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { SectionLabel } from "../components/SectionLabel";
 import { contactInfo } from "@/data/contact";
+import { sendContactEmail } from "@/lib/api/sendContactEmail.functions";
 import {
   ArrowRight,
   Mail,
