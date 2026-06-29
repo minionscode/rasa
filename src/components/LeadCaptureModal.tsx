@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { X, ArrowRight, Mail } from "lucide-react";
-import { sendNewsletterEmail } from "@/server/sendNewsletterEmail";
+import { sendNewsletterEmail } from "@/lib/api/sendNewsletterEmail.functions";
 
 const SESSION_KEY = "rasa_lead_modal_shown";
 const VISIT_KEY = "rasa_visit_count";

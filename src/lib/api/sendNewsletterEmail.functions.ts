@@ -6,7 +6,7 @@ export type NewsletterPayload = {
 }
 
 export const sendNewsletterEmail = createServerFn({ method: 'POST' })
-  .validator((data: NewsletterPayload) => data)
+  .inputValidator((data: NewsletterPayload) => data)
   .handler(async ({ data }) => {
     const apiKey = process.env.RESEND_API_KEY
     if (!apiKey) throw new Error('RESEND_API_KEY is not set')
