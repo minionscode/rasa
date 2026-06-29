@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { X, ArrowRight, Mail } from "lucide-react";
+import { sendNewsletterEmail } from "@/server/sendNewsletterEmail";
 
 const SESSION_KEY = "rasa_lead_modal_shown";
 const VISIT_KEY = "rasa_visit_count";
 const AGE_KEY = "rasa_age_verified";
+const SUBSCRIBED_KEY = "rasa_newsletter_subscribed";
 
 const isAgeVerified = () => {
   if (typeof window === "undefined") return false;
@@ -18,15 +20,32 @@ const isAgeVerified = () => {
   }
 };
 
+const isAlreadySubscribed = () => {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.localStorage.getItem(SUBSCRIBED_KEY) === "1";
+  } catch {
+    return false;
+  }
+};
+
+const markSubscribed = () => {
+  try {
+    window.localStorage.setItem(SUBSCRIBED_KEY, "1");
+  } catch {}
+};
+
 export function LeadCaptureModal() {
   const [open, setOpen] = useState(false);
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [done, setDone] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
   const location = useLocation();
   const firedRef = useRef(false);
 
-  // Track visits per session
   useEffect(() => {
     if (typeof window === "undefined") return;
     const count = Number(sessionStorage.getItem(VISIT_KEY) || "0") + 1;
@@ -37,19 +56,22 @@ export function LeadCaptureModal() {
     if (typeof window === "undefined") return;
     if (sessionStorage.getItem(SESSION_KEY)) return;
 
+    if (isAlreadySubscribed()) {
+      setAlreadySubscribed(true);
+      return;
+    }
+
     const trigger = () => {
       if (firedRef.current) return;
       if (sessionStorage.getItem(SESSION_KEY)) return;
-      if (!isAgeVerified()) return; // never overlay the age gate
+      if (!isAgeVerified()) return;
       firedRef.current = true;
       sessionStorage.setItem(SESSION_KEY, "1");
       setOpen(true);
     };
 
-    // Trigger 1: 100s timer
     const timer = window.setTimeout(trigger, 100_000);
 
-    // Trigger 2: 60% scroll
     const onScroll = () => {
       const h = document.documentElement;
       const scrolled = (h.scrollTop + window.innerHeight) / h.scrollHeight;
@@ -57,7 +79,6 @@ export function LeadCaptureModal() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Trigger 3: second page in session
     const visits = Number(sessionStorage.getItem(VISIT_KEY) || "0");
     if (visits >= 2) {
       window.setTimeout(trigger, 1500);
@@ -81,7 +102,7 @@ export function LeadCaptureModal() {
     };
   }, [open]);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
     if (!ok) {
@@ -89,8 +110,18 @@ export function LeadCaptureModal() {
       return;
     }
     setError("");
-    setDone(true);
-    setTimeout(() => setOpen(false), 2000);
+    setSendError("");
+    setSending(true);
+    try {
+      await sendNewsletterEmail({ data: { email: email.trim() } });
+      markSubscribed();
+      setDone(true);
+      setTimeout(() => setOpen(false), 2500);
+    } catch {
+      setSendError("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   if (!open) return null;
@@ -125,66 +156,100 @@ export function LeadCaptureModal() {
           <X className="h-4 w-4" />
         </button>
 
-        <p className="text-[0.65rem] tracking-luxe uppercase text-gold inline-flex items-center gap-2">
-          <Mail className="h-3 w-3" /> Stay Updated
-        </p>
-        <h2
-          id="lead-title"
-          className="mt-3 font-serif text-3xl md:text-4xl text-balance"
-        >
-          Stay Updated with RASA
-        </h2>
-        <p className="mt-4 text-sm text-foreground/80 leading-relaxed">
-          Subscribe to receive product launches, collection releases, flavour
-          updates, partnership opportunities, and industry news.
-        </p>
-
-        {done ? (
-          <p className="mt-8 font-serif italic text-lg text-gold-soft">
-            Thank you — you are now subscribed.
-          </p>
+        {alreadySubscribed ? (
+          <>
+            <p className="text-[0.65rem] tracking-luxe uppercase text-gold inline-flex items-center gap-2">
+              <Mail className="h-3 w-3" /> Already Subscribed
+            </p>
+            <h2
+              id="lead-title"
+              className="mt-3 font-serif text-3xl md:text-4xl text-balance"
+            >
+              You're already subscribed.
+            </h2>
+            <p className="mt-4 text-sm text-foreground/80 leading-relaxed">
+              You're already subscribed to our newsletter. We'll keep you updated with the latest from the House of RASA.
+            </p>
+            <button
+              onClick={() => setOpen(false)}
+              className="mt-8 inline-flex items-center justify-center px-8 py-3.5 border border-border text-foreground/80 text-[0.7rem] tracking-luxe uppercase hover:border-gold/50 hover:text-gold transition-all duration-500"
+            >
+              Close
+            </button>
+          </>
         ) : (
-          <form onSubmit={onSubmit} noValidate className="mt-8 space-y-5">
-            <div>
-              <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">
-                Email Address
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (error) setError("");
-                }}
-                placeholder="Enter your email address"
-                className={`w-full bg-transparent border-b ${
-                  error ? "border-destructive" : "border-border/70"
-                } py-3 text-foreground focus:border-gold outline-none transition-colors placeholder:text-muted-foreground/50`}
-              />
-              {error && (
-                <p className="mt-2 text-xs font-serif italic text-destructive">
-                  {error}
-                </p>
-              )}
-            </div>
+          <>
+            <p className="text-[0.65rem] tracking-luxe uppercase text-gold inline-flex items-center gap-2">
+              <Mail className="h-3 w-3" /> Stay Updated
+            </p>
+            <h2
+              id="lead-title"
+              className="mt-3 font-serif text-3xl md:text-4xl text-balance"
+            >
+              Stay Updated with RASA
+            </h2>
+            <p className="mt-4 text-sm text-foreground/80 leading-relaxed">
+              Subscribe to receive product launches, collection releases, flavour
+              updates, partnership opportunities, and industry news.
+            </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <button
-                type="submit"
-                className="group inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-all duration-500 flex-1"
-              >
-                Subscribe
-                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="inline-flex items-center justify-center px-8 py-3.5 border border-border text-foreground/80 text-[0.7rem] tracking-luxe uppercase hover:border-gold/50 hover:text-gold transition-all duration-500"
-              >
-                Maybe Later
-              </button>
-            </div>
-          </form>
+            {done ? (
+              <p className="mt-8 font-serif italic text-lg text-gold-soft">
+                Thank you — you are now subscribed.
+              </p>
+            ) : (
+              <form onSubmit={onSubmit} noValidate className="mt-8 space-y-5">
+                <div>
+                  <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (error) setError("");
+                    }}
+                    placeholder="Enter your email address"
+                    className={`w-full bg-transparent border-b ${
+                      error ? "border-destructive" : "border-border/70"
+                    } py-3 text-foreground focus:border-gold outline-none transition-colors placeholder:text-muted-foreground/50`}
+                  />
+                  {error && (
+                    <p className="mt-2 text-xs font-serif italic text-destructive">
+                      {error}
+                    </p>
+                  )}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="group inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-gold text-primary-foreground text-[0.7rem] tracking-luxe uppercase hover:bg-gold-soft transition-all duration-500 flex-1 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {sending ? "Sending…" : "Subscribe"}
+                    {!sending && (
+                      <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(false)}
+                    className="inline-flex items-center justify-center px-8 py-3.5 border border-border text-foreground/80 text-[0.7rem] tracking-luxe uppercase hover:border-gold/50 hover:text-gold transition-all duration-500"
+                  >
+                    Maybe Later
+                  </button>
+                </div>
+
+                {sendError && (
+                  <p className="text-xs font-serif italic text-destructive">
+                    {sendError}
+                  </p>
+                )}
+              </form>
+            )}
+          </>
         )}
       </div>
     </div>
