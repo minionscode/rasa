@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TestEmailRouteImport } from './routes/test-email'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as HouseOfRasaRouteImport } from './routes/house-of-rasa'
 import { Route as HookahRouteImport } from './routes/hookah'
@@ -22,6 +23,11 @@ import { Route as CollectionsTarkibRouteImport } from './routes/collections.tark
 import { Route as CollectionsMakhmalRouteImport } from './routes/collections.makhmal'
 import { Route as CollectionsMajlisRouteImport } from './routes/collections.majlis'
 
+const TestEmailRoute = TestEmailRouteImport.update({
+  id: '/test-email',
+  path: '/test-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
+  '/test-email': typeof TestEmailRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
+  '/test-email': typeof TestEmailRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -121,6 +129,7 @@ export interface FileRoutesById {
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
+  '/test-email': typeof TestEmailRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/hookah'
     | '/house-of-rasa'
     | '/partners'
+    | '/test-email'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/hookah'
     | '/house-of-rasa'
     | '/partners'
+    | '/test-email'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/hookah'
     | '/house-of-rasa'
     | '/partners'
+    | '/test-email'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -180,6 +192,7 @@ export interface RootRouteChildren {
   HookahRoute: typeof HookahRoute
   HouseOfRasaRoute: typeof HouseOfRasaRoute
   PartnersRoute: typeof PartnersRoute
+  TestEmailRoute: typeof TestEmailRoute
   CollectionsMajlisRoute: typeof CollectionsMajlisRoute
   CollectionsMakhmalRoute: typeof CollectionsMakhmalRoute
   CollectionsTarkibRoute: typeof CollectionsTarkibRoute
@@ -188,6 +201,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/test-email': {
+      id: '/test-email'
+      path: '/test-email'
+      fullPath: '/test-email'
+      preLoaderRoute: typeof TestEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partners': {
       id: '/partners'
       path: '/partners'
@@ -284,6 +304,7 @@ const rootRouteChildren: RootRouteChildren = {
   HookahRoute: HookahRoute,
   HouseOfRasaRoute: HouseOfRasaRoute,
   PartnersRoute: PartnersRoute,
+  TestEmailRoute: TestEmailRoute,
   CollectionsMajlisRoute: CollectionsMajlisRoute,
   CollectionsMakhmalRoute: CollectionsMakhmalRoute,
   CollectionsTarkibRoute: CollectionsTarkibRoute,
