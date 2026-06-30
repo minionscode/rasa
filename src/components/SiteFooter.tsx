@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucide-react";
 
 import { contactInfo } from "@/data/contact";
 import { AnimatedWordmark } from "@/components/AnimatedWordmark";
+import { sendNewsletterEmail } from "@/lib/api/sendNewsletterEmail.functions";
 
 export function SiteFooter() {
   return (
@@ -192,10 +193,53 @@ export function SiteFooter() {
   );
 }
 
+const SUBSCRIBED_KEY = "rasa_newsletter_subscribed";
+
+const isAlreadySubscribed = () => {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.localStorage.getItem(SUBSCRIBED_KEY) === "1";
+  } catch {
+    return false;
+  }
+};
+
+const markSubscribed = () => {
+  try {
+    window.localStorage.setItem(SUBSCRIBED_KEY, "1");
+  } catch {}
+};
+
 function Newsletter() {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
+
+  useEffect(() => {
+    if (isAlreadySubscribed()) setAlreadySubscribed(true);
+  }, []);
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError("A valid email address is required.");
+      return;
+    }
+    setError("");
+    setSending(true);
+    try {
+      await sendNewsletterEmail({ data: { email: email.trim() } });
+      markSubscribed();
+      setDone(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <div className="grid md:grid-cols-[1.1fr_1fr] gap-8 items-center">
       <div>
@@ -206,22 +250,12 @@ function Newsletter() {
           industry news.
         </p>
       </div>
-      {done ? (
-        <p className="font-serif italic text-lg text-gold-soft">Thank you — you are now subscribed.</p>
+      {alreadySubscribed || done ? (
+        <p className="font-serif italic text-lg text-gold-soft">
+          {done ? "Thank you — you are now subscribed." : "You're subscribed to our premium updates."}
+        </p>
       ) : (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-              setError("A valid email address is required.");
-              return;
-            }
-            setError("");
-            setDone(true);
-          }}
-          noValidate
-          className="space-y-2"
-        >
+        <form onSubmit={onSubmit} noValidate className="space-y-2">
           <div
             className={`flex items-center gap-3 border-b ${error ? "border-destructive" : "border-border/70 focus-within:border-gold"} transition-colors`}
           >
@@ -234,12 +268,14 @@ function Newsletter() {
               }}
               placeholder="Enter your email address"
               className="flex-1 bg-transparent py-3 text-foreground outline-none placeholder:text-muted-foreground/60"
+              disabled={sending}
             />
             <button
               type="submit"
-              className="inline-flex items-center gap-2 py-3 text-[0.7rem] tracking-luxe uppercase text-gold hover:text-gold-soft transition-colors"
+              disabled={sending}
+              className="inline-flex items-center gap-2 py-3 text-[0.7rem] tracking-luxe uppercase text-gold hover:text-gold-soft transition-colors disabled:opacity-60"
             >
-              Subscribe <ArrowRight className="h-3.5 w-3.5" />
+              {sending ? "Sending…" : "Subscribe"} <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
           {error && <p className="text-xs font-serif italic text-destructive">{error}</p>}
