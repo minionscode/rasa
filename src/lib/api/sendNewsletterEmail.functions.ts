@@ -61,13 +61,21 @@ export const sendNewsletterEmail = createServerFn({ method: 'POST' })
     ])
 
     if (subscriberResult.status === 'rejected') {
+      console.error('Subscriber email threw:', subscriberResult.reason)
       const reason = subscriberResult.reason
       const msg = reason instanceof Error ? reason.message : 'Failed to send confirmation email'
       throw new Error(msg)
     }
 
+    if (subscriberResult.value.error) {
+      console.error('Subscriber email API error:', subscriberResult.value.error)
+      throw new Error(subscriberResult.value.error.message || 'Resend rejected the confirmation email')
+    }
+
     if (internalResult.status === 'rejected') {
-      console.error('Internal subscriber notification failed:', internalResult.reason)
+      console.error('Internal notification threw:', internalResult.reason)
+    } else if (internalResult.value.error) {
+      console.error('Internal notification API error:', internalResult.value.error)
     }
 
     return { ok: true }
