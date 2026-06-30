@@ -12,7 +12,7 @@ const schema = z.object({
 });
 
 const TO_ADDRESS = "admin@rasatobacco.com";
-const FROM_ADDRESS = "RASA Sales <onboarding@resend.dev>";
+const FROM_ADDRESS = "RASA Sales <noreply@rasatobacco.com>";
 
 const esc = (s: string) =>
   s.replace(/[&<>"']/g, (c) =>
