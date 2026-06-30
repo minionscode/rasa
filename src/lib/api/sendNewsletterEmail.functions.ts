@@ -45,7 +45,7 @@ export const sendNewsletterEmail = createServerFn({ method: 'POST' })
       </div>
     `
 
-    await Promise.all([
+    const [subscriberResult, internalResult] = await Promise.allSettled([
       resend.emails.send({
         from: 'RASA <noreply@rasatobacco.com>',
         to: [data.email],
@@ -59,6 +59,16 @@ export const sendNewsletterEmail = createServerFn({ method: 'POST' })
         html: internalHtml,
       }),
     ])
+
+    if (subscriberResult.status === 'rejected') {
+      const reason = subscriberResult.reason
+      const msg = reason instanceof Error ? reason.message : 'Failed to send confirmation email'
+      throw new Error(msg)
+    }
+
+    if (internalResult.status === 'rejected') {
+      console.error('Internal subscriber notification failed:', internalResult.reason)
+    }
 
     return { ok: true }
   })

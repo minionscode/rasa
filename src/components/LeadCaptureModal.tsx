@@ -32,6 +32,7 @@ const isAlreadySubscribed = () => {
 const markSubscribed = () => {
   try {
     window.localStorage.setItem(SUBSCRIBED_KEY, "1");
+    window.dispatchEvent(new Event("rasa-newsletter-subscribed"));
   } catch {}
 };
 
@@ -88,6 +89,12 @@ export function LeadCaptureModal() {
       window.clearTimeout(timer);
       window.removeEventListener("scroll", onScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    const onSubscribed = () => setAlreadySubscribed(true);
+    window.addEventListener("rasa-newsletter-subscribed", onSubscribed);
+    return () => window.removeEventListener("rasa-newsletter-subscribed", onSubscribed);
   }, []);
 
   useEffect(() => {
@@ -243,7 +250,7 @@ export function LeadCaptureModal() {
                 </div>
 
                 {sendError && (
-                  <p className="text-xs font-serif italic text-destructive">
+                  <p className="text-xs font-serif italic text-destructive bg-destructive/10 border border-destructive/30 rounded-sm px-3 py-2">
                     {sendError}
                   </p>
                 )}

@@ -207,6 +207,7 @@ const isAlreadySubscribed = () => {
 const markSubscribed = () => {
   try {
     window.localStorage.setItem(SUBSCRIBED_KEY, "1");
+    window.dispatchEvent(new Event("rasa-newsletter-subscribed"));
   } catch {}
 };
 
@@ -219,6 +220,12 @@ function Newsletter() {
 
   useEffect(() => {
     if (isAlreadySubscribed()) setAlreadySubscribed(true);
+  }, []);
+
+  useEffect(() => {
+    const onSubscribed = () => setAlreadySubscribed(true);
+    window.addEventListener("rasa-newsletter-subscribed", onSubscribed);
+    return () => window.removeEventListener("rasa-newsletter-subscribed", onSubscribed);
   }, []);
 
   const onSubmit = async (e: React.FormEvent) => {
