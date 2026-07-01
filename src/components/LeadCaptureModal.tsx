@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "@tanstack/react-router";
 import { X, ArrowRight, Mail } from "lucide-react";
-import { sendNewsletterEmail } from "@/lib/api/sendNewsletterEmail.functions";
+
 
 const SESSION_KEY = "rasa_lead_modal_shown";
 const VISIT_KEY = "rasa_visit_count";
@@ -120,7 +120,13 @@ export function LeadCaptureModal() {
     setSendError("");
     setSending(true);
     try {
-      await sendNewsletterEmail({ data: { email: email.trim() } });
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || 'Failed');
       markSubscribed();
       setDone(true);
       setTimeout(() => setOpen(false), 2500);
