@@ -9,16 +9,22 @@ export const sendNewsletterEmail = createServerFn({ method: 'POST' })
   .inputValidator((data: NewsletterPayload) => data)
   .handler(async ({ data }) => {
     const apiKey = process.env.RESEND_API_KEY
-    if (!apiKey) throw new Error('RESEND_API_KEY is not set')
+    console.log('RESEND_API_KEY present:', !!apiKey)
+    if (!apiKey) {
+      console.error('RESEND_API_KEY is not set in environment')
+      throw new Error('RESEND_API_KEY is not set')
+    }
+
 
     const resend = new Resend(apiKey)
 
     const confirmationHtml = `
       <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;padding:40px 32px;background:#0d0d0d;color:#e8e0d4;">
         <div style="text-align:center;margin-bottom:32px;">
-          <h1 style="color:#c9a96e;font-size:2rem;font-weight:400;letter-spacing:0.05em;margin:0;">RASA</h1>
-          <p style="color:#888;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;margin:6px 0 0;">Smoke, Perfected.</p>
+          <img src="https://rasatobacco.com/__l5e/assets-v1/fab30e32-ad30-4a8f-b380-b81aff00a8ef/rasa-logo.png" alt="RASA" style="height:72px;width:auto;display:inline-block;" />
+          <p style="color:#888;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;margin:8px 0 0;">Smoke, Perfected.</p>
         </div>
+
         <hr style="border:none;border-top:1px solid #2a2a2a;margin:0 0 32px;" />
         <h2 style="color:#e8e0d4;font-size:1.5rem;font-weight:400;margin:0 0 16px;">You are now subscribed.</h2>
         <p style="color:#b0a898;line-height:1.8;margin:0 0 24px;font-size:0.95rem;">
