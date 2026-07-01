@@ -4,7 +4,7 @@ import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucid
 
 import { contactInfo } from "@/data/contact";
 import { AnimatedWordmark } from "@/components/AnimatedWordmark";
-import { sendNewsletterEmail } from "@/lib/api/sendNewsletterEmail.functions";
+
 
 export function SiteFooter() {
   return (
@@ -237,7 +237,13 @@ function Newsletter() {
     setError("");
     setSending(true);
     try {
-      await sendNewsletterEmail({ data: { email: email.trim() } });
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || 'Failed');
       markSubscribed();
       setDone(true);
     } catch {
