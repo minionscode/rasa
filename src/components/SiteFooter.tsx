@@ -237,13 +237,11 @@ function Newsletter() {
     setError("");
     setSending(true);
     try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email.trim() }),
+      const { supabase } = await import('@/integrations/supabase/client');
+      const { error } = await supabase.functions.invoke('newsletter', {
+        body: { email: email.trim() },
       });
-      const data = await res.json();
-      if (!res.ok || data.error) throw new Error(data.error || 'Failed');
+      if (error) throw error;
       markSubscribed();
       setDone(true);
     } catch {
