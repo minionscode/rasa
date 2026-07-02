@@ -22,7 +22,6 @@ import { Route as CollectionsIndexRouteImport } from './routes/collections.index
 import { Route as CollectionsTarkibRouteImport } from './routes/collections.tarkib'
 import { Route as CollectionsMakhmalRouteImport } from './routes/collections.makhmal'
 import { Route as CollectionsMajlisRouteImport } from './routes/collections.majlis'
-import { Route as ApiNewsletterRouteImport } from './routes/api/newsletter'
 
 const TestEmailRoute = TestEmailRouteImport.update({
   id: '/test-email',
@@ -89,11 +88,6 @@ const CollectionsMajlisRoute = CollectionsMajlisRouteImport.update({
   path: '/collections/majlis',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiNewsletterRoute = ApiNewsletterRouteImport.update({
-  id: '/api/newsletter',
-  path: '/api/newsletter',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -105,7 +99,6 @@ export interface FileRoutesByFullPath {
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
-  '/api/newsletter': typeof ApiNewsletterRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -121,7 +114,6 @@ export interface FileRoutesByTo {
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
-  '/api/newsletter': typeof ApiNewsletterRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -138,7 +130,6 @@ export interface FileRoutesById {
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
-  '/api/newsletter': typeof ApiNewsletterRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -156,7 +147,6 @@ export interface FileRouteTypes {
     | '/house-of-rasa'
     | '/partners'
     | '/test-email'
-    | '/api/newsletter'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -172,7 +162,6 @@ export interface FileRouteTypes {
     | '/house-of-rasa'
     | '/partners'
     | '/test-email'
-    | '/api/newsletter'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -188,7 +177,6 @@ export interface FileRouteTypes {
     | '/house-of-rasa'
     | '/partners'
     | '/test-email'
-    | '/api/newsletter'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -205,7 +193,6 @@ export interface RootRouteChildren {
   HouseOfRasaRoute: typeof HouseOfRasaRoute
   PartnersRoute: typeof PartnersRoute
   TestEmailRoute: typeof TestEmailRoute
-  ApiNewsletterRoute: typeof ApiNewsletterRoute
   CollectionsMajlisRoute: typeof CollectionsMajlisRoute
   CollectionsMakhmalRoute: typeof CollectionsMakhmalRoute
   CollectionsTarkibRoute: typeof CollectionsTarkibRoute
@@ -305,13 +292,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsMajlisRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/newsletter': {
-      id: '/api/newsletter'
-      path: '/api/newsletter'
-      fullPath: '/api/newsletter'
-      preLoaderRoute: typeof ApiNewsletterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -325,7 +305,6 @@ const rootRouteChildren: RootRouteChildren = {
   HouseOfRasaRoute: HouseOfRasaRoute,
   PartnersRoute: PartnersRoute,
   TestEmailRoute: TestEmailRoute,
-  ApiNewsletterRoute: ApiNewsletterRoute,
   CollectionsMajlisRoute: CollectionsMajlisRoute,
   CollectionsMakhmalRoute: CollectionsMakhmalRoute,
   CollectionsTarkibRoute: CollectionsTarkibRoute,
