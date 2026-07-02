@@ -32,7 +32,7 @@ serve(async (req) => {
     const confirmationHtml = `
       <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;padding:40px 32px;background:#0d0d0d;color:#e8e0d4;">
         <div style="text-align:center;margin-bottom:32px;">
-          <h1 style="font-family:Georgia,serif;color:#c9a96e;font-size:2.8rem;font-weight:400;letter-spacing:0.25em;margin:0;text-transform:uppercase;">RASA</h1>
+          <img src="https://wqugkexzzevmbgrtiotk.supabase.co/storage/v1/object/public/assets/rasa-logo.png" alt="RASA" style="height:80px;width:auto;display:inline-block;" />
           <p style="color:#888;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;margin:8px 0 0;">Smoke, Perfected.</p>
         </div>
         <hr style="border:none;border-top:1px solid #2a2a2a;margin:0 0 32px;" />
