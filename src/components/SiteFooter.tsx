@@ -4,6 +4,7 @@ import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucid
 
 import { contactInfo } from "@/data/contact";
 import { AnimatedWordmark } from "@/components/AnimatedWordmark";
+import { PrivacyPolicyModal } from "@/components/PrivacyPolicyModal";
 
 
 export function SiteFooter() {
