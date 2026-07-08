@@ -179,9 +179,12 @@ export function SiteFooter() {
         <div className="mt-14 pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-foreground/65">
           <p>© {new Date().getFullYear()} RASA. All Rights Reserved.</p>
           <div className="flex gap-6 flex-wrap justify-center">
-            <a href="#" className="hover:text-gold transition-colors">
+            <button
+              onClick={() => setPrivacyOpen(true)}
+              className="hover:text-gold transition-colors cursor-pointer"
+            >
               Privacy Policy
-            </a>
+            </button>
             <a href="#" className="hover:text-gold transition-colors">
               Terms &amp; Conditions
             </a>
