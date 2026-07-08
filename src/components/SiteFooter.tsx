@@ -4,9 +4,11 @@ import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucid
 
 import { contactInfo } from "@/data/contact";
 import { AnimatedWordmark } from "@/components/AnimatedWordmark";
+import { PrivacyPolicyModal } from "@/components/PrivacyPolicyModal";
 
 
 export function SiteFooter() {
+  const [privacyOpen, setPrivacyOpen] = useState(false);
   return (
     <footer className="relative bg-ink border-t border-border/60">
       <div className="absolute inset-x-0 top-0 luxe-divider" />
@@ -177,9 +179,12 @@ export function SiteFooter() {
         <div className="mt-14 pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-foreground/65">
           <p>© {new Date().getFullYear()} RASA. All Rights Reserved.</p>
           <div className="flex gap-6 flex-wrap justify-center">
-            <a href="#" className="hover:text-gold transition-colors">
+            <button
+              onClick={() => setPrivacyOpen(true)}
+              className="hover:text-gold transition-colors cursor-pointer"
+            >
               Privacy Policy
-            </a>
+            </button>
             <a href="#" className="hover:text-gold transition-colors">
               Terms &amp; Conditions
             </a>
@@ -189,6 +194,7 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
+      <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
     </footer>
   );
 }
