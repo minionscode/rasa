@@ -36,19 +36,14 @@ serve(async (req) => {
           <p style="color:#888;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;margin:8px 0 0;">Smoke, Perfected.</p>
         </div>
         <hr style="border:none;border-top:1px solid #2a2a2a;margin:0 0 32px;" />
-        <h2 style="color:#e8e0d4;font-size:1.5rem;font-weight:400;margin:0 0 16px;">You are now subscribed.</h2>
-        <p style="color:#b0a898;line-height:1.8;margin:0 0 24px;font-size:0.95rem;">
-          Welcome to the House of RASA. You will be among the first to receive product launches,
-          collection releases, flavour updates, partnership opportunities, and curated industry news.
-        </p>
-        <p style="color:#b0a898;line-height:1.8;margin:0 0 32px;font-size:0.95rem;">
-          We do not believe in noise. Only in substance.
-        </p>
+        <p style="color:#b0a898;line-height:1.9;font-size:1rem;margin:0 0 20px;">Every great experience begins somewhere.</p>
+        <p style="color:#b0a898;line-height:1.9;font-size:1rem;margin:0 0 20px;">Thank you for choosing to stay connected with RASA.</p>
+        <p style="color:#b0a898;line-height:1.9;font-size:1rem;margin:0 0 20px;">You'll be among the first to discover new collections, product launches, exclusive updates, and special announcements.</p>
+        <p style="color:#b0a898;line-height:1.9;font-size:1rem;margin:0 0 32px;">We look forward to sharing what's next.</p>
         <hr style="border:none;border-top:1px solid #2a2a2a;margin:0 0 24px;" />
-        <p style="color:#555;font-size:0.75rem;text-align:center;margin:0;">
-          RASA Tobacco Partners Pvt. Ltd. · Gurugram, Haryana<br />
-          You received this because you subscribed at rasatobacco.com
-        </p>
+        <p style="color:#c9a96e;font-family:Georgia,serif;font-style:italic;font-size:0.95rem;margin:0 0 4px;">Smoke, Perfected.</p>
+        <p style="color:#888;font-size:0.85rem;margin:0;">— Team RASA</p>
+        <p style="color:#444;font-size:0.72rem;text-align:center;margin:32px 0 0;">RASA Tobacco Partners Pvt. Ltd. · Gurugram, Haryana<br />You received this because you subscribed at rasatobacco.com</p>
       </div>
     `
 
