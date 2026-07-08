@@ -8,6 +8,7 @@ import { PrivacyPolicyModal } from "@/components/PrivacyPolicyModal";
 
 
 export function SiteFooter() {
+  const [privacyOpen, setPrivacyOpen] = useState(false);
   return (
     <footer className="relative bg-ink border-t border-border/60">
       <div className="absolute inset-x-0 top-0 luxe-divider" />
