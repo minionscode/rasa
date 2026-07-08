@@ -194,6 +194,8 @@ export function SiteFooter() {
           </div>
         </div>
       </div>
+      </div>
+      <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
     </footer>
   );
 }
