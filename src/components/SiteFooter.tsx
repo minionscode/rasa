@@ -5,10 +5,12 @@ import { Instagram, Mail, Phone, MessageCircle, MapPin, ArrowRight } from "lucid
 import { contactInfo } from "@/data/contact";
 import { AnimatedWordmark } from "@/components/AnimatedWordmark";
 import { PrivacyPolicyModal } from "@/components/PrivacyPolicyModal";
+import { AgeRestrictionPolicyModal } from "@/components/AgeRestrictionPolicyModal";
 
 
 export function SiteFooter() {
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [ageOpen, setAgeOpen] = useState(false);
   return (
     <footer className="relative bg-ink border-t border-border/60">
       <div className="absolute inset-x-0 top-0 luxe-divider" />
@@ -188,13 +190,17 @@ export function SiteFooter() {
             <a href="#" className="hover:text-gold transition-colors">
               Terms &amp; Conditions
             </a>
-            <a href="#" className="hover:text-gold transition-colors">
+            <button
+              onClick={() => setAgeOpen(true)}
+              className="hover:text-gold transition-colors cursor-pointer"
+            >
               Age Restriction Policy
-            </a>
+            </button>
           </div>
         </div>
       </div>
       <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+      <AgeRestrictionPolicyModal open={ageOpen} onClose={() => setAgeOpen(false)} />
     </footer>
   );
 }

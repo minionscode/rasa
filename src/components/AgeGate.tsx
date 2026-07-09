@@ -87,12 +87,14 @@ export function AgeGate() {
             <p className="font-serif text-2xl md:text-[1.75rem] text-foreground/95 text-balance leading-snug animate-fade-up delay-200">
               This website contains content intended for adults.
             </p>
-            <p className="mt-4 text-sm text-muted-foreground animate-fade-up delay-300">
+            <p className="mt-3 text-sm text-muted-foreground animate-fade-up delay-300">
               Please confirm you are 18 years of age or older.
             </p>
 
+            <div className="luxe-divider my-8 animate-fade-up delay-350" />
+
             {/* Checkbox */}
-            <div className="mt-8 flex items-start justify-center gap-3 animate-fade-up delay-350">
+            <div className="flex items-start justify-center gap-3 animate-fade-up delay-350">
               <button
                 type="button"
                 role="checkbox"
@@ -128,7 +130,7 @@ export function AgeGate() {
             </div>
 
             {showError && (
-              <p className="mt-2 text-xs font-serif italic text-destructive animate-fade-up">
+              <p className="mt-3 text-xs font-serif italic text-red-400 bg-red-950/60 border border-red-800/50 px-4 py-2.5 animate-fade-up">
                 Please agree to the Age Restriction Policy to continue.
               </p>
             )}
