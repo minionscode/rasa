@@ -6,11 +6,13 @@ import { contactInfo } from "@/data/contact";
 import { AnimatedWordmark } from "@/components/AnimatedWordmark";
 import { PrivacyPolicyModal } from "@/components/PrivacyPolicyModal";
 import { AgeRestrictionPolicyModal } from "@/components/AgeRestrictionPolicyModal";
+import { TermsAndConditionsModal } from "@/components/TermsAndConditionsModal";
 
 
 export function SiteFooter() {
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [ageOpen, setAgeOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
   return (
     <footer className="relative bg-ink border-t border-border/60">
       <div className="absolute inset-x-0 top-0 luxe-divider" />
@@ -187,9 +189,12 @@ export function SiteFooter() {
             >
               Privacy Policy
             </button>
-            <a href="#" className="hover:text-gold transition-colors">
+            <button
+              onClick={() => setTermsOpen(true)}
+              className="hover:text-gold transition-colors cursor-pointer"
+            >
               Terms &amp; Conditions
-            </a>
+            </button>
             <button
               onClick={() => setAgeOpen(true)}
               className="hover:text-gold transition-colors cursor-pointer"
@@ -201,6 +206,7 @@ export function SiteFooter() {
       </div>
       <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
       <AgeRestrictionPolicyModal open={ageOpen} onClose={() => setAgeOpen(false)} />
+      <TermsAndConditionsModal open={termsOpen} onClose={() => setTermsOpen(false)} />
     </footer>
   );
 }
