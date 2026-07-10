@@ -61,9 +61,9 @@ function Partners() {
         <div className="absolute inset-0 grain" />
         <div className="relative z-10 text-center px-6 max-w-3xl animate-fade-up">
           <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-8">
-            Partnerships
+            Partnership
           </p>
-          <h1 className="font-serif text-6xl md:text-[8rem] leading-none">Partners</h1>
+          <h1 className="font-serif text-6xl md:text-[8rem] leading-none">Partner</h1>
           <div className="luxe-divider max-w-[6rem] mx-auto my-10" />
           <p className="font-serif italic text-xl md:text-2xl text-gold-soft">
             Join the House of RASA.
