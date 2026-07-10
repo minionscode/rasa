@@ -243,14 +243,15 @@ function BodySections({ collection }: { collection: Collection }) {
                   All {collection.name} Flavours
                 </h2>
               </div>
-              <Link
-                to="/contact"
-                search={{ collection: collection.name }}
+              <a
+                href={`https://wa.me/919090204008?text=${encodeURIComponent(`Hi, I'm interested in the full ${collection.name} catalogue. Could you please share more details?`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="luxe-underline text-[0.7rem] tracking-luxe uppercase"
                 style={{ color: collection.accentVar }}
               >
                 Request the full catalogue
-              </Link>
+              </a>
             </div>
           </Reveal>
 
