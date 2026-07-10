@@ -176,13 +176,44 @@ function CollectionsMega({
   onClose: () => void;
 }) {
   const items = [
-    { name: "Majlis", tag: "The Expression of Heritage", slug: "majlis", path: "/collections/majlis" as const, logo: majlisLogo },
-    { name: "Makhmal", tag: "The Expression of Refinement", slug: "makhmal", path: "/collections/makhmal" as const, logo: makhmalLogo },
-    { name: "Tarkib", tag: "The Expression of Innovation", slug: "tarkib", path: "/collections/tarkib" as const, logo: tarkibLogo },
+    {
+      name: "Majlis",
+      tag: "The Expression of Heritage",
+      label: "Collection I",
+      slug: "majlis",
+      path: "/collections/majlis" as const,
+      logo: majlisLogo,
+      bg: "#5B1823",
+      bgSecondary: "#742131",
+      pattern: "pattern-arabesque",
+    },
+    {
+      name: "Makhmal",
+      tag: "The Expression of Refinement",
+      label: "Collection II",
+      slug: "makhmal",
+      path: "/collections/makhmal" as const,
+      logo: makhmalLogo,
+      bg: "#3A123F",
+      bgSecondary: "#4D1754",
+      pattern: "pattern-velvet",
+    },
+    {
+      name: "Tarkib",
+      tag: "The Expression of Innovation",
+      label: "Collection III",
+      slug: "tarkib",
+      path: "/collections/tarkib" as const,
+      logo: tarkibLogo,
+      bg: "#081A3B",
+      bgSecondary: "#0D2552",
+      pattern: "pattern-geometric",
+    },
   ];
+
   return (
     <DropButton label="Collections" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-      <div className="bg-ink/95 backdrop-blur-xl border border-gold/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-6 w-[560px]">
+      <div className="bg-ink/95 backdrop-blur-xl border border-gold/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-5 w-[600px]">
         <Link
           to="/collections"
           onClick={onClose}
@@ -197,17 +228,47 @@ function CollectionsMega({
               key={c.slug}
               to={c.path}
               onClick={onClose}
-              className="group block p-3 border border-transparent hover:border-gold/30 hover:bg-surface/40 transition-all duration-300"
+              className={`group block relative overflow-hidden border border-white/10 hover:border-gold/40 transition-all duration-500`}
+              style={{ background: c.bg }}
             >
-              <div className="aspect-square mb-3 flex items-center justify-center">
-                <img src={c.logo} alt="" width={612} height={408} loading="lazy" className="max-h-20 w-auto opacity-90 group-hover:opacity-100 crisp-img transition-opacity" />
+              {/* Pattern overlay */}
+              <div
+                className={`absolute inset-0 ${c.pattern} opacity-40`}
+              />
+              {/* Gradient vignette — darkens edges so logo/text pop */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `radial-gradient(ellipse at 50% 30%, ${c.bgSecondary}80, ${c.bg}ff 80%)`,
+                }}
+              />
+              {/* Hover glow */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background: `radial-gradient(ellipse at 50% 0%, rgba(211,161,136,0.18), transparent 70%)`,
+                }}
+              />
+              {/* Content */}
+              <div className="relative z-10 p-4 flex flex-col items-center text-center">
+                <div className="h-20 flex items-center justify-center mb-3">
+                  <img
+                    src={c.logo}
+                    alt={c.name}
+                    width={612}
+                    height={408}
+                    loading="lazy"
+                    className="max-h-16 w-auto opacity-90 group-hover:opacity-100 crisp-img transition-opacity duration-300"
+                  />
+                </div>
+                <p className="text-[0.55rem] tracking-luxe uppercase text-white/50 mb-1">{c.label}</p>
+                <p className="font-serif text-base text-white group-hover:text-gold transition-colors duration-300">
+                  {c.name}
+                </p>
+                <p className="text-[0.55rem] tracking-luxe uppercase text-white/50 mt-1 leading-snug">
+                  {c.tag}
+                </p>
               </div>
-              <p className="font-serif text-base text-foreground group-hover:text-gold transition-colors text-center">
-                {c.name}
-              </p>
-              <p className="text-[0.6rem] tracking-luxe uppercase text-muted-foreground mt-1 text-center leading-snug">
-                {c.tag}
-              </p>
             </Link>
           ))}
         </div>
