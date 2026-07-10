@@ -107,8 +107,8 @@ export function AgeGate() {
                   checked
                     ? "border-gold bg-gold"
                     : showError
-                    ? "border-destructive"
-                    : "border-border/60 hover:border-gold/60"
+                    ? "border-red-400"
+                    : "border-gold/70 hover:border-gold"
                 }`}
               >
                 {checked && (
