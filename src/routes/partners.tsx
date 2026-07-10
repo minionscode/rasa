@@ -14,7 +14,7 @@ export const Route = createFileRoute("/partners")({
         content:
           "Distributor, Lounge, and Retail partnerships with RASA across India and the Gulf region.",
       },
-      { property: "og:title", content: "Partners — RASA" },
+      { property: "og:title", content: "Partner — RASA" },
       {
         property: "og:description",
         content: "Distributor, Lounge and Retail partnerships with the House of RASA.",
