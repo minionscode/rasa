@@ -8,7 +8,7 @@ import { sendPartnerEmail } from "@/lib/api/sendPartnerEmail.functions";
 export const Route = createFileRoute("/partners")({
   head: () => ({
     meta: [
-      { title: "Partners — Join the House of RASA" },
+      { title: "Partner — Join the House of RASA" },
       {
         name: "description",
         content:
