@@ -33,7 +33,7 @@ serve(async (req) => {
       <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;padding:40px 32px;background:#0d0d0d;color:#e8e0d4;">
         <div style="text-align:center;margin-bottom:32px;">
           <img src="https://wqugkexzzevmbgrtiotk.supabase.co/storage/v1/object/public/assets/rasa-logo.png" alt="RASA" style="height:80px;width:auto;display:inline-block;" />
-          <p style="color:#888;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;margin:8px 0 0;">Smoke, Perfected.</p>
+          <p style="font-family:'Cinzel',Georgia,serif;color:#888;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;margin:8px 0 0;">SMOKE, PERFECTED</p>
         </div>
         <hr style="border:none;border-top:1px solid #2a2a2a;margin:0 0 32px;" />
         <p style="color:#b0a898;line-height:1.9;font-size:1rem;margin:0 0 20px;">Every great experience begins somewhere.</p>
@@ -41,7 +41,7 @@ serve(async (req) => {
         <p style="color:#b0a898;line-height:1.9;font-size:1rem;margin:0 0 20px;">You'll be among the first to discover new collections, product launches, exclusive updates, and special announcements.</p>
         <p style="color:#b0a898;line-height:1.9;font-size:1rem;margin:0 0 32px;">We look forward to sharing what's next.</p>
         <hr style="border:none;border-top:1px solid #2a2a2a;margin:0 0 24px;" />
-        <p style="color:#c9a96e;font-family:Georgia,serif;font-style:italic;font-size:0.95rem;margin:0 0 4px;">Smoke, Perfected.</p>
+        <p style="font-family:'Cinzel',Georgia,serif;color:#c9a96e;font-size:0.95rem;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 4px;">SMOKE, PERFECTED</p>
         <p style="color:#888;font-size:0.85rem;margin:0;">— Team RASA</p>
         <p style="color:#444;font-size:0.72rem;text-align:center;margin:32px 0 0;">RASA Tobacco Partners Pvt. Ltd. · Gurugram, Haryana<br />You received this because you subscribed at rasatobacco.com</p>
       </div>

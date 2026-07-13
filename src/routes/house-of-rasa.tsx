@@ -198,9 +198,9 @@ function HeroBlock() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 1.4 }}
-          className="font-serif italic text-xl md:text-3xl text-gold-soft"
+          className="font-display uppercase tracking-wider text-xl md:text-3xl text-gold-soft"
         >
-          Smoke, Perfected.
+          SMOKE, PERFECTED
         </motion.p>
       </motion.div>
     </section>
@@ -285,8 +285,8 @@ function PillarsSection() {
           <RevealChild>
             <h2 className="font-serif font-light text-4xl md:text-6xl text-balance leading-[1.02]">
               What{" "}
-              <em className="not-italic gradient-gold-text italic">
-                Smoke, Perfected.
+              <em className="not-italic gradient-gold-text font-display uppercase tracking-wider">
+                SMOKE, PERFECTED
               </em>{" "}
               Means
             </h2>
@@ -495,8 +495,8 @@ function ClosingSection() {
             </div>
           </RevealChild>
           <RevealChild>
-            <p className="font-serif text-2xl md:text-4xl tracking-[0.15em] gradient-gold-text mt-8">
-              Smoke, Perfected.
+            <p className="font-display uppercase text-2xl md:text-4xl tracking-wider gradient-gold-text mt-8">
+              SMOKE, PERFECTED
             </p>
           </RevealChild>
         </RevealGroup>
