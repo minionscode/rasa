@@ -153,9 +153,9 @@ function Hero() {
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.4, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 font-serif italic text-2xl md:text-4xl gradient-gold-text tracking-wide"
+            className="mt-6 font-display uppercase text-2xl md:text-4xl gradient-gold-text tracking-wider"
           >
-            Smoke, Perfected.
+            SMOKE, PERFECTED
           </motion.p>
         </motion.div>
       </div>

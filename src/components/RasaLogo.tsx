@@ -17,8 +17,8 @@ export function RasaLogo({ className = "", showTag = false, imgClassName = "h-10
         decoding="async"
       />
       {showTag && (
-        <span className="mt-2 text-[0.6rem] md:text-xs tracking-luxe text-muted-foreground uppercase">
-          Smoke, Perfected
+        <span className="mt-2 font-display text-[0.6rem] md:text-xs tracking-wider text-muted-foreground uppercase">
+          SMOKE, PERFECTED
         </span>
       )}
     </div>

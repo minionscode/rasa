@@ -24,7 +24,7 @@ export function SiteFooter() {
           {/* Brand */}
           <div className="lg:col-span-1 sm:col-span-2">
             <AnimatedWordmark size="h-14" halo={false} float={false} />
-            <p className="mt-4 font-serif italic text-base gradient-gold-text">Smoke, Perfected.</p>
+            <p className="mt-4 font-display uppercase tracking-wider text-base gradient-gold-text">SMOKE, PERFECTED</p>
             <p className="mt-5 text-sm text-foreground/75 leading-relaxed max-w-xs">
               A luxury hookah lifestyle house and premium distribution partner — built on craftsmanship, character and
               refinement.

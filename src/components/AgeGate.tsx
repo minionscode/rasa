@@ -79,7 +79,7 @@ export function AgeGate() {
 
             <div className="animate-fade-up flex flex-col items-center">
               <img src={rasaLogo} alt="RASA" width={728} height={292} loading="lazy" className="h-24 md:h-28 w-auto" />
-              <p className="mt-5 font-serif italic text-lg md:text-xl text-gold-soft">Smoke, Perfected.</p>
+              <p className="mt-5 font-display uppercase tracking-wider text-lg md:text-xl text-gold-soft">SMOKE, PERFECTED</p>
             </div>
 
             <div className="luxe-divider my-10 animate-fade-up delay-100" />
