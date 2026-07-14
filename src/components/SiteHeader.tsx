@@ -75,6 +75,9 @@ export function SiteHeader() {
             <Link to="/partners" className={navLink} activeProps={{ className: "text-gold" }}>
               Partner
             </Link>
+            <Link to="/loyalty" className={navLink} activeProps={{ className: "text-gold" }}>
+              Loyalty
+            </Link>
             <Link to="/contact" className={navLink} activeProps={{ className: "text-gold" }}>
               Contact
             </Link>
