@@ -119,6 +119,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const showWhatsApp = pathname !== "/age-restricted" && pathname !== "/test-email";
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -130,6 +132,7 @@ function RootComponent() {
       </main>
       <SiteFooter />
       <LeadCaptureModal />
+      {showWhatsApp && <WhatsAppFloat />}
     </QueryClientProvider>
   );
 }
