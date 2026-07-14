@@ -123,6 +123,7 @@ export function SiteHeader() {
               { to: "/coming-soon", label: "Hookahs", search: { category: "hookahs" } },
               { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
               { to: "/partners", label: "Partner" },
+              { to: "/loyalty", label: "Loyalty" },
               { to: "/contact", label: "Contact" },
             ].map((item) => (
               <Link
