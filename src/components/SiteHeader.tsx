@@ -75,6 +75,9 @@ export function SiteHeader() {
             <Link to="/partners" className={navLink} activeProps={{ className: "text-gold" }}>
               Partner
             </Link>
+            <Link to="/loyalty" className={navLink} activeProps={{ className: "text-gold" }}>
+              Loyalty
+            </Link>
             <Link to="/contact" className={navLink} activeProps={{ className: "text-gold" }}>
               Contact
             </Link>
@@ -120,6 +123,7 @@ export function SiteHeader() {
               { to: "/coming-soon", label: "Hookahs", search: { category: "hookahs" } },
               { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
               { to: "/partners", label: "Partner" },
+              { to: "/loyalty", label: "Loyalty" },
               { to: "/contact", label: "Contact" },
             ].map((item) => (
               <Link

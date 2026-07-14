@@ -14,7 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      loyalty_members: {
+        Row: {
+          birthday: string | null
+          city: string | null
+          created_at: string | null
+          email: string
+          id: string
+          instagram_handle: string | null
+          name: string
+          phone: string | null
+          points: number | null
+          referral_code: string | null
+          referred_by: string | null
+          tier: string | null
+          total_spent: number | null
+        }
+        Insert: {
+          birthday?: string | null
+          city?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          instagram_handle?: string | null
+          name: string
+          phone?: string | null
+          points?: number | null
+          referral_code?: string | null
+          referred_by?: string | null
+          tier?: string | null
+          total_spent?: number | null
+        }
+        Update: {
+          birthday?: string | null
+          city?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          instagram_handle?: string | null
+          name?: string
+          phone?: string | null
+          points?: number | null
+          referral_code?: string | null
+          referred_by?: string | null
+          tier?: string | null
+          total_spent?: number | null
+        }
+        Relationships: []
+      }
+      loyalty_points_log: {
+        Row: {
+          created_at: string | null
+          id: string
+          member_id: string | null
+          points: number
+          reason: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          member_id?: string | null
+          points: number
+          reason: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          member_id?: string | null
+          points?: number
+          reason?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "loyalty_points_log_member_id_fkey"
+            columns: ["member_id"]
+            isOneToOne: false
+            referencedRelation: "loyalty_members"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
