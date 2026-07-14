@@ -57,7 +57,12 @@ const REDEEM_WAYS = [
 
 function LoyaltyPage() {
   const [form, setForm] = useState({
-    name: "", email: "", phone: "", city: "", birthday: "", instagram_handle: "",
+    name: "",
+    email: "",
+    phone: "",
+    city: "",
+    birthday: "",
+    instagram_handle: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -98,18 +103,19 @@ function LoyaltyPage() {
 
   return (
     <>
-      <SiteHeader />
       <main className="bg-ink text-foreground min-h-screen">
-
         {/* Hero */}
         <section className="relative pt-40 pb-24 px-6 text-center overflow-hidden">
           <div className="absolute inset-0 grain opacity-40" />
           <div className="relative z-10 max-w-3xl mx-auto">
             <p className="text-[0.65rem] tracking-luxe uppercase text-gold mb-4">Exclusive Membership</p>
             <h1 className="font-serif text-6xl md:text-8xl leading-none mb-6">Loyalty</h1>
-            <p className="font-display text-sm tracking-luxe uppercase" style={{ color: "#DEA193" }}>SMOKE, PERFECTED</p>
+            <p className="font-display text-sm tracking-luxe uppercase" style={{ color: "#DEA193" }}>
+              SMOKE, PERFECTED
+            </p>
             <p className="mt-8 text-foreground/75 max-w-xl mx-auto leading-relaxed">
-              Join the House of RASA's exclusive loyalty program. Earn points, unlock rewards, and rise through tiers crafted for the discerning connoisseur.
+              Join the House of RASA's exclusive loyalty program. Earn points, unlock rewards, and rise through tiers
+              crafted for the discerning connoisseur.
             </p>
           </div>
         </section>
@@ -122,7 +128,10 @@ function LoyaltyPage() {
           <h2 className="font-serif text-4xl text-center mb-12">How to Earn</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {EARN_WAYS.map((w) => (
-              <div key={w.label} className="border border-border/40 hover:border-gold/40 transition-colors p-6 bg-surface/20">
+              <div
+                key={w.label}
+                className="border border-border/40 hover:border-gold/40 transition-colors p-6 bg-surface/20"
+              >
                 <div className="text-gold mb-3">{w.icon}</div>
                 <p className="font-serif text-lg mb-1">{w.label}</p>
                 <p className="text-xs text-foreground/65 leading-relaxed">{w.desc}</p>
@@ -159,12 +168,17 @@ function LoyaltyPage() {
                 style={{ borderColor: t.border, background: `${t.color}08` }}
               >
                 <div className="w-8 h-px mb-4" style={{ background: t.color }} />
-                <p className="font-serif text-2xl mb-1" style={{ color: t.color }}>{t.name}</p>
+                <p className="font-serif text-2xl mb-1" style={{ color: t.color }}>
+                  {t.name}
+                </p>
                 <p className="text-[0.6rem] tracking-luxe uppercase text-foreground/50 mb-4">{t.requirement}</p>
                 <ul className="space-y-2">
                   {t.benefits.map((b) => (
                     <li key={b} className="flex items-start gap-2 text-xs text-foreground/75">
-                      <span style={{ color: t.color }} className="mt-0.5 shrink-0">·</span>{b}
+                      <span style={{ color: t.color }} className="mt-0.5 shrink-0">
+                        ·
+                      </span>
+                      {b}
                     </li>
                   ))}
                 </ul>
@@ -183,7 +197,9 @@ function LoyaltyPage() {
           {submitted ? (
             <div className="border border-gold/30 bg-gold/5 p-10 text-center">
               <p className="font-serif text-3xl text-gold mb-4">Welcome to RASA.</p>
-              <p className="text-foreground/75 leading-relaxed">You are now a Bronze member of the House of RASA Loyalty Program. Our team will be in touch shortly.</p>
+              <p className="text-foreground/75 leading-relaxed">
+                You are now a Bronze member of the House of RASA Loyalty Program. Our team will be in touch shortly.
+              </p>
             </div>
           ) : (
             <form onSubmit={onSubmit} noValidate className="space-y-5">
@@ -228,9 +244,7 @@ function LoyaltyPage() {
             </form>
           )}
         </section>
-
       </main>
-      <SiteFooter />
     </>
   );
 }
