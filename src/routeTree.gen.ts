@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TestEmailRouteImport } from './routes/test-email'
 import { Route as PartnersRouteImport } from './routes/partners'
+import { Route as LoyaltyRouteImport } from './routes/loyalty'
 import { Route as HouseOfRasaRouteImport } from './routes/house-of-rasa'
 import { Route as HookahRouteImport } from './routes/hookah'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -31,6 +32,11 @@ const TestEmailRoute = TestEmailRouteImport.update({
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoyaltyRoute = LoyaltyRouteImport.update({
+  id: '/loyalty',
+  path: '/loyalty',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HouseOfRasaRoute = HouseOfRasaRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
+  '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
+  '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
+  '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/hookah'
     | '/house-of-rasa'
+    | '/loyalty'
     | '/partners'
     | '/test-email'
     | '/collections/majlis'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/hookah'
     | '/house-of-rasa'
+    | '/loyalty'
     | '/partners'
     | '/test-email'
     | '/collections/majlis'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/hookah'
     | '/house-of-rasa'
+    | '/loyalty'
     | '/partners'
     | '/test-email'
     | '/collections/majlis'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   HookahRoute: typeof HookahRoute
   HouseOfRasaRoute: typeof HouseOfRasaRoute
+  LoyaltyRoute: typeof LoyaltyRoute
   PartnersRoute: typeof PartnersRoute
   TestEmailRoute: typeof TestEmailRoute
   CollectionsMajlisRoute: typeof CollectionsMajlisRoute
@@ -213,6 +226,13 @@ declare module '@tanstack/react-router' {
       path: '/partners'
       fullPath: '/partners'
       preLoaderRoute: typeof PartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loyalty': {
+      id: '/loyalty'
+      path: '/loyalty'
+      fullPath: '/loyalty'
+      preLoaderRoute: typeof LoyaltyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/house-of-rasa': {
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   HookahRoute: HookahRoute,
   HouseOfRasaRoute: HouseOfRasaRoute,
+  LoyaltyRoute: LoyaltyRoute,
   PartnersRoute: PartnersRoute,
   TestEmailRoute: TestEmailRoute,
   CollectionsMajlisRoute: CollectionsMajlisRoute,
