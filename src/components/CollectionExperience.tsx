@@ -1,7 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { AuthModal } from "@/components/AuthModal";
 
 import { collections, formats, type Collection, type Flavour } from "@/data/collections";
 import { FormatEnquireChip } from "@/routes/collections.index";
@@ -171,6 +173,8 @@ function BodySections({ collection }: { collection: Collection }) {
   const sectionBg = `radial-gradient(ellipse at 20% 10%, ${secondaryVar} 0%, transparent 50%), radial-gradient(ellipse at 85% 90%, color-mix(in oklab, ${collection.accentVar} 8%, transparent) 0%, transparent 60%), linear-gradient(180deg, color-mix(in oklab, ${collection.bgVar} 60%, var(--ink)) 0%, var(--ink) 100%)`;
   const smokeRef = useRef<HTMLDivElement | null>(null);
   const smokeInView = useInView(smokeRef, { margin: "200px 0px", once: false });
+  const { user } = useAuth();
+  const [authOpen, setAuthOpen] = useState(false);
 
   return (
     <div ref={smokeRef} className="relative overflow-hidden" style={{ background: sectionBg }}>
@@ -243,15 +247,28 @@ function BodySections({ collection }: { collection: Collection }) {
                   All {collection.name} Flavours
                 </h2>
               </div>
-              <a
-                href={`https://wa.me/919090204008?text=${encodeURIComponent(`Hi, I'm interested in the full ${collection.name} catalogue. Could you please share more details?`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="luxe-underline text-[0.7rem] tracking-luxe uppercase"
-                style={{ color: collection.accentVar }}
-              >
-                Request the full catalogue
-              </a>
+              {user ? (
+                <a
+                  href={`https://wa.me/919090204008?text=${encodeURIComponent(`Hi, I'm interested in the full ${collection.name} catalogue. Could you please share more details?`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="luxe-underline text-[0.7rem] tracking-luxe uppercase"
+                  style={{ color: collection.accentVar }}
+                >
+                  Request the full catalogue
+                </a>
+              ) : (
+                <>
+                  <button
+                    onClick={() => setAuthOpen(true)}
+                    className="luxe-underline text-[0.7rem] tracking-luxe uppercase"
+                    style={{ color: collection.accentVar }}
+                  >
+                    Request the full catalogue
+                  </button>
+                  <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} reason="catalogue" />
+                </>
+              )}
             </div>
           </Reveal>
 

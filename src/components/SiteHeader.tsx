@@ -6,6 +6,7 @@ import majlisLogo from "@/assets/majlis-logo.png";
 import makhmalLogo from "@/assets/makhmal-logo.png";
 import tarkibLogo from "@/assets/tarkib-logo.png";
 import { collections } from "@/data/collections";
+import { useAuth } from "@/hooks/useAuth";
 
 type DropItem = {
   label: string;
@@ -21,6 +22,7 @@ export function SiteHeader() {
   const [search, setSearch] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -90,6 +92,23 @@ export function SiteHeader() {
             >
               <Search className="h-4 w-4" />
             </button>
+
+            {user ? (
+              <button
+                onClick={signOut}
+                className="flex items-center gap-2 text-[0.65rem] tracking-luxe uppercase text-foreground/70 hover:text-gold transition-colors"
+                title="Sign out"
+              >
+                {user.user_metadata?.avatar_url ? (
+                  <img src={user.user_metadata.avatar_url as string} alt="" className="w-7 h-7 rounded-full object-cover border border-gold/30" />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center text-gold text-xs font-medium">
+                    {((user.user_metadata?.full_name as string) || user.email || "U")[0].toUpperCase()}
+                  </div>
+                )}
+                <span className="hidden lg:inline">Sign Out</span>
+              </button>
+            ) : null}
           </nav>
 
           <div className="lg:hidden flex items-center gap-4">

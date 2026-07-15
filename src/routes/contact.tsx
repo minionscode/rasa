@@ -1,5 +1,7 @@
 import { createFileRoute, useSearch } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { AuthModal } from "@/components/AuthModal";
 import { useServerFn } from "@tanstack/react-start";
 import { SectionLabel } from "../components/SectionLabel";
 import { contactInfo } from "@/data/contact";
@@ -96,6 +98,18 @@ function Contact() {
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
   const sendContact = useServerFn(sendContactEmail);
+  const { user } = useAuth();
+  const [authOpen, setAuthOpen] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setForm((f) => ({
+        ...f,
+        name: f.name || (user.user_metadata?.full_name as string) || (user.user_metadata?.name as string) || "",
+        email: f.email || user.email || "",
+      }));
+    }
+  }, [user]);
 
   const onChange =
     (k: keyof FormState) =>
@@ -294,18 +308,28 @@ function Contact() {
                 </div>
 
                 <div className="pt-3 flex flex-col sm:flex-row gap-3">
-                  <button
-                    type="submit"
-                    disabled={sending}
-                    className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500 disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
-                    {sending ? "Sending…" : "Submit Enquiry"}
-                    {sending ? (
-                      <span className="h-3.5 w-3.5 rounded-full border-2 border-primary-foreground/40 border-t-primary-foreground animate-spin" />
-                    ) : (
-                      <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                    )}
-                  </button>
+                  {!user ? (
+                    <button
+                      type="button"
+                      onClick={() => setAuthOpen(true)}
+                      className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
+                    >
+                      Sign In to Submit <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      disabled={sending}
+                      className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500 disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {sending ? "Sending…" : "Submit Enquiry"}
+                      {sending ? (
+                        <span className="h-3.5 w-3.5 rounded-full border-2 border-primary-foreground/40 border-t-primary-foreground animate-spin" />
+                      ) : (
+                        <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                      )}
+                    </button>
+                  )}
                   <a
                     href={whatsappLink}
                     target="_blank"
@@ -369,6 +393,7 @@ function Contact() {
           </aside>
         </div>
       </div>
+      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} reason="contact" />
     </section>
   );
 }
