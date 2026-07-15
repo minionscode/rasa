@@ -9,7 +9,7 @@ type Props = {
 };
 
 export function AuthModal({ open, onClose, reason = "contact" }: Props) {
-  const { signInWithGoogle } = useAuth();
+  const { signInWithGoogle, user } = useAuth();
 
   useEffect(() => {
     if (!open) return;
@@ -22,6 +22,12 @@ export function AuthModal({ open, onClose, reason = "contact" }: Props) {
       window.removeEventListener("keydown", onKey);
     };
   }, [open, onClose]);
+
+  useEffect(() => {
+    if (user && open) {
+      onClose();
+    }
+  }, [user, open, onClose]);
 
   if (!open) return null;
 
