@@ -94,6 +94,36 @@ export type Database = {
           },
         ]
       }
+      users: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          email: string
+          full_name: string | null
+          id: string
+          last_sign_in: string | null
+          provider: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email: string
+          full_name?: string | null
+          id: string
+          last_sign_in?: string | null
+          provider?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string | null
+          id?: string
+          last_sign_in?: string | null
+          provider?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
