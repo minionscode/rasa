@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 import type { User } from "@supabase/supabase-js";
 
 export function useAuth() {
@@ -18,7 +17,6 @@ export function useAuth() {
       setUser(u);
       setLoading(false);
 
-      // Upsert into public.users on sign in
       if (u) {
         await supabase.from("users").upsert({
           id: u.id,
@@ -35,9 +33,12 @@ export function useAuth() {
   }, []);
 
   const signInWithGoogle = useCallback(async () => {
-    await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.href,
-      extraParams: { prompt: "select_account" },
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.href,
+        queryParams: { prompt: "select_account" },
+      },
     });
   }, []);
 
