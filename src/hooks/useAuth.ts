@@ -11,40 +11,35 @@ export function useAuth() {
       setUser(session?.user ?? null);
       setLoading(false);
     });
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       const u = session?.user ?? null;
       setUser(u);
       setLoading(false);
-
       if (u) {
         await supabase.from("users").upsert({
           id: u.id,
           email: u.email!,
-          full_name: u.user_metadata?.full_name ?? u.user_metadata?.name ?? null,
+          full_name: u.user_metadata?.full_name ?? null,
           avatar_url: u.user_metadata?.avatar_url ?? null,
-          provider: u.app_metadata?.provider ?? "google",
+          provider: "email",
           last_sign_in: new Date().toISOString(),
         }, { onConflict: "id" });
       }
     });
-
     return () => subscription.unsubscribe();
   }, []);
 
-  const signInWithGoogle = useCallback(async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `https://wqugkexzzevmbgrtiotk.supabase.co/auth/v1/callback`,
-        queryParams: { prompt: "select_account" },
-      },
+  const sendMagicLink = useCallback(async (email: string) => {
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: window.location.href },
     });
+    if (error) throw error;
   }, []);
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
   }, []);
 
-  return { user, loading, signInWithGoogle, signOut };
+  return { user, loading, sendMagicLink, signOut };
 }
