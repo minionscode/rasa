@@ -36,7 +36,7 @@ export function useAuth() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: window.location.href,
+        redirectTo: `https://qhzbxlyyksppynxnnmqe.supabase.co/auth/v1/callback`,
         queryParams: { prompt: "select_account" },
       },
     });
