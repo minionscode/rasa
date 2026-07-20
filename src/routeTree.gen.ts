@@ -24,6 +24,8 @@ import { Route as CollectionsIndexRouteImport } from './routes/collections.index
 import { Route as CollectionsTarkibRouteImport } from './routes/collections.tarkib'
 import { Route as CollectionsMakhmalRouteImport } from './routes/collections.makhmal'
 import { Route as CollectionsMajlisRouteImport } from './routes/collections.majlis'
+import { Route as AccountSettingsRouteImport } from './routes/account.settings'
+import { Route as AccountOrdersRouteImport } from './routes/account.orders'
 
 const TestEmailRoute = TestEmailRouteImport.update({
   id: '/test-email',
@@ -100,6 +102,16 @@ const CollectionsMajlisRoute = CollectionsMajlisRouteImport.update({
   path: '/collections/majlis',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountSettingsRoute = AccountSettingsRouteImport.update({
+  id: '/account/settings',
+  path: '/account/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountOrdersRoute = AccountOrdersRouteImport.update({
+  id: '/account/orders',
+  path: '/account/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -113,6 +125,8 @@ export interface FileRoutesByFullPath {
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
+  '/account/orders': typeof AccountOrdersRoute
+  '/account/settings': typeof AccountSettingsRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -130,6 +144,8 @@ export interface FileRoutesByTo {
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
+  '/account/orders': typeof AccountOrdersRoute
+  '/account/settings': typeof AccountSettingsRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -148,6 +164,8 @@ export interface FileRoutesById {
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
+  '/account/orders': typeof AccountOrdersRoute
+  '/account/settings': typeof AccountSettingsRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
   '/collections/makhmal': typeof CollectionsMakhmalRoute
   '/collections/tarkib': typeof CollectionsTarkibRoute
@@ -167,6 +185,8 @@ export interface FileRouteTypes {
     | '/loyalty'
     | '/partners'
     | '/test-email'
+    | '/account/orders'
+    | '/account/settings'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -184,6 +204,8 @@ export interface FileRouteTypes {
     | '/loyalty'
     | '/partners'
     | '/test-email'
+    | '/account/orders'
+    | '/account/settings'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -201,6 +223,8 @@ export interface FileRouteTypes {
     | '/loyalty'
     | '/partners'
     | '/test-email'
+    | '/account/orders'
+    | '/account/settings'
     | '/collections/majlis'
     | '/collections/makhmal'
     | '/collections/tarkib'
@@ -219,6 +243,8 @@ export interface RootRouteChildren {
   LoyaltyRoute: typeof LoyaltyRoute
   PartnersRoute: typeof PartnersRoute
   TestEmailRoute: typeof TestEmailRoute
+  AccountOrdersRoute: typeof AccountOrdersRoute
+  AccountSettingsRoute: typeof AccountSettingsRoute
   CollectionsMajlisRoute: typeof CollectionsMajlisRoute
   CollectionsMakhmalRoute: typeof CollectionsMakhmalRoute
   CollectionsTarkibRoute: typeof CollectionsTarkibRoute
@@ -332,6 +358,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsMajlisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/settings': {
+      id: '/account/settings'
+      path: '/account/settings'
+      fullPath: '/account/settings'
+      preLoaderRoute: typeof AccountSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/orders': {
+      id: '/account/orders'
+      path: '/account/orders'
+      fullPath: '/account/orders'
+      preLoaderRoute: typeof AccountOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -347,6 +387,8 @@ const rootRouteChildren: RootRouteChildren = {
   LoyaltyRoute: LoyaltyRoute,
   PartnersRoute: PartnersRoute,
   TestEmailRoute: TestEmailRoute,
+  AccountOrdersRoute: AccountOrdersRoute,
+  AccountSettingsRoute: AccountSettingsRoute,
   CollectionsMajlisRoute: CollectionsMajlisRoute,
   CollectionsMakhmalRoute: CollectionsMakhmalRoute,
   CollectionsTarkibRoute: CollectionsTarkibRoute,
