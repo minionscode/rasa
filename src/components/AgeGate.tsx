@@ -29,7 +29,7 @@ export function AgeGate() {
   }, [pathname]);
 
   if (!mounted) return null;
-  if (verified || pathname === "/age-restricted") return null;
+  if (verified || pathname === "/age-restricted" || pathname === "/login") return null;
 
   const enter = () => {
     if (!checked) {
