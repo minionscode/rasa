@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
 import type { User } from "@supabase/supabase-js";
 
 export function useAuth() {
@@ -11,6 +12,7 @@ export function useAuth() {
       setUser(session?.user ?? null);
       setLoading(false);
     });
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       const u = session?.user ?? null;
       setUser(u);
@@ -19,27 +21,27 @@ export function useAuth() {
         await supabase.from("users").upsert({
           id: u.id,
           email: u.email!,
-          full_name: u.user_metadata?.full_name ?? null,
+          full_name: u.user_metadata?.full_name ?? u.user_metadata?.name ?? null,
           avatar_url: u.user_metadata?.avatar_url ?? null,
-          provider: "email",
+          provider: u.app_metadata?.provider ?? "google",
           last_sign_in: new Date().toISOString(),
         }, { onConflict: "id" });
       }
     });
+
     return () => subscription.unsubscribe();
   }, []);
 
-  const sendMagicLink = useCallback(async (email: string) => {
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: window.location.href },
+  const signInWithGoogle = useCallback(async () => {
+    await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: window.location.href,
+      extraParams: { prompt: "select_account" },
     });
-    if (error) throw error;
   }, []);
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
   }, []);
 
-  return { user, loading, sendMagicLink, signOut };
+  return { user, loading, signInWithGoogle, signOut };
 }
