@@ -33,8 +33,9 @@ export function useAuth() {
   }, []);
 
   const signInWithGoogle = useCallback(async () => {
+    sessionStorage.setItem("rasa_login_return", window.location.pathname);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.href,
+      redirect_uri: `${window.location.origin}/login`,
       extraParams: { prompt: "select_account" },
     });
     if (result?.error) {
@@ -44,13 +45,11 @@ export function useAuth() {
   }, []);
 
   const signOut = useCallback(async () => {
-    setUser(null);
     try {
       await supabase.auth.signOut();
     } catch (e) {
       console.error("signOut error", e);
     }
-    window.location.replace("/");
   }, []);
 
   return { user, loading, signInWithGoogle, signOut };

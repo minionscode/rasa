@@ -120,20 +120,19 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const showWhatsApp = pathname !== "/age-restricted" && pathname !== "/test-email";
   const isLoginPage = pathname === "/login";
+  const isExcluded = isLoginPage || pathname === "/age-restricted" || pathname === "/test-email";
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <PageTransition /> */}
       <AgeGate />
       {!isLoginPage && <SiteHeader />}
       <main className="min-h-screen">
         <Outlet />
       </main>
-      {!isLoginPage && <SiteFooter />}
-      {!isLoginPage && <LeadCaptureModal />}
-      {showWhatsApp && !isLoginPage && <WhatsAppFloat />}
+      {!isExcluded && <SiteFooter />}
+      {!isExcluded && <LeadCaptureModal />}
+      {!isExcluded && <WhatsAppFloat />}
     </QueryClientProvider>
   );
 }
