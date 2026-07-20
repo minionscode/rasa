@@ -99,7 +99,7 @@ function Contact() {
   const [sendError, setSendError] = useState<string | null>(null);
   const sendContact = useServerFn(sendContactEmail);
   const { user } = useAuth();
-  const [authOpen, setAuthOpen] = useState(false);
+  
 
   useEffect(() => {
     if (user) {
