@@ -193,6 +193,87 @@ function DropButton({
   );
 }
 
+function ProfileMenu({
+  user,
+  signOut,
+  isOpen,
+  onOpen,
+  onClose,
+}: {
+  user: NonNullable<ReturnType<typeof useAuth>["user"]>;
+  signOut: () => Promise<void>;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}) {
+  const name = (user.user_metadata?.full_name as string) || (user.user_metadata?.name as string) || user.email || "Account";
+  const initial = name[0]?.toUpperCase() ?? "U";
+  const avatar = user.user_metadata?.avatar_url as string | undefined;
+
+  return (
+    <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
+      <button
+        className="flex items-center gap-2 text-[0.65rem] tracking-luxe uppercase text-foreground/85 hover:text-gold transition-colors"
+        aria-label="Account menu"
+      >
+        {avatar ? (
+          <img src={avatar} alt="" className="w-8 h-8 rounded-full object-cover border border-gold/40" />
+        ) : (
+          <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center text-gold text-xs font-medium">
+            {initial}
+          </div>
+        )}
+        <ChevronDown className={`h-3 w-3 opacity-60 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+      </button>
+      {isOpen && (
+        <div className="absolute right-0 top-full pt-4 z-50">
+          <div className="w-64 bg-ink/95 backdrop-blur-xl border border-gold/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)]">
+            <div className="px-5 py-4 border-b border-border/40 flex items-center gap-3">
+              {avatar ? (
+                <img src={avatar} alt="" className="w-10 h-10 rounded-full object-cover border border-gold/30" />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center text-gold text-sm font-medium">
+                  {initial}
+                </div>
+              )}
+              <div className="min-w-0">
+                <p className="font-serif text-sm text-foreground truncate">{name}</p>
+                <p className="text-[0.6rem] tracking-wide text-foreground/50 truncate">{user.email}</p>
+              </div>
+            </div>
+            <nav className="py-2">
+              <Link
+                to="/account/settings"
+                onClick={onClose}
+                className="block px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors"
+              >
+                Settings
+              </Link>
+              <Link
+                to="/account/orders"
+                onClick={onClose}
+                className="block px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors"
+              >
+                Your Orders
+              </Link>
+              <div className="my-2 border-t border-border/40" />
+              <button
+                onClick={() => {
+                  onClose();
+                  void signOut();
+                }}
+                className="w-full text-left px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors"
+              >
+                Sign Out
+              </button>
+            </nav>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function CollectionsMega({
   isOpen,
   onOpen,
