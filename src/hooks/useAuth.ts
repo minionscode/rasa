@@ -33,10 +33,14 @@ export function useAuth() {
   }, []);
 
   const signInWithGoogle = useCallback(async () => {
-    await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.href,
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: window.location.origin,
       extraParams: { prompt: "select_account" },
     });
+    if (result?.error) {
+      console.error("Google sign-in error", result.error);
+      throw result.error;
+    }
   }, []);
 
   const signOut = useCallback(async () => {
