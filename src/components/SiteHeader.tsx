@@ -182,6 +182,27 @@ export function SiteHeader() {
               </Link>
             ))}
 
+            <div className="mt-6 pt-6 border-t border-border/40 flex flex-col gap-4">
+              {user ? (
+                <>
+                  <Link to="/account/settings" className="font-serif tracking-wide text-lg text-foreground hover:text-gold">Settings</Link>
+                  <Link to="/account/orders" className="font-serif tracking-wide text-lg text-foreground hover:text-gold">Your Orders</Link>
+                  <button
+                    onClick={() => { setOpen(false); void signOut(); }}
+                    className="text-left font-serif tracking-wide text-lg text-foreground hover:text-gold"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <Link
+                  to="/login"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-gold/50 text-gold text-xs tracking-luxe uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+                >
+                  Sign In
+                </Link>
+              )}
+            </div>
           </nav>
         </div>
       )}
