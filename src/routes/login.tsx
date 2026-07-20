@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import rasaLogo from "@/assets/rasa-logo.png";
@@ -35,9 +35,16 @@ function LoginPage() {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="fixed inset-0 bg-ink flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-gold/30 border-t-gold animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <div className="relative min-h-screen bg-ink flex items-center justify-center px-4 overflow-hidden">
-      {/* Ambient background */}
       <div className="absolute inset-0 smoke-bg opacity-80" />
       <div
         className="absolute inset-0 opacity-40 animate-smoke pointer-events-none"
@@ -48,7 +55,6 @@ function LoginPage() {
       />
       <div className="absolute inset-0 grain pointer-events-none" />
 
-      {/* Decorative corner lines */}
       <div className="absolute top-8 left-8 w-16 h-px bg-gold/30" />
       <div className="absolute top-8 left-8 w-px h-16 bg-gold/30" />
       <div className="absolute top-8 right-8 w-16 h-px bg-gold/30" />
@@ -58,7 +64,6 @@ function LoginPage() {
       <div className="absolute bottom-8 right-8 w-16 h-px bg-gold/30" />
       <div className="absolute bottom-8 right-8 w-px h-16 bg-gold/30" />
 
-      {/* Card */}
       <div
         className="relative z-10 w-full max-w-md animate-fade-up"
         style={{
@@ -68,7 +73,6 @@ function LoginPage() {
           boxShadow: "0 40px 100px -20px oklch(0 0 0 / 0.8), 0 0 60px -10px oklch(0.78 0.09 48 / 0.2)",
         }}
       >
-        {/* Gold corner accents */}
         <span className="absolute top-0 left-0 w-8 h-px bg-gold" />
         <span className="absolute top-0 left-0 w-px h-8 bg-gold" />
         <span className="absolute top-0 right-0 w-8 h-px bg-gold" />
@@ -79,34 +83,24 @@ function LoginPage() {
         <span className="absolute bottom-0 right-0 w-px h-8 bg-gold" />
 
         <div className="px-10 py-12 text-center">
-          {/* Logo */}
           <div className="animate-fade-up flex justify-center mb-6">
-            <img
-              src={rasaLogo}
-              alt="RASA"
-              className="h-20 w-auto"
-              loading="eager"
-              draggable={false}
-            />
+            <img src={rasaLogo} alt="RASA" className="h-20 w-auto" loading="eager" draggable={false} />
           </div>
 
-          {/* Tagline */}
           <p className="font-display text-[0.6rem] tracking-luxe mb-8 animate-fade-up delay-100" style={{ color: "#DEA193" }}>
             SMOKE, PERFECTED
           </p>
 
           <div className="luxe-divider mb-8 animate-fade-up delay-100" />
 
-          {/* Heading */}
           <div className="animate-fade-up delay-200">
             <p className="text-[0.6rem] tracking-luxe uppercase text-gold mb-3">Welcome</p>
             <h1 className="font-serif text-4xl text-foreground mb-3">Sign In</h1>
             <p className="text-sm text-foreground/65 leading-relaxed mb-8">
-              Access the House of RASA. Sign in to submit enquiries, request catalogues, and manage your experience.
+              Access the House of RASA. Sign in to submit enquiries, request catalogues, and manage your loyalty membership.
             </p>
           </div>
 
-          {/* Google Button */}
           <div className="animate-fade-up delay-300">
             <button
               onClick={handleGoogle}
@@ -132,17 +126,16 @@ function LoginPage() {
 
           <div className="luxe-divider mt-8 mb-6 animate-fade-up delay-400" />
 
-          {/* Back to site */}
           <div className="animate-fade-up delay-500">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="inline-flex items-center gap-2 text-[0.65rem] tracking-luxe uppercase text-foreground/50 hover:text-gold transition-colors duration-300"
             >
               <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
                 <path d="M7.5 2L3.5 6L7.5 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               Back to Site
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -121,7 +121,7 @@ export function SiteHeader() {
             </button>
             {user ? (
               <Link
-                to="/account/settings"
+                to="/loyalty"
                 aria-label="Account"
                 className="flex items-center"
               >
@@ -185,8 +185,8 @@ export function SiteHeader() {
             <div className="mt-6 pt-6 border-t border-border/40 flex flex-col gap-4">
               {user ? (
                 <>
-                  <Link to="/account/settings" className="font-serif tracking-wide text-lg text-foreground hover:text-gold">Settings</Link>
-                  <Link to="/account/orders" className="font-serif tracking-wide text-lg text-foreground hover:text-gold">Your Orders</Link>
+                  <Link to="/loyalty" onClick={() => setOpen(false)} className="font-serif tracking-wide text-lg text-foreground hover:text-gold">Loyalty Program</Link>
+                  <Link to="/contact" onClick={() => setOpen(false)} className="font-serif tracking-wide text-lg text-foreground hover:text-gold">Contact Us</Link>
                   <button
                     onClick={() => { setOpen(false); void signOut(); }}
                     className="text-left font-serif tracking-wide text-lg text-foreground hover:text-gold"
@@ -286,18 +286,18 @@ function ProfileMenu({
             </div>
             <nav className="py-2">
               <Link
-                to="/account/settings"
+                to="/loyalty"
                 onClick={onClose}
                 className="block px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors"
               >
-                Settings
+                Loyalty Program
               </Link>
               <Link
-                to="/account/orders"
+                to="/contact"
                 onClick={onClose}
                 className="block px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors"
               >
-                Your Orders
+                Contact Us
               </Link>
               <div className="my-2 border-t border-border/40" />
               <button
