@@ -308,15 +308,6 @@ function Contact() {
                 </div>
 
                 <div className="pt-3 flex flex-col sm:flex-row gap-3">
-                  {!user ? (
-                    <button
-                      type="button"
-                      onClick={() => setAuthOpen(true)}
-                      className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-gold text-primary-foreground text-xs tracking-luxe uppercase hover:bg-gold-soft transition-colors duration-500"
-                    >
-                      Sign In to Submit <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  ) : (
                     <button
                       type="submit"
                       disabled={sending}
@@ -329,7 +320,6 @@ function Contact() {
                         <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                       )}
                     </button>
-                  )}
                   <a
                     href={whatsappLink}
                     target="_blank"
