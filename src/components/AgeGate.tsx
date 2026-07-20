@@ -16,7 +16,10 @@ const readVerified = () => {
 
 export function AgeGate() {
   const [mounted, setMounted] = useState(false);
-  const [verified, setVerified] = useState<boolean>(false);
+  const [verified, setVerified] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    try { return window.sessionStorage.getItem("rasa_age_verified") === "1"; } catch { return false; }
+  });
   const [checked, setChecked] = useState(false);
   const [showError, setShowError] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
@@ -25,8 +28,11 @@ export function AgeGate() {
 
   useEffect(() => {
     setMounted(true);
-    if (readVerified()) setVerified(true);
-  }, [pathname]);
+  }, []);
+
+  useEffect(() => {
+    if (!verified && readVerified()) setVerified(true);
+  }, [pathname, verified]);
 
   if (!mounted) return null;
   if (verified || pathname === "/age-restricted" || pathname === "/login") return null;

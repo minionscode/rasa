@@ -44,12 +44,12 @@ export function useAuth() {
   }, []);
 
   const signOut = useCallback(async () => {
+    setUser(null);
     try {
-      await supabase.auth.signOut({ scope: "local" });
+      await supabase.auth.signOut();
     } catch (e) {
       console.error("signOut error", e);
     }
-    setUser(null);
     window.location.replace("/");
   }, []);
 
