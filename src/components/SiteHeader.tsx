@@ -111,7 +111,7 @@ export function SiteHeader() {
             ) : (
               <Link
                 to="/login"
-                className="text-[0.65rem] tracking-luxe uppercase text-foreground/70 hover:text-gold transition-colors duration-300 hidden md:inline-flex items-center gap-1.5"
+                className="hidden md:inline-flex items-center gap-2 px-5 py-2 border border-gold/50 text-gold text-[0.65rem] tracking-luxe uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
               >
                 <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
                   <circle cx="8" cy="5" r="3" stroke="currentColor" strokeWidth="1.2"/>
