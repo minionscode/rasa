@@ -40,7 +40,15 @@ export function useAuth() {
   }, []);
 
   const signOut = useCallback(async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+    } catch (e) {
+      console.error("signOut error", e);
+    }
+    setUser(null);
+    if (typeof window !== "undefined") {
+      window.location.href = "/";
+    }
   }, []);
 
   return { user, loading, signInWithGoogle, signOut };
