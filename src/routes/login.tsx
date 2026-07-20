@@ -17,10 +17,14 @@ function LoginPage() {
   const { user, signInWithGoogle, loading } = useAuth();
   const navigate = useNavigate();
   const signingInRef = useRef(false);
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
-    if (!loading && user) {
-      const timer = setTimeout(() => navigate({ to: "/" }), 300);
+    if (!loading && user && !hasRedirected.current) {
+      hasRedirected.current = true;
+      const returnTo = sessionStorage.getItem("rasa_login_return") || "/";
+      sessionStorage.removeItem("rasa_login_return");
+      const timer = setTimeout(() => navigate({ to: returnTo as "/" }), 300);
       return () => clearTimeout(timer);
     }
   }, [user, loading, navigate]);

@@ -104,6 +104,7 @@ export function SiteHeader() {
             ) : (
               <Link
                 to="/login"
+                onClick={() => sessionStorage.setItem("rasa_login_return", window.location.pathname)}
                 className="hidden md:inline-flex items-center gap-2 px-5 py-2 border border-gold/50 text-gold text-[0.65rem] tracking-luxe uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
               >
                 <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
@@ -136,6 +137,7 @@ export function SiteHeader() {
             ) : (
               <Link
                 to="/login"
+                onClick={() => sessionStorage.setItem("rasa_login_return", window.location.pathname)}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-gold/50 text-gold text-[0.6rem] tracking-luxe uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
               >
                 Sign In
@@ -196,6 +198,7 @@ export function SiteHeader() {
               ) : (
                 <Link
                   to="/login"
+                  onClick={() => sessionStorage.setItem("rasa_login_return", window.location.pathname)}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-gold/50 text-gold text-xs tracking-luxe uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
                 >
                   Sign In
