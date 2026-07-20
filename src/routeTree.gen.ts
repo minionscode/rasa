@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TestEmailRouteImport } from './routes/test-email'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as LoyaltyRouteImport } from './routes/loyalty'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as HouseOfRasaRouteImport } from './routes/house-of-rasa'
 import { Route as HookahRouteImport } from './routes/hookah'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -37,6 +38,11 @@ const PartnersRoute = PartnersRouteImport.update({
 const LoyaltyRoute = LoyaltyRouteImport.update({
   id: '/loyalty',
   path: '/loyalty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HouseOfRasaRoute = HouseOfRasaRouteImport.update({
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
+  '/login': typeof LoginRoute
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
+  '/login': typeof LoginRoute
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
+  '/login': typeof LoginRoute
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
   '/test-email': typeof TestEmailRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/hookah'
     | '/house-of-rasa'
+    | '/login'
     | '/loyalty'
     | '/partners'
     | '/test-email'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/hookah'
     | '/house-of-rasa'
+    | '/login'
     | '/loyalty'
     | '/partners'
     | '/test-email'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/hookah'
     | '/house-of-rasa'
+    | '/login'
     | '/loyalty'
     | '/partners'
     | '/test-email'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   HookahRoute: typeof HookahRoute
   HouseOfRasaRoute: typeof HouseOfRasaRoute
+  LoginRoute: typeof LoginRoute
   LoyaltyRoute: typeof LoyaltyRoute
   PartnersRoute: typeof PartnersRoute
   TestEmailRoute: typeof TestEmailRoute
@@ -233,6 +246,13 @@ declare module '@tanstack/react-router' {
       path: '/loyalty'
       fullPath: '/loyalty'
       preLoaderRoute: typeof LoyaltyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/house-of-rasa': {
@@ -323,6 +343,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   HookahRoute: HookahRoute,
   HouseOfRasaRoute: HouseOfRasaRoute,
+  LoginRoute: LoginRoute,
   LoyaltyRoute: LoyaltyRoute,
   PartnersRoute: PartnersRoute,
   TestEmailRoute: TestEmailRoute,
@@ -334,13 +355,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
