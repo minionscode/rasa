@@ -94,20 +94,13 @@ export function SiteHeader() {
             </button>
 
             {user ? (
-              <button
-                onClick={signOut}
-                className="flex items-center gap-2 text-[0.65rem] tracking-luxe uppercase text-foreground/70 hover:text-gold transition-colors"
-                title="Sign out"
-              >
-                {user.user_metadata?.avatar_url ? (
-                  <img src={user.user_metadata.avatar_url as string} alt="" className="w-7 h-7 rounded-full object-cover border border-gold/30" />
-                ) : (
-                  <div className="w-7 h-7 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center text-gold text-xs font-medium">
-                    {((user.user_metadata?.full_name as string) || user.email || "U")[0].toUpperCase()}
-                  </div>
-                )}
-                <span className="hidden lg:inline">Sign Out</span>
-              </button>
+              <ProfileMenu
+                user={user}
+                signOut={signOut}
+                isOpen={openDrop === "profile"}
+                onOpen={() => setOpenDrop("profile")}
+                onClose={() => setOpenDrop(null)}
+              />
             ) : (
               <Link
                 to="/login"
