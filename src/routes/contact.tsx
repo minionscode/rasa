@@ -1,7 +1,7 @@
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { AuthModal } from "@/components/AuthModal";
+
 import { useServerFn } from "@tanstack/react-start";
 import { SectionLabel } from "../components/SectionLabel";
 import { contactInfo } from "@/data/contact";
