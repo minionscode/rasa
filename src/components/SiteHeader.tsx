@@ -108,7 +108,18 @@ export function SiteHeader() {
                 )}
                 <span className="hidden lg:inline">Sign Out</span>
               </button>
-            ) : null}
+            ) : (
+              <a
+                href="/login"
+                className="text-[0.65rem] tracking-luxe uppercase text-foreground/70 hover:text-gold transition-colors duration-300 hidden md:inline-flex items-center gap-1.5"
+              >
+                <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none">
+                  <circle cx="8" cy="5" r="3" stroke="currentColor" strokeWidth="1.2"/>
+                  <path d="M2 14c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                </svg>
+                Sign In
+              </a>
+            )}
           </nav>
 
           <div className="lg:hidden flex items-center gap-4">

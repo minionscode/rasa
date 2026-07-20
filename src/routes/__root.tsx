@@ -121,18 +121,19 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const showWhatsApp = pathname !== "/age-restricted" && pathname !== "/test-email";
+  const isLoginPage = pathname === "/login";
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* <PageTransition /> */}
       <AgeGate />
-      <SiteHeader />
+      {!isLoginPage && <SiteHeader />}
       <main className="min-h-screen">
         <Outlet />
       </main>
-      <SiteFooter />
-      <LeadCaptureModal />
-      {showWhatsApp && <WhatsAppFloat />}
+      {!isLoginPage && <SiteFooter />}
+      {!isLoginPage && <LeadCaptureModal />}
+      {showWhatsApp && !isLoginPage && <WhatsAppFloat />}
     </QueryClientProvider>
   );
 }
