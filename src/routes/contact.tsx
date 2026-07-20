@@ -383,7 +383,7 @@ function Contact() {
           </aside>
         </div>
       </div>
-      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} reason="contact" />
+      
     </section>
   );
 }
