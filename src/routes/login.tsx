@@ -20,7 +20,8 @@ function LoginPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      navigate({ to: "/" });
+      const timer = setTimeout(() => navigate({ to: "/" }), 300);
+      return () => clearTimeout(timer);
     }
   }, [user, loading, navigate]);
 
