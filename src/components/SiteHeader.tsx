@@ -185,15 +185,14 @@ export function SiteHeader() {
             <div className="mt-6 pt-6 border-t border-border/40 flex flex-col gap-4">
               {user ? (
                 <>
-                  <Link to="/loyalty" onClick={() => setOpen(false)} className="font-serif tracking-wide text-lg text-foreground hover:text-gold">Loyalty Program</Link>
-                  <Link to="/contact" onClick={() => setOpen(false)} className="font-serif tracking-wide text-lg text-foreground hover:text-gold">Contact Us</Link>
                   <button
                     onClick={() => { setOpen(false); void signOut(); }}
-                    className="text-left font-serif tracking-wide text-lg text-foreground hover:text-gold"
+                    className="text-left font-serif tracking-wide text-lg text-red-400/80 hover:text-red-400 transition-colors"
                   >
                     Sign Out
                   </button>
                 </>
+
               ) : (
                 <Link
                   to="/login"
@@ -285,31 +284,17 @@ function ProfileMenu({
               </div>
             </div>
             <nav className="py-2">
-              <Link
-                to="/loyalty"
-                onClick={onClose}
-                className="block px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors"
-              >
-                Loyalty Program
-              </Link>
-              <Link
-                to="/contact"
-                onClick={onClose}
-                className="block px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors"
-              >
-                Contact Us
-              </Link>
-              <div className="my-2 border-t border-border/40" />
               <button
                 onClick={() => {
                   onClose();
                   void signOut();
                 }}
-                className="w-full text-left px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors"
+                className="w-full text-left px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-red-400/80 hover:text-red-400 hover:bg-red-950/30 transition-colors"
               >
                 Sign Out
               </button>
             </nav>
+
           </div>
         </div>
       )}
