@@ -115,10 +115,32 @@ export function SiteHeader() {
             )}
           </nav>
 
-          <div className="lg:hidden flex items-center gap-4">
+          <div className="lg:hidden flex items-center gap-3">
             <button aria-label="Search" onClick={() => setSearch(true)} className="text-foreground/85">
               <Search className="h-4 w-4" />
             </button>
+            {user ? (
+              <Link
+                to="/account/settings"
+                aria-label="Account"
+                className="flex items-center"
+              >
+                {user.user_metadata?.avatar_url ? (
+                  <img src={user.user_metadata.avatar_url as string} alt="" className="w-8 h-8 rounded-full object-cover border border-gold/40" />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center text-gold text-xs font-medium">
+                    {((user.user_metadata?.full_name as string) || user.email || "U")[0]?.toUpperCase()}
+                  </div>
+                )}
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-gold/50 text-gold text-[0.6rem] tracking-luxe uppercase hover:bg-gold hover:text-primary-foreground transition-all duration-300"
+              >
+                Sign In
+              </Link>
+            )}
             <button onClick={() => setOpen(true)} className="p-1 text-foreground" aria-label="Open menu">
               <Menu className="h-5 w-5" />
             </button>
