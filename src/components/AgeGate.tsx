@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import rasaLogo from "@/assets/rasa-logo.png";
 import { AgeRestrictionPolicyModal } from "@/components/AgeRestrictionPolicyModal";
@@ -8,14 +8,22 @@ const BYPASS = ["/age-restricted", "/login", "/test-email"];
 
 const readVerified = () => {
   try {
+    if (typeof window === "undefined") return false;
     return window.sessionStorage.getItem(AGE_KEY) === "1";
   } catch {
     return false;
   }
 };
 
+const saveVerified = () => {
+  try {
+    window.sessionStorage.setItem(AGE_KEY, "1");
+  } catch {}
+};
+
 export function AgeGate() {
-  const [verified, setVerified] = useState<boolean>(readVerified);
+  const [checked, setChecked] = useState(false);
+  const [verified, setVerified] = useState(false);
   const [exiting, setExiting] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
 
@@ -26,37 +34,27 @@ export function AgeGate() {
   const confirmedByUrl = confirmedByWindow;
 
   useEffect(() => {
-    if (!confirmedByUrl && !readVerified()) return;
-
-    try {
-      window.sessionStorage.setItem(AGE_KEY, "1");
-    } catch {}
-
-    setVerified(true);
-
     if (confirmedByUrl) {
+      saveVerified();
+      setVerified(true);
       window.history.replaceState(null, "", pathname + window.location.hash);
+      return;
+    }
+
+    if (readVerified()) {
+      setVerified(true);
     }
   }, [confirmedByUrl, pathname]);
 
-  if (verified || confirmedByUrl || BYPASS.includes(pathname)) return null;
+  const handleEnter = () => {
+    if (!checked) return;
 
-  const handleEnter = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    const checkbox = form.elements.namedItem("age-confirmation");
-    const isChecked = checkbox instanceof HTMLInputElement && checkbox.checked;
-
-    if (!isChecked) return;
-
-    try {
-      window.sessionStorage.setItem(AGE_KEY, "1");
-    } catch {}
-
+    saveVerified();
+    setVerified(true);
     setExiting(true);
-    window.setTimeout(() => setVerified(true), 450);
   };
+
+  if (verified || confirmedByUrl || BYPASS.includes(pathname)) return null;
 
   return (
     <>
@@ -122,14 +120,14 @@ export function AgeGate() {
 
           <div className="luxe-divider my-8" />
 
-          <form className="age-gate-form" method="get" action="/" onSubmit={handleEnter}>
+          <div className="age-gate-form">
             <div className="mx-auto flex w-full max-w-md items-start gap-3 text-left">
               <input
                 id="age-confirmation"
                 name="age-confirmation"
                 type="checkbox"
-                value="on"
-                required
+                checked={checked}
+                onChange={(event) => setChecked(event.currentTarget.checked)}
                 className="mt-1 h-5 w-5 shrink-0 cursor-pointer accent-gold"
               />
               <p className="text-xs leading-relaxed text-muted-foreground">
@@ -159,7 +157,9 @@ export function AgeGate() {
               }}
             >
             <button
-              type="submit"
+              type="button"
+              onClick={handleEnter}
+              disabled={!checked}
               className="age-gate-enter"
               style={{
                 padding: "16px 48px",
@@ -189,7 +189,7 @@ export function AgeGate() {
               I'm Below 18
             </Link>
             </div>
-          </form>
+          </div>
 
           <p
             style={{
