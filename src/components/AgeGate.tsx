@@ -78,25 +78,16 @@ export function AgeGate() {
 
             <div className="luxe-divider my-8" />
 
-            {/* Checkbox row */}
-            <label className="flex items-start justify-center gap-3 cursor-pointer select-none">
-              <span
-                onClick={() => { setChecked(c => !c); if (showError) setShowError(false); }}
-                role="checkbox"
-                aria-checked={checked}
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); setChecked(c => !c); if (showError) setShowError(false); } }}
-                className={`shrink-0 mt-0.5 w-5 h-5 rounded-full border-2 transition-all duration-300 flex items-center justify-center cursor-pointer ${
-                  checked ? "border-gold bg-gold" : showError ? "border-red-400" : "border-gold/70 hover:border-gold"
-                }`}
-              >
-                {checked && (
-                  <svg className="w-2.5 h-2.5 text-ink" viewBox="0 0 10 10" fill="none">
-                    <path d="M1.5 5L4 7.5L8.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                )}
-              </span>
-              <span className="text-xs text-muted-foreground/90 text-left leading-relaxed">
+            <div className="flex items-start justify-center gap-3">
+              <input
+                type="checkbox"
+                id="age-check"
+                checked={checked}
+                onChange={(e) => { setChecked(e.target.checked); if (showError) setShowError(false); }}
+                className="mt-1 w-4 h-4 cursor-pointer accent-gold shrink-0"
+                style={{ accentColor: "#c9a96e" }}
+              />
+              <label htmlFor="age-check" className="text-xs text-muted-foreground/90 text-left leading-relaxed cursor-pointer">
                 By checking this, you are agreeing to our{" "}
                 <button
                   type="button"
@@ -105,8 +96,8 @@ export function AgeGate() {
                 >
                   Age Restriction Policy
                 </button>
-              </span>
-            </label>
+              </label>
+            </div>
 
             {showError && (
               <p className="mt-3 text-xs font-serif italic text-red-400 bg-red-950/60 border border-red-800/50 px-4 py-2.5">
