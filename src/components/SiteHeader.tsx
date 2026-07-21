@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Menu, X, Search, ChevronDown, ArrowRight } from "lucide-react";
 import rasaLogo from "@/assets/rasa-logo.png";
 import majlisLogo from "@/assets/majlis-logo.png";
@@ -255,9 +255,20 @@ function ProfileMenu({
   const initial = name[0]?.toUpperCase() ?? "U";
   const avatar = user.user_metadata?.avatar_url as string | undefined;
 
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [isOpen, onClose]);
+
   return (
-    <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
+    <div className="relative" ref={ref}>
       <button
+        onClick={() => isOpen ? onClose() : onOpen()}
         className="flex items-center gap-2 text-[0.65rem] tracking-luxe uppercase text-foreground/85 hover:text-gold transition-colors"
         aria-label="Account menu"
       >
@@ -288,9 +299,9 @@ function ProfileMenu({
             </div>
             <nav className="py-2">
               <button
-                onClick={() => {
+                onClick={async () => {
                   onClose();
-                  void signOut();
+                  await signOut();
                 }}
                 className="w-full text-left px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-red-400/80 hover:text-red-400 hover:bg-red-950/30 transition-colors"
               >
