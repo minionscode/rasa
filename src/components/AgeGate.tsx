@@ -15,6 +15,7 @@ const setVerifiedInStorage = () => {
 
 export function AgeGate() {
   const [verified, setVerified] = useState<boolean>(isVerified);
+  const [exiting, setExiting] = useState(false);
   const [checked, setChecked] = useState(false);
   const [showError, setShowError] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
@@ -27,14 +28,15 @@ export function AgeGate() {
   const enter = () => {
     if (!checked) { setShowError(true); return; }
     setVerifiedInStorage();
-    setVerified(true);
+    setExiting(true);
+    setTimeout(() => setVerified(true), 700);
   };
 
   const decline = () => router.navigate({ to: "/age-restricted" });
 
   return (
     <>
-      <div className="fixed inset-0 z-[120] flex items-center justify-center bg-ink/95 animate-fade-in px-6">
+      <div className={`fixed inset-0 z-[120] flex items-center justify-center bg-ink/95 px-6 transition-opacity duration-700 ${exiting ? "opacity-0 pointer-events-none" : "animate-fade-in"}`}>
         <div className="absolute inset-0 smoke-bg opacity-70 pointer-events-none" />
         <div
           className="absolute -inset-[20%] opacity-50 animate-smoke pointer-events-none"

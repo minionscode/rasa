@@ -49,6 +49,8 @@ export function useAuth() {
       await supabase.auth.signOut();
     } catch (e) {
       console.error("signOut error", e);
+    } finally {
+      window.location.replace("/");
     }
   }, []);
 
