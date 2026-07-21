@@ -16,7 +16,6 @@ const readVerified = () => {
 
 export function AgeGate() {
   const [verified, setVerified] = useState<boolean>(readVerified);
-  const [checked, setChecked] = useState(false);
   const [exiting, setExiting] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
 
@@ -25,8 +24,14 @@ export function AgeGate() {
 
   if (verified || BYPASS.includes(pathname)) return null;
 
-  const handleEnter = () => {
-    if (!checked) return;
+  const handleEnter = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const checkbox = form.elements.namedItem("age-confirmation");
+    const isChecked = checkbox instanceof HTMLInputElement && checkbox.checked;
+
+    if (!isChecked) return;
 
     try {
       window.sessionStorage.setItem(AGE_KEY, "1");
@@ -42,6 +47,21 @@ export function AgeGate() {
 
   return (
     <>
+      <style>
+        {`
+          .age-gate-form .age-gate-enter {
+            background: rgba(201,169,110,0.35);
+            color: rgba(10,8,7,0.55);
+            cursor: not-allowed;
+          }
+
+          .age-gate-form:has(#age-confirmation:checked) .age-gate-enter {
+            background: #c9a96e;
+            color: #0a0807;
+            cursor: pointer;
+          }
+        `}
+      </style>
       <div
         className={`fixed inset-0 z-[120] flex items-center justify-center px-6 transition-opacity duration-500 ${
           exiting ? "pointer-events-none opacity-0" : "opacity-100"
@@ -89,53 +109,50 @@ export function AgeGate() {
 
           <div className="luxe-divider my-8" />
 
-          <div className="mx-auto flex w-full max-w-md items-start gap-3 text-left">
-            <input
-              id="age-confirmation"
-              type="checkbox"
-              checked={checked}
-              onChange={(event) => setChecked(event.currentTarget.checked)}
-              className="mt-1 h-5 w-5 shrink-0 cursor-pointer accent-gold"
-            />
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              <label htmlFor="age-confirmation" className="cursor-pointer">
-                By checking this, you are agreeing to our{" "}
-              </label>
-              <button
-                type="button"
-                onClick={() => setPolicyOpen(true)}
-                className="cursor-pointer underline"
-                style={{ color: "#c9a96e" }}
-              >
-                Age Restriction Policy
-              </button>
-              .
-            </p>
-          </div>
+          <form className="age-gate-form" onSubmit={handleEnter}>
+            <div className="mx-auto flex w-full max-w-md items-start gap-3 text-left">
+              <input
+                id="age-confirmation"
+                name="age-confirmation"
+                type="checkbox"
+                required
+                className="mt-1 h-5 w-5 shrink-0 cursor-pointer accent-gold"
+              />
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                <label htmlFor="age-confirmation" className="cursor-pointer">
+                  By checking this, you are agreeing to our{" "}
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setPolicyOpen(true)}
+                  className="cursor-pointer underline"
+                  style={{ color: "#c9a96e" }}
+                >
+                  Age Restriction Policy
+                </button>
+                .
+              </p>
+            </div>
 
-          <div
-            className="sm:flex-row"
-            style={{
-              marginTop: "32px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
-              justifyContent: "center",
-            }}
-          >
+            <div
+              className="sm:flex-row"
+              style={{
+                marginTop: "32px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+                justifyContent: "center",
+              }}
+            >
             <button
-              type="button"
-              onClick={handleEnter}
-              disabled={!checked}
+              type="submit"
+              className="age-gate-enter"
               style={{
                 padding: "16px 48px",
-                background: checked ? "#c9a96e" : "rgba(201,169,110,0.35)",
-                color: checked ? "#0a0807" : "rgba(10,8,7,0.55)",
                 fontSize: "0.7rem",
                 letterSpacing: "0.32em",
                 textTransform: "uppercase",
                 fontWeight: 500,
-                cursor: checked ? "pointer" : "not-allowed",
                 border: "none",
                 transition: "all 0.3s ease",
               }}
@@ -158,7 +175,8 @@ export function AgeGate() {
             >
               I'm Below 18
             </button>
-          </div>
+            </div>
+          </form>
 
           <p
             style={{
