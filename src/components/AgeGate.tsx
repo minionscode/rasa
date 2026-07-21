@@ -108,9 +108,7 @@ export function AgeGate() {
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={enter}
-                className={`px-12 py-4 text-[0.7rem] tracking-luxe uppercase font-medium transition-all duration-500 ${
-                  checked ? "bg-gold text-ink hover:bg-gold-soft" : "bg-gold/40 text-ink/60 cursor-not-allowed"
-                }`}
+                className="px-12 py-4 text-[0.7rem] tracking-luxe uppercase font-medium transition-all duration-500 bg-gold text-ink hover:bg-gold-soft"
               >
                 Enter
               </button>
