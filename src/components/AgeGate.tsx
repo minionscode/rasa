@@ -83,9 +83,9 @@ export function AgeGate() {
                 type="checkbox"
                 id="age-check"
                 checked={checked}
-                onChange={(e) => { setChecked(e.target.checked); if (showError) setShowError(false); }}
-                className="mt-1 w-4 h-4 cursor-pointer accent-gold shrink-0"
-                style={{ accentColor: "#c9a96e" }}
+                onChange={() => { setChecked(prev => !prev); setShowError(false); }}
+                className="mt-1 w-4 h-4 cursor-pointer shrink-0"
+                style={{ accentColor: "#c9a96e", width: "16px", height: "16px" }}
               />
               <label htmlFor="age-check" className="text-xs text-muted-foreground/90 text-left leading-relaxed cursor-pointer">
                 By checking this, you are agreeing to our{" "}
@@ -108,9 +108,7 @@ export function AgeGate() {
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={enter}
-                className={`px-12 py-4 text-[0.7rem] tracking-luxe uppercase font-medium transition-all duration-500 ${
-                  checked ? "bg-gold text-ink hover:bg-gold-soft" : "bg-gold/40 text-ink/60 cursor-not-allowed"
-                }`}
+                className="px-12 py-4 text-[0.7rem] tracking-luxe uppercase font-medium transition-all duration-500 bg-gold text-ink hover:bg-gold-soft"
               >
                 Enter
               </button>
