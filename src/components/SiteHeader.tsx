@@ -299,9 +299,9 @@ function ProfileMenu({
             </div>
             <nav className="py-2">
               <button
-                onClick={() => {
+                onClick={async () => {
                   onClose();
-                  void signOut();
+                  await signOut();
                 }}
                 className="w-full text-left px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-red-400/80 hover:text-red-400 hover:bg-red-950/30 transition-colors"
               >
