@@ -65,12 +65,13 @@ export function AgeGate() {
               Please confirm you are 18 years of age or older.
             </p>
             <div className="luxe-divider my-8 animate-fade-up delay-350" />
-            <div className="flex items-start justify-center gap-3 animate-fade-up delay-350">
+            <div className="flex items-start justify-center gap-3">
               <button
                 type="button"
                 role="checkbox"
                 aria-checked={checked}
                 onClick={() => { setChecked(!checked); if (showError) setShowError(false); }}
+                style={{ pointerEvents: "auto", position: "relative", zIndex: 50 }}
                 className={`shrink-0 mt-0.5 w-5 h-5 rounded-full border-2 transition-all duration-300 flex items-center justify-center ${checked ? "border-gold bg-gold" : showError ? "border-red-400" : "border-gold/70 hover:border-gold"}`}
               >
                 {checked && (
