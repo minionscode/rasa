@@ -22,7 +22,9 @@ export function AgeGate() {
   if (verified || BYPASS.includes(pathname)) return null;
 
   const enter = () => {
-    if (!checked) { setShowError(true); return; }
+    const ageCheck = document.getElementById("age-check");
+    const consentChecked = checked || (ageCheck instanceof HTMLInputElement && ageCheck.checked);
+    if (!consentChecked) { setShowError(true); return; }
     try { window.sessionStorage.setItem(AGE_KEY, "1"); } catch {}
     setExiting(true);
     setTimeout(() => setVerified(true), 700);
@@ -84,8 +86,17 @@ export function AgeGate() {
               <input
                 type="checkbox"
                 id="age-check"
-                checked={checked}
-                onChange={() => { setChecked(prev => !prev); setShowError(false); }}
+                defaultChecked={checked}
+                onChange={(event) => {
+                  const isChecked = event.currentTarget.checked;
+                  setChecked(isChecked);
+                  if (isChecked) setShowError(false);
+                }}
+                onClick={(event) => {
+                  const isChecked = event.currentTarget.checked;
+                  setChecked(isChecked);
+                  if (isChecked) setShowError(false);
+                }}
                 style={{ accentColor: "#c9a96e", width: "16px", height: "16px", minWidth: "16px", cursor: "pointer", marginTop: "2px" }}
               />
               <label htmlFor="age-check" style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", textAlign: "left", lineHeight: "1.6", cursor: "pointer" }}>
@@ -109,7 +120,7 @@ export function AgeGate() {
             <div style={{ marginTop: "32px", display: "flex", flexDirection: "column", gap: "12px", justifyContent: "center" }} className="sm:flex-row">
               <button
                 onClick={enter}
-                disabled={!checked}
+                aria-disabled={!checked}
                 style={{ padding: "16px 48px", background: checked ? "#c9a96e" : "rgba(201,169,110,0.35)", color: checked ? "#0a0807" : "rgba(10,8,7,0.55)", fontSize: "0.7rem", letterSpacing: "0.32em", textTransform: "uppercase", fontWeight: 500, cursor: checked ? "pointer" : "not-allowed", border: "none", transition: "all 0.3s ease" }}
               >
                 Enter
