@@ -1,5 +1,5 @@
-import { useState, type FormEvent } from "react";
-import { useRouter, useRouterState } from "@tanstack/react-router";
+import { useEffect, useState, type FormEvent } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
 import rasaLogo from "@/assets/rasa-logo.png";
 import { AgeRestrictionPolicyModal } from "@/components/AgeRestrictionPolicyModal";
 
@@ -19,10 +19,27 @@ export function AgeGate() {
   const [exiting, setExiting] = useState(false);
   const [policyOpen, setPolicyOpen] = useState(false);
 
-  const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const confirmedByWindow =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("age-confirmation") === "on";
+  const confirmedByUrl = confirmedByWindow;
 
-  if (verified || BYPASS.includes(pathname)) return null;
+  useEffect(() => {
+    if (!confirmedByUrl && !readVerified()) return;
+
+    try {
+      window.sessionStorage.setItem(AGE_KEY, "1");
+    } catch {}
+
+    setVerified(true);
+
+    if (confirmedByUrl) {
+      window.history.replaceState(null, "", pathname + window.location.hash);
+    }
+  }, [confirmedByUrl, pathname]);
+
+  if (verified || confirmedByUrl || BYPASS.includes(pathname)) return null;
 
   const handleEnter = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,10 +56,6 @@ export function AgeGate() {
 
     setExiting(true);
     window.setTimeout(() => setVerified(true), 450);
-  };
-
-  const handleDecline = () => {
-    router.navigate({ to: "/age-restricted" });
   };
 
   return (
@@ -109,12 +122,13 @@ export function AgeGate() {
 
           <div className="luxe-divider my-8" />
 
-          <form className="age-gate-form" onSubmit={handleEnter}>
+          <form className="age-gate-form" method="get" action="/" onSubmit={handleEnter}>
             <div className="mx-auto flex w-full max-w-md items-start gap-3 text-left">
               <input
                 id="age-confirmation"
                 name="age-confirmation"
                 type="checkbox"
+                value="on"
                 required
                 className="mt-1 h-5 w-5 shrink-0 cursor-pointer accent-gold"
               />
@@ -159,9 +173,8 @@ export function AgeGate() {
             >
               Enter
             </button>
-            <button
-              type="button"
-              onClick={handleDecline}
+            <Link
+              to="/age-restricted"
               style={{
                 padding: "16px 40px",
                 border: "1px solid rgba(255,255,255,0.15)",
@@ -174,7 +187,7 @@ export function AgeGate() {
               }}
             >
               I'm Below 18
-            </button>
+            </Link>
             </div>
           </form>
 
