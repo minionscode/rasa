@@ -1,27 +1,33 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 
-const mockGetSession = vi.fn().mockResolvedValue({ data: { session: null } });
-const mockOnAuthStateChange = vi.fn().mockReturnValue({ data: { subscription: { unsubscribe: vi.fn() } } });
-const mockSignOut = vi.fn().mockResolvedValue({});
-const mockUpsert = vi.fn().mockReturnValue({ error: null });
-const mockSignInWithOAuth = vi.fn().mockResolvedValue({ redirected: true });
+const mocks = vi.hoisted(() => {
+  return {
+    getSession: vi.fn().mockResolvedValue({ data: { session: null } }),
+    onAuthStateChange: vi
+      .fn()
+      .mockReturnValue({ data: { subscription: { unsubscribe: vi.fn() } } }),
+    signOut: vi.fn().mockResolvedValue({}),
+    upsert: vi.fn().mockReturnValue({ error: null }),
+    signInWithOAuth: vi.fn().mockResolvedValue({ redirected: true }),
+  };
+});
 
 vi.mock("@/integrations/supabase/client", () => ({
   supabase: {
     auth: {
-      getSession: mockGetSession,
-      onAuthStateChange: mockOnAuthStateChange,
-      signOut: mockSignOut,
+      getSession: mocks.getSession,
+      onAuthStateChange: mocks.onAuthStateChange,
+      signOut: mocks.signOut,
     },
-    from: () => ({ upsert: mockUpsert }),
+    from: () => ({ upsert: mocks.upsert }),
   },
 }));
 
 vi.mock("@/integrations/lovable", () => ({
   lovable: {
     auth: {
-      signInWithOAuth: mockSignInWithOAuth,
+      signInWithOAuth: mocks.signInWithOAuth,
     },
   },
 }));
@@ -31,8 +37,10 @@ import { useAuth } from "@/hooks/useAuth";
 describe("useAuth", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    mockGetSession.mockResolvedValue({ data: { session: null } });
-    mockOnAuthStateChange.mockReturnValue({ data: { subscription: { unsubscribe: vi.fn() } } });
+    mocks.getSession.mockResolvedValue({ data: { session: null } });
+    mocks.onAuthStateChange.mockReturnValue({
+      data: { subscription: { unsubscribe: vi.fn() } },
+    });
   });
 
   it("initialises with loading true and user null", () => {
@@ -53,11 +61,13 @@ describe("useAuth", () => {
   });
 
   it("calls supabase signOut on signOut()", async () => {
-    const originalReplace = window.location.replace;
-    window.location.replace = vi.fn();
+    const replaceSpy = vi.fn();
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      value: { ...window.location, replace: replaceSpy, href: "http://localhost/" },
+    });
     const { result } = renderHook(() => useAuth());
     await result.current.signOut();
-    expect(mockSignOut).toHaveBeenCalled();
-    window.location.replace = originalReplace;
+    expect(mocks.signOut).toHaveBeenCalled();
   });
 });
