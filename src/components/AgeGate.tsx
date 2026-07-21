@@ -109,7 +109,8 @@ export function AgeGate() {
             <div style={{ marginTop: "32px", display: "flex", flexDirection: "column", gap: "12px", justifyContent: "center" }} className="sm:flex-row">
               <button
                 onClick={enter}
-                style={{ padding: "16px 48px", background: "#c9a96e", color: "#0a0807", fontSize: "0.7rem", letterSpacing: "0.32em", textTransform: "uppercase", fontWeight: 500, cursor: "pointer", border: "none" }}
+                disabled={!checked}
+                style={{ padding: "16px 48px", background: checked ? "#c9a96e" : "rgba(201,169,110,0.35)", color: checked ? "#0a0807" : "rgba(10,8,7,0.55)", fontSize: "0.7rem", letterSpacing: "0.32em", textTransform: "uppercase", fontWeight: 500, cursor: checked ? "pointer" : "not-allowed", border: "none", transition: "all 0.3s ease" }}
               >
                 Enter
               </button>
