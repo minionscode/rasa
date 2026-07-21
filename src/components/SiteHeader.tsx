@@ -255,9 +255,20 @@ function ProfileMenu({
   const initial = name[0]?.toUpperCase() ?? "U";
   const avatar = user.user_metadata?.avatar_url as string | undefined;
 
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!isOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [isOpen, onClose]);
+
   return (
-    <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
+    <div className="relative" ref={ref}>
       <button
+        onClick={() => isOpen ? onClose() : onOpen()}
         className="flex items-center gap-2 text-[0.65rem] tracking-luxe uppercase text-foreground/85 hover:text-gold transition-colors"
         aria-label="Account menu"
       >
