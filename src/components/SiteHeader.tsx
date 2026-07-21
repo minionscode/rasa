@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Menu, X, Search, ChevronDown, ArrowRight } from "lucide-react";
 import rasaLogo from "@/assets/rasa-logo.png";
 import majlisLogo from "@/assets/majlis-logo.png";
