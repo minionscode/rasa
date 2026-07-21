@@ -61,11 +61,13 @@ describe("useAuth", () => {
   });
 
   it("calls supabase signOut on signOut()", async () => {
-    const originalReplace = window.location.replace;
-    (window.location as any).replace = vi.fn();
+    const replaceSpy = vi.fn();
+    Object.defineProperty(window, "location", {
+      configurable: true,
+      value: { ...window.location, replace: replaceSpy, href: "http://localhost/" },
+    });
     const { result } = renderHook(() => useAuth());
     await result.current.signOut();
     expect(mocks.signOut).toHaveBeenCalled();
-    window.location.replace = originalReplace;
   });
 });
