@@ -86,16 +86,13 @@ export function AgeGate() {
               <input
                 type="checkbox"
                 id="age-check"
-                defaultChecked={checked}
-                onChange={(event) => {
-                  const isChecked = event.currentTarget.checked;
-                  setChecked(isChecked);
-                  if (isChecked) setShowError(false);
-                }}
-                onClick={(event) => {
-                  const isChecked = event.currentTarget.checked;
-                  setChecked(isChecked);
-                  if (isChecked) setShowError(false);
+                checked={checked}
+                onChange={() => {
+                  setChecked((prev) => {
+                    const next = !prev;
+                    if (next) setShowError(false);
+                    return next;
+                  });
                 }}
                 style={{ accentColor: "#c9a96e", width: "16px", height: "16px", minWidth: "16px", cursor: "pointer", marginTop: "2px" }}
               />
