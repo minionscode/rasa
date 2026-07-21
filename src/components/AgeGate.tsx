@@ -83,9 +83,9 @@ export function AgeGate() {
                 type="checkbox"
                 id="age-check"
                 checked={checked}
-                onChange={(e) => { setChecked(e.target.checked); if (showError) setShowError(false); }}
-                className="mt-1 w-4 h-4 cursor-pointer accent-gold shrink-0"
-                style={{ accentColor: "#c9a96e" }}
+                onChange={() => { setChecked(prev => !prev); setShowError(false); }}
+                className="mt-1 w-4 h-4 cursor-pointer shrink-0"
+                style={{ accentColor: "#c9a96e", width: "16px", height: "16px" }}
               />
               <label htmlFor="age-check" className="text-xs text-muted-foreground/90 text-left leading-relaxed cursor-pointer">
                 By checking this, you are agreeing to our{" "}
