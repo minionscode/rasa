@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter, useRouterState } from "@tanstack/react-router";
 import rasaLogo from "@/assets/rasa-logo.png";
 import { AgeRestrictionPolicyModal } from "@/components/AgeRestrictionPolicyModal";
@@ -24,7 +24,7 @@ export function AgeGate() {
 
   if (verified || BYPASS.includes(pathname)) return null;
 
-  const handleEnter = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleEnter = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const form = event.currentTarget;
