@@ -62,7 +62,13 @@ export function useAuth() {
 
   const signInWithGoogle = useCallback(async () => {
     try {
-      sessionStorage.setItem(RETURN_KEY, window.location.pathname);
+      // Only overwrite if we don't already have a stored return path,
+      // and never store "/login" as a destination.
+      const existing = sessionStorage.getItem(RETURN_KEY);
+      if (!existing) {
+        const here = window.location.pathname;
+        sessionStorage.setItem(RETURN_KEY, here === "/login" ? "/" : here);
+      }
     } catch {
       /* ignore */
     }
