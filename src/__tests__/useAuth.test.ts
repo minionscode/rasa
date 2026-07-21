@@ -62,8 +62,7 @@ describe("useAuth", () => {
 
   it("calls supabase signOut on signOut()", async () => {
     const originalReplace = window.location.replace;
-    // @ts-expect-error override for test
-    window.location.replace = vi.fn();
+    (window.location as any).replace = vi.fn();
     const { result } = renderHook(() => useAuth());
     await result.current.signOut();
     expect(mocks.signOut).toHaveBeenCalled();
