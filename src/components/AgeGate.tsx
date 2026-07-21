@@ -22,7 +22,8 @@ export function AgeGate() {
   if (verified || BYPASS.includes(pathname)) return null;
 
   const enter = () => {
-    const consentChecked = checked || document.getElementById("age-check") instanceof HTMLInputElement && document.getElementById("age-check")?.checked;
+    const ageCheck = document.getElementById("age-check");
+    const consentChecked = checked || (ageCheck instanceof HTMLInputElement && ageCheck.checked);
     if (!consentChecked) { setShowError(true); return; }
     try { window.sessionStorage.setItem(AGE_KEY, "1"); } catch {}
     setExiting(true);
@@ -87,6 +88,11 @@ export function AgeGate() {
                 id="age-check"
                 defaultChecked={checked}
                 onChange={(event) => {
+                  const isChecked = event.currentTarget.checked;
+                  setChecked(isChecked);
+                  if (isChecked) setShowError(false);
+                }}
+                onClick={(event) => {
                   const isChecked = event.currentTarget.checked;
                   setChecked(isChecked);
                   if (isChecked) setShowError(false);
