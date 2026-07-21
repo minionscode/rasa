@@ -20,12 +20,10 @@ export function AgeGate() {
   const [policyOpen, setPolicyOpen] = useState(false);
 
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const search = useRouterState({ select: (s) => s.location.search }) as Record<string, unknown>;
-  const confirmedBySearch = search["age-confirmation"] === "on";
   const confirmedByWindow =
     typeof window !== "undefined" &&
     new URLSearchParams(window.location.search).get("age-confirmation") === "on";
-  const confirmedByUrl = confirmedBySearch || confirmedByWindow;
+  const confirmedByUrl = confirmedByWindow;
 
   useEffect(() => {
     if (!confirmedByUrl && !readVerified()) return;
