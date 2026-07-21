@@ -35,12 +35,12 @@ export function AgeGate() {
   return (
     <>
       <div className="fixed inset-0 z-[120] flex items-center justify-center bg-ink/95 animate-fade-in px-6">
-        <div className="absolute inset-0 smoke-bg opacity-70" />
+        <div className="absolute inset-0 smoke-bg opacity-70 pointer-events-none" />
         <div
-          className="absolute -inset-[20%] opacity-50 animate-smoke"
+          className="absolute -inset-[20%] opacity-50 animate-smoke pointer-events-none"
           style={{ background: "radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.05), transparent 55%), radial-gradient(ellipse at 70% 60%, rgba(255,255,255,0.04), transparent 60%)" }}
         />
-        <div className="absolute inset-0 grain" />
+        <div className="absolute inset-0 grain pointer-events-none" />
         <div className="relative z-10 max-w-xl w-full">
           <div
             className="relative border border-gold/30 bg-ink/60 backdrop-blur-2xl px-8 md:px-14 py-14 text-center"
