@@ -314,7 +314,7 @@ function LoyaltyPage() {
             {submitted && member ? (
               <div className="border border-gold/30 bg-gold/5 p-10 text-center">
                 <p className="font-serif text-3xl text-gold mb-2">Welcome to RASA.</p>
-                <p className="text-foreground/75 leading-relaxed mb-4">You are now a Bronze member. You've been awarded <span className="text-gold font-serif">{member.points} points</span> to start.</p>
+                <p className="text-foreground/75 leading-relaxed mb-4">You are now a Bronze member. You've been awarded <span className="text-gold font-serif">{member?.points ?? 0} points</span> to start.</p>
                 <p className="text-xs text-foreground/50">Scroll up to view your member dashboard.</p>
               </div>
             ) : (
