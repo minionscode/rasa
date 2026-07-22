@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { ArrowRight } from "lucide-react";
-import { sendPartnerEmail } from "@/lib/api/sendPartnerEmail.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/partners")({
   head: () => ({
@@ -158,7 +157,6 @@ function PartnerForm() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
-  const sendPartner = useServerFn(sendPartnerEmail);
   const [f, setF] = useState({
     name: "", company: "", phone: "", email: "",
     businessType: "Distributor", city: "", state: "", message: "",
@@ -171,7 +169,10 @@ function PartnerForm() {
     setSendError(null);
     setSending(true);
     try {
-      await sendPartner({ data: f });
+      const { error: fnError } = await supabase.functions.invoke('partner-form', {
+        body: { ...f, user_id: null },
+      });
+      if (fnError) throw fnError;
       setSubmitted(true);
     } catch {
       setSendError("Something went wrong. Please try WhatsApp or email us directly.");

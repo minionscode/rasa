@@ -29,6 +29,14 @@ serve(async (req) => {
       )
     }
 
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')
+    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
+    if (supabaseUrl && supabaseKey) {
+      const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2')
+      const db = createClient(supabaseUrl, supabaseKey)
+      await db.from('newsletter_subscribers').upsert({ email, source: 'popup' }, { onConflict: 'email' })
+    }
+
     const confirmationHtml = `
       <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;padding:40px 32px;background:#0d0d0d;color:#e8e0d4;">
         <div style="text-align:center;margin-bottom:32px;">
