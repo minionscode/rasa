@@ -14,6 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      catalogue_requests: {
+        Row: {
+          collection: string
+          email: string | null
+          id: string
+          requested_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          collection: string
+          email?: string | null
+          id?: string
+          requested_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          collection?: string
+          email?: string | null
+          id?: string
+          requested_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      enquiries: {
+        Row: {
+          business: string
+          created_at: string | null
+          email: string
+          id: string
+          message: string
+          name: string
+          phone: string
+          status: string | null
+          type: string
+          user_id: string | null
+        }
+        Insert: {
+          business: string
+          created_at?: string | null
+          email: string
+          id?: string
+          message: string
+          name: string
+          phone: string
+          status?: string | null
+          type: string
+          user_id?: string | null
+        }
+        Update: {
+          business?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          phone?: string
+          status?: string | null
+          type?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       loyalty_members: {
         Row: {
           birthday: string | null
@@ -93,6 +156,72 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      newsletter_subscribers: {
+        Row: {
+          email: string
+          id: string
+          source: string | null
+          subscribed_at: string | null
+        }
+        Insert: {
+          email: string
+          id?: string
+          source?: string | null
+          subscribed_at?: string | null
+        }
+        Update: {
+          email?: string
+          id?: string
+          source?: string | null
+          subscribed_at?: string | null
+        }
+        Relationships: []
+      }
+      partner_registrations: {
+        Row: {
+          business_type: string
+          city: string
+          company: string
+          created_at: string | null
+          email: string
+          id: string
+          message: string | null
+          name: string
+          phone: string
+          state: string
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          business_type: string
+          city: string
+          company: string
+          created_at?: string | null
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+          state: string
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          business_type?: string
+          city?: string
+          company?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+          state?: string
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
       }
       users: {
         Row: {
