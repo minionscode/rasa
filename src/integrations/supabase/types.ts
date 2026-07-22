@@ -92,6 +92,7 @@ export type Database = {
           referred_by: string | null
           tier: string | null
           total_spent: number | null
+          user_id: string | null
         }
         Insert: {
           birthday?: string | null
@@ -107,6 +108,7 @@ export type Database = {
           referred_by?: string | null
           tier?: string | null
           total_spent?: number | null
+          user_id?: string | null
         }
         Update: {
           birthday?: string | null
@@ -122,6 +124,31 @@ export type Database = {
           referred_by?: string | null
           tier?: string | null
           total_spent?: number | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      loyalty_points_config: {
+        Row: {
+          active: boolean | null
+          description: string | null
+          id: string
+          label: string
+          points: number
+        }
+        Insert: {
+          active?: boolean | null
+          description?: string | null
+          id: string
+          label: string
+          points: number
+        }
+        Update: {
+          active?: boolean | null
+          description?: string | null
+          id?: string
+          label?: string
+          points?: number
         }
         Relationships: []
       }
