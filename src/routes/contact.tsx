@@ -2,10 +2,9 @@ import { createFileRoute, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 
-import { useServerFn } from "@tanstack/react-start";
 import { SectionLabel } from "../components/SectionLabel";
 import { contactInfo } from "@/data/contact";
-import { sendContactEmail } from "@/lib/api/sendContactEmail.functions";
+import { supabase } from "@/integrations/supabase/client";
 import {
   ArrowRight,
   Mail,
@@ -97,7 +96,6 @@ function Contact() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
-  const sendContact = useServerFn(sendContactEmail);
   const { user } = useAuth();
   
 
@@ -141,7 +139,10 @@ function Contact() {
     setSendError(null);
     setSending(true);
     try {
-      await sendContact({ data: form });
+      const { error: fnError } = await supabase.functions.invoke('contact-form', {
+        body: { ...form, user_id: user?.id ?? null },
+      });
+      if (fnError) throw fnError;
       setSubmitted(true);
     } catch {
       setSendError(
