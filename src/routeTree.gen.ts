@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TestEmailRouteImport } from './routes/test-email'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as LoyaltyRouteImport } from './routes/loyalty'
 import { Route as LoginRouteImport } from './routes/login'
@@ -18,6 +17,7 @@ import { Route as HookahRouteImport } from './routes/hookah'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ComingSoonRouteImport } from './routes/coming-soon'
 import { Route as AgeRestrictedRouteImport } from './routes/age-restricted'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
@@ -27,11 +27,6 @@ import { Route as CollectionsMajlisRouteImport } from './routes/collections.majl
 import { Route as AccountSettingsRouteImport } from './routes/account.settings'
 import { Route as AccountOrdersRouteImport } from './routes/account.orders'
 
-const TestEmailRoute = TestEmailRouteImport.update({
-  id: '/test-email',
-  path: '/test-email',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
@@ -70,6 +65,11 @@ const ComingSoonRoute = ComingSoonRouteImport.update({
 const AgeRestrictedRoute = AgeRestrictedRouteImport.update({
   id: '/age-restricted',
   path: '/age-restricted',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccessoriesRoute = AccessoriesRouteImport.update({
@@ -116,6 +116,7 @@ const AccountOrdersRoute = AccountOrdersRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/admin': typeof AdminRoute
   '/age-restricted': typeof AgeRestrictedRoute
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
@@ -124,7 +125,6 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
-  '/test-email': typeof TestEmailRoute
   '/account/orders': typeof AccountOrdersRoute
   '/account/settings': typeof AccountSettingsRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
@@ -135,6 +135,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/admin': typeof AdminRoute
   '/age-restricted': typeof AgeRestrictedRoute
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
@@ -143,7 +144,6 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
-  '/test-email': typeof TestEmailRoute
   '/account/orders': typeof AccountOrdersRoute
   '/account/settings': typeof AccountSettingsRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
@@ -155,6 +155,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/admin': typeof AdminRoute
   '/age-restricted': typeof AgeRestrictedRoute
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
@@ -163,7 +164,6 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
-  '/test-email': typeof TestEmailRoute
   '/account/orders': typeof AccountOrdersRoute
   '/account/settings': typeof AccountSettingsRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
@@ -176,6 +176,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accessories'
+    | '/admin'
     | '/age-restricted'
     | '/coming-soon'
     | '/contact'
@@ -184,7 +185,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/loyalty'
     | '/partners'
-    | '/test-email'
     | '/account/orders'
     | '/account/settings'
     | '/collections/majlis'
@@ -195,6 +195,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/accessories'
+    | '/admin'
     | '/age-restricted'
     | '/coming-soon'
     | '/contact'
@@ -203,7 +204,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/loyalty'
     | '/partners'
-    | '/test-email'
     | '/account/orders'
     | '/account/settings'
     | '/collections/majlis'
@@ -214,6 +214,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/accessories'
+    | '/admin'
     | '/age-restricted'
     | '/coming-soon'
     | '/contact'
@@ -222,7 +223,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/loyalty'
     | '/partners'
-    | '/test-email'
     | '/account/orders'
     | '/account/settings'
     | '/collections/majlis'
@@ -234,6 +234,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessoriesRoute: typeof AccessoriesRoute
+  AdminRoute: typeof AdminRoute
   AgeRestrictedRoute: typeof AgeRestrictedRoute
   ComingSoonRoute: typeof ComingSoonRoute
   ContactRoute: typeof ContactRoute
@@ -242,7 +243,6 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   LoyaltyRoute: typeof LoyaltyRoute
   PartnersRoute: typeof PartnersRoute
-  TestEmailRoute: typeof TestEmailRoute
   AccountOrdersRoute: typeof AccountOrdersRoute
   AccountSettingsRoute: typeof AccountSettingsRoute
   CollectionsMajlisRoute: typeof CollectionsMajlisRoute
@@ -253,13 +253,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/test-email': {
-      id: '/test-email'
-      path: '/test-email'
-      fullPath: '/test-email'
-      preLoaderRoute: typeof TestEmailRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/partners': {
       id: '/partners'
       path: '/partners'
@@ -314,6 +307,13 @@ declare module '@tanstack/react-router' {
       path: '/age-restricted'
       fullPath: '/age-restricted'
       preLoaderRoute: typeof AgeRestrictedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accessories': {
@@ -378,6 +378,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessoriesRoute: AccessoriesRoute,
+  AdminRoute: AdminRoute,
   AgeRestrictedRoute: AgeRestrictedRoute,
   ComingSoonRoute: ComingSoonRoute,
   ContactRoute: ContactRoute,
@@ -386,7 +387,6 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   LoyaltyRoute: LoyaltyRoute,
   PartnersRoute: PartnersRoute,
-  TestEmailRoute: TestEmailRoute,
   AccountOrdersRoute: AccountOrdersRoute,
   AccountSettingsRoute: AccountSettingsRoute,
   CollectionsMajlisRoute: CollectionsMajlisRoute,

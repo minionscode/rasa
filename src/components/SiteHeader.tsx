@@ -187,6 +187,8 @@ export function SiteHeader() {
             <div className="mt-6 pt-6 border-t border-border/40 flex flex-col gap-4">
               {user ? (
                 <>
+                  <Link to="/account/settings" onClick={() => setOpen(false)} className="font-serif tracking-wide text-lg text-foreground hover:text-gold">My Account</Link>
+                  <Link to="/account/orders" onClick={() => setOpen(false)} className="font-serif tracking-wide text-lg text-foreground hover:text-gold">My Enquiries</Link>
                   <button
                     onClick={() => { setOpen(false); void signOut(); }}
                     className="text-left font-serif tracking-wide text-lg text-red-400/80 hover:text-red-400 transition-colors"
@@ -298,6 +300,10 @@ function ProfileMenu({
               </div>
             </div>
             <nav className="py-2">
+              <Link to="/account/settings" onClick={onClose} className="block px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors">My Account</Link>
+              <Link to="/account/orders" onClick={onClose} className="block px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors">My Enquiries</Link>
+              <Link to="/loyalty" onClick={onClose} className="block px-5 py-2.5 text-[0.7rem] tracking-luxe uppercase text-foreground/80 hover:text-gold hover:bg-surface/40 transition-colors">Loyalty</Link>
+              <div className="my-1 border-t border-border/40" />
               <button
                 onClick={async () => {
                   onClose();
