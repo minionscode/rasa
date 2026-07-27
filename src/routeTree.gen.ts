@@ -18,6 +18,7 @@ import { Route as HookahRouteImport } from './routes/hookah'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ComingSoonRouteImport } from './routes/coming-soon'
 import { Route as AgeRestrictedRouteImport } from './routes/age-restricted'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsIndexRouteImport } from './routes/collections.index'
@@ -72,6 +73,11 @@ const AgeRestrictedRoute = AgeRestrictedRouteImport.update({
   path: '/age-restricted',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccessoriesRoute = AccessoriesRouteImport.update({
   id: '/accessories',
   path: '/accessories',
@@ -116,6 +122,7 @@ const AccountOrdersRoute = AccountOrdersRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/admin': typeof AdminRoute
   '/age-restricted': typeof AgeRestrictedRoute
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
@@ -135,6 +142,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/admin': typeof AdminRoute
   '/age-restricted': typeof AgeRestrictedRoute
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
@@ -155,6 +163,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/admin': typeof AdminRoute
   '/age-restricted': typeof AgeRestrictedRoute
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
@@ -176,6 +185,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accessories'
+    | '/admin'
     | '/age-restricted'
     | '/coming-soon'
     | '/contact'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/accessories'
+    | '/admin'
     | '/age-restricted'
     | '/coming-soon'
     | '/contact'
@@ -214,6 +225,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/accessories'
+    | '/admin'
     | '/age-restricted'
     | '/coming-soon'
     | '/contact'
@@ -234,6 +246,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessoriesRoute: typeof AccessoriesRoute
+  AdminRoute: typeof AdminRoute
   AgeRestrictedRoute: typeof AgeRestrictedRoute
   ComingSoonRoute: typeof ComingSoonRoute
   ContactRoute: typeof ContactRoute
@@ -316,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgeRestrictedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/accessories': {
       id: '/accessories'
       path: '/accessories'
@@ -378,6 +398,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessoriesRoute: AccessoriesRoute,
+  AdminRoute: AdminRoute,
   AgeRestrictedRoute: AgeRestrictedRoute,
   ComingSoonRoute: ComingSoonRoute,
   ContactRoute: ContactRoute,
