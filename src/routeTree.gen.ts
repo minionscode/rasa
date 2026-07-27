@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TestEmailRouteImport } from './routes/test-email'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as LoyaltyRouteImport } from './routes/loyalty'
 import { Route as LoginRouteImport } from './routes/login'
@@ -28,11 +27,6 @@ import { Route as CollectionsMajlisRouteImport } from './routes/collections.majl
 import { Route as AccountSettingsRouteImport } from './routes/account.settings'
 import { Route as AccountOrdersRouteImport } from './routes/account.orders'
 
-const TestEmailRoute = TestEmailRouteImport.update({
-  id: '/test-email',
-  path: '/test-email',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
@@ -131,7 +125,6 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
-  '/test-email': typeof TestEmailRoute
   '/account/orders': typeof AccountOrdersRoute
   '/account/settings': typeof AccountSettingsRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
@@ -151,7 +144,6 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
-  '/test-email': typeof TestEmailRoute
   '/account/orders': typeof AccountOrdersRoute
   '/account/settings': typeof AccountSettingsRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
@@ -172,7 +164,6 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/loyalty': typeof LoyaltyRoute
   '/partners': typeof PartnersRoute
-  '/test-email': typeof TestEmailRoute
   '/account/orders': typeof AccountOrdersRoute
   '/account/settings': typeof AccountSettingsRoute
   '/collections/majlis': typeof CollectionsMajlisRoute
@@ -194,7 +185,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/loyalty'
     | '/partners'
-    | '/test-email'
     | '/account/orders'
     | '/account/settings'
     | '/collections/majlis'
@@ -214,7 +204,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/loyalty'
     | '/partners'
-    | '/test-email'
     | '/account/orders'
     | '/account/settings'
     | '/collections/majlis'
@@ -234,7 +223,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/loyalty'
     | '/partners'
-    | '/test-email'
     | '/account/orders'
     | '/account/settings'
     | '/collections/majlis'
@@ -255,7 +243,6 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   LoyaltyRoute: typeof LoyaltyRoute
   PartnersRoute: typeof PartnersRoute
-  TestEmailRoute: typeof TestEmailRoute
   AccountOrdersRoute: typeof AccountOrdersRoute
   AccountSettingsRoute: typeof AccountSettingsRoute
   CollectionsMajlisRoute: typeof CollectionsMajlisRoute
@@ -266,13 +253,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/test-email': {
-      id: '/test-email'
-      path: '/test-email'
-      fullPath: '/test-email'
-      preLoaderRoute: typeof TestEmailRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/partners': {
       id: '/partners'
       path: '/partners'
@@ -407,7 +387,6 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   LoyaltyRoute: LoyaltyRoute,
   PartnersRoute: PartnersRoute,
-  TestEmailRoute: TestEmailRoute,
   AccountOrdersRoute: AccountOrdersRoute,
   AccountSettingsRoute: AccountSettingsRoute,
   CollectionsMajlisRoute: CollectionsMajlisRoute,
