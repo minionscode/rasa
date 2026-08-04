@@ -33,6 +33,20 @@ const STATUS_COLORS: Record<string, string> = {
   approved: "#34d399", rejected: "#f87171",
 };
 
+function exportCSV(data: any[], filename: string) {
+  if (!data.length) return;
+  const headers = Object.keys(data[0]);
+  const rows = data.map(row => headers.map(h => JSON.stringify(row[h] ?? "")).join(","));
+  const csv = [headers.join(","), ...rows].join("\n");
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${filename}-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 function AdminPage() {
   const [authed, setAuthed] = useState(false);
   const [pw, setPw] = useState("");
@@ -85,8 +99,8 @@ function AdminPage() {
     callAdminData(section, page);
   };
 
-  const awardPoints = async (memberId: string, reason: string) => {
-    await supabase.functions.invoke("loyalty-award", { body: { member_id: memberId, reason } });
+  const awardPoints = async (memberId: string, reason: string, pointsOverride?: number) => {
+    await supabase.functions.invoke("loyalty-award", { body: { member_id: memberId, reason, points_override: pointsOverride } });
     callAdminData(section, page);
   };
 

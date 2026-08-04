@@ -144,7 +144,7 @@ function LoyaltyPage() {
   const [member, setMember] = useState<Member | null>(null);
   const [history, setHistory] = useState<LogEntry[]>([]);
   const [memberLoading, setMemberLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", city: "", birthday: "", instagram_handle: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", city: "", birthday: "", instagram_handle: "", referred_by: "" });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
@@ -218,6 +218,21 @@ function LoyaltyPage() {
         await supabase.functions.invoke('loyalty-award', {
           body: { member_id: newMember.id, reason: 'profile_complete' }
         });
+      }
+
+      // Handle referral — find referrer and award them 150 pts
+      if (form.referred_by) {
+        const { data: referrer } = await supabase
+          .from("loyalty_members")
+          .select("id")
+          .eq("referral_code", form.referred_by.trim().toUpperCase())
+          .single();
+        if (referrer) {
+          await supabase.functions.invoke('loyalty-award', {
+            body: { member_id: referrer.id, reason: 'referral', points_override: 150 }
+          });
+          await supabase.from("loyalty_members").update({ referred_by: form.referred_by.trim() }).eq("id", newMember.id);
+        }
       }
 
       const { data: updated } = await supabase.from("loyalty_members").select("*").eq("id", newMember.id).single();
@@ -327,6 +342,7 @@ function LoyaltyPage() {
                     { key: "city", label: "City", type: "text", placeholder: "Your city" },
                     { key: "birthday", label: "Birthday (for bonus points)", type: "date", placeholder: "" },
                     { key: "instagram_handle", label: "Instagram Handle (+75 pts)", type: "text", placeholder: "@yourusername" },
+                    { key: "referred_by", label: "Referral Code (optional)", type: "text", placeholder: "Friend's referral code" },
                   ].map(({ key, label, type, placeholder }) => (
                     <div key={key}>
                       <label className="block text-[0.65rem] tracking-luxe uppercase text-gold/80 mb-2">{label}</label>
