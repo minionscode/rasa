@@ -262,7 +262,7 @@ function Newsletter() {
     try {
       const { supabase } = await import('@/integrations/supabase/client');
       const { error } = await supabase.functions.invoke('newsletter', {
-        body: { email: email.trim() },
+        body: { email: email.trim(), source: 'footer' },
       });
       if (error) throw error;
       markSubscribed();
