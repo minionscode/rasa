@@ -181,6 +181,18 @@ function AdminPage() {
           </div>
         )}
 
+        {!loading && data?.data && data.data.length > 0 && section !== "overview" && (
+          <div className="mb-6 flex justify-end">
+            <button
+              onClick={() => exportCSV(data.data, section)}
+              className="text-[0.65rem] tracking-luxe uppercase px-5 py-2.5 border border-gold/40 text-gold hover:bg-gold/10 transition-colors flex items-center gap-2"
+            >
+              <svg className="w-3.5 h-3.5" viewBox="0 0 16 16" fill="none"><path d="M8 2v8m0 0L5 7m3 3 3-3M2 12h12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              Export CSV
+            </button>
+          </div>
+        )}
+
         {!loading && data && section === "overview" && (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
@@ -285,6 +297,27 @@ function AdminPage() {
                   <button onClick={() => awardPoints(row.id, "review")} className="text-[0.6rem] tracking-luxe uppercase px-4 py-2 border border-border/40 text-foreground/50 hover:border-gold/50 hover:text-gold transition-colors">+Review (50)</button>
                   <button onClick={() => awardPoints(row.id, "instagram_tag")} className="text-[0.6rem] tracking-luxe uppercase px-4 py-2 border border-border/40 text-foreground/50 hover:border-gold/50 hover:text-gold transition-colors">+Instagram (75)</button>
                   <button onClick={() => awardPoints(row.id, "birthday")} className="text-[0.6rem] tracking-luxe uppercase px-4 py-2 border border-border/40 text-foreground/50 hover:border-gold/50 hover:text-gold transition-colors">+Birthday (200)</button>
+                  <div className="flex gap-1">
+                    <input
+                      type="number"
+                      placeholder="pts"
+                      min="1"
+                      id={`custom-${row.id}`}
+                      className="w-16 bg-transparent border border-border/40 text-foreground text-xs px-2 py-1.5 outline-none focus:border-gold transition-colors"
+                    />
+                    <button
+                      onClick={() => {
+                        const input = document.getElementById(`custom-${row.id}`) as HTMLInputElement;
+                        const pts = parseInt(input.value);
+                        if (!pts || pts <= 0) return;
+                        awardPoints(row.id, 'purchase', pts);
+                        input.value = '';
+                      }}
+                      className="text-[0.6rem] tracking-luxe uppercase px-3 py-1.5 border border-border/40 text-foreground/50 hover:border-gold/50 hover:text-gold transition-colors"
+                    >
+                      +Purchase
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
