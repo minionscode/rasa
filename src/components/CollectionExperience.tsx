@@ -3,6 +3,7 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { AuthModal } from "@/components/AuthModal";
 
 import { collections, formats, type Collection, type Flavour } from "@/data/collections";
@@ -254,6 +255,13 @@ function BodySections({ collection }: { collection: Collection }) {
                   rel="noopener noreferrer"
                   className="luxe-underline text-[0.7rem] tracking-luxe uppercase"
                   style={{ color: collection.accentVar }}
+                  onClick={() => {
+                    supabase.from("catalogue_requests").insert({
+                      user_id: user.id,
+                      email: user.email,
+                      collection: collection.name,
+                    }).then(() => {});
+                  }}
                 >
                   Request the full catalogue
                 </a>
