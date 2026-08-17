@@ -14,6 +14,7 @@ import { Route as LoyaltyRouteImport } from './routes/loyalty'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as HouseOfRasaRouteImport } from './routes/house-of-rasa'
 import { Route as HookahRouteImport } from './routes/hookah'
+import { Route as FlavoursRouteImport } from './routes/flavours'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ComingSoonRouteImport } from './routes/coming-soon'
 import { Route as AgeRestrictedRouteImport } from './routes/age-restricted'
@@ -50,6 +51,11 @@ const HouseOfRasaRoute = HouseOfRasaRouteImport.update({
 const HookahRoute = HookahRouteImport.update({
   id: '/hookah',
   path: '/hookah',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FlavoursRoute = FlavoursRouteImport.update({
+  id: '/flavours',
+  path: '/flavours',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/age-restricted': typeof AgeRestrictedRoute
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
+  '/flavours': typeof FlavoursRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/login': typeof LoginRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/age-restricted': typeof AgeRestrictedRoute
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
+  '/flavours': typeof FlavoursRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/login': typeof LoginRoute
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/age-restricted': typeof AgeRestrictedRoute
   '/coming-soon': typeof ComingSoonRoute
   '/contact': typeof ContactRoute
+  '/flavours': typeof FlavoursRoute
   '/hookah': typeof HookahRoute
   '/house-of-rasa': typeof HouseOfRasaRoute
   '/login': typeof LoginRoute
@@ -180,6 +189,7 @@ export interface FileRouteTypes {
     | '/age-restricted'
     | '/coming-soon'
     | '/contact'
+    | '/flavours'
     | '/hookah'
     | '/house-of-rasa'
     | '/login'
@@ -199,6 +209,7 @@ export interface FileRouteTypes {
     | '/age-restricted'
     | '/coming-soon'
     | '/contact'
+    | '/flavours'
     | '/hookah'
     | '/house-of-rasa'
     | '/login'
@@ -218,6 +229,7 @@ export interface FileRouteTypes {
     | '/age-restricted'
     | '/coming-soon'
     | '/contact'
+    | '/flavours'
     | '/hookah'
     | '/house-of-rasa'
     | '/login'
@@ -238,6 +250,7 @@ export interface RootRouteChildren {
   AgeRestrictedRoute: typeof AgeRestrictedRoute
   ComingSoonRoute: typeof ComingSoonRoute
   ContactRoute: typeof ContactRoute
+  FlavoursRoute: typeof FlavoursRoute
   HookahRoute: typeof HookahRoute
   HouseOfRasaRoute: typeof HouseOfRasaRoute
   LoginRoute: typeof LoginRoute
@@ -286,6 +299,13 @@ declare module '@tanstack/react-router' {
       path: '/hookah'
       fullPath: '/hookah'
       preLoaderRoute: typeof HookahRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flavours': {
+      id: '/flavours'
+      path: '/flavours'
+      fullPath: '/flavours'
+      preLoaderRoute: typeof FlavoursRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -382,6 +402,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgeRestrictedRoute: AgeRestrictedRoute,
   ComingSoonRoute: ComingSoonRoute,
   ContactRoute: ContactRoute,
+  FlavoursRoute: FlavoursRoute,
   HookahRoute: HookahRoute,
   HouseOfRasaRoute: HouseOfRasaRoute,
   LoginRoute: LoginRoute,
