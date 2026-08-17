@@ -167,7 +167,8 @@ export function SiteHeader() {
               { to: "/collections/majlis", label: "— Majlis" },
               { to: "/collections/makhmal", label: "— Makhmal" },
               { to: "/collections/tarkib", label: "— Tarkib" },
-              { to: "/coming-soon", label: "Hookahs", search: { category: "hookahs" } },
+              { to: "/flavours", label: "Hookah Flavours" },
+              { to: "/coming-soon", label: "Hookah", search: { category: "hookahs" } },
               { to: "/coming-soon", label: "Accessories", search: { category: "accessories" } },
               { to: "/partners", label: "Partner" },
               { to: "/loyalty", label: "Loyalty" },
@@ -444,33 +445,50 @@ function ProductsMega({
 }) {
   const items = [
     {
-      title: "Hookahs",
+      title: "Hookah Flavours",
+      sub: "20g · 60g · 250g · 500g · 1kg",
+      to: "/flavours" as const,
+      search: undefined,
+      accent: "#c9a96e",
+    },
+    {
+      title: "Hookah",
       sub: "Classic & Luxury Series",
-      category: "hookahs",
+      to: "/coming-soon" as const,
+      search: { category: "hookahs" },
+      accent: "#DEA193",
     },
     {
       title: "Accessories",
       sub: "Bowls · Hoses · Mouthpieces",
-      category: "accessories",
+      to: "/coming-soon" as const,
+      search: { category: "accessories" },
+      accent: "#b0a898",
     },
   ];
   return (
     <DropButton label="Products" isOpen={isOpen} onOpen={onOpen} onClose={onClose}>
-      <div className="bg-ink/95 backdrop-blur-xl border border-gold/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-6 w-[420px] grid grid-cols-2 gap-4">
-        {items.map((it) => (
-          <Link
-            key={it.category}
-            to="/coming-soon"
-            search={{ category: it.category }}
-            onClick={onClose}
-            className="group block p-4 border border-transparent hover:border-gold/30 hover:bg-surface/40 transition-all duration-300"
-          >
-            <p className="text-[0.6rem] tracking-luxe uppercase text-gold/80">{it.sub}</p>
-            <p className="font-serif text-lg mt-2 group-hover:text-gold transition-colors">
-              {it.title}
-            </p>
-          </Link>
-        ))}
+      <div className="bg-ink/95 backdrop-blur-xl border border-gold/15 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] p-5 w-[480px]">
+        <div className="grid grid-cols-1 gap-2">
+          {items.map((it) => (
+            <Link
+              key={it.title}
+              to={it.to}
+              search={it.search as any}
+              onClick={onClose}
+              className="group flex items-center gap-4 p-4 border border-transparent hover:border-gold/25 hover:bg-surface/40 transition-all duration-300"
+            >
+              <div className="w-1 h-8 shrink-0 rounded-full transition-colors duration-300" style={{ background: it.accent }} />
+              <div>
+                <p className="font-serif text-lg group-hover:text-gold transition-colors duration-300">{it.title}</p>
+                <p className="text-[0.6rem] tracking-luxe uppercase mt-0.5" style={{ color: `${it.accent}99` }}>{it.sub}</p>
+              </div>
+              <svg className="w-3.5 h-3.5 ml-auto text-foreground/30 group-hover:text-gold group-hover:translate-x-1 transition-all shrink-0" viewBox="0 0 14 14" fill="none">
+                <path d="M2 7h10m0 0L8 3m4 4-4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          ))}
+        </div>
       </div>
     </DropButton>
   );
